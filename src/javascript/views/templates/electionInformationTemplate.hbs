@@ -1,0 +1,15 @@
+<div class="nav" id="all-elections">
+  <div class="left-arrow"></div>
+  All Elections
+</div>
+<div class="information-items">
+{{> election-administration-body this.electionAdministrationBody }}
+{{> election-administration-body this.localJurisdiction.electionAdministrationBody }}
+<div class="box sources">
+{{#each this.localJurisdiction.sources }}
+{{> source }}
+{{/each }}
+{{#each this.sources }}
+{{> source }}
+{{/each }}
+</div>

@@ -1,0 +1,34 @@
+<div class="contest">
+
+	<div class="ballot-placement">
+	Ballot Placement:
+	{{ ballotPlacement }}
+	</div>
+	<div class="primary-party">
+	Primary Party:
+	{{ primaryParty }}
+	</div>
+	<div class="office">
+	Office:
+	{{ office }}
+	</div>
+	<div class="type">
+	Type:
+	{{ type }}
+	</div>
+	<div class="candidate-list">
+	Candidates:
+	{{#each candidates}}
+			<div class="candidate-item">
+				<div class="name">
+				Name:
+				{{ name }}
+				</div>
+				<div class="party">
+				Party:
+				{{ party }}
+				</div>
+			</div>
+	{{/each}}
+	</div>
+</div>
