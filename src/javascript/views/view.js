@@ -5,7 +5,8 @@ module.exports = (function() {
     template: '',
     events : {},
     routeEvents : {},
-    onRender: function() {},
+    onBeforeRender: function() {},
+    onAfterRender: function() {},
     render: function(options) {
       var that = this;
       var $container = document.body;
@@ -13,6 +14,7 @@ module.exports = (function() {
         if (options.container) $container = options.container;
         if (options.data) this.data = options.data;
       }
+      this.onBeforeRender({data: this.data});
       if (!!this.$el) this.toggle();
       else $container.innerHTML += '<div id=' + this.$id + '>' + this.template(options) + '</div>';
       this.$el = document.getElementById(this.$id);
@@ -28,7 +30,7 @@ module.exports = (function() {
         });
       }
 
-      this.onRender({data: this.data});
+      this.onAfterRender({data: this.data});
 
       return this;
     },

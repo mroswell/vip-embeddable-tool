@@ -8,8 +8,11 @@ handlebars.registerPartial('election-administration-body', require('./views/temp
 handlebars.registerPartial('normalized-address', require('./views/templates/partials/normalized-address.hbs'))
 handlebars.registerPartial('election-official', require('./views/templates/partials/election-official.hbs'))
 handlebars.registerPartial('source', require('./views/templates/partials/source.hbs'))
+handlebars.registerPartial('contest', require('./views/templates/partials/contest.hbs'))
 // require('./partials.js');
-
+handlebars.registerHelper('json', function(context) {
+    return JSON.stringify(context);
+});
 
 google.maps.event.addDomListener(window, 'load', function() {
   router.start();

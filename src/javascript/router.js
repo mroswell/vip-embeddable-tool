@@ -5,7 +5,7 @@ module.exports = (function() {
   var $container       = document.body;
   var addressView      = require('./views/addressView.js');
   var electionsView     = require('./views/electionsView.js');
-  var informationView  = require('./views/informationView.js');
+  var voterResourcesView  = require('./views/voterResourcesView.js');
   var mapView          = require('./views/mapView.js');
   var moreLocationsView = require('./views/moreLocationsView.js')
   var apiRequest       = require('./api.js');
@@ -42,7 +42,10 @@ module.exports = (function() {
         })
         .onRouteEvent('moreLocations', function() {
           router.navigate(moreLocationsView, mapView, { data: data });
-        });
+        })
+        .onRouteEvent('voterResources', function() {
+          router.navigate(voterResourcesView, mapView, { data: data });
+        })
 
       electionsView
         .onRouteEvent('electionsViewBack', function() {
@@ -52,6 +55,11 @@ module.exports = (function() {
       moreLocationsView
         .onRouteEvent('moreLocationsViewBack', function() {
           router.navigate(mapView, moreLocationsView, { data: data });
+        })
+
+      voterResourcesView
+        .onRouteEvent('voterResourcesBack', function() {
+          router.navigate(mapView, voterResourcesView, { data: data });
         })
 
       addressView.render();

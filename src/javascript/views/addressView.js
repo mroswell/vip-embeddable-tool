@@ -9,7 +9,7 @@ module.exports = View.extend({
     '#info-icon click' : 'openAboutModal',
     '#close-button click' : 'closeAboutModal', 
   },
-  onRender : function(apiCallback) {
+  onAfterRender : function(apiCallback) {
     var $address = this.find('#address-input');
     var $aboutModal = this.find('#about');
     var $notFoundModal = this.find('#address-not-found');
