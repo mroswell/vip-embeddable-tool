@@ -13,6 +13,8 @@ var gulp         = require('gulp');
 var mocha = require('gulp-mocha');
 var handleErrors = require('../util/handleErrors');
 var source       = require('vinyl-source-stream');
+var uglify       = require('gulp-uglify');
+var streamify    = require('gulp-streamify');
 
 gulp.task('browserify', function() {
 
@@ -31,6 +33,7 @@ gulp.task('browserify', function() {
       .bundle()
       .on('error', handleErrors)
       .pipe(source('app.js'))
+      // .pipe(streamify(uglify()))
       .pipe(gulp.dest('./build/'))
       .on('end', bundleLogger.end);
   };

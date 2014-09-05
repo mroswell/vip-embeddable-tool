@@ -46,6 +46,19 @@ module.exports = (function() {
         .onRouteEvent('voterResources', function() {
           router.navigate(voterResourcesView, mapView, { data: data });
         })
+        .onRouteEvent('mapViewSubmit', function(response) {
+          data = response;
+          console.log(data)
+
+          // render the elections view if there's more than one election
+          // returned for the entered address, otherwise render the map view
+          if (typeof data.otherElections !== 'undefined') {
+            router.navigate(electionsView, mapView, { data: data });
+          } else router.navigate(mapView, mapView, { data: data });
+        })
+        .onRouteEvent('submitSelectedElection', function(options) {
+          
+        })
 
       electionsView
         .onRouteEvent('electionsViewBack', function() {

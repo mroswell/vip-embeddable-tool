@@ -4,12 +4,65 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content = "width = device-width, initial-scale=1, user-scalable=no"/>
-    <title>Gulp Playground</title>
+    <title>Voter Tool</title>
     <link rel="stylesheet" href="/app.css" />
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry"></script>
+    <style>
+    #app-container {
+      position: absolute;
+      width: 320px;
+      height: 480px;
+      left: 50%;
+      margin-left: -160px;
+      margin-top: 150px;
+      border: 1px dashed black;
+      overflow: auto;
+    }
+    #app-container-size-selectors {
+      position: absolute;
+      left: 50%;
+      margin-top: 75px;
+      margin-left: -85px;
+      text-align: center;
+    }
+    label {
+      float: left;
+    }
+    input[type="radio"] {
+      float: left;
+    }
+    </style>
   </head>
-
   <body>
+    <h1>Voter Information Project Voter Tool</h1>
+    <div id="app-container"></div>
+    <div id="app-container-size-selectors">
+      <label><input name="320x480" type="radio" id="mobile" value="320x480">320x480px</label>
+      <label><input name="900x768" type="radio" id="tablet" value="900x768">900x768px</label>
+    </div>
+    <button id="fill-address" style="position:absolute;left:50%;margin-left:-105px;">Fill in address</button>
+    <script>
+    (function() {
+      function $(id) { return document.getElementById(id); }
+      $('mobile').addEventListener('click', function() {
+        $('tablet').checked = false;
+        $('app-container').style.width = "320px";
+        $('app-container').style.height = "480px";
+        $('app-container').style['margin-left'] = "-160px";
+      });
+      $('tablet').addEventListener('click', function() {
+        $('mobile').checked = false;
+        $('app-container').style.width = "900px";
+        $('app-container').style.height = "768px";
+        $('app-container').style['margin-left'] = "-450px";
+      });
+      $('fill-address').addEventListener('click', function() {
+        $('address-input').value='36 E. 20th St. New York, NY';
+        google.maps.event.trigger($('address-input'), 'place_changed', {});
+      });
+    })(this);
+    </script>
     <script src="/app.js"></script>
   </body>
 </html>

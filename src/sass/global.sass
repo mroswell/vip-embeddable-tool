@@ -1,0 +1,152 @@
+@import 'variables'
+@import 'compass/css3'
+
+*, *:before, *:after
+  outline: none
+  @include box-sizing(border-box)
+
+body
+  margin: 0
+  font-family: 'Droid Sans', sans-serif
+
+input[type=text]
+  padding: 12px
+  border: 1px solid $border
+  border-radius: 4px
+  font-size: 16px
+  font-family: sans-serif
+  width: 100%
+
+input:focus
+  outline: none
+
+a
+  color: #333
+  text-decoration: none
+
+  &:focus
+    color: #333
+//  display: block
+//  margin-left: 45%
+//  color: $darkgray
+//  font-size: 13px
+//  border-bottom: 1px solid $darkgray
+
+button
+  padding: 5px 50px
+  border: 1px solid $border
+  border-radius: 5px
+  background: 0
+  color: $darkgray
+  text-transform: uppercase
+  font-size: 12px
+
+li
+  margin: 15px
+
+.box
+  border: 1px solid $border
+  border-top: 0
+  padding: 15px
+
+.box:first-child
+//  border-top: 1px solid $border
+
+.container
+  margin: 0 auto
+  width: 85%
+  @include box-shadow(0px, 2px, 2px, 0px, rgba(50, 50, 50, 0.25))
+
+.container:first-child
+  margin-top: 30px
+
+.footer
+  border: 1px solid $border
+  border-top: 0
+  padding: 10px
+  height: 10px
+  font-size: 10px
+  color: $darkgray
+
+.bottom
+  padding: 5px 0
+  bottom: 0
+  color: white
+  background-color: $darkgray
+  font-size: 8px
+  font-weight: bold
+  text-align: center
+
+.pac-container
+//  margin-top: -29px
+//  margin-left: 1px
+
+.modal
+  display: none
+  position: absolute
+  background-color: white
+  border: 1px solid $border
+  padding: 10px
+  left: calc(10% - 10px)
+  top: 28%
+  width: 80%
+  height: 60%
+  z-index: 2
+  overflow: hidden
+  @include box-shadow(0, 3px, 2px, 0, rgba(50,50,50,0.45))
+
+
+.radio
+  @include inline-block
+  width: 18px
+  height: 18px
+  @include border-radius(18px)
+  border: 2px solid white
+  background-color: transparent
+
+  .radio-selected
+    display: none
+    margin: 1px
+    background-color: white
+    width: 12px
+    height: 12px
+    border-radius: 12px
+
+  &.checked
+    .radio-selected
+      display: block
+
+
+.right-arrow
+  float: right
+  @include translateY(-50%)
+  width: 0
+  height: 0
+  margin-left: 20px
+  border-top: 8px solid transparent
+  border-bottom: 8px solid transparent
+  border-left: 8px solid $blue
+
+.right-inner-arrow
+  position: relative
+  left: -3px
+  border-left: 8px solid white
+
+.nav
+  margin-bottom: 3px
+  padding: 15px
+  color: #b9b9b9
+  @include box-shadow(0, 3px, 2px, 0, rgba(50,50,50,0.45))
+
+.left-arrow
+  @include inline-block
+  width: 0
+  height: 0
+  margin-left: 14px
+  margin-right: 7px
+  border-top: 6px solid transparent
+  border-bottom: 6px solid transparent
+  border-right: 10px solid #b9b9b9
+
+.hidden
+  display: none

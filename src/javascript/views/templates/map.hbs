@@ -1,51 +1,90 @@
-<div class="nav" id="change-your-address">
-  <div class="left-arrow"></div>
-  Back
+<div class="info box" id="registered-address">
+  Registered Voter Address
+  <span>Change</span>
 </div>
+
 <div class="box">
-  <div class="address-name">Address you entered:</div>
-  <div class="address">
-    {{ data.normalizedInput.line1 }}
-    {{ data.normalizedInput.line2 }}
-    {{ data.normalizedInput.line3 }}
-    {{ data.normalizedInput.city }}
-    {{ data.normalizedInput.state }}
-    {{ data.normalizedInput.zip }}
+  {{> address data.normalizedInput }}
+  <input type="text" class="change-address">
+</div>
+
+<div class="info box" id="more-elections">
+  Elections
+  <span>+</span>
+</div>
+
+<div class="info box" id="election-list">
+  <div class="election-selection">
+    <div class="radio checked"><div class="radio-selected"></div></div>
+    <span class="hidden">{{ data.election.id }}</span>
+    {{ data.election.name }}
   </div>
+  {{#each data.otherElections }}
+  <div class="election-selection">
+    <div class="radio"><div class="radio-selected"></div></div>
+    <span class="hidden">{{ id }}</span>
+    {{ name }}
+  </div>
+  {{/each}}
 </div>
-<div id="map-canvas">
+
+<div class="box" id="chosen-election">
+{{>election data.election}}
 </div>
-<button id="more-locations">More Locations</button>
+
+<div class="info box" id="polling-location">
+  Polling Location:
+  <span id="map-toggle">Closest</span>
+</div>
+
 <div id="location" class="box">
-  Your Closest Polling Location
-  <div class="address-name">
-  {{ data.pollingLocations.0.address.locationName }}
-  </div>
-  <div class="address-distance">
-  {{ data.distance }}
-  </div>
-  <div class="address">
-  {{ data.pollingLocations.0.address.line1 }}
-  </div>
-  <div class="address">
-  {{ data.pollingLocations.0.address.line2 }}
-  </div>
-  <div class="address">
-  {{ data.pollingLocations.0.address.line3 }}
-  </div>
-  <div class="address">
-  {{ data.pollingLocations.0.address.city }}
-  {{ data.pollingLocations.0.address.state }}
-  {{ data.pollingLocations.0.address.zip }}
-  </div>
-  <a href="https://www.google.com/maps?saddr=My+Location&daddr={{data.pollingLocations}}">Directions</a>
+  {{> address data.pollingLocations.0.address }}
+  <span>Directions</span>
 </div>
-<div id="voter-resources" class="box">
+<div id="map-canvas"></div>
+
+<div class="info box" id="resources-toggle">
+  Voter Resources
+  <span>+</span>
+</div>
+<div class="box information-items">
+  <div class="correspondence-address">
+  <b>{{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}</b>
+  <b>{{ data.state.0.local_jurisdiction.name }}</b><br>
+  {{ data.state.0.local_jurisdiction.electionAdministrationBody.hoursOfOperation }}
+  {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
+  {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.physicalAddress }}
+  <br>
+  <b>{{ data.state.0.electionAdministrationBody.name }}</b>
+  {{ data.state.0.electionAdministrationBody.hoursOfOperation }}
+  {{> normalized-address data.state.0.electionAdministrationBody.correspondenceAddress }}
+  {{> normalized-address data.state.0.electionAdministrationBody.physicalAddress }}
+  </div>
+</div>
+<div id="more-resources">
+  <div class="subsection box">
+  Voter ID Requirements
+  </div>
+  <div class="box information-items">
+    <div class="voter-id-info">
+    {{#each data.voterId }}
+      <div class="question">{{ question }}</div>
+      <div class="answer">{{ answer }}</div>
+    {{/each}}
+    <a href="{{ data.voterIdLink }}">Link</a>
+    </div>
+  {{!-- {{> election-administration-body data.state.0.electionAdministrationBody }}
+  {{> election-administration-body data.state.0.local_jurisdiction.electionAdministrationBody }} --}}
+  </div>
+</div>
+{{!-- <div id="voter-resources" class="box">
 Voter Resources
 <div class="right-arrow"></div>
-</div>
+</div> --}}
 <div class="contests">
+<div class="info box">Ballot Information</div>
 {{#each data.contests}}
 {{> contest}}
 {{/each}}
 </div>
+<div id="fade"></div>

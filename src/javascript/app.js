@@ -9,6 +9,8 @@ handlebars.registerPartial('normalized-address', require('./views/templates/part
 handlebars.registerPartial('election-official', require('./views/templates/partials/election-official.hbs'))
 handlebars.registerPartial('source', require('./views/templates/partials/source.hbs'))
 handlebars.registerPartial('contest', require('./views/templates/partials/contest.hbs'))
+handlebars.registerPartial('modals', require('./views/templates/partials/modals.hbs'))
+handlebars.registerPartial('address', require('./views/templates/partials/address.hbs'))
 // require('./partials.js');
 handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context);

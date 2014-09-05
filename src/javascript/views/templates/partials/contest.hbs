@@ -1,34 +1,25 @@
-<div class="contest">
-
-	<div class="ballot-placement box">
-	Ballot Placement:
-	{{ ballotPlacement }}
-	</div>
-	<div class="primary-party box">
-	Primary Party:
-	{{ primaryParty }}
-	</div>
-	<div class="office box">
-	Office:
-	{{ office }}
-	</div>
-	<div class="type box">
-	Type:
-	{{ type }}
+<div class="contest contest-toggle">
+	<div class="subsection box">
+		{{ office }}<br>
+		<div class="contest-type"> 
+			{{ primaryParty }}
+			{{ type }}
+		</div>
+		<span>+</span>
 	</div>
 	<div class="candidate-list">
-	Candidates:
-	{{#each candidates}}
+		{{#each candidates}}
+		<a href="{{ candidateUrl }}" target="_blank">
 			<div class="candidate-item box">
 				<div class="name">
-				Name:
 				{{ name }}
 				</div>
+				<span class="right-arrow"><span class="right-inner-arrow right-arrow"></span></span>
 				<div class="party">
-				Party:
 				{{ party }}
 				</div>
 			</div>
-	{{/each}}
+		</a>
+		{{/each}}
 	</div>
 </div>

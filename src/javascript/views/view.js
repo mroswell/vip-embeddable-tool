@@ -1,21 +1,31 @@
 module.exports = (function() {
   var view = {
+
     $id : '',
+
     $el : '',
+
     template: '',
+
     events : {},
+
     routeEvents : {},
+
     onBeforeRender: function() {},
+
     onAfterRender: function() {},
+
+    onRemove: function() {},
+
     render: function(options) {
       var that = this;
-      var $container = document.body;
+      var $container = document.getElementById('app-container');
       if (options) {
         if (options.container) $container = options.container;
         if (options.data) this.data = options.data;
       }
       this.onBeforeRender({data: this.data});
-      if (!!this.$el) this.toggle();
+      if (document.getElementById(this.$id)) this.toggle();
       else $container.innerHTML += '<div id=' + this.$id + '>' + this.template(options) + '</div>';
       this.$el = document.getElementById(this.$id);
 
@@ -34,23 +44,30 @@ module.exports = (function() {
 
       return this;
     },
+
     remove: function() {
-      this.$el.parentNode.replaceChild(this.$el.cloneNode(true), this.$el);
-      this.toggle();
+      // this.$el.parentNode.replaceChild(this.$el.cloneNode(true), this.$el);
+      // this.toggle();
+      this.onRemove();
+      this.$el.parentNode.removeChild(this.$el);
 
       return this;
     },
+
     onRouteEvent: function(event, callback) {
       this.routeEvents[event] = callback;
 
       return this;
     },
+
     triggerRouteEvent: function(event, args) {
       this.routeEvents[event].call(this, args);
     },
+
     find: function(query) {
       return this.$el.querySelector(query);
     },
+
     toggle: function() {
       var el = document.getElementById(this.$id);
       el.style.display = (el.style.display != 'none' ? 'none' : '')

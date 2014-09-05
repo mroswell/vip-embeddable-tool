@@ -1,4 +1,5 @@
 var View = require('./view.js');
+var voterIdData = require('../voterIdData.js');
 
 module.exports = View.extend({
 
@@ -8,6 +9,25 @@ module.exports = View.extend({
 
   events: {
     '.nav click' : 'back'
+  },
+
+  onBeforeRender: function(options) {
+    var stateData = Array.prototype.filter.call(voterIdData, function(entry) {
+      return entry.State === options.data.normalizedInput.state;
+    });
+    stateData = stateData[0];
+    var voterId = {};
+    var i = 0;
+    for (var key in stateData) {
+      voterId[i] = { 
+        'question' : key,
+        'answer' : stateData[key]
+      }
+      i += 1;
+    }
+    options.data.voterId = voterId;
+    // options.data.voterIdData = stateData[0];
+    console.log(options.data);
   },
 
   back: function() {

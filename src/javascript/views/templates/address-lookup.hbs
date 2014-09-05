@@ -1,41 +1,19 @@
+<img id="user-image"></img>
 <div class="box">
-  <h1>Voter Information</h1>
-</div>
-<div class="box">
+  <h1 class="title">Voter Information Tool</h1>
+  <h2 class="subtitle">Subheader Text</h2>
   <input type="text" id="address-input" placeholder="Enter registered address">
-  <a id="current-location">Use current location</a>
-</div>
-<div class="box" id="get-information-on">
-  Get Information on...
-  <ul>
-    <li>Ballot Information</li>
-    <li>Polling Locations</li>
-    <li>Early Voting</li>
-  </ul>
+    Get Information on...
+    <ul>
+      <li>Ballot Information</li>
+      <li>Polling Locations</li>
+      <li>Early Voting</li>
+    </ul>
 </div>
 <div class="footer">
+  For the most complete and up to date information, consult your local election official
   <i id="info-icon">i</i>
+  <i id="plus-icon">+</i>
 </div>
-<div class="bottom">
-For the most complete and up to date information, consult your local election official
-</div>
-<div class="modal" id="about">
-<h2>About</h2>
-<div id="close-button">x</div>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</div>
-<div class="modal" id="address-not-found">
-<h1>Address was not found.</h1>
-You entered:
-<h2>
-1234 Main St<br>
-New York, NY 10000
-</h2>
-Please verify your registered voter address and try again.
-<button>Try Again</button>
-</div>
+
+{{> modals }}
