@@ -8,14 +8,18 @@
 body
   margin: 0
   font-family: 'Droid Sans', sans-serif
+  color: $text
 
 input[type=text]
-  padding: 12px
+  padding: 12px 0 12px 34px
   border: 1px solid $border
   border-radius: 4px
   font-size: 16px
   font-family: sans-serif
+  color: $input-text
   width: 100%
+  background-color: $input-background
+  @include box-shadow(1px 1px 6px 0px #ccc)
 
 input:focus
   outline: none
@@ -45,12 +49,11 @@ li
   margin: 15px
 
 .box
-  border: 1px solid $border
-  border-top: 0
+  border-bottom: 1px solid $border
   padding: 15px
 
-.box:first-child
-//  border-top: 1px solid $border
+.box:last-child
+  border-top: 1px solid $border
 
 .container
   margin: 0 auto
@@ -61,12 +64,14 @@ li
   margin-top: 30px
 
 .footer
-  border: 1px solid $border
-  border-top: 0
-  padding: 10px
-  height: 10px
-  font-size: 10px
-  color: $darkgray
+  position: absolute
+  bottom: 0
+  width: 100%
+  height: 40px
+  padding: 10px 40px 10px 20px
+  color: white
+  font-size: 9px
+  background-color: $text
 
 .bottom
   padding: 5px 0
@@ -86,15 +91,18 @@ li
   position: absolute
   background-color: white
   border: 1px solid $border
-  padding: 10px
-  left: calc(10% - 10px)
-  top: 28%
-  width: 80%
-  height: 60%
-  z-index: 2
+  padding: 15px
+  width: 95%
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  z-index: 3
   overflow: hidden
-  @include box-shadow(0, 3px, 2px, 0, rgba(50,50,50,0.45))
+  @include box-shadow(0 3px 2px 0 rgba(50,50,50,0.45))
 
+  h2
+    color: $blue
+    margin: 20px 0
 
 .radio
   @include inline-block
@@ -119,10 +127,10 @@ li
 
 .right-arrow
   float: right
-  @include translateY(-50%)
   width: 0
   height: 0
   margin-left: 20px
+  @include translateY(-50%)
   border-top: 8px solid transparent
   border-bottom: 8px solid transparent
   border-left: 8px solid $blue
@@ -148,5 +156,23 @@ li
   border-bottom: 6px solid transparent
   border-right: 10px solid #b9b9b9
 
+.magnifying-glass
+  position: relative
+  width: 18px
+  top: -32px
+  left: 10px
+  stroke: $magnifying-glass
+
 .hidden
   display: none
+
+#fade
+  display: none
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+  background-color: black
+  opacity: .35
+  z-index: 2

@@ -19,10 +19,12 @@ module.exports = (function() {
 
     render: function(options) {
       var that = this;
+      var isModal = false;
       var $container = document.getElementById('app-container');
       if (options) {
         if (options.container) $container = options.container;
         if (options.data) this.data = options.data;
+        if (options.modal) isModal = true;
       }
       this.onBeforeRender({data: this.data});
       if (document.getElementById(this.$id)) this.toggle();

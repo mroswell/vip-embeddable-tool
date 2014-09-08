@@ -28,18 +28,19 @@ module.exports = View.extend({
   markers: [],
 
   onBeforeRender: function(options) {
+
     // TESTING
-    var newPollingLocation = {
-      address: {
-        line1: "233 Frost St.",
-        city: "Milwaukee",
-        state: "WI",
-        zip: "53211"
-      },
-      notes: "jsld",
-      pollingHours: "24/7"
-    };
-    if (options.data.pollingLocations) options.data.pollingLocations.push(newPollingLocation);
+    // var newPollingLocation = {
+    //   address: {
+    //     line1: "233 Frost St.",
+    //     city: "Milwaukee",
+    //     state: "WI",
+    //     zip: "53211"
+    //   },
+    //   notes: "jsld",
+    //   pollingHours: "24/7"
+    // };
+    // if (options.data.pollingLocations) options.data.pollingLocations.push(newPollingLocation);
 
     // TESTING
     if (!options.data.otherElections) {
@@ -77,6 +78,11 @@ module.exports = View.extend({
     if (state.local_jurisdiction && !state.local_jurisdiction.name) {
       state.local_jurisdiction.name = "Local Jurisdiction";
     }
+
+    // WA / OR mail-in case
+    if (state.name === 'Washington' || state.name === 'Oregon') {
+      
+    }    
 
     // reformat the dates
     var date = new Date(options.data.election.electionDay);
@@ -122,12 +128,12 @@ module.exports = View.extend({
   },
 
   onAfterRender: function(options) {
+    var that = this;
     if (options.data.pollingLocations && options.data.pollingLocations.length) {
       var address = this._parseAddress(options.data.pollingLocations[0].address);
       this._encodeAddressAndInitializeMap(options.data.pollingLocations[0].address);
 
       if (options.data.pollingLocations.length > 1) {
-        var that = this;
         var otherLocations = options.data.pollingLocations.slice(1);
 
         otherLocations.forEach(function(location) {
@@ -145,6 +151,13 @@ module.exports = View.extend({
       //     document.querySelector('#map-view .address-distance').innerText = (Math.round(distance) / 1000) + ' mi';
       // });
     } else this._encodeAddressAndInitializeMap("Paris, France");
+
+    document.querySelector('#modal').style.display = 'block';
+    document.head += '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">';
+    document.querySelector('#modal').addEventListener('click', function() {
+      this.style.display = '';
+      that.triggerRouteEvent('mapViewBack')
+    })
   },
 
   onRemove: function() {
@@ -163,6 +176,8 @@ module.exports = View.extend({
         zoom: 12,
         center: position,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
+        draggable: false,
+        panControl: false,
         zoomControl: false,
         scrollwheel: false,
         mapTypeControl: false,
@@ -273,9 +288,12 @@ module.exports = View.extend({
       this.autocompleteListener = function() {
         var address = this.autocomplete.getPlace().formatted_address;
 
-        api(address, function(response) {
-          this.triggerRouteEvent('mapViewSubmit', response)
-        }.bind(this));
+        api({
+          address: address,
+          success: function(response) {
+            this.triggerRouteEvent('mapViewSubmit', response)
+          }.bind(this)
+        });
       }.bind(this);
 
       google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
@@ -295,9 +313,13 @@ module.exports = View.extend({
     if (!selected.classList.contains('checked')) {
       var electionId = selected.nextElementSibling.innerHTML;
       var address = this._parseAddress(this.data.normalizedInput);
-      api(address, function(response) {
-        this.triggerRouteEvent('mapViewSubmit', response)
-      }.bind(this), electionId);
+      api({
+        address: address,
+        success: function(response) {
+          this.triggerRouteEvent('mapViewSubmit', response)
+        }.bind(this),
+        electionId: electionId
+      });
     }
   },
 

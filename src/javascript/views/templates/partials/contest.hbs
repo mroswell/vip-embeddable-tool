@@ -8,6 +8,15 @@
 		<span>+</span>
 	</div>
 	<div class="candidate-list">
+		{{#if referendumSubtitle }}
+		<a href="{{ referendumUrl }}">
+			<div class="referendum-subtitle box">
+				{{ referendumTitle }}
+				<span class="right-arrow"><span class="right-inner-arrow right-arrow"></span></span>
+				{{ referendumSubtitle }}
+			</div>
+		</a>
+		{{/if }}
 		{{#each candidates}}
 		<a href="{{ candidateUrl }}" target="_blank">
 			<div class="candidate-item box">

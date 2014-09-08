@@ -4,12 +4,34 @@
 // mapView
 //
 //
+body
+
+#modal
+  display: none
+  position: absolute
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  // width: 100%
+  // height: 100%
+  z-index: 998
+  background-color: rgba(0,0,0,.25)
 
 #map-canvas
   height: 150px
   @include transition(height, 200ms, ease-in-out)
 
 #map-view
+  z-index: 999
+  margin: 0 auto
+  max-width: 320px
+  left: 50%
+  // top: 50%
+  @include translateX(-50%)
+  background-color: white
+  position: absolute
+  // max-width: 100vw
 
   button
     position: absolute
@@ -58,6 +80,10 @@
     max-height: 0px
     overflow: hidden
     @include transition(max-height, 200ms, ease-in-out)
+
+  .candidate-item
+    .right-arrow
+      @include translateY(-50%)
 
   .change-address
     display: none
@@ -114,13 +140,6 @@
     overflow: hidden
     @include transition(max-height, 200ms, ease-in-out)
 
-  #fade
-    display: none
-    position: absolute
-    left: 0
-    top: 0
-    width: 100%
-    height: 100%
-    background-color: black
-    opacity: .35
-    z-index: 2
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px)
+  #map-view
+    max-width: 320px

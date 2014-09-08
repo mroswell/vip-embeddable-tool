@@ -23,7 +23,11 @@ module.exports = (function() {
           // returned for the entered address, otherwise render the map view
           if (typeof data.otherElections !== 'undefined') {
             router.navigate(electionsView, addressView, { data: data });
-          } else router.navigate(mapView, addressView, { data: data });
+          } else router.navigate(mapView, addressView, {
+            data: data,
+            container: document.body,
+            modal: true
+          });
         });
 
       electionsView
@@ -54,10 +58,14 @@ module.exports = (function() {
           // returned for the entered address, otherwise render the map view
           if (typeof data.otherElections !== 'undefined') {
             router.navigate(electionsView, mapView, { data: data });
-          } else router.navigate(mapView, mapView, { data: data });
+          } else router.navigate(mapView, mapView, { 
+            data: data,
+            container: document.body,
+            modal: true
+          });
         })
         .onRouteEvent('submitSelectedElection', function(options) {
-          
+
         })
 
       electionsView

@@ -21,14 +21,19 @@ module.exports = View.extend({
     document.body.addEventListener('click', function(e) {
       if (e.target !== $aboutModal) $aboutModal.style.display = 'none';
       $notFoundModal.style.display = 'none';
-    });
+      this.find('#fade').style.display = 'none';
+    }.bind(this));
 
     this.autocomplete = new google.maps.places.Autocomplete($address);
 
     this.autocompleteListener = function () {
       enteredAddress = this.autocomplete.getPlace().formatted_address;
 
-      api(enteredAddress, this.handleElectionData.bind(this));
+      api({
+        address: enteredAddress, 
+        success: this.handleElectionData.bind(this), 
+        error: this.handleAddressNotFound.bind(this)
+      });
     }.bind(this);
 
     google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
@@ -55,6 +60,12 @@ module.exports = View.extend({
     } else this.triggerRouteEvent('addressViewSubmit', response);
   },
 
+  handleAddressNotFound: function() {
+    this.find('#address-not-found').style.display = 'block';
+    this.find('#fade').style.display = 'block';
+    this.find('#address-input').value = "";
+  },
+
   selectElection: function(e) {
     var electionId = e.currentTarget.querySelector('.hidden');
     console.log(electionId);
@@ -63,11 +74,13 @@ module.exports = View.extend({
 
   openAboutModal: function(e) {
     this.find('#about').style.display = 'block';
+    this.find('#fade').style.display = 'block';
     e.stopPropagation();
   },
 
   closeAboutModal: function() {
     this.find('#about').style.display = 'none';
+    this.find('#fade').style.display = 'none';
   }
 
 });
