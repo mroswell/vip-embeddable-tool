@@ -5,6 +5,8 @@ module.exports = (function() {
 
     $el : '',
 
+    $container : '',
+
     template: '',
 
     events : {},
@@ -26,6 +28,7 @@ module.exports = (function() {
         if (options.data) this.data = options.data;
         if (options.modal) isModal = true;
       }
+      this.$container = $container;
       this.onBeforeRender({data: this.data});
       if (document.getElementById(this.$id)) this.toggle();
       else $container.innerHTML += '<div id=' + this.$id + '>' + this.template(options) + '</div>';

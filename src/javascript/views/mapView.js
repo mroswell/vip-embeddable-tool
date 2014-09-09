@@ -20,12 +20,16 @@ module.exports = View.extend({
     '#voter-resources click' : 'voterResources',
     '#polling-location click' : 'toggleMap',
     '#more-elections click' : 'toggleElections',
-    '#resources-toggle click' : 'toggleResources'
+    '#resources-toggle click' : 'toggleResources',
+    '#plus-icon click' : 'openAboutModal',
+    '#close-button click' : 'closeAboutModal'
   },
 
   map: null,
 
   markers: [],
+
+  address: '',
 
   onBeforeRender: function(options) {
 
@@ -131,7 +135,10 @@ module.exports = View.extend({
     var that = this;
     if (options.data.pollingLocations && options.data.pollingLocations.length) {
       var address = this._parseAddress(options.data.pollingLocations[0].address);
+
       this._encodeAddressAndInitializeMap(options.data.pollingLocations[0].address);
+
+      this.find('#location a').href="https://maps.google.com?daddr=" + address;
 
       if (options.data.pollingLocations.length > 1) {
         var otherLocations = options.data.pollingLocations.slice(1);
@@ -152,12 +159,9 @@ module.exports = View.extend({
       // });
     } else this._encodeAddressAndInitializeMap("Paris, France");
 
-    document.querySelector('#modal').style.display = 'block';
-    document.head += '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">';
-    document.querySelector('#modal').addEventListener('click', function() {
-      this.style.display = '';
-      that.triggerRouteEvent('mapViewBack')
-    })
+    this.find('#info-icon').parentNode.href = options.data.state[0].electionAdministrationBody.electionInfoUrl;
+
+    // this._toggleModal();
   },
 
   onRemove: function() {
@@ -167,6 +171,28 @@ module.exports = View.extend({
     }
 
     this.markers = [];
+  },
+
+  _toggleModal: function() {
+    var modal = document.querySelector('#modal');
+    var that = this;
+
+    if (getComputedStyle(modal)['display'] !== 'block') {
+      document.querySelector('#modal').style.display = 'block';
+      document.querySelector('#modal').addEventListener('click', function() {
+        this.style.display = '';
+        that.triggerRouteEvent('mapViewBack')
+      });
+
+      document.body.classList.add('body-modal-show');
+      this.$el.parentNode.classList.add('container-modal-show');
+      this.$el.classList.add('map-view-modal-show');
+    } else {
+      modal.style.display = '';
+      document.body.classList.remove('body-modal-show');
+      this.$el.parentNode.classList.remove('container-modal-show');
+      this.$el.classList.remove('map-view-modal-show');
+    }
   },
 
   _encodeAddressAndInitializeMap : function(address) {
@@ -217,7 +243,8 @@ module.exports = View.extend({
   _addPollingLocation: function(position, address) {
       var marker = new google.maps.Marker({
         map: this.map,
-        position: position
+        position: position,
+        icon: './images/blue-marker.png'
       });
       var that = this;
       google.maps.event.addListener(marker, 'click', function() {
@@ -310,8 +337,8 @@ module.exports = View.extend({
   changeElection: function(e) {
     var selected = e.currentTarget.firstElementChild;
 
-    if (!selected.classList.contains('checked')) {
-      var electionId = selected.nextElementSibling.innerHTML;
+    if (selected.classList.contains('hidden')) {
+      var electionId = selected.nextElementSibling.nextElementSibling.innerHTML;
       var address = this._parseAddress(this.data.normalizedInput);
       api({
         address: address,
@@ -326,16 +353,19 @@ module.exports = View.extend({
   toggleMap: function(e) {
     var canvas = this.find('#map-canvas');
     var toggle = this.find('#map-toggle');
-    if (toggle.innerHTML !== 'Closest') {
-      toggle.innerHTML = 'Closest';
-      canvas.style.height = '150px';
-    } else {
-      toggle.innerHTML = 'All';
+    if (getComputedStyle(canvas)['height'] !== '300px') {
       canvas.style.height = '300px';
+      toggle.querySelector('.minus').classList.remove('hidden');
+      toggle.querySelector('.plus').classList.add('hidden');
+    } else {
+      canvas.style.height = '150px';
+      toggle.querySelector('.plus').classList.remove('hidden');
+      toggle.querySelector('.minus').classList.add('hidden');
     }
   },
 
   toggleElections: function(e) {
+    e.stopPropagation();
     this._slidePanel(
       this.find('#election-list'),
       e.currentTarget.querySelector('span'),
@@ -351,10 +381,28 @@ module.exports = View.extend({
   },
 
   toggleContest: function(e) {
-    this._slidePanel(
-      e.currentTarget.lastElementChild,
-      e.currentTarget.firstElementChild.lastElementChild
-    );
+    // this._slidePanel(
+    //   e.currentTarget.lastElementChild,
+    //   e.currentTarget.firstElementChild.lastElementChild
+    // );
+
+    var inSymbol = '+';
+    var out = '−';
+    var max = '2000px';
+    var min = '0px';
+    if (getComputedStyle(e.currentTarget.lastElementChild)['max-height'] !== min) {
+      e.currentTarget.lastElementChild.style['max-height'] = min;
+      e.currentTarget.firstElementChild.lastElementChild.innerHTML = inSymbol;
+      // button.querySelector('.plus').classList.remove('hidden');
+      // button.querySelector('.minus').classList.add('hidden');
+    } else {
+      e.currentTarget.lastElementChild.style['max-height'] = max;
+      e.currentTarget.firstElementChild.lastElementChild.innerHTML = out;
+      // button.querySelector('.minus').classList.remove('hidden');
+      // button.querySelector('.plus').classList.add('hidden');
+    }
+
+    // this.$container.scrollTop = e.currentTarget.firstElementChild.lastElementChild.getBoundingClientRect().top - this.$container.getBoundingClientRect().top;
   },
 
   _slidePanel: function(panel, button, options) {
@@ -364,11 +412,17 @@ module.exports = View.extend({
     var min = (options && options.min ? options.min : '0px');
     if (getComputedStyle(panel)['max-height'] !== min) {
       panel.style['max-height'] = min;
-      button.innerHTML = inSymbol;
+      // button.innerHTML = inSymbol;
+      button.querySelector('.plus').classList.remove('hidden');
+      button.querySelector('.minus').classList.add('hidden');
     } else {
       panel.style['max-height'] = max;
-      button.innerHTML = out;
+      // button.innerHTML = out;
+      button.querySelector('.minus').classList.remove('hidden');
+      button.querySelector('.plus').classList.add('hidden');
     }
+
+    // this.$container.scrollTop = button.getBoundingClientRect().top - this.$container.getBoundingClientRect().top;
   },
 
   moreLocations: function() {
@@ -381,6 +435,17 @@ module.exports = View.extend({
 
   back: function() {
     this.triggerRouteEvent('mapViewBack');
+  },
+
+  openAboutModal: function(e) {
+    this.find('#about').style.display = 'block';
+    this.find('#fade').style.display = 'block';
+    e.stopPropagation();
+  },
+
+  closeAboutModal: function() {
+    this.find('#about').style.display = 'none';
+    this.find('#fade').style.display = 'none';
   }
 
 });

@@ -7,6 +7,7 @@
     <title>Voter Tool</title>
     <link rel="stylesheet" href="./app.css" />
     <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Robot:400,500,700' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry"></script>
     <style>
     body {
@@ -21,6 +22,7 @@
       margin-top: 150px;
       border: 1px dashed black;
       overflow: auto;
+      overflow-x: hidden;
     }
     #app-container-size-selectors {
       position: absolute;
@@ -29,22 +31,31 @@
       margin-left: -85px;
       text-align: center;
     }
+    #fill-address {
+      margin: 30px 0;
+      transform: translateX(-50%);
+    }
     label {
       float: left;
     }
     input[type="radio"] {
       float: left;
+      display: none;
+    }
+    label {
+      display: none;
     }
     </style>
   </head>
   <body>
-    <h1>Voter Information Project Voter Tool</h1>
+    <h1 style="text-align: center; margin: 30px">Voter Information Project Voter Tool</h1>
     <div id="app-container"></div>
     <div id="app-container-size-selectors">
       <label><input name="320x480" type="radio" id="mobile" value="320x480">320x480px</label>
       <label><input name="900x768" type="radio" id="tablet" value="900x768">900x768px</label>
     </div>
-    <button id="fill-address" style="position:absolute;left:50%;margin-left:-105px;">Fill in address</button>
+    <button id="fill-address" style="position:absolute;left:50%;">Fill in address</button>
+    <div style="text-align: center;">Submitting a request will return the next upcoming election, but you can also choose to use the VIP Test Election.</div>
     <script>
     (function() {
       function $(id) { return document.getElementById(id); }

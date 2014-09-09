@@ -1,38 +1,33 @@
 <div class="election-administration-body">
-  <div class="box name">
+{{!--   <div class="name">
   {{ name }}
-  </div>
+  </div> --}}
   {{#if electionInfoUrl }}
-  <a class="box election-info-url" href="{{ electionInfoUrl }}" target="_blank">
+  <a class="election-info-url" href="{{ electionInfoUrl }}" target="_blank">
     Election Information
-    <div class="right-arrow"></div>
   </a>
   {{/if}}
   {{#if electionRegistrationConfirmationUrl }}
-  <a class="box election-registration-confirmation-url" href="{{ electionRegistrationConfirmationUrl }}" target="_blank">
+  <a class="election-registration-confirmation-url" href="{{ electionRegistrationConfirmationUrl }}" target="_blank">
     Registration Confirmation
-    <div class="right-arrow"></div>
   </a>
   {{/if}}
   {{#if absenteeVotingInfoUrl}}
-  <a class="box absentee-voting-info-url" href="{{ absenteeVotingInfoUrl }}" target="_blank">
+  <a class="absentee-voting-info-url" href="{{ absenteeVotingInfoUrl }}" target="_blank">
   Absentee Voting Information
-  <div class="right-arrow"></div>
   </a>
   {{/if}}
   {{#if votingLocationFinderUrl}}
-  <a class="box voting-location-finder-url" href="{{ votingLocationFinderUrl }}" target="_blank">
+  <a class="voting-location-finder-url" href="{{ votingLocationFinderUrl }}" target="_blank">
     Voting Location Finder
-    <div class="right-arrow"></div>
   </a>
   {{/if}}
   {{#if ballotInfoUrl }}
-  <a class="box ballot-info-url" href="{{ ballotInfoUrl }}" target="_blank">
+  <a class="ballot-info-url" href="{{ ballotInfoUrl }}" target="_blank">
     Ballot Information
-    <div class="right-arrow"></div>
   </a>
   {{/if}}
-  {{#if voter_services }}
+{{!--   {{#if voter_services }}
   <div class="box voter-services">
   {{ voter_services }}
   </div>
@@ -66,5 +61,5 @@
   {{> source }}
   {{/each}}
   </div>
-  {{/if}}
+  {{/if}} --}}
 </div>

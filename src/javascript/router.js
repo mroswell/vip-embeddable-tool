@@ -25,7 +25,7 @@ module.exports = (function() {
             router.navigate(electionsView, addressView, { data: data });
           } else router.navigate(mapView, addressView, {
             data: data,
-            container: document.body,
+            // container: document.body,
             modal: true
           });
         });
@@ -60,7 +60,7 @@ module.exports = (function() {
             router.navigate(electionsView, mapView, { data: data });
           } else router.navigate(mapView, mapView, { 
             data: data,
-            container: document.body,
+            // container: document.body,
             modal: true
           });
         })

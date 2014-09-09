@@ -8,9 +8,11 @@ module.exports = View.extend({
   template     : require('./templates/address-lookup.hbs'),
 
   events : {
-    '#info-icon click' : 'openAboutModal',
+    '#plus-icon click' : 'openAboutModal',
     '#close-button click' : 'closeAboutModal',
   },
+
+  address : '',
 
   onAfterRender : function(apiCallback) {
     var $address = this.find('#address-input');
@@ -28,6 +30,7 @@ module.exports = View.extend({
 
     this.autocompleteListener = function () {
       enteredAddress = this.autocomplete.getPlace().formatted_address;
+      this.address = enteredAddress;
 
       api({
         address: enteredAddress, 
@@ -35,6 +38,20 @@ module.exports = View.extend({
         error: this.handleAddressNotFound.bind(this)
       });
     }.bind(this);
+
+    window.addEventListener('keypress', function(e) {
+      var key = e.which || e.keyCode;
+      if (key === 13) {
+        var address = this.find('#address-input').value;
+        this.address = address;
+
+        api({
+          address: address, 
+          success: this.handleElectionData.bind(this), 
+          error: this.handleAddressNotFound.bind(this)
+        });
+      }
+    }.bind(this));
 
     google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
   },
@@ -63,6 +80,7 @@ module.exports = View.extend({
   handleAddressNotFound: function() {
     this.find('#address-not-found').style.display = 'block';
     this.find('#fade').style.display = 'block';
+    this.find('#address-not-found h1').innerHTML = this.address;
     this.find('#address-input').value = "";
   },
 

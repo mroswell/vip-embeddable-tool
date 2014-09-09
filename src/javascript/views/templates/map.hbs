@@ -1,6 +1,6 @@
 <div class="info box" id="registered-address">
   Registered Voter Address
-  <span>Change</span>
+  <span>Edit</span>
 </div>
 
 <div class="box">
@@ -10,18 +10,25 @@
 
 <div class="info box" id="more-elections">
   Elections
-  <span>+</span>
+  <span>
+    <img src="./images/plus.png" class="toggle-image plus">
+    <img src="./images/minus.png" class="toggle-image minus hidden">
+  </span>
 </div>
 
 <div class="info box" id="election-list">
   <div class="election-selection">
-    <div class="radio checked"><div class="radio-selected"></div></div>
+    {{!-- <div class="radio checked"><div class="radio-selected"></div></div> --}}
+    <img src="./images/radio-checked.png" class="radio checked">
+    <img src="./images/radio-unchecked.png" class="radio unchecked hidden">
     <span class="hidden">{{ data.election.id }}</span>
     {{ data.election.name }}
   </div>
   {{#each data.otherElections }}
   <div class="election-selection">
-    <div class="radio"><div class="radio-selected"></div></div>
+    {{!-- <div class="radio"><div class="radio-selected"></div></div> --}}
+    <img src="./images/radio-checked.png" class="radio checked hidden">
+    <img src="./images/radio-unchecked.png" class="radio unchecked">
     <span class="hidden">{{ id }}</span>
     {{ name }}
   </div>
@@ -30,38 +37,61 @@
 
 <div class="box" id="chosen-election">
 {{>election data.election}}
+<img src="./images/calendar.png">
 </div>
 
 <div class="info box" id="polling-location">
   Polling Location:
-  <span id="map-toggle">Closest</span>
+  <span id="map-toggle">
+    <img src="./images/plus.png" class="toggle-image plus">
+    <img src="./images/minus.png" class="toggle-image minus hidden">
+  </span>
 </div>
 
 <div id="location" class="box">
   {{> address data.pollingLocations.0.address }}
-  <span>Directions</span>
+  <span>
+    <a href="#" target="_blank">
+      <img src="./images/directions.png">
+    </a>
+  </span>
 </div>
 <div id="map-canvas"></div>
 
 <div class="info box" id="resources-toggle">
   Voter Resources
-  <span>+</span>
+  <span>
+    <img src="./images/plus.png" class="toggle-image plus">
+    <img src="./images/minus.png" class="toggle-image minus hidden">
+  </span>
 </div>
 <div class="box information-items">
-  <div class="correspondence-address">
+  Information on how to navigate the elections process, including deadlines, Voter ID information, and registration links.
+</div>
+<div id="more-resources">
+  <div class="subsection box">
+  Local Election Administration
+  </div>
+  <div class="correspondence-address box">
+  <h1>Local Jurisdiction</h1>
   <b>{{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}</b>
   <b>{{ data.state.0.local_jurisdiction.name }}</b><br>
   {{ data.state.0.local_jurisdiction.electionAdministrationBody.hoursOfOperation }}
   {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
   {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.physicalAddress }}
   <br>
+  <h1>State Elections Office</h1>
   <b>{{ data.state.0.electionAdministrationBody.name }}</b>
   {{ data.state.0.electionAdministrationBody.hoursOfOperation }}
   {{> normalized-address data.state.0.electionAdministrationBody.correspondenceAddress }}
   {{> normalized-address data.state.0.electionAdministrationBody.physicalAddress }}
   </div>
-</div>
-<div id="more-resources">
+  <div class="subsection box">
+  Additional Resources
+  </div>
+  <div class="box information-links">
+  {{> election-administration-body data.state.0.electionAdministrationBody }}
+  </div>
   <div class="subsection box">
   Voter ID Requirements
   </div>
@@ -87,4 +117,11 @@ Voter Resources
 {{> contest}}
 {{/each}}
 </div>
+<div class="footer">
+  For the most complete and up to date information, consult your local election official
+  <a href="#" target="_blank"><i id="info-icon">i</i></a>
+  {{!-- <i id="plus-icon">+</i> --}}
+</div>
+
+{{> modals }}
 <div id="fade"></div>

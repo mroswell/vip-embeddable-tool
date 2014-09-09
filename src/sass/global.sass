@@ -7,7 +7,7 @@
 
 body
   margin: 0
-  font-family: 'Droid Sans', sans-serif
+  font-family: 'Roboto', sans-serif
   color: $text
 
 input[type=text]
@@ -17,6 +17,7 @@ input[type=text]
   font-size: 16px
   font-family: sans-serif
   color: $input-text
+  color: $text
   width: 100%
   background-color: $input-background
   @include box-shadow(1px 1px 6px 0px #ccc)
@@ -37,11 +38,10 @@ a
 //  border-bottom: 1px solid $darkgray
 
 button
-  padding: 5px 50px
-  border: 1px solid $border
-  border-radius: 5px
-  background: 0
-  color: $darkgray
+  padding: 10px 20px
+  border: 0
+  background: $blue
+  color: white
   text-transform: uppercase
   font-size: 12px
 
@@ -51,9 +51,6 @@ li
 .box
   border-bottom: 1px solid $border
   padding: 15px
-
-.box:last-child
-  border-top: 1px solid $border
 
 .container
   margin: 0 auto
@@ -83,7 +80,7 @@ li
   text-align: center
 
 .pac-container
-//  margin-top: -29px
+  margin-top: -29px
 //  margin-left: 1px
 
 .modal
