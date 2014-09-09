@@ -1,6 +1,8 @@
 var View = require('./view.js');
 var api  = require('../api.js');
 var voterIdData = require('../voterIdData.js');
+var $ = require('jquery');
+window.$ = $;
 
 module.exports = View.extend({
 
@@ -357,6 +359,7 @@ module.exports = View.extend({
       canvas.style.height = '300px';
       toggle.querySelector('.minus').classList.remove('hidden');
       toggle.querySelector('.plus').classList.add('hidden');
+      this._scrollTo('#map-toggle', 10);
     } else {
       canvas.style.height = '150px';
       toggle.querySelector('.plus').classList.remove('hidden');
@@ -400,6 +403,7 @@ module.exports = View.extend({
       e.currentTarget.firstElementChild.lastElementChild.innerHTML = out;
       // button.querySelector('.minus').classList.remove('hidden');
       // button.querySelector('.plus').classList.add('hidden');
+      this._scrollTo(e.currentTarget.firstElementChild.lastElementChild, 20);
     }
 
     // this.$container.scrollTop = e.currentTarget.firstElementChild.lastElementChild.getBoundingClientRect().top - this.$container.getBoundingClientRect().top;
@@ -420,9 +424,16 @@ module.exports = View.extend({
       // button.innerHTML = out;
       button.querySelector('.minus').classList.remove('hidden');
       button.querySelector('.plus').classList.add('hidden');
+      this._scrollTo(button, 10);
     }
 
     // this.$container.scrollTop = button.getBoundingClientRect().top - this.$container.getBoundingClientRect().top;
+  },
+
+  _scrollTo: function(target, padding) {
+    $(this.$container).animate({
+      scrollTop: $(target).offset().top - $(this.$container).offset().top + $(this.$container).scrollTop() - padding
+    }, 500);
   },
 
   moreLocations: function() {
