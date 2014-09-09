@@ -1,0 +1,13 @@
+<div class="modal" id="multiple-elections">
+  <h2>Multiple elections found. Select one:</h2>
+  {{#each elections}}
+    <div class="election">
+      <img src="./images/radio-checked-blue.png" class="radio checked hidden">
+      <img src="./images/radio-unchecked-black.png" class="radio unchecked">
+      <h1>{{name}}</h1>
+      <h2>{{date}}</h2>
+      <div class="hidden">{{id}}</div>
+    </div>
+  {{/each}}
+  <button>Done</button>
+</div>

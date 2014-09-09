@@ -1,11 +1,14 @@
 var View = require('./view.js');
 var api = require('../api.js');
+var $ = require('jquery');
 
 module.exports = View.extend({
 
   $id          : 'address-view',
 
   template     : require('./templates/address-lookup.hbs'),
+
+  multipleElections : require('./templates/partials/multiple-elections.hbs'),
 
   events : {
     '#plus-icon click' : 'openAboutModal',
@@ -23,7 +26,7 @@ module.exports = View.extend({
     document.body.addEventListener('click', function(e) {
       if (e.target !== $aboutModal) $aboutModal.style.display = 'none';
       $notFoundModal.style.display = 'none';
-      this.find('#fade').style.display = 'none';
+      if (e.target === this.find('#fade')) this.find('#fade').style.display = 'none';
     }.bind(this));
 
     this.autocomplete = new google.maps.places.Autocomplete($address);
@@ -62,18 +65,50 @@ module.exports = View.extend({
 
   handleElectionData: function(response) {
     // if response has multiple elections, select which election
+
+    if (!response.otherElections) {
+      response.otherElections = [{
+        name: "VIP Test Election",
+        date: "01/25/1900",
+        id: "2000"
+      }];
+    }
     if (response.otherElections) {
-      this.$el.innerHTML += electionChoiceTemplate({
+      // this.$el.innerHTML += electionChoiceTemplate({
+      //   elections: [response.election].concat(response.otherElections)
+      // });
+      // document.getElementById('elections').style.display = 'block';
+      // var that = this;
+      // this.querySelectorAll('.election').forEach(function(election) {
+      //   election.addEventListener('click', function(e) {
+      //     var electionId = e.currentTarget.querySelector('.hidden').innerHTML;
+      //     that.triggerRouteEvent('addressViewSubmit', response);
+      //   });
+      // });
+      this.$el.innerHTML += this.multipleElections({
         elections: [response.election].concat(response.otherElections)
       });
-      document.getElementById('elections').style.display = 'block';
-      var that = this;
-      this.querySelectorAll('.election').forEach(function(election) {
-        election.addEventListener('click', function(e) {
-          var electionId = e.currentTarget.querySelector('.hidden').innerHTML;
-          that.triggerRouteEvent('addressViewSubmit', response);
+      this.find('#multiple-elections').style.display = 'block';
+      this.find('#fade').style.display = 'block';
+      this.find('#multiple-elections .checked').classList.remove('hidden');
+      this.find('#multiple-elections .unchecked').classList.add('hidden');
+      this.find('#multiple-elections button').addEventListener('click', function() {
+        var id = this.find('.checked:not(.hidden)').parentNode.lastElementChild.innerHTML;
+        api({
+          address: this._parseAddress(response.normalizedInput), 
+          success: function(newResponse) {
+            this.triggerRouteEvent('addressViewSubmit', newResponse);
+          }.bind(this),
+          electionId: id
         });
+      }.bind(this));
+      $('.election').on('click', function() {
+        $('.checked').addClass('hidden');
+        $('.unchecked').removeClass('hidden')
+        $(this).find('.checked').removeClass('hidden');
+        $(this).find('.unchecked').addClass('hidden');
       });
+      
     } else this.triggerRouteEvent('addressViewSubmit', response);
   },
 

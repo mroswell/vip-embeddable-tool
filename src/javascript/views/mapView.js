@@ -48,7 +48,6 @@ module.exports = View.extend({
     // };
     // if (options.data.pollingLocations) options.data.pollingLocations.push(newPollingLocation);
 
-    // TESTING
     if (!options.data.otherElections) {
       options.data.otherElections = [{
         name: "VIP Test Election",
@@ -257,14 +256,6 @@ module.exports = View.extend({
         } else that._fitMap();
       });
       this.markers.push(marker);
-  },
-
-  _parseAddress: function(address) {
-    if (typeof address === 'object') {
-      var parsedAddress = '';
-      for (var key in address) parsedAddress += address[key] + ' ';
-    return parsedAddress;
-    } else return address;
   },
 
   _calculateDistance: function(fromLocation, toLocation, callback) {
