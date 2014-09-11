@@ -1,6 +1,7 @@
 var util = require('./util.js');
 var router           = require('./router.js');
 var handlebars       = require('hbsfy/runtime');
+var $                = require('jquery');
 
 handlebars.registerPartial('election', require('./views/templates/partials/election.hbs'))
 handlebars.registerPartial('election-information-item', require('./views/templates/partials/election-information-item.hbs'))
@@ -15,7 +16,9 @@ handlebars.registerPartial('address', require('./views/templates/partials/addres
 handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context);
 });
-
+// $.getScript('http://maps.googleapis.com/maps/api/js?libraries=places,geometry', function() {
+//   router.start();
+// })
 google.maps.event.addDomListener(window, 'load', function() {
   router.start();
 });

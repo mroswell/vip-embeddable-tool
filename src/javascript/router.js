@@ -17,7 +17,7 @@ module.exports = (function() {
       addressView
         .onRouteEvent('addressViewSubmit', function(response) {
           data = response;
-          console.log(data)
+          window.console && console.log(data);
 
           // render the elections view if there's more than one election
           // returned for the entered address, otherwise render the map view

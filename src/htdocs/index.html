@@ -10,15 +10,20 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700' rel='stylesheet' type='text/css'>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places,geometry"></script>
     <style>
+    html,
     body {
-      height: 100vh;
+/*      position: fixed;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;*/
     }
     #app-container {
       position: absolute;
-      width: 320px;
+      width: 640px;
       height: 480px;
       left: 50%;
-      margin-left: -160px;
+      margin-left: -320px;
       margin-top: 150px;
       border: 1px dashed black;
       overflow: auto;
@@ -56,6 +61,7 @@
     </div>
     <button id="fill-address" style="position:absolute;left:50%;">Fill in address</button>
     <div style="text-align: center;">Submitting a request will return the next upcoming election, but you can also choose to use the VIP Test Election.</div>
+    <div id="modal"></div>
     <script>
     (function() {
       function $(id) { return document.getElementById(id); }
@@ -75,10 +81,10 @@
         $('address-input').value='36 E. 20th St. New York, NY';
         google.maps.event.trigger($('address-input'), 'place_changed', {});
       });
+      // $('modal').style.display = 'block';
     })(this);
     </script>
     <script src="./app.js"></script>
-    <div id="modal"></div>
     <!-- <div id="app-container"></div> -->
   </body>
 </html>

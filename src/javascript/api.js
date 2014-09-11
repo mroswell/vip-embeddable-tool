@@ -5,7 +5,7 @@ var apiRequest = function(options) {
   // note: this shouldn't be necessary but adding in the electionId for time being
   // (Alaska)
   if (options.electionId) url += '&electionId=' + options.electionId;
-  // else url += '&electionId=2000';
+  else url += '&electionId=2000';
 
   request.open('GET', url, true);
 

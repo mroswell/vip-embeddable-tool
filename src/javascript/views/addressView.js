@@ -15,6 +15,8 @@ module.exports = View.extend({
     '#close-button click' : 'closeAboutModal',
   },
 
+  hasPressedEnter: false,
+
   address : '',
 
   onAfterRender : function(apiCallback) {
@@ -23,17 +25,19 @@ module.exports = View.extend({
     var $notFoundModal = this.find('#address-not-found');
     var electionChoiceTemplate = require('./templates/elections.hbs');
 
-    document.body.addEventListener('click', function(e) {
-      if (e.target !== $aboutModal) $aboutModal.style.display = 'none';
-      $notFoundModal.style.display = 'none';
-      if (e.target === this.find('#fade')) this.find('#fade').style.display = 'none';
+    $('body').on('click', function(e) {
+      if (e.target !== $aboutModal) $aboutModal.hide();
+      $notFoundModal.hide();
+      if (e.target === this.find('#fade')) this.find('#fade').hide();
     }.bind(this));
-
-    this.autocomplete = new google.maps.places.Autocomplete($address);
+    console.log($address)
+    this.autocomplete = new google.maps.places.Autocomplete($address[0]);
 
     this.autocompleteListener = function () {
       enteredAddress = this.autocomplete.getPlace().formatted_address;
+      if (typeof enteredAddress === 'undefined') return;
       this.address = enteredAddress;
+      console.log('autocomplete listener: ' + enteredAddress)
 
       api({
         address: enteredAddress, 
@@ -42,11 +46,14 @@ module.exports = View.extend({
       });
     }.bind(this);
 
-    window.addEventListener('keypress', function(e) {
+    $(window).on('keypress', function(e) {
       var key = e.which || e.keyCode;
+      if (this.hasPressedEnter) return;
       if (key === 13) {
-        var address = this.find('#address-input').value;
+        var address = this.find('#address-input').val();
+        console.log('enter pressed: ' + address);
         this.address = address;
+        this.hasPressedEnter = true;
 
         api({
           address: address, 
@@ -65,7 +72,7 @@ module.exports = View.extend({
 
   handleElectionData: function(response) {
     // if response has multiple elections, select which election
-
+    console.log('handling electiondata')
     if (!response.otherElections) {
       response.otherElections = [{
         name: "VIP Test Election",
@@ -74,26 +81,16 @@ module.exports = View.extend({
       }];
     }
     if (response.otherElections) {
-      // this.$el.innerHTML += electionChoiceTemplate({
-      //   elections: [response.election].concat(response.otherElections)
-      // });
-      // document.getElementById('elections').style.display = 'block';
-      // var that = this;
-      // this.querySelectorAll('.election').forEach(function(election) {
-      //   election.addEventListener('click', function(e) {
-      //     var electionId = e.currentTarget.querySelector('.hidden').innerHTML;
-      //     that.triggerRouteEvent('addressViewSubmit', response);
-      //   });
-      // });
-      this.$el.innerHTML += this.multipleElections({
+      this.$el.append(this.multipleElections({
         elections: [response.election].concat(response.otherElections)
-      });
-      this.find('#multiple-elections').style.display = 'block';
-      this.find('#fade').style.display = 'block';
-      this.find('#multiple-elections .checked').classList.remove('hidden');
-      this.find('#multiple-elections .unchecked').classList.add('hidden');
-      this.find('#multiple-elections button').addEventListener('click', function() {
-        var id = this.find('.checked:not(.hidden)').parentNode.lastElementChild.innerHTML;
+      }));
+      this.find('#multiple-elections').show();
+      this.find('#fade').show();
+      $('#multiple-elections .checked').removeClass('hidden');
+      $('#multiple-elections .unchecked').addClass('hidden');
+      $(this.find('#multiple-elections button')).on('click', function() {
+        // var id = this.find('.checked:not(.hidden)').parentNode.lastElementChild.innerHTML;
+        var id = this.find('.checked:not(.hidden)').siblings('.hidden').eq(0).text();
         api({
           address: this._parseAddress(response.normalizedInput), 
           success: function(newResponse) {
@@ -113,10 +110,11 @@ module.exports = View.extend({
   },
 
   handleAddressNotFound: function() {
-    this.find('#address-not-found').style.display = 'block';
-    this.find('#fade').style.display = 'block';
+    this.find('#address-not-found').show().show();
+    this.find('#fade').show();
     this.find('#address-not-found h1').innerHTML = this.address;
     this.find('#address-input').value = "";
+    this.hasPressedEnter = false;
   },
 
   selectElection: function(e) {
@@ -126,14 +124,14 @@ module.exports = View.extend({
   },
 
   openAboutModal: function(e) {
-    this.find('#about').style.display = 'block';
-    this.find('#fade').style.display = 'block';
+    this.find('#about').toggle().toggle();
+    this.find('#fade').toggle();
     e.stopPropagation();
   },
 
   closeAboutModal: function() {
-    this.find('#about').style.display = 'none';
-    this.find('#fade').style.display = 'none';
+    this.find('#about').style.display.hide();
+    this.find('#fade').style.display.hide();
   }
 
 });

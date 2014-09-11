@@ -12,6 +12,8 @@ module.exports = View.extend({
 
   addressPartial: require('./templates/partials/address.hbs'),
 
+  landscape: false,
+
   events: {
     '.nav click' : 'back',
     '.contest-toggle click' : 'toggleContest',
@@ -24,7 +26,8 @@ module.exports = View.extend({
     '#more-elections click' : 'toggleElections',
     '#resources-toggle click' : 'toggleResources',
     '#plus-icon click' : 'openAboutModal',
-    '#close-button click' : 'closeAboutModal'
+    '#close-button click' : 'closeAboutModal',
+    '#ballot-information click' : 'toggleBallot'
   },
 
   map: null,
@@ -130,6 +133,10 @@ module.exports = View.extend({
     }
 
     this.data = options.data;
+
+    if ($(this.$container).innerWidth() > 600) {
+      this.landscape = true;
+    }
   },
 
   onAfterRender: function(options) {
@@ -139,7 +146,7 @@ module.exports = View.extend({
 
       this._encodeAddressAndInitializeMap(options.data.pollingLocations[0].address);
 
-      this.find('#location a').href="https://maps.google.com?daddr=" + address;
+      this.find('#location a').attr('href', 'https://maps.google.com?daddr=' + address);
 
       if (options.data.pollingLocations.length > 1) {
         var otherLocations = options.data.pollingLocations.slice(1);
@@ -151,6 +158,15 @@ module.exports = View.extend({
         });
       }
 
+      //
+      // tablet/desktop view
+      //
+        // this.landscape = true;
+      // setTimeout(function() {
+      //   this.remove();
+      //   this.render(options);
+      // }.bind(this), 2000);
+
       // is distance going in?
       // this._calculateDistance(
       //   options.data.normalizedInput,
@@ -160,9 +176,14 @@ module.exports = View.extend({
       // });
     } else this._encodeAddressAndInitializeMap("Paris, France");
 
-    this.find('#info-icon').parentNode.href = options.data.state[0].electionAdministrationBody.electionInfoUrl;
+    if (this.landscape) this._switchToLandscape();
+
+    this.find('#info-icon').parent().attr('href', options.data.state[0].electionAdministrationBody.electionInfoUrl);
 
     // this._toggleModal();
+
+    $('html,body').scrollLeft($(this.$container).scrollLeft());
+    $('html,body').scrollTop($(this.$container).scrollTop());
   },
 
   onRemove: function() {
@@ -174,25 +195,94 @@ module.exports = View.extend({
     this.markers = [];
   },
 
+  _switchToLandscape: function() {
+      $('#map-view').css('height', '100%');
+      $('#map-view').prepend(($('.left').detach()));
+      $('.left').wrapAll('<div class="left-wrapper" />');
+      $('.left-wrapper').prepend('<img src="./images/vip-logo.png" class="left box">');
+      $('.right').wrapAll('<div class="right-wrapper" />');
+      $('.toggle-image.plus').attr('src', './images/left-arrow-white.png').addClass('arrow right-arrow');
+      $('.toggle-image.minus').attr('src', './images/right-arrow-white.png').addClass('arrow left-arrow');
+      $('#registered-address').find('span').css({
+        'margin-top':'-17px'
+      })
+      $('.left-wrapper').css({
+        'float': 'left',
+        'position': 'absolute',
+        'z-index': 2,
+        'width': '40%',
+        'height': 'calc(100% - 40px)',
+        // 'overflow': 'visible',
+        'box-shadow': '8px 0px 5px 0px rgba(50, 50, 50, 0.35)'
+      });
+      $('.left-wrapper img.box').css({
+        'width': '100px',
+        'margin': '-12px auto',
+        'display': 'block',
+        'border-bottom': '0'      
+      });
+      $('.right-wrapper').css({
+        'height': 'calc(100% - 40px)',
+        'overflow-y': 'auto',
+        'position': 'absolute'
+      });
+      $('.right').css({
+        'float': 'right',
+        'width': '60%'
+      })
+      $('.right .box').css({
+        'margin-left': '8px'
+      });
+      $('#map-canvas').css({
+        'position': 'absolute',
+        'left': '40%',
+        'height': '100%'
+      });
+      $('#location').css({
+        'position': 'absolute',
+        'left': '43%',
+        'top': '55%',
+        'width': '50%',
+        'background-color': 'white',
+        'z-index': 1
+      });
+      $('#polling-location .right-arrow').addClass('hidden')
+      $('#polling-location .left-arrow').removeClass('hidden');
+      $('#polling-location').css({
+        'width': '105%',
+        'background-color': '#57c4f7' // $highlightblue
+      });
+      $('.left-wrapper .box:not(.info)').css({
+        padding: '10px'
+      })
+      $('#more-resources').hide();
+      $('.contests.right').hide();
+      $('.left').css({
+      });
+      $('#info-icon').css({
+        transform: 'none'
+      });
+  },
+
   _toggleModal: function() {
-    var modal = document.querySelector('#modal');
+    var modal = $('#modal');
     var that = this;
 
-    if (getComputedStyle(modal)['display'] !== 'block') {
-      document.querySelector('#modal').style.display = 'block';
-      document.querySelector('#modal').addEventListener('click', function() {
-        this.style.display = '';
+    if (modal.css('display') !== 'block') {
+      modal.show();
+      modal.on('click', function() {
+        modal.hide()
         that.triggerRouteEvent('mapViewBack')
       });
 
-      document.body.classList.add('body-modal-show');
-      this.$el.parentNode.classList.add('container-modal-show');
-      this.$el.classList.add('map-view-modal-show');
+      $(document.body).addClass('body-modal-show');
+      $(this.$el.parentNode).addClass('container-modal-show');
+      $(this.$el).addClass('map-view-modal-show');
     } else {
-      modal.style.display = '';
-      document.body.classList.remove('body-modal-show');
-      this.$el.parentNode.classList.remove('container-modal-show');
-      this.$el.classList.remove('map-view-modal-show');
+      modal.hide()
+      $(document.body).removeClass('body-modal-show');
+      $(this.$el.parentNode).removeClass('container-modal-show');
+      $(this.$el).removeClass('map-view-modal-show');
     }
   },
 
@@ -218,11 +308,11 @@ module.exports = View.extend({
         that.find('#location .address').innerHTML = that.addressPartial(address);
       });
 
-      document.getElementById('map-canvas').addEventListener(that._transitionEnd(), function() {
+      $('#map-canvas').on(that._transitionEnd(), function() {
         google.maps.event.trigger(that.map, 'resize');
         that.map.panTo(that.markers[0].getPosition());
         window.markers = that.markers;
-        if (that.find('#map-canvas').style.height === '300px') that._fitMap();
+        if (that.find('#map-canvas').height() === '300px') that._fitMap();
         else that.map.setZoom(12);
       });
     });
@@ -299,11 +389,11 @@ module.exports = View.extend({
     var addressInput = this.find('.change-address');
     var that = this;
 
-    if (getComputedStyle(addressInput)['display'] === 'none') {
-      this.autocomplete = new google.maps.places.Autocomplete(addressInput);
-      addressInput.previousElementSibling.style.display = 'none';
-      addressInput.style.display = 'block';
-      this.find('#fade').style.display = 'block';
+    if (addressInput.css('display') === 'none') {
+      this.autocomplete = new google.maps.places.Autocomplete(addressInput[0]);
+      addressInput.prev().hide();
+      addressInput.show();
+      if (!this.landscape) this.find('#fade').show();
 
       this.autocompleteListener = function() {
         var address = this.autocomplete.getPlace().formatted_address;
@@ -318,19 +408,18 @@ module.exports = View.extend({
 
       google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
     } else {
-      console.log(this.autocompleteListener);
       google.maps.event.clearInstanceListeners(this.autocomplete);
 
-      addressInput.previousElementSibling.style.display = '';
-      addressInput.style.display = 'none';
-      this.find('#fade').style.display = 'none';
+      addressInput.prev().show()
+      addressInput.hide()
+      this.find('#fade').hide()
     }
   },
 
   changeElection: function(e) {
     var selected = e.currentTarget.firstElementChild;
 
-    if (selected.classList.contains('hidden')) {
+    if ($(selected).hasClass('hidden')) {
       var electionId = selected.nextElementSibling.nextElementSibling.innerHTML;
       var address = this._parseAddress(this.data.normalizedInput);
       api({
@@ -344,34 +433,108 @@ module.exports = View.extend({
   },
 
   toggleMap: function(e) {
-    var canvas = this.find('#map-canvas');
-    var toggle = this.find('#map-toggle');
-    if (getComputedStyle(canvas)['height'] !== '300px') {
-      canvas.style.height = '300px';
-      toggle.querySelector('.minus').classList.remove('hidden');
-      toggle.querySelector('.plus').classList.add('hidden');
-      this._scrollTo('#map-toggle', 10);
+    if (!this.landscape) {
+      var canvas = this.find('#map-canvas');
+      var toggle = this.find('#map-toggle');
+      if (canvas.height() !== 300) {
+        canvas.height(300);
+        toggle.find('.minus').removeClass('hidden');
+        toggle.find('.plus').addClass('hidden');
+        this._scrollTo(toggle, 10);
+      } else {
+        canvas.height(150);
+        toggle.find('.plus').removeClass('hidden');
+        toggle.find('.minus').addClass('hidden');
+      }
     } else {
-      canvas.style.height = '150px';
-      toggle.querySelector('.plus').classList.remove('hidden');
-      toggle.querySelector('.minus').classList.add('hidden');
+      if ($('#location').css('display') !== 'none') return;
+      $('.info.box').css({
+          'background-color':'#1C7CA5',
+          width: '100%'
+      });
+      $(':not(#polling-location) .right-arrow').removeClass('hidden');
+      $(':not(#polling-location) .left-arrow').addClass('hidden');
+      $('#more-resources').hide();
+      $('#map-canvas, #location').show();
+      $('#polling-location')
+        .css({
+          'background-color':'#57c4f7',
+          width: '105%',
+        });
+      $('#polling-location .right-arrow').addClass('hidden');
+      $('#polling-location .left-arrow').removeClass('hidden');
     }
   },
 
   toggleElections: function(e) {
     e.stopPropagation();
+    if (this.landscape) {
+      // $('.left-wrapper').css({
+      //   'overflow-y': 'auto',
+      // })
+    }
     this._slidePanel(
       this.find('#election-list'),
-      e.currentTarget.querySelector('span'),
+      $(e.currentTarget.querySelector('span')),
       { max: '100px' }
     );
   },
 
   toggleResources: function(e) {
-    this._slidePanel(
-      this.find('#more-resources'),
-      e.currentTarget.lastElementChild
-    );
+    if (!this.landscape) {
+      this._slidePanel(
+        this.find('#more-resources'),
+        e.currentTarget.lastElementChild
+      );
+    } else {
+      if ($('#more-resources').css('display') !== 'none') return;
+      $('#map-canvas, #location, .contests').hide();
+      $('.info.box')
+        .css({
+          'background-color':'#1C7CA5',
+          width: '100%'
+        });
+
+      $(':not(#resources-toggle) .right-arrow').removeClass('hidden');
+      $(':not(#resources-toggle) .left-arrow').addClass('hidden');
+
+      $('#resources-toggle')
+        .css({
+          'background-color':'#57c4f7',
+          width: '105%',
+        });
+      $('#resources-toggle .right-arrow').addClass('hidden');
+      $('#resources-toggle .left-arrow').removeClass('hidden');
+
+      $('#more-resources')
+        .css({
+          'max-height':'2000px'
+        }).show();
+    }
+  },
+
+  toggleBallot: function() {
+    // if (!this.landscape || $('.contests').css('display') !== 'none') return;
+    if (!this.landscape) return;
+    $('#map-canvas, #location, #more-resources').hide();
+    $('.info.box')
+      .css({
+        'background-color':'#1C7CA5',
+        'width': '100%'
+      });
+
+    $(':not(#ballot-information) .right-arrow').removeClass('hidden');
+    $(':not(#ballot-information) .left-arrow').addClass('hidden');
+
+    $('#ballot-information')
+      .css({
+        'background-color':'#57c4f7',
+        'width': '105%',
+      });
+
+    $('#ballot-information .right-arrow').addClass('hidden');
+    $('#ballot-information .left-arrow').removeClass('hidden');
+    $('.contests').show();
   },
 
   toggleContest: function(e) {
@@ -379,23 +542,30 @@ module.exports = View.extend({
     //   e.currentTarget.lastElementChild,
     //   e.currentTarget.firstElementChild.lastElementChild
     // );
+    var candidateList = $(e.currentTarget).find('.candidate-list');
+    var toggleSign = $(e.currentTarget).find('span');
 
-    var inSymbol = '+';
-    var out = '−';
-    var max = '2000px';
-    var min = '0px';
-    if (getComputedStyle(e.currentTarget.lastElementChild)['max-height'] !== min) {
-      e.currentTarget.lastElementChild.style['max-height'] = min;
-      e.currentTarget.firstElementChild.lastElementChild.innerHTML = inSymbol;
-      // button.querySelector('.plus').classList.remove('hidden');
-      // button.querySelector('.minus').classList.add('hidden');
+    if (candidateList.css('max-height') !== '0px') {
+      candidateList.css('max-height', '0px');
+      toggleSign.text('+')
     } else {
-      e.currentTarget.lastElementChild.style['max-height'] = max;
-      e.currentTarget.firstElementChild.lastElementChild.innerHTML = out;
-      // button.querySelector('.minus').classList.remove('hidden');
-      // button.querySelector('.plus').classList.add('hidden');
-      this._scrollTo(e.currentTarget.firstElementChild.lastElementChild, 20);
+      candidateList.css('max-height', '2000px');
+      toggleSign.text('-')
+      this._scrollTo(toggleSign, 20);
     }
+
+    // var inSymbol = '+';
+    // var out = '−';
+    // var max = '2000px';
+    // var min = '0px';
+    // if (getComputedStyle(e.currentTarget.lastElementChild)['max-height'] !== min) {
+    //   e.currentTarget.lastElementChild.style['max-height'] = min;
+    //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = inSymbol;
+    // } else {
+    //   e.currentTarget.lastElementChild.style['max-height'] = max;
+    //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = out;
+    //   this._scrollTo(e.currentTarget.firstElementChild.lastElementChild, 20);
+    // }
 
     // this.$container.scrollTop = e.currentTarget.firstElementChild.lastElementChild.getBoundingClientRect().top - this.$container.getBoundingClientRect().top;
   },
@@ -405,16 +575,15 @@ module.exports = View.extend({
     var out = (options && options.out ? options.out : '−');
     var max = (options && options.max ? options.max : '2000px');
     var min = (options && options.min ? options.min : '0px');
-    if (getComputedStyle(panel)['max-height'] !== min) {
-      panel.style['max-height'] = min;
-      // button.innerHTML = inSymbol;
-      button.querySelector('.plus').classList.remove('hidden');
-      button.querySelector('.minus').classList.add('hidden');
+    if (panel.css('max-height') !== min) {
+      panel.css('max-height', min);
+      button.find('.plus').removeClass('hidden');
+      button.find('.minus').addClass('hidden');
     } else {
-      panel.style['max-height'] = max;
-      // button.innerHTML = out;
-      button.querySelector('.minus').classList.remove('hidden');
-      button.querySelector('.plus').classList.add('hidden');
+      panel.css('max-height', max);
+
+      button.find('.minus').removeClass('hidden');
+      button.find('.plus').addClass('hidden');
       this._scrollTo(button, 10);
     }
 
@@ -423,7 +592,7 @@ module.exports = View.extend({
 
   _scrollTo: function(target, padding) {
     $(this.$container).animate({
-      scrollTop: $(target).offset().top - $(this.$container).offset().top + $(this.$container).scrollTop() - padding
+      scrollTop: target.offset().top - $(this.$container).offset().top + $(this.$container).scrollTop() - padding
     }, 500);
   },
 

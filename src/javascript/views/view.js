@@ -20,32 +20,38 @@ module.exports = (function() {
     onRemove: function() {},
 
     render: function(options) {
+      // last change
       var that = this;
       var isModal = false;
-      var $container = document.getElementById('app-container');
+      var $container = $('#app-container');
       if (options) {
         if (options.container) $container = options.container;
         if (options.data) this.data = options.data;
         if (options.modal) isModal = true;
       }
       this.$container = $container;
-      this.onBeforeRender({data: this.data});
-      if (document.getElementById(this.$id)) this.toggle();
-      else $container.innerHTML += '<div id=' + this.$id + '>' + this.template(options) + '</div>';
-      this.$el = document.getElementById(this.$id);
+      this.onBeforeRender(options);
+
+      if (!!$('#' + this.$id)[0]) this.toggle();
+      else {
+        this.$el = $('<div id=' + this.$id + '/>').append(this.template(options));
+        console.log(this.$el)
+        $container.append(this.$el);
+      }
 
       for (var key in this.events) {
         var el = key.split(' ')[0];
         var ev = key.split(' ')[1];
 
-        var els = this.$el.querySelectorAll(el);
-        if (!els.length) els = document.body.querySelectorAll(el);
-        Array.prototype.map.call(els, function(e) {
-          e.addEventListener(ev, that[that.events[key]].bind(that));
+        var els = $(this.$el).find(el);
+        if (!els.length) els = $(el);
+        $.map(els, function(e) {
+          $(e).on(ev, that[that.events[key]].bind(that));
         });
       }
 
-      this.onAfterRender({data: this.data});
+      // this.onAfterRender({data: this.data});
+      this.onAfterRender(options);
 
       return this;
     },
@@ -54,7 +60,7 @@ module.exports = (function() {
       // this.$el.parentNode.replaceChild(this.$el.cloneNode(true), this.$el);
       // this.toggle();
       this.onRemove();
-      this.$el.parentNode.removeChild(this.$el);
+      this.$el.remove();
 
       return this;
     },
@@ -70,12 +76,14 @@ module.exports = (function() {
     },
 
     find: function(query) {
-      return this.$el.querySelector(query);
+      return $(this.$el).find(query);
     },
 
     toggle: function() {
-      var el = document.getElementById(this.$id);
-      el.style.display = (el.style.display != 'none' ? 'none' : '')
+      var el = $('#' + this.$id);
+      var val = (el.css('display') !== 'none') ? 'none' : 'block';
+      el.css('display', val);
+      // el.get(0).style.display = (el.style.display != 'none' ? 'none' : '')
     },
 
     _parseAddress: function(address) {
