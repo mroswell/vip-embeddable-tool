@@ -25,6 +25,10 @@ module.exports = View.extend({
     var $notFoundModal = this.find('#address-not-found');
     var electionChoiceTemplate = require('./templates/elections.hbs');
 
+    if (this.$container.width() > 600) {
+      $('#user-image').css('max-width', '450px');
+    }
+
     $('body').on('click', function(e) {
       if (e.target !== $aboutModal) $aboutModal.hide();
       $notFoundModal.hide();
@@ -72,7 +76,7 @@ module.exports = View.extend({
 
   handleElectionData: function(response) {
     // if response has multiple elections, select which election
-    console.log('handling electiondata')
+    // console.log('handling electiondata')
     if (!response.otherElections) {
       response.otherElections = [{
         name: "VIP Test Election",
@@ -86,8 +90,8 @@ module.exports = View.extend({
       }));
       this.find('#multiple-elections').show();
       this.find('#fade').show();
-      $('#multiple-elections .checked').removeClass('hidden');
-      $('#multiple-elections .unchecked').addClass('hidden');
+      $('.checked:first').removeClass('hidden');
+      $('.unchecked:first').addClass('hidden');
       $(this.find('#multiple-elections button')).on('click', function() {
         // var id = this.find('.checked:not(.hidden)').parentNode.lastElementChild.innerHTML;
         var id = this.find('.checked:not(.hidden)').siblings('.hidden').eq(0).text();

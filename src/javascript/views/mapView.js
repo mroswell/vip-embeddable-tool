@@ -51,13 +51,14 @@ module.exports = View.extend({
     // };
     // if (options.data.pollingLocations) options.data.pollingLocations.push(newPollingLocation);
 
-    if (!options.data.otherElections) {
-      options.data.otherElections = [{
-        name: "VIP Test Election",
-        date: "01/25/1900",
-        id: "2000"
-      }];
-    }
+    // TESTING multiple election scenario
+    // if (!options.data.otherElections) {
+    //   options.data.otherElections = [{
+    //     name: "VIP Test Election",
+    //     date: "01/25/1900",
+    //     id: "2000"
+    //   }];
+    // }
 
     // comb the voter id data
     var stateData = Array.prototype.filter.call(voterIdData, function(entry) {
@@ -177,6 +178,9 @@ module.exports = View.extend({
     } else this._encodeAddressAndInitializeMap("Paris, France");
 
     if (this.landscape) this._switchToLandscape();
+    else this.find('#ballot-information .toggle-image').hide();
+
+    $('.contest-toggle').trigger('click');
 
     this.find('#info-icon').parent().attr('href', options.data.state[0].electionAdministrationBody.electionInfoUrl);
 
@@ -197,6 +201,8 @@ module.exports = View.extend({
 
   _switchToLandscape: function() {
       $('#map-view').css('height', '100%');
+      $('#map-view .info').css('font-size', '16px');
+      $('#location img').css('margin-right', '-10px');
       $('#map-view').prepend(($('.left').detach()));
       $('.left').wrapAll('<div class="left-wrapper" />');
       $('.left-wrapper').prepend('<img src="./images/vip-logo.png" class="left box">');
@@ -204,7 +210,7 @@ module.exports = View.extend({
       $('.toggle-image.plus').attr('src', './images/left-arrow-white.png').addClass('arrow right-arrow');
       $('.toggle-image.minus').attr('src', './images/right-arrow-white.png').addClass('arrow left-arrow');
       $('#registered-address').find('span').css({
-        'margin-top':'-17px'
+        // 'margin-top':'-17px'
       })
       $('.left-wrapper').css({
         'float': 'left',
@@ -240,7 +246,7 @@ module.exports = View.extend({
       });
       $('#location').css({
         'position': 'absolute',
-        'left': '43%',
+        'left': '45%',
         'top': '55%',
         'width': '50%',
         'background-color': 'white',
@@ -484,7 +490,7 @@ module.exports = View.extend({
     if (!this.landscape) {
       this._slidePanel(
         this.find('#more-resources'),
-        e.currentTarget.lastElementChild
+        $(e.currentTarget.lastElementChild)
       );
     } else {
       if ($('#more-resources').css('display') !== 'none') return;
