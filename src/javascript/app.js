@@ -12,6 +12,7 @@ handlebars.registerPartial('source', require('./views/templates/partials/source.
 handlebars.registerPartial('contest', require('./views/templates/partials/contest.hbs'))
 handlebars.registerPartial('modals', require('./views/templates/partials/modals.hbs'))
 handlebars.registerPartial('address', require('./views/templates/partials/address.hbs'))
+handlebars.registerPartial('polling-location-info', require('./views/templates/partials/polling-location-info.hbs'))
 // require('./partials.js');
 handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context);

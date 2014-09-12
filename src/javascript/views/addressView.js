@@ -15,7 +15,7 @@ module.exports = View.extend({
     '#close-button click' : 'closeAboutModal',
   },
 
-  hasPressedEnter: false,
+  hasSubmitted: false,
 
   address : '',
 
@@ -31,17 +31,17 @@ module.exports = View.extend({
 
     $('body').on('click', function(e) {
       if (e.target !== $aboutModal) $aboutModal.hide();
-      $notFoundModal.hide();
-      if (e.target === this.find('#fade')) this.find('#fade').hide();
+      if (e.target !== $notFoundModal) $notFoundModal.hide();
+      if (e.target !== this.find('#fade')) this.find('#fade').hide();
     }.bind(this));
-    console.log($address)
     this.autocomplete = new google.maps.places.Autocomplete($address[0]);
 
     this.autocompleteListener = function () {
+      if (this.hasSubmitted) return;
       enteredAddress = this.autocomplete.getPlace().formatted_address;
       if (typeof enteredAddress === 'undefined') return;
       this.address = enteredAddress;
-      console.log('autocomplete listener: ' + enteredAddress)
+      this.hasSubmitted = true;
 
       api({
         address: enteredAddress, 
@@ -51,13 +51,12 @@ module.exports = View.extend({
     }.bind(this);
 
     $(window).on('keypress', function(e) {
+      if (this.hasSubmitted) return;
       var key = e.which || e.keyCode;
-      if (this.hasPressedEnter) return;
       if (key === 13) {
         var address = this.find('#address-input').val();
-        console.log('enter pressed: ' + address);
         this.address = address;
-        this.hasPressedEnter = true;
+        this.hasSubmitted = true;
 
         api({
           address: address, 
@@ -77,13 +76,13 @@ module.exports = View.extend({
   handleElectionData: function(response) {
     // if response has multiple elections, select which election
     // console.log('handling electiondata')
-    if (!response.otherElections) {
-      response.otherElections = [{
-        name: "VIP Test Election",
-        date: "01/25/1900",
-        id: "2000"
-      }];
-    }
+    // if (!response.otherElections) {
+    //   response.otherElections = [{
+    //     name: "VIP Test Election",
+    //     date: "01/25/1900",
+    //     id: "2000"
+    //   }];
+    // }
     if (response.otherElections) {
       this.$el.append(this.multipleElections({
         elections: [response.election].concat(response.otherElections)
@@ -114,28 +113,27 @@ module.exports = View.extend({
   },
 
   handleAddressNotFound: function() {
-    this.find('#address-not-found').show().show();
+    this.find('#address-not-found').show();
     this.find('#fade').show();
-    this.find('#address-not-found h1').innerHTML = this.address;
+    this.find('#address-not-found h1').text(this.address);
     this.find('#address-input').value = "";
-    this.hasPressedEnter = false;
+    this.hasSubmitted = false;
   },
 
   selectElection: function(e) {
     var electionId = e.currentTarget.querySelector('.hidden');
-    console.log(electionId);
     this.triggerRouteEvent('');
   },
 
   openAboutModal: function(e) {
-    this.find('#about').toggle().toggle();
+    this.find('#about').toggle();
     this.find('#fade').toggle();
     e.stopPropagation();
   },
 
   closeAboutModal: function() {
-    this.find('#about').style.display.hide();
-    this.find('#fade').style.display.hide();
+    this.find('#about').hide();
+    this.find('#fade').hide();
   }
 
 });

@@ -35,7 +35,6 @@ module.exports = (function() {
       if (!!$('#' + this.$id)[0]) this.toggle();
       else {
         this.$el = $('<div id=' + this.$id + '/>').append(this.template(options));
-        console.log(this.$el)
         $container.append(this.$el);
       }
 

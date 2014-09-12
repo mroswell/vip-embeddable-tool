@@ -144,9 +144,12 @@
     float: right
     @include translateY(-50%)
     &.toggle-image
-      transform: none
+      @include translateY(0)
     &.left-arrow
       @include translateY(27%)
+
+  .polling-location-info
+    padding: 5px
 
   #registered-address
     span

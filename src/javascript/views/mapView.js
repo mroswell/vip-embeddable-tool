@@ -12,7 +12,11 @@ module.exports = View.extend({
 
   addressPartial: require('./templates/partials/address.hbs'),
 
+  pollingLocationPartial: require('./templates/partials/polling-location-info.hbs'),
+
   landscape: false,
+
+  hasSubmitted: false,
 
   events: {
     '.nav click' : 'back',
@@ -35,6 +39,8 @@ module.exports = View.extend({
   markers: [],
 
   address: '',
+
+  noScroll: true,
 
   onBeforeRender: function(options) {
 
@@ -143,11 +149,22 @@ module.exports = View.extend({
   onAfterRender: function(options) {
     var that = this;
     if (options.data.pollingLocations && options.data.pollingLocations.length) {
-      var address = this._parseAddress(options.data.pollingLocations[0].address);
+      var primaryLocation = options.data.pollingLocations[0];
+      var address = this._parseAddress(primaryLocation.address);
 
-      this._encodeAddressAndInitializeMap(options.data.pollingLocations[0].address);
+      this._encodeAddressAndInitializeMap(primaryLocation.address);
 
       this.find('#location a').attr('href', 'https://maps.google.com?daddr=' + address);
+
+      primaryLocation.hours = "9am - 5pm";
+      var $locationInfo = $(this.pollingLocationPartial(primaryLocation));
+      this.find('#location').append($locationInfo);
+      $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + address);
+      this.find('#location').on('click', function() {
+        if ($locationInfo.css('display') === 'none') $locationInfo.show();
+        else $locationInfo.hide();
+      });
+      $locationInfo.hide();
 
       if (options.data.pollingLocations.length > 1) {
         var otherLocations = options.data.pollingLocations.slice(1);
@@ -175,12 +192,17 @@ module.exports = View.extend({
       //   function(distance) {
       //     document.querySelector('#map-view .address-distance').innerText = (Math.round(distance) / 1000) + ' mi';
       // });
-    } else this._encodeAddressAndInitializeMap("Paris, France");
+    } else {
+      this._encodeAddressAndInitializeMap();
+    }
 
     if (this.landscape) this._switchToLandscape();
     else this.find('#ballot-information .toggle-image').hide();
 
+    this.noScroll = true;
     $('.contest-toggle').trigger('click');
+    this.noScroll = false;
+
 
     this.find('#info-icon').parent().attr('href', options.data.state[0].electionAdministrationBody.electionInfoUrl);
 
@@ -206,7 +228,8 @@ module.exports = View.extend({
       $('#map-view').prepend(($('.left').detach()));
       $('.left').wrapAll('<div class="left-wrapper" />');
       $('.left-wrapper').prepend('<img src="./images/vip-logo.png" class="left box">');
-      $('.right').wrapAll('<div class="right-wrapper" />');
+      $('.left-wrapper').append('<div class="light-blue-box"/>');
+      $('.right').wrapAll($('<div class="right-wrapper" />'));
       $('.toggle-image.plus').attr('src', './images/left-arrow-white.png').addClass('arrow right-arrow');
       $('.toggle-image.minus').attr('src', './images/right-arrow-white.png').addClass('arrow left-arrow');
       $('#registered-address').find('span').css({
@@ -294,34 +317,72 @@ module.exports = View.extend({
 
   _encodeAddressAndInitializeMap : function(address) {
     var that = this;
-    this._geocode(address, function(position) {
-      var options = {
-        zoom: 12,
-        center: position,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        draggable: false,
-        panControl: false,
-        zoomControl: false,
-        scrollwheel: false,
-        mapTypeControl: false,
-        streetViewControl: false
-      };
-      that.map = new google.maps.Map(document.getElementById("map-canvas"), options);
-      that._addPollingLocation(position, address);
-      google.maps.event.addListener(that.map, 'click', function() {
-        that.toggleMap();
 
-        that.find('#location .address').innerHTML = that.addressPartial(address);
-      });
+    // no polling location found
+    if (typeof address === 'undefined') {
+      this._geocode("United States of America", function(position) {
+        var options = {
+          zoom: 3,
+          center: position,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          draggable: false,
+          panControl: false,
+          zoomControl: false,
+          scrollwheel: false,
+          mapTypeControl: false,
+          streetViewControl: false
+        };
+        that.map = new google.maps.Map(document.getElementById("map-canvas"), options);
+        that.find('#location').find('a').remove();
+        that.find('#location .address')
+          .css('text-align', 'center')
+          .text('No Polling Locations Found');
 
-      $('#map-canvas').on(that._transitionEnd(), function() {
-        google.maps.event.trigger(that.map, 'resize');
-        that.map.panTo(that.markers[0].getPosition());
-        window.markers = that.markers;
-        if (that.find('#map-canvas').height() === '300px') that._fitMap();
-        else that.map.setZoom(12);
+        $('#map-canvas').on(that._transitionEnd(), function() {
+          google.maps.event.trigger(that.map, 'resize');
+          that.map.panTo(position);
+          if (that.find('#map-canvas').height() === '300px') that._fitMap();
+          // else that.map.setZoom(4);
+        });
+      })
+
+        // google.maps.event.addListener(that.map, 'click', function() {
+        //   that.toggleMap();
+
+        //   // that.find('#location .address').innerHTML = that.addressPartial(address);
+        // });
+
+
+    } else {
+      this._geocode(address, function(position) {
+        var options = {
+          zoom: 12,
+          center: position,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          draggable: false,
+          panControl: false,
+          zoomControl: false,
+          scrollwheel: false,
+          mapTypeControl: false,
+          streetViewControl: false
+        };
+        that.map = new google.maps.Map(document.getElementById("map-canvas"), options);
+        that._addPollingLocation(position, address);
+        google.maps.event.addListener(that.map, 'click', function() {
+          that.toggleMap();
+
+          that.find('#location .address').innerHTML = that.addressPartial(address);
+        });
+
+        $('#map-canvas').on(that._transitionEnd(), function() {
+          google.maps.event.trigger(that.map, 'resize');
+          that.map.panTo(that.markers[0].getPosition());
+          window.markers = that.markers;
+          if (that.find('#map-canvas').height() === '300px') that._fitMap();
+          else that.map.setZoom(12);
+        });
       });
-    });
+    }
   },
 
   _fitMap: function() {
@@ -396,23 +457,61 @@ module.exports = View.extend({
     var that = this;
 
     if (addressInput.css('display') === 'none') {
-      this.autocomplete = new google.maps.places.Autocomplete(addressInput[0]);
+      // this.autocomplete = new google.maps.places.Autocomplete(addressInput[0]);
+      this.autocomplete = new google.maps.places.SearchBox(addressInput[0]);
       addressInput.prev().hide();
       addressInput.show();
       if (!this.landscape) this.find('#fade').show();
 
+      addressInput.on('focus', function() {
+        addressInput.val("");
+      })
+
       this.autocompleteListener = function() {
-        var address = this.autocomplete.getPlace().formatted_address;
+        // console.log('autocomplete ' + this.hasSubmitted);
+        if (this.hasSubmitted) return;
+        // var address = this.autocomplete.getPlace().formatted_address;
+        var address = this.autocomplete.getPlaces()[0].formatted_address;
+        // console.log('autocomplete ' + address);
+        if (typeof address === 'undefined') return;
+        this.hasSubmitted = true;
 
         api({
           address: address,
           success: function(response) {
-            this.triggerRouteEvent('mapViewSubmit', response)
-          }.bind(this)
+            this.hasSubmitted = false;
+            this.triggerRouteEvent('mapViewSubmit', response);
+          }.bind(this),
+          error: this.handleAddressNotFound
         });
       }.bind(this);
 
-      google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
+      $(window).on('keypress', function(e) {
+        this.address = addressInput.val();
+        var key = e.which || e.keyCode;
+        if (key === 13) {
+          // google.maps.event.trigger(autocomplete, 'places_changed');
+          // e.preventDefault();
+          if (this.hasSubmitted) return;
+          // var address = addressInput.val();
+          addressInput.replaceWith(addressInput.clone());
+          // var address = $(".pac-container .pac-item:first").text();
+          // console.log('enterkey ' + address + addressInput.val())
+          // this.hasSubmitted = true;
+
+          // api({
+          //   address: address,
+          //   success: function(response) {
+          //     this.hasSubmitted = false;
+          //     this.triggerRouteEvent('mapViewSubmit', response)
+          //   }.bind(this),
+          //   error: this.handleAddressNotFound
+          // });
+        }
+      }.bind(this));
+
+      // google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
+      google.maps.event.addListener(this.autocomplete, 'places_changed', this.autocompleteListener);
     } else {
       google.maps.event.clearInstanceListeners(this.autocomplete);
 
@@ -420,6 +519,14 @@ module.exports = View.extend({
       addressInput.hide()
       this.find('#fade').hide()
     }
+  },
+
+  handleAddressNotFound: function() {
+    // this.find('#address-not-found').show();
+    // this.find('#fade').show();
+    // this.find('#address-not-found h1').text(this.address);
+    $('.change-address').val("");
+    this.hasSubmitted = false;
   },
 
   changeElection: function(e) {
@@ -460,7 +567,7 @@ module.exports = View.extend({
       });
       $(':not(#polling-location) .right-arrow').removeClass('hidden');
       $(':not(#polling-location) .left-arrow').addClass('hidden');
-      $('#more-resources').hide();
+      $('#more-resources, .contests').hide();
       $('#map-canvas, #location').show();
       $('#polling-location')
         .css({
@@ -597,6 +704,7 @@ module.exports = View.extend({
   },
 
   _scrollTo: function(target, padding) {
+    if (this.noScroll) return;
     $(this.$container).animate({
       scrollTop: target.offset().top - $(this.$container).offset().top + $(this.$container).scrollTop() - padding
     }, 500);
