@@ -116,7 +116,9 @@ module.exports = View.extend({
       var candidates = contest.candidates;
       candidates && candidates.forEach(function(candidate) {
         var candidateUrl = candidate.candidateUrl;
-        if (!candidateUrl) candidateUrl = 'http://google.com/search?q=' + candidate.name;
+        if (!candidateUrl) {
+          candidate.candidateUrl = 'http://google.com/search?q=' + candidate.name;
+        }
       });
     });
 
@@ -160,10 +162,10 @@ module.exports = View.extend({
       var $locationInfo = $(this.pollingLocationPartial(primaryLocation));
       this.find('#location').append($locationInfo);
       $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + address);
-      this.find('#location').on('click', function() {
-        if ($locationInfo.css('display') === 'none') $locationInfo.show();
-        else $locationInfo.hide();
-      });
+      // this.find('#location').on('click', function() {
+      //   if ($locationInfo.css('display') === 'none') $locationInfo.show();
+      //   else $locationInfo.hide();
+      // });
       $locationInfo.hide();
 
       if (options.data.pollingLocations.length > 1) {
@@ -386,12 +388,16 @@ module.exports = View.extend({
   },
 
   _fitMap: function() {
-    var bounds = new google.maps.LatLngBounds();
-    for(i=0;i<this.markers.length;i++) {
-      bounds.extend(this.markers[i].getPosition());
-    }
+    if (this.markers.length === 1) {
+      this.map.setZoom(15);
+    } else {
+      var bounds = new google.maps.LatLngBounds();
+      for(i=0;i<this.markers.length;i++) {
+        bounds.extend(this.markers[i].getPosition());
+      }
 
-    this.map.fitBounds(bounds);
+      this.map.fitBounds(bounds);
+    }
   },
 
   _zoomTo: function() {
@@ -405,14 +411,20 @@ module.exports = View.extend({
         icon: './images/blue-marker.png'
       });
       var that = this;
-      google.maps.event.addListener(marker, 'click', function() {
-        if (this.map.getZoom() !== 12) {
-          that.map.panTo(marker.getPosition());
-          that.map.setZoom(12);
-          that.find('#location .address').innerHTML = that.addressPartial(address);
-        } else that._fitMap();
-      });
+      google.maps.event.addListener(marker, 'click', this._toggleMapZoom.bind(this, marker, address));
       this.markers.push(marker);
+  },
+
+  _toggleMapZoom: function(marker, address) {
+      if (this.map.getZoom() !== 12) {
+        this.map.panTo(marker.getPosition());
+        this.map.setZoom(12);
+        this.find('#location .address').innerHTML = this.addressPartial(address);
+        $('.polling-location-info').hide();
+      } else {
+        this._fitMap();
+        $('.polling-location-info').show();
+      }
   },
 
   _calculateDistance: function(fromLocation, toLocation, callback) {
