@@ -19,18 +19,24 @@
 		</a>
 		{{/if }}
 		{{#each candidates}}
+		{{#if candidateUrl}}
 		<a href="{{ candidateUrl }}" target="_blank">
+		{{/if}}
 			<div class="candidate-item box">
 				<div class="name">
 				{{ name }}
 				</div>
+				{{#if candidateUrl}}
 				<img src="./images/arrow.png" class="arrow">
+				{{/if}}
 				{{!-- <span class="right-arrow"><span class="right-inner-arrow right-arrow"></span></span> --}}
 				<div class="party">
 				{{ party }}
 				</div>
 			</div>
+		{{#if candidateUrl}}
 		</a>
+		{{/if}}
 		{{/each}}
 	</div>
 </div>

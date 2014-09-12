@@ -111,16 +111,16 @@ module.exports = View.extend({
     options.data.election.electionDay = newDate;
 
     // add google searches for candidates with no link
-    var contests = options.data.contests;
-    contests && contests.forEach(function(contest) {
-      var candidates = contest.candidates;
-      candidates && candidates.forEach(function(candidate) {
-        var candidateUrl = candidate.candidateUrl;
-        if (!candidateUrl) {
-          candidate.candidateUrl = 'http://google.com/search?q=' + candidate.name;
-        }
-      });
-    });
+    // var contests = options.data.contests;
+    // contests && contests.forEach(function(contest) {
+    //   var candidates = contest.candidates;
+    //   candidates && candidates.forEach(function(candidate) {
+    //     var candidateUrl = candidate.candidateUrl;
+    //     if (!candidateUrl) {
+    //       candidate.candidateUrl = 'http://google.com/search?q=' + candidate.name;
+    //     }
+    //   });
+    // });
 
     // sort the contests by their placement on the ballot
     function contestComparator(firstContest, secondContest) {
@@ -667,6 +667,7 @@ module.exports = View.extend({
     //   e.currentTarget.lastElementChild,
     //   e.currentTarget.firstElementChild.lastElementChild
     // );
+    if (!$(e.target).hasClass('subsection')) return;
     var candidateList = $(e.currentTarget).find('.candidate-list');
     var toggleSign = $(e.currentTarget).find('span');
 
