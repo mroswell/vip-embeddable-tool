@@ -202,7 +202,7 @@ module.exports = View.extend({
     else this.find('#ballot-information .toggle-image').hide();
 
     this.noScroll = true;
-    $('.contest-toggle').trigger('click');
+    $('.contest-toggle .subsection').trigger('click');
     this.noScroll = false;
 
 
