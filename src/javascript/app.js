@@ -29,10 +29,11 @@ window.vit = {
       .attr('async', 'true')
       .appendTo($('head'));
 
-    $('<meta>')
-      .attr('name', 'viewport')
-      .attr('content', 'width=device-width')
-      .appendTo($('head'));
+    // $('<meta>')
+    //   .attr('name', 'viewport')
+    //   .attr('content', 'width=device-width')
+    //   .appendTo($('head'));
+
   }
 }
 

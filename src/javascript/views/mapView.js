@@ -43,7 +43,10 @@ module.exports = View.extend({
   address: '',
 
   onBeforeRender: function(options) {
-
+    this.viewportWidthTag = $('<meta>')
+      .attr('name', 'viewport')
+      .attr('content', 'width=device-width')
+      .appendTo($('head'));
     // TESTING
     // var newPollingLocation = {
     //   address: {
@@ -230,6 +233,8 @@ module.exports = View.extend({
     if (this.autocomplete) google.maps.event.clearInstanceListeners(this.autocomplete);
 
     this.markers = [];
+
+    $(this.viewportWidthTag).remove();
   },
 
   _switchToLandscape: function() {
