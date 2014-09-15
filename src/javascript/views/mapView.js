@@ -210,7 +210,8 @@ module.exports = View.extend({
     } else this._encodeAddressAndInitializeMap();
 
     if (this.landscape) this._switchToLandscape();
-    else this.find('#ballot-information .toggle-image').hide();
+    else 
+      // this.find('#ballot-information .toggle-image').hide();
 
 
 
@@ -661,26 +662,35 @@ module.exports = View.extend({
 
   toggleBallot: function() {
     // if (!this.landscape || $('.contests').css('display') !== 'none') return;
-    if (!this.landscape) return;
-    $('#map-canvas, #location, #more-resources').hide();
-    $('.info.box')
-      .css({
-        'background-color':'#1C7CA5',
-        'width': '100%'
-      });
+    if (!this.landscape) {
+      console.log("here")
+      $('#all-contests').slideToggle(500, function() {
+        this._scrollTo($('#ballot-information span'), 10);
+        $('#ballot-information')
+          .find('.plus, .minus')
+            .toggleClass('hidden');
+      }.bind(this));
+    } else { 
+      $('#map-canvas, #location, #more-resources').hide();
+      $('.info.box')
+        .css({
+          'background-color':'#1C7CA5',
+          'width': '100%'
+        });
 
-    $(':not(#ballot-information) .right-arrow').removeClass('hidden');
-    $(':not(#ballot-information) .left-arrow').addClass('hidden');
+      $(':not(#ballot-information) .right-arrow').removeClass('hidden');
+      $(':not(#ballot-information) .left-arrow').addClass('hidden');
 
-    $('#ballot-information')
-      .css({
-        'background-color':'#57c4f7',
-        'width': '105%',
-      });
+      $('#ballot-information')
+        .css({
+          'background-color':'#57c4f7',
+          'width': '105%',
+        });
 
-    $('#ballot-information .right-arrow').addClass('hidden');
-    $('#ballot-information .left-arrow').removeClass('hidden');
-    $('.contests').show();
+      $('#ballot-information .right-arrow').addClass('hidden');
+      $('#ballot-information .left-arrow').removeClass('hidden');
+      $('.contests').show();
+    }
   },
 
   toggleContest: function(e) {

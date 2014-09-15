@@ -112,18 +112,20 @@
 Voter Resources
 <div class="right-arrow"></div>
 </div> --}}
-<div class="contests right">
+
 <div class="info box left" id="ballot-information">
   Ballot Information
   <span>
-    <img src="./images/plus.png" class="toggle-image plus">
-    <img src="./images/minus.png" class="toggle-image minus hidden">
+    <img src="./images/plus.png" class="toggle-image plus hidden">
+    <img src="./images/minus.png" class="toggle-image minus">
   </span>
 </div>
+<div class="contests right" id="all-contests">
 {{#each data.contests}}
 {{> contest}}
 {{/each}}
 </div>
+
 <div class="footer">
   <span>
   For the most complete and up to date information, consult your local election official.
