@@ -23,6 +23,7 @@ module.exports = View.extend({
     '.contest-toggle click' : 'toggleContest',
     '.election-selection click' : 'changeElection',
     '#registered-address click' : 'changeAddress',
+    '.address click' : 'changeAddress',
     '#fade click' : 'changeAddress',
     '#more-locations click' : 'moreLocations',
     '#voter-resources click' : 'voterResources',
@@ -244,7 +245,7 @@ module.exports = View.extend({
         'width': '40%',
         'height': 'calc(100% - 40px)',
         // 'overflow': 'visible',
-        'box-shadow': '8px 0px 5px 0px rgba(50, 50, 50, 0.35)'
+        'box-shadow': '2px 0px 5px 0px rgba(50, 50, 50, 0.35)'
       });
       $('.left-wrapper img.box').css({
         'width': '100px',
@@ -467,6 +468,9 @@ module.exports = View.extend({
   changeAddress: function(e) {
     var addressInput = this.find('.change-address');
     var that = this;
+
+    // brings up change address bar if you click .address on left, but not if you click .address on map:
+    if ( $(e.currentTarget).hasClass("address") && $(e.currentTarget).closest("#location").length > 0 ) return;
 
     if (addressInput.css('display') === 'none') {
       // this.autocomplete = new google.maps.places.Autocomplete(addressInput[0]);
