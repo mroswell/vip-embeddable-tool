@@ -6,24 +6,14 @@
     "type": "git",
     "url": "git://github.com/greypants/gulp-starter.git"
   },
-  "browser": {
-    "underscore": "backbone/node_modules/underscore",
-    "plugin": "./src/javascript/vendor/jquery-plugin.js"
-  },
   "browserify": {
     "transform": [
       "browserify-shim",
-      "hbsfy"
+      "hbsfy",
+      "cssify"
     ]
   },
-  "browserify-shim": {
-    "plugin": {
-      "exports": "plugin",
-      "depends": [
-        "jquery:$"
-      ]
-    }
-  },
+  "browserify-shim": {},
   "devDependencies": {
     "browser-sync": "~0.8.2",
     "browserify": "~3.36.0",
@@ -45,12 +35,12 @@
     "vinyl-source-stream": "~0.1.1",
     "watchify": "~0.10.1",
     "gulp-uglify": "^1.0.1",
-    "gulp-streamify": "0.0.5"
+    "gulp-streamify": "0.0.5",
+    "cssify": "^0.6.0"
   },
   "dependencies": {
-    "backbone": "~1.1.2",
     "jquery": "^2.1.1",
-    "jquery-scrollto": "^1.4.4",
-    "jquery.scrollto": "^1.4.13"
+    "fastclick": "^1.0.3",
+    "cssify": "^0.6.0"
   }
 }

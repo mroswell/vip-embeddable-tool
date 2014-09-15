@@ -1,0 +1,62 @@
+@import 'variables'
+@import 'compass/css3'
+
+.landscape#map-view
+  height: 100%
+
+  .info
+    font-size: 16px
+
+  #location
+    position: absolute,
+    left: 45%,
+    top: 55%,
+    width: 50%,
+    background-color: white,
+    z-index: 2
+    img
+      margin-right: -10px
+
+  .left-wrapper
+    float: left
+    position: absolute
+    z-index: 2
+    width: 40%
+    height: calc(100% - 40px)
+    @include box-shadow(8px 0px 5px 0px rgba(50, 50, 50, 0.35))
+
+    img.box
+      width: 100px
+      margin: -12px auto
+      display: block
+      border-bottom: 0
+
+  .right-wrapper
+    height: calc(100% - 40px)
+    overflow-y: auto
+    -webkit-overflow-scrolling: touch
+    position: absolute
+
+  .right
+    float: right
+    width: 60%
+
+    .box
+      margin-left: 8px
+
+  #map-canvas
+    position: absolute !important
+    left: 40%
+    height: 100%
+    background-color: white
+    z-index: 1
+
+  #polling-location
+    width: 105%
+    background-color: $highlightblue
+
+  .left-wrapper .box:not(.info)
+    padding: 10px
+
+  #info-icon
+    transform: none

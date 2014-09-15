@@ -2,6 +2,7 @@ var View = require('./view.js');
 var api  = require('../api.js');
 var voterIdData = require('../voterIdData.js');
 var $ = require('jquery');
+var fastclick = require('fastclick');
 window.$ = $;
 
 module.exports = View.extend({
@@ -39,8 +40,6 @@ module.exports = View.extend({
   markers: [],
 
   address: '',
-
-  noScroll: true,
 
   onBeforeRender: function(options) {
 
@@ -110,18 +109,6 @@ module.exports = View.extend({
 
     options.data.election.electionDay = newDate;
 
-    // add google searches for candidates with no link
-    // var contests = options.data.contests;
-    // contests && contests.forEach(function(contest) {
-    //   var candidates = contest.candidates;
-    //   candidates && candidates.forEach(function(candidate) {
-    //     var candidateUrl = candidate.candidateUrl;
-    //     if (!candidateUrl) {
-    //       candidate.candidateUrl = 'http://google.com/search?q=' + candidate.name;
-    //     }
-    //   });
-    // });
-
     // sort the contests by their placement on the ballot
     function contestComparator(firstContest, secondContest) {
       var firstPosition = parseInt(firstContest.ballotPlacement);
@@ -143,12 +130,38 @@ module.exports = View.extend({
 
     this.data = options.data;
 
-    if ($(this.$container).innerWidth() > 600) {
-      this.landscape = true;
-    }
+    var container = (this.modal ? window : this.$container);
+    
+    this._setOrientation();
+    $(document).on('orientationchange', this._setOrientation.bind(this))
+
+    $('<div id="_vitModal">')
+      .appendTo($('body'));
   },
 
   onAfterRender: function(options) {
+    $(window).on('resize', function() {
+      if (this.modal) {
+        var width  = $(window).innerWidth()
+          , height = $(window).innerHeight();     
+      } else {
+        var width  = $(this.$container).innerWidth()
+          , height = $(this.$container).innerHeight();
+      }
+      console.log(width)
+      if (width > 600 && !this.landscape) {
+        this.$container.removeClass('floating-container');
+        this._switchToLandscape();
+      }
+      if (width < 600 && this.landscape) {
+        this.landscape = false;
+        this.$container.removeClass('floating-modal-container');
+        this.triggerRouteEvent('mapViewRerender');
+        console.log('rerendering')
+      }
+    }.bind(this));
+
+
     var that = this;
     if (options.data.pollingLocations && options.data.pollingLocations.length) {
       var primaryLocation = options.data.pollingLocations[0];
@@ -178,15 +191,6 @@ module.exports = View.extend({
         });
       }
 
-      //
-      // tablet/desktop view
-      //
-        // this.landscape = true;
-      // setTimeout(function() {
-      //   this.remove();
-      //   this.render(options);
-      // }.bind(this), 2000);
-
       // is distance going in?
       // this._calculateDistance(
       //   options.data.normalizedInput,
@@ -194,16 +198,11 @@ module.exports = View.extend({
       //   function(distance) {
       //     document.querySelector('#map-view .address-distance').innerText = (Math.round(distance) / 1000) + ' mi';
       // });
-    } else {
-      this._encodeAddressAndInitializeMap();
-    }
+    } else this._encodeAddressAndInitializeMap();
 
     if (this.landscape) this._switchToLandscape();
     else this.find('#ballot-information .toggle-image').hide();
 
-    this.noScroll = true;
-    $('.contest-toggle .subsection').trigger('click');
-    this.noScroll = false;
 
 
     this.find('#info-icon').parent().attr('href', options.data.state[0].electionAdministrationBody.electionInfoUrl);
@@ -212,21 +211,29 @@ module.exports = View.extend({
 
     $('html,body').scrollLeft($(this.$container).scrollLeft());
     $('html,body').scrollTop($(this.$container).scrollTop());
+
+
+    fastclick(document.body);
   },
 
   onRemove: function() {
-    if (this.autocomplete) {
-      // google.maps.event.removeListener(this.autocompleteListener);
-      google.maps.event.clearInstanceListeners(this.autocomplete);
-    }
+    if (this.autocomplete) google.maps.event.clearInstanceListeners(this.autocomplete);
 
     this.markers = [];
   },
 
   _switchToLandscape: function() {
-      $('#map-view').css('height', '100%');
-      $('#map-view .info').css('font-size', '16px');
-      $('#location img').css('margin-right', '-10px');
+    $('#map-view').addClass('landscape');
+    if (this.modal) this.$container.addClass('floating-modal-container');
+    if (this.prevWidth && this.prevHeight) {
+      this.$container.css({
+        width: this.prevWidth,
+        height: this.prevHeight
+      });
+    }
+      // $('#map-view').css('height', '100%');
+      // $('#map-view .info').css('font-size', '16px');
+      // $('#location img').css('margin-right', '-10px');
       $('#map-view').prepend(($('.left').detach()));
       $('.left').wrapAll('<div class="left-wrapper" />');
       $('.left-wrapper').prepend('<img src="./images/vip-logo.png" class="left box">');
@@ -234,72 +241,70 @@ module.exports = View.extend({
       $('.right').wrapAll($('<div class="right-wrapper" />'));
       $('.toggle-image.plus').attr('src', './images/left-arrow-white.png').addClass('arrow right-arrow');
       $('.toggle-image.minus').attr('src', './images/right-arrow-white.png').addClass('arrow left-arrow');
-      $('#registered-address').find('span').css({
-        // 'margin-top':'-17px'
-      })
-      $('.left-wrapper').css({
-        'float': 'left',
-        'position': 'absolute',
-        'z-index': 2,
-        'width': '40%',
-        'height': 'calc(100% - 40px)',
-        // 'overflow': 'visible',
-        'box-shadow': '8px 0px 5px 0px rgba(50, 50, 50, 0.35)'
-      });
-      $('.left-wrapper img.box').css({
-        'width': '100px',
-        'margin': '-12px auto',
-        'display': 'block',
-        'border-bottom': '0'      
-      });
-      $('.right-wrapper').css({
-        'height': 'calc(100% - 40px)',
-        'overflow-y': 'auto',
-        'position': 'absolute'
-      });
-      $('.right').css({
-        'float': 'right',
-        'width': '60%'
-      })
-      $('.right .box').css({
-        'margin-left': '8px'
-      });
-      $('#map-canvas').css({
-        'position': 'absolute',
-        'left': '40%',
-        'height': '100%'
-      });
-      $('#location').css({
-        'position': 'absolute',
-        'left': '45%',
-        'top': '55%',
-        'width': '50%',
-        'background-color': 'white',
-        'z-index': 1
-      });
+      // $('.left-wrapper').css({
+      //   'float': 'left',
+      //   'position': 'absolute',
+      //   'z-index': 2,
+      //   'width': '40%',
+      //   'height': 'calc(100% - 40px)',
+      //   'overflow': 'visible',
+      //   'box-shadow': '8px 0px 5px 0px rgba(50, 50, 50, 0.35)'
+      // });
+      // $('.left-wrapper img.box').css({
+      //   'width': '100px',
+      //   'margin': '-12px auto',
+      //   'display': 'block',
+      //   'border-bottom': '0'      
+      // });
+      // $('.right-wrapper').css({
+      //   'height': 'calc(100% - 40px)',
+      //   'overflow-y': 'auto',
+      //   '-webkit-overflow-scrolling': 'touch',
+      //   'position': 'absolute'
+      // });
+      // $('.right').css({
+      //   'float': 'right',
+      //   'width': '60%'
+      // })
+      // $('.right .box').css({
+      //   'margin-left': '8px'
+      // });
+      // $('#map-canvas').css({
+      //   'position': 'absolute',
+      //   'left': '40%',
+      //   'height': '100%'
+      // });
+      // $('#location').css({
+      //   'position': 'absolute',
+      //   'left': '45%',
+      //   'top': '55%',
+      //   'width': '50%',
+      //   'background-color': 'white',
+      //   'z-index': 1
+      // });
       $('#polling-location .right-arrow').addClass('hidden')
       $('#polling-location .left-arrow').removeClass('hidden');
-      $('#polling-location').css({
-        'width': '105%',
-        'background-color': '#57c4f7' // $highlightblue
-      });
-      $('.left-wrapper .box:not(.info)').css({
-        padding: '10px'
-      })
+      // $('#polling-location').css({
+      //   'width': '105%',
+      //   'background-color': '#57c4f7' // $highlightblue
+      // });
+      // $('.left-wrapper .box:not(.info)').css({
+      //   padding: '10px'
+      // })
       $('#more-resources').hide();
       $('.contests.right').hide();
-      $('.left').css({
-      });
-      $('#info-icon').css({
-        transform: 'none'
-      });
+      // $('#info-icon').css({
+      //   transform: 'none'
+      // });
+
+    this.landscape = true;
   },
 
   _toggleModal: function() {
-    var modal = $('#modal');
+    var modal = $('#_vitModal');
     var that = this;
 
-    if (modal.css('display') !== 'block') {
+    if (modal.is(':hidden')) {
       modal.show();
       modal.on('click', function() {
         modal.hide()
@@ -400,10 +405,6 @@ module.exports = View.extend({
     }
   },
 
-  _zoomTo: function() {
-
-  },
-
   _addPollingLocation: function(position, address) {
       var marker = new google.maps.Marker({
         map: this.map,
@@ -468,7 +469,7 @@ module.exports = View.extend({
     var addressInput = this.find('.change-address');
     var that = this;
 
-    if (addressInput.css('display') === 'none') {
+    if (addressInput.is(':hidden')) {
       // this.autocomplete = new google.maps.places.Autocomplete(addressInput[0]);
       this.autocomplete = new google.maps.places.SearchBox(addressInput[0]);
       addressInput.prev().hide();
@@ -542,7 +543,7 @@ module.exports = View.extend({
   },
 
   changeElection: function(e) {
-    var selected = e.currentTarget.firstElementChild;
+    var selected = $(this).firstElementChild;
 
     if ($(selected).hasClass('hidden')) {
       var electionId = selected.nextElementSibling.nextElementSibling.innerHTML;
@@ -572,7 +573,8 @@ module.exports = View.extend({
         toggle.find('.minus').addClass('hidden');
       }
     } else {
-      if ($('#location').css('display') !== 'none') return;
+      if ($('#location').is(':visible')) return;
+
       $('.info.box').css({
           'background-color':'#1C7CA5',
           width: '100%'
@@ -593,26 +595,22 @@ module.exports = View.extend({
 
   toggleElections: function(e) {
     e.stopPropagation();
-    if (this.landscape) {
-      // $('.left-wrapper').css({
-      //   'overflow-y': 'auto',
-      // })
-    }
-    this._slidePanel(
-      this.find('#election-list'),
-      $(e.currentTarget.querySelector('span')),
-      { max: '100px' }
-    );
+    $('#election-list').slideToggle(100, function() {
+      this._scrollTo($('#more-elections span'), 10)
+    }.bind(this));
+
   },
 
   toggleResources: function(e) {
     if (!this.landscape) {
-      this._slidePanel(
-        this.find('#more-resources'),
-        $(e.currentTarget.lastElementChild)
-      );
+      $('#more-resources').slideToggle(500, function() {
+        this._scrollTo($('#resources-toggle span'), 10);
+        $('#resources-toggle')
+          .find('.plus, .minus')
+            .toggleClass('hidden');
+      }.bind(this));
     } else {
-      if ($('#more-resources').css('display') !== 'none') return;
+      if ($('#more-resources').is(':visible')) return;
       $('#map-canvas, #location, .contests').hide();
       $('.info.box')
         .css({
@@ -671,14 +669,20 @@ module.exports = View.extend({
     var candidateList = $(e.currentTarget).find('.candidate-list');
     var toggleSign = $(e.currentTarget).find('span');
 
-    if (candidateList.css('max-height') !== '0px') {
-      candidateList.css('max-height', '0px');
-      toggleSign.text('+')
-    } else {
-      candidateList.css('max-height', '2000px');
-      toggleSign.text('-')
+    candidateList.slideToggle(500, function() {
+      var text = (candidateList.is(':hidden') ? '+' : '-')
+      toggleSign.text(text);
       this._scrollTo(toggleSign, 20);
-    }
+    }.bind(this));
+
+    // // if (candidateList.css('max-height') !== '0px') {
+    // //   candidateList.css('max-height', '0px');
+    //   toggleSign.text('+')
+    // // } else {
+    // //   candidateList.css('max-height', '2000px');
+    //   toggleSign.text('-')
+    //   this._scrollTo(toggleSign, 20);
+    // // }
 
     // var inSymbol = '+';
     // var out = '−';
@@ -717,7 +721,6 @@ module.exports = View.extend({
   },
 
   _scrollTo: function(target, padding) {
-    if (this.noScroll) return;
     $(this.$container).animate({
       scrollTop: target.offset().top - $(this.$container).offset().top + $(this.$container).scrollTop() - padding
     }, 500);
@@ -736,14 +739,14 @@ module.exports = View.extend({
   },
 
   openAboutModal: function(e) {
-    this.find('#about').style.display = 'block';
-    this.find('#fade').style.display = 'block';
+    this.find('#about').show();
+    this.find('#fade').show();
     e.stopPropagation();
   },
 
   closeAboutModal: function() {
-    this.find('#about').style.display = 'none';
-    this.find('#fade').style.display = 'none';
+    this.find('#about').style.hide();
+    this.find('#fade').style.hide();
   }
 
 });

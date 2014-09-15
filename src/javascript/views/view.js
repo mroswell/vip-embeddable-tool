@@ -13,6 +13,19 @@ module.exports = (function() {
 
     routeEvents : {},
 
+    modal: false,
+
+    isPortrait: function() {
+      return window.orientation % 180 === 0;
+    },
+
+    _setOrientation: function() {
+      var container = (this.modal ? window : this.$container);
+      if (this.isPortrait() && $(container).innerWidth() < 600) this.landscape = false;
+      else this.landscape = true;
+      console.log(this.landscape);
+    },
+
     onBeforeRender: function() {},
 
     onAfterRender: function() {},
@@ -22,12 +35,11 @@ module.exports = (function() {
     render: function(options) {
       // last change
       var that = this;
-      var isModal = false;
-      var $container = $('#app-container');
+      var $container = $('#_vit');
       if (options) {
         if (options.container) $container = options.container;
         if (options.data) this.data = options.data;
-        if (options.modal) isModal = true;
+        if (options.modal) this.modal = options.modal;
       }
       this.$container = $container;
       this.onBeforeRender(options);
@@ -36,6 +48,30 @@ module.exports = (function() {
       else {
         this.$el = $('<div id=' + this.$id + '/>').append(this.template(options));
         $container.append(this.$el);
+        if (this.modal && !this.landscape) {
+          var width = window.innerWidth;
+          var height = window.innerHeight;
+          console.log(width, height);
+          this.prevWidth = $container.css('width');
+          this.prevHeight = $container.css('height');
+          $container
+            .addClass('floating-container')
+            .css({
+              'width': width,
+              'height': height,
+            });
+          $('body')
+            .addClass('no-scroll');
+        } else if (this.modal && this.landscape) {
+          $container
+            .addClass('floating-modal-container')
+            .css({
+              'width': width,
+              'height': height,
+            });
+          $('body')
+            .addClass('no-scroll');
+        }
       }
 
       for (var key in this.events) {
@@ -60,6 +96,17 @@ module.exports = (function() {
       // this.toggle();
       this.onRemove();
       this.$el.remove();
+
+      if (this.modal) {
+        this.$container
+          .removeClass('floating-container')
+          .css({
+            width: this.prevWidth,
+            height: this.prevHeight
+          });
+        $('body')
+          .removeClass('no-scroll');
+      }
 
       return this;
     },

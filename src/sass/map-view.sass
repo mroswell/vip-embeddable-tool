@@ -4,7 +4,7 @@
 // mapView
 //
 //
-#modal
+#_vit_modal
   display: none
   position: absolute
   left: 0
@@ -32,7 +32,7 @@
 .radio
   margin: -5px 10px 0
 
-#map-canvas
+#map-canvas:not(.landscape)
   height: 150px
   @include transition(height, 200ms, ease-in-out)
 
@@ -77,6 +77,7 @@
 
   .box
     @include transition(height, 200ms, ease-in-out)
+    @include border-radius(1px)
 
   .address
     .address-name,
@@ -88,7 +89,7 @@
   .subsection
     background-color: #eee
     padding: 15px
-    font-size: 20px
+    font-size: 17px
 
     span
       float: right
@@ -99,9 +100,9 @@
       font-style: italic
 
   .candidate-list
-    max-height: 0px
+    //max-height: 0px
     overflow: hidden
-    @include transition(max-height, 200ms, ease-in-out)
+    //@include transition(max-height, 200ms, ease-in-out)
 
   .candidate-item
     .right-arrow
@@ -187,20 +188,22 @@
     margin-top: 125px
 
   #other-elections
-    max-height: 0px
+    //max-height: 0px
     overflow: hidden
-    @include transition(max-height, 200ms, ease-in-out)
+    //@include transition(max-height, 200ms, ease-in-out)
 
   #election-list
+    display: none
     padding: 0 20px
-    max-height: 0px
+    //max-height: 0px
     overflow: hidden
-    @include transition(max-height, 200ms, ease-in-out)
+    //@include transition(max-height, 200ms, ease-in-out)
 
   #more-resources
-    max-height: 0px
+    display: none 
+    //max-height: 0px
     overflow: hidden
-    @include transition(max-height, 200ms, ease-in-out)
+    //@include transition(max-height, 200ms, ease-in-out)
 
     h1
       font-size: 20px
