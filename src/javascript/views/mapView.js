@@ -132,6 +132,14 @@ module.exports = View.extend({
     this.data = options.data;
 
     var container = (this.modal ? window : this.$container);
+    if ($(container).innerWidth() < 600) {
+      $(this.$container).removeClass('floating-modal-container');
+      this.landscape = false;
+    } else {
+      $(this.$container).removeClass('floating-container');
+      this.landscape = true;
+      console.log(this.landscape);
+    }
     
     this._setOrientation();
     $(document).on('orientationchange', this._setOrientation.bind(this))
