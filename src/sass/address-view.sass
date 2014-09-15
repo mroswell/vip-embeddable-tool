@@ -7,6 +7,34 @@
 //
 //
 
+#address-view 
+  #about 
+    h2
+      margin: 10px 0 20px 0
+    p
+      margin-bottom: 30px
+  .footer
+    #plus-icon
+      position: relative
+      top: 50%
+      margin-top: -50px
+      margin-right: -30px
+      @include translate(-50%, -50%)
+      color: white
+      background-color: $blue
+      font-family: times
+      font-weight: bold
+      text-align: center
+      border: 6px solid $blue
+      border-top: 2px solid $blue
+      border-bottom: 2px solid $blue
+      border-radius: 18px
+      width: 19px
+      font-size: 14px
+      float: right
+      display: block
+      cursor: pointer
+
 .address-info
   height: 100%
   border-bottom: 0
@@ -40,11 +68,12 @@
   text-transform: uppercase
 
 #info-icon
-  margin: -10px 0 0 0
+  // margin: -8px 0 0 0
   position: relative
   top: 50%
+  margin-top: -9px
   margin-right: -30px
-  @include translate(-50%, -50%)
+  // @include translate(-50%, -50%)
   color: $text
   font-family: times
   font-weight: bold
@@ -79,23 +108,28 @@
   font-size: 14px
   float: right
   display: block
+  cursor: pointer
 
 #close-button
-  // @include inline-block
+  transform: rotate(45deg)
+  -webkit-transform: rotate(45deg)
   position: absolute
   bottom: 10px
   right: 10px
   color: white
   background-color: $blue
+  font-family: times
+  font-weight: bold
+  text-align: center
   border: 6px solid $blue
-  //border-top: 2px solid $blue
-  border-top: 0
-  border-bottom: 2px solid $blue
+  border-top: 2px solid $blue
+  border-bottom: 3px solid $blue
   border-radius: 18px
   width: 19px
   font-size: 14px
-  font-weight: bold
-  text-align: center
+  display: block
+  cursor: pointer
+
 
 #address-not-found
   display: none

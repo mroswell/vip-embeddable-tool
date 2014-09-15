@@ -23,7 +23,7 @@ module.exports = View.extend({
     var $address = this.find('#address-input');
     var $aboutModal = this.find('#about');
     var $notFoundModal = this.find('#address-not-found');
-    var electionChoiceTemplate = require('./templates/elections.hbs');
+    // var electionChoiceTemplate = require('./templates/elections.hbs');
 
     if (this.$container.width() > 600) {
       $('#user-image').css('max-width', '450px');

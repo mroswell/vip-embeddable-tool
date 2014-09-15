@@ -7,7 +7,7 @@ module.exports = (function() {
 
     $container : '',
 
-    template: '',
+    template: function() {},
 
     events : {},
 
@@ -20,10 +20,16 @@ module.exports = (function() {
     },
 
     _setOrientation: function() {
-      var container = (this.modal ? window : this.$container);
-      if (this.isPortrait() && $(container).innerWidth() < 600) this.landscape = false;
-      else this.landscape = true;
-      console.log(this.landscape);
+      // var container = (this.modal ? window : this.$container);
+      // if (this.isPortrait() && $(container).innerWidth() < 600) {
+      //   $(this.$container).removeClass('floating-modal-container');
+      //   this.triggerRouteEvent('mapViewRerender')
+      //   this.landscape = false;
+      // } else {
+      //   $(this.$container).removeClass('floating-container');
+      //   this.landscape = true;
+      //   console.log(this.landscape);
+      // }
     },
 
     onBeforeRender: function() {},
@@ -46,7 +52,9 @@ module.exports = (function() {
 
       if (!!$('#' + this.$id)[0]) this.toggle();
       else {
-        this.$el = $('<div id=' + this.$id + '/>').append(this.template(options));
+        this.$el = $('<div id=' + this.$id + '/>')
+        console.log(this.$el)
+        this.$el.append(this.template(options));
         $container.append(this.$el);
         if (this.modal && !this.landscape) {
           var width = window.innerWidth;
@@ -95,7 +103,7 @@ module.exports = (function() {
       // this.$el.parentNode.replaceChild(this.$el.cloneNode(true), this.$el);
       // this.toggle();
       this.onRemove();
-      this.$el.remove();
+      $(this.$el).remove();
 
       if (this.modal) {
         this.$container
@@ -138,7 +146,7 @@ module.exports = (function() {
         for (var key in address) parsedAddress += address[key] + ' ';
       return parsedAddress;
       } else return address;
-    },
+    }
   };
   
   return {

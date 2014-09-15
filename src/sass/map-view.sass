@@ -4,7 +4,7 @@
 // mapView
 //
 //
-#_vit_modal
+#_vitModal
   display: none
   position: absolute
   left: 0
@@ -73,6 +73,7 @@
 
     span
       float: right
+      cursor: pointer
       // font-weight: bold
 
   .box
@@ -87,11 +88,13 @@
       color: #333
 
   .subsection
+    cursor: default
     background-color: #eee
     padding: 15px
     font-size: 17px
 
     span
+      cursor: pointer
       float: right
       @include translateY(-50%)
 
@@ -120,6 +123,9 @@
 
   .party
     font-style: italic
+
+  .election 
+    cursor: default
 
   .election-selection
     margin: 5px 0
@@ -154,6 +160,7 @@
     margin: 5px 0
 
   #registered-address
+    cursor: pointer
     span
       color: $lightblue
 
@@ -198,6 +205,9 @@
     //max-height: 0px
     overflow: hidden
     //@include transition(max-height, 200ms, ease-in-out)
+
+  #more-elections, #polling-location, #resources-toggle, #ballot-information 
+    cursor: pointer
 
   #more-resources
     display: none 

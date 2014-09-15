@@ -24,6 +24,7 @@ module.exports = View.extend({
     '.contest-toggle click' : 'toggleContest',
     '.election-selection click' : 'changeElection',
     '#registered-address click' : 'changeAddress',
+    '.address click' : 'changeAddress',
     '#fade click' : 'changeAddress',
     '#more-locations click' : 'moreLocations',
     '#voter-resources click' : 'voterResources',
@@ -241,6 +242,7 @@ module.exports = View.extend({
       $('.right').wrapAll($('<div class="right-wrapper" />'));
       $('.toggle-image.plus').attr('src', './images/left-arrow-white.png').addClass('arrow right-arrow');
       $('.toggle-image.minus').attr('src', './images/right-arrow-white.png').addClass('arrow left-arrow');
+
       // $('.left-wrapper').css({
       //   'float': 'left',
       //   'position': 'absolute',
@@ -469,6 +471,9 @@ module.exports = View.extend({
     var addressInput = this.find('.change-address');
     var that = this;
 
+    // brings up change address bar if you click .address on left, but not if you click .address on map:
+    if ( $(e.currentTarget).hasClass("address") && $(e.currentTarget).closest("#location").length > 0 ) return;
+
     if (addressInput.is(':hidden')) {
       // this.autocomplete = new google.maps.places.Autocomplete(addressInput[0]);
       this.autocomplete = new google.maps.places.SearchBox(addressInput[0]);
@@ -665,15 +670,16 @@ module.exports = View.extend({
     //   e.currentTarget.lastElementChild,
     //   e.currentTarget.firstElementChild.lastElementChild
     // );
-    if (!$(e.target).hasClass('subsection')) return;
-    var candidateList = $(e.currentTarget).find('.candidate-list');
-    var toggleSign = $(e.currentTarget).find('span');
 
-    candidateList.slideToggle(500, function() {
-      var text = (candidateList.is(':hidden') ? '+' : '-')
-      toggleSign.text(text);
-      this._scrollTo(toggleSign, 20);
-    }.bind(this));
+    if ($(e.target).hasClass('subsection') || $(e.target).hasClass('subsection-plus')) {
+      var candidateList = $(e.currentTarget).find('.candidate-list');
+      var toggleSign = $(e.currentTarget).find('span');
+
+      candidateList.slideToggle(500, function() {
+        var text = (candidateList.is(':hidden') ? '+' : '-')
+        toggleSign.text(text);
+        this._scrollTo(toggleSign, 20);
+      }.bind(this));
 
     // // if (candidateList.css('max-height') !== '0px') {
     // //   candidateList.css('max-height', '0px');
@@ -683,21 +689,21 @@ module.exports = View.extend({
     //   toggleSign.text('-')
     //   this._scrollTo(toggleSign, 20);
     // // }
+      // var inSymbol = '+';
+      // var out = '−';
+      // var max = '2000px';
+      // var min = '0px';
+      // if (getComputedStyle(e.currentTarget.lastElementChild)['max-height'] !== min) {
+      //   e.currentTarget.lastElementChild.style['max-height'] = min;
+      //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = inSymbol;
+      // } else {
+      //   e.currentTarget.lastElementChild.style['max-height'] = max;
+      //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = out;
+      //   this._scrollTo(e.currentTarget.firstElementChild.lastElementChild, 20);
+      // }
 
-    // var inSymbol = '+';
-    // var out = '−';
-    // var max = '2000px';
-    // var min = '0px';
-    // if (getComputedStyle(e.currentTarget.lastElementChild)['max-height'] !== min) {
-    //   e.currentTarget.lastElementChild.style['max-height'] = min;
-    //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = inSymbol;
-    // } else {
-    //   e.currentTarget.lastElementChild.style['max-height'] = max;
-    //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = out;
-    //   this._scrollTo(e.currentTarget.firstElementChild.lastElementChild, 20);
-    // }
-
-    // this.$container.scrollTop = e.currentTarget.firstElementChild.lastElementChild.getBoundingClientRect().top - this.$container.getBoundingClientRect().top;
+      // this.$container.scrollTop = e.currentTarget.firstElementChild.lastElementChild.getBoundingClientRect().top - this.$container.getBoundingClientRect().top;
+    }
   },
 
   _slidePanel: function(panel, button, options) {

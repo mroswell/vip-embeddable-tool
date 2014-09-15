@@ -62,14 +62,22 @@ li
   margin-top: 30px
 
 .footer
+  font-weight: bold
   position: absolute
   bottom: 0
   width: 100%
   height: 40px
   padding: 10px 40px 10px 20px
   color: white
-  font-size: 9px
+  font-size: 11px
   background-color: $text
+
+  span
+    letter-spacing: -0.3px
+    position: absolute
+    width: 75%
+    @include translate(0%, -50%)
+    top: 50%
 
 .bottom
   padding: 5px 0
@@ -102,8 +110,7 @@ li
   z-index: 99 !important
   left: 50% !important
   top: 50% !important
-  @include translate(-50%, -50%)
-  overflow: scroll !important
+  overflow: hidden !important
 
 .modal
   display: none
