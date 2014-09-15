@@ -96,6 +96,11 @@ li
   overflow: hidden
   position: fixed
 
+.max-height
+  height: 100%
+  transform: none
+  -webkit-transform: none
+
 .floating-container
   position: fixed !important
   z-index: 99 !important
@@ -107,9 +112,15 @@ li
 
 .floating-modal-container
   position: absolute !important
-  z-index: 99 !important
+  z-index: 999 !important
   left: 50% !important
   top: 50% !important
+  margin: 0 !important
+  padding: 0 !important
+  border: 0 !important
+  width: 800px !important
+  height: 600px !important
+  @include translate(-50%, -50%)
   overflow: hidden !important
 
 .modal

@@ -50,6 +50,14 @@ module.exports = (function() {
       this.$container = $container;
       this.onBeforeRender(options);
 
+      $('html, body')
+        .removeClass('max-height')
+        .find('body')
+          .removeClass('no-scroll')
+          .find($container)
+            .removeClass('floating-container')
+            .removeClass('floating-modal-container')
+
       if (!!$('#' + this.$id)[0]) this.toggle();
       else {
         this.$el = $('<div id=' + this.$id + '/>')
@@ -68,8 +76,10 @@ module.exports = (function() {
               'width': width,
               'height': height,
             });
-          $('body')
-            .addClass('no-scroll');
+          $('html, body')
+            .removeClass('max-height')
+            .find('body')
+              .addClass('no-scroll');
         } else if (this.modal && this.landscape) {
           $container
             .addClass('floating-modal-container')
@@ -77,8 +87,10 @@ module.exports = (function() {
               'width': width,
               'height': height,
             });
-          $('body')
-            .addClass('no-scroll');
+          $('html, body')
+            .addClass('max-height')
+            .find('body')
+              .removeClass('no-scroll')
         }
       }
 

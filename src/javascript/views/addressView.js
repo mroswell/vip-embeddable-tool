@@ -35,12 +35,14 @@ module.exports = View.extend({
       if (e.target !== this.find('#fade')) this.find('#fade').hide();
     }.bind(this));
     this.autocomplete = new google.maps.places.Autocomplete($address[0]);
-
+    console.log('in on after render', this.autocompleteListener)
+    this.hasSubmitted = false;
     this.autocompleteListener = function () {
       if (this.hasSubmitted) return;
       enteredAddress = this.autocomplete.getPlace().formatted_address;
       if (typeof enteredAddress === 'undefined') return;
       this.address = enteredAddress;
+      console.log('autocomplete triggered for address: ' + this.address);
       this.hasSubmitted = true;
 
       api({
@@ -49,13 +51,15 @@ module.exports = View.extend({
         error: this.handleAddressNotFound.bind(this)
       });
     }.bind(this);
-
-    $(window).on('keypress', function(e) {
+    console.log(this.keypressListener)
+    this.keypressListener = function(e) {
+      console.log(this.find('#address-input').val(), this.hasSubmitted)
       if (this.hasSubmitted) return;
       var key = e.which || e.keyCode;
       if (key === 13) {
         var address = this.find('#address-input').val();
         this.address = address;
+        console.log('enter key pressed for address: ' + this.address);
         this.hasSubmitted = true;
 
         api({
@@ -64,13 +68,16 @@ module.exports = View.extend({
           error: this.handleAddressNotFound.bind(this)
         });
       }
-    }.bind(this));
+    }
+
+    $(window).on('keypress.keypressListener', this.keypressListener.bind(this));
 
     google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
   },
 
   onRemove: function() {
     google.maps.event.clearInstanceListeners(this.autocomplete);
+    $(window).unbind('keypress.keypressListener')
   },
 
   handleElectionData: function(response) {

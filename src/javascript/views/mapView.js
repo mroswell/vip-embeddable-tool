@@ -232,7 +232,17 @@ module.exports = View.extend({
   },
 
   _switchToLandscape: function() {
-    $('#map-view').addClass('landscape');
+    $('html, body')
+      .addClass('max-height')
+      .find('#_vitModal')
+        .show()
+        .one('click', function() {
+          $('#_vitModal').hide();
+          this.triggerRouteEvent('mapViewBack')
+        }.bind(this))
+      .end()
+      .find('#map-view')
+        .addClass('landscape');
     if (this.modal) this.$container.addClass('floating-modal-container');
     if (this.prevWidth && this.prevHeight) {
       this.$container.css({
