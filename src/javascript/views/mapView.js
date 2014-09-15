@@ -671,33 +671,34 @@ module.exports = View.extend({
     //   e.currentTarget.lastElementChild,
     //   e.currentTarget.firstElementChild.lastElementChild
     // );
-    if (!$(e.target).hasClass('subsection')) return;
-    var candidateList = $(e.currentTarget).find('.candidate-list');
-    var toggleSign = $(e.currentTarget).find('span');
+    if ($(e.target).hasClass('subsection') || $(e.target).hasClass('subsection-plus')) {
+      var candidateList = $(e.currentTarget).find('.candidate-list');
+      var toggleSign = $(e.currentTarget).find('span');
 
-    if (candidateList.css('max-height') !== '0px') {
-      candidateList.css('max-height', '0px');
-      toggleSign.text('+')
-    } else {
-      candidateList.css('max-height', '2000px');
-      toggleSign.text('-')
-      this._scrollTo(toggleSign, 20);
+      if (candidateList.css('max-height') !== '0px') {
+        candidateList.css('max-height', '0px');
+        toggleSign.text('+')
+      } else {
+        candidateList.css('max-height', '2000px');
+        toggleSign.text('-')
+        this._scrollTo(toggleSign, 20);
+      }
+
+      // var inSymbol = '+';
+      // var out = '−';
+      // var max = '2000px';
+      // var min = '0px';
+      // if (getComputedStyle(e.currentTarget.lastElementChild)['max-height'] !== min) {
+      //   e.currentTarget.lastElementChild.style['max-height'] = min;
+      //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = inSymbol;
+      // } else {
+      //   e.currentTarget.lastElementChild.style['max-height'] = max;
+      //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = out;
+      //   this._scrollTo(e.currentTarget.firstElementChild.lastElementChild, 20);
+      // }
+
+      // this.$container.scrollTop = e.currentTarget.firstElementChild.lastElementChild.getBoundingClientRect().top - this.$container.getBoundingClientRect().top;
     }
-
-    // var inSymbol = '+';
-    // var out = '−';
-    // var max = '2000px';
-    // var min = '0px';
-    // if (getComputedStyle(e.currentTarget.lastElementChild)['max-height'] !== min) {
-    //   e.currentTarget.lastElementChild.style['max-height'] = min;
-    //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = inSymbol;
-    // } else {
-    //   e.currentTarget.lastElementChild.style['max-height'] = max;
-    //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = out;
-    //   this._scrollTo(e.currentTarget.firstElementChild.lastElementChild, 20);
-    // }
-
-    // this.$container.scrollTop = e.currentTarget.firstElementChild.lastElementChild.getBoundingClientRect().top - this.$container.getBoundingClientRect().top;
   },
 
   _slidePanel: function(panel, button, options) {
