@@ -12,6 +12,8 @@ module.exports = (function() {
       var router = this;
       
       var modal = typeof options.modal !== 'undefined' ? options.modal : true;
+      var alert = typeof options.alert !== 'undefined' ? options.alert : null;
+      console.log(alert)
 
       addressView
         .onRouteEvent('addressViewSubmit', function(response) {
@@ -23,7 +25,8 @@ module.exports = (function() {
           }.bind(this));
           router.navigate(mapView, addressView, {
             data: data,
-            modal: modal
+            modal: modal,
+            alert: alert
           });
         });
 

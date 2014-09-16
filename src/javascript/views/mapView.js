@@ -33,7 +33,8 @@ module.exports = View.extend({
     '#resources-toggle click' : 'toggleResources',
     '#plus-icon click' : 'openAboutModal',
     '#close-button click' : 'closeAboutModal',
-    '#ballot-information click' : 'toggleBallot'
+    '#ballot-information click' : 'toggleBallot',
+    '#alert click' : 'closeAlert'
   },
 
   map: null,
@@ -156,6 +157,14 @@ module.exports = View.extend({
   },
 
   onAfterRender: function(options) {
+    if (options.alert) {
+      this.find('#alert')
+        .find('#text')
+          .text(options.alert)
+        .end()
+        .show();
+    }
+
     $(window).on('resize', function() {
       if (this.modal) {
         var width  = $(window).innerWidth()
@@ -798,6 +807,10 @@ module.exports = View.extend({
   closeAboutModal: function() {
     this.find('#about').style.hide();
     this.find('#fade').style.hide();
+  },
+
+  closeAlert: function() {
+    this.find('#alert').hide();
   }
 
 });
