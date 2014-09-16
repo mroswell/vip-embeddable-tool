@@ -322,7 +322,7 @@ module.exports = View.extend({
       // $('.left-wrapper .box:not(.info)').css({
       //   padding: '10px'
       // })
-      // $('#more-resources').hide();
+      $('#more-resources').hide();
       $('.contests.right').hide();
       // $('#info-icon').css({
       //   transform: 'none'
