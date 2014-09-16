@@ -37,10 +37,18 @@
 </div>
 
 <div class="box left" id="chosen-election">
-{{>election data.election}}
-<a href="">
-  <img src="./images/calendar.png">
-</a>
+  {{>election data.election}}
+  <a href="" title="{{ data.election.name }}" class="addthisevent" style="background-image: url('./images/calendar.png'); float: right; margin-top: -30px; margin-right: 2px; background-color: transparent; border: 0; height: 20px; width: 20px; background-size: contain; padding: 0; background-position: center;">
+
+      <span class="_start"> {{data.election.dateForCalendar }}</span>
+      <span class="_end"> {{data.election.dateForCalendar }}</span>
+      <span class="_summary">{{ data.election.name }}</span>
+      <span class="_description">{{ data.election.name }}</span>
+      <span class="_location">{{> address data.pollingLocations.0.address }}</span>
+      <span class="_all_day_event">true</span>
+      <span class="_date_format">MM/DD/YYYY</span>
+  </a> 
+  <!-- <img src="./images/calendar.png"> -->
 </div>
 
 <div class="info box left" id="polling-location">

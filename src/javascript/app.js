@@ -28,7 +28,7 @@ window.vit = {
       .attr('type', 'text/javascript')
       .attr('async', 'true')
       .appendTo($('head'));
-
+      
     // $('<meta>')
     //   .attr('name', 'viewport')
     //   .attr('content', 'width=device-width')
