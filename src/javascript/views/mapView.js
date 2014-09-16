@@ -48,6 +48,8 @@ module.exports = View.extend({
       .attr('name', 'viewport')
       .attr('content', 'width=device-width')
       .appendTo($('head'));
+
+    $(this.$container).css('-webkit-overflow-scrolling', 'touch')
     // this.viewportMobileWebTag = $('<meta>')
     //   .attr('name', 'apple-mobile-web-app-capable')
     //   .attr('content', 'yes')
