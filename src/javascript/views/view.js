@@ -16,7 +16,8 @@ module.exports = (function() {
     modal: false,
 
     isPortrait: function() {
-      return window.orientation % 180 === 0;
+      // return window.orientation % 180 === 0;
+      return true;
     },
 
     _setOrientation: function() {
@@ -156,6 +157,17 @@ module.exports = (function() {
       if (typeof address === 'object') {
         var parsedAddress = '';
         for (var key in address) parsedAddress += address[key] + ' ';
+      return parsedAddress;
+      } else return address;
+    },
+
+    _parseAddressWithoutName: function(address) {
+      if (typeof address === 'object') {
+        var parsedAddress = '';
+        for (var key in address) {
+          if (key === 'locationName') continue;
+          parsedAddress += address[key] + ' ';
+        }
       return parsedAddress;
       } else return address;
     }

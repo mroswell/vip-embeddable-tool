@@ -490,7 +490,7 @@ module.exports = View.extend({
     var that = this;
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({
-      'address': this._parseAddress(location)
+      'address': this._parseAddressWithoutName(location)
     }, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) callback(results[0].geometry.location);
     });
