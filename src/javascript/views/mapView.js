@@ -810,7 +810,7 @@ module.exports = View.extend({
   },
 
   closeAlert: function() {
-    this.find('#alert').hide();
+    this.find('#alert').fadeOut('slow');
   }
 
 });
