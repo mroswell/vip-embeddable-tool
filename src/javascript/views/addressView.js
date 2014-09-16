@@ -97,7 +97,7 @@ module.exports = View.extend({
     // }
     var stateName = response.state[0].name;
     console.log(stateName)
-    if (stateName === 'New York' || stateName === 'Oregon') {
+    if (stateName === 'Washington' || stateName === 'Oregon') {
       $('#current-location, #fade')
         .show();
 
