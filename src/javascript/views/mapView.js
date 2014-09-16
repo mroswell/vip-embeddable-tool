@@ -646,6 +646,7 @@ module.exports = View.extend({
     } else {
       if ($('#more-resources').is(':visible')) return;
       $('#map-canvas, #location, .contests').hide();
+      $('#about-resources').show();
       $('.info.box')
         .css({
           'background-color':'#1C7CA5',
