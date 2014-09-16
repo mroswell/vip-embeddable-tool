@@ -15,9 +15,6 @@
       margin-left: -320px;
       margin-top: 150px;
       border: 1px dashed black;
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-      overflow-x: hidden;
     }
     #fill-address {
       margin: 30px 0;
@@ -43,7 +40,9 @@
     <div id="_vit"></div>
     <script src="./app.js"></script>
     <script>
-    vit.load();
+    vit.load({
+      alert: "Remember to vote on Nov 7!"
+    });
     </script>
   </body>
 </html>

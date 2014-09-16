@@ -47,6 +47,7 @@ module.exports = (function() {
         if (options.container) $container = options.container;
         if (options.data) this.data = options.data;
         if (options.modal) this.modal = options.modal;
+        if (options.alert) this.alert = options.alert;
       }
       this.$container = $container;
       this.onBeforeRender(options);

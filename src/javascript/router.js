@@ -8,8 +8,12 @@ module.exports = (function() {
   var apiRequest       = require('./api.js');
 
   return {
-    start: function() {
+    start: function(options) {
       var router = this;
+      
+      var modal = typeof options.modal !== 'undefined' ? options.modal : true;
+      var alert = typeof options.alert !== 'undefined' ? options.alert : null;
+      console.log(alert)
 
       addressView
         .onRouteEvent('addressViewSubmit', function(response) {
@@ -17,23 +21,14 @@ module.exports = (function() {
           window.console && console.log(data);
           window.history && history.pushState(null, null, '?polling-location');
           $(window).on('popstate', function() {
-            console.log('popstate!!!!!!!!!!');
             router.navigate(addressView, mapView);
           }.bind(this));
           router.navigate(mapView, addressView, {
             data: data,
-            // container: document.body,
-            modal: true
+            modal: modal,
+            alert: alert
           });
         });
-
-      // electionsView
-      //   .onRouteEvent('electionsViewSubmit', function(election) {
-      //     // if its the main returned election, continue to the map view
-      //     // else resubmit the query with the chosen election and route to the mapview
-      //     // for now assume main election
-      //     router.navigate(mapView, addressView, { data: data });
-      //   });
 
       mapView
         .onRouteEvent('mapViewBack', function() {
@@ -43,12 +38,6 @@ module.exports = (function() {
         })
         .onRouteEvent('mapViewRerender', function() {
           router.navigate(mapView, mapView, { data: data })
-        })
-        .onRouteEvent('moreLocations', function() {
-          router.navigate(moreLocationsView, mapView, { data: data });
-        })
-        .onRouteEvent('voterResources', function() {
-          router.navigate(voterResourcesView, mapView, { data: data });
         })
         .onRouteEvent('mapViewSubmit', function(response) {
           data = response;
@@ -60,28 +49,10 @@ module.exports = (function() {
             router.navigate(electionsView, mapView, { data: data });
           } else router.navigate(mapView, mapView, { 
             data: data,
-            // container: document.body,
-            modal: true
+            modal: modal
           });
         })
-        .onRouteEvent('submitSelectedElection', function(options) {
 
-        })
-
-      // electionsView
-      //   .onRouteEvent('electionsViewBack', function() {
-      //     router.navigate(addressView, electionsView);
-      //   });
-
-      // moreLocationsView
-      //   .onRouteEvent('moreLocationsViewBack', function() {
-      //     router.navigate(mapView, moreLocationsView, { data: data });
-      //   })
-
-      // voterResourcesView
-      //   .onRouteEvent('voterResourcesBack', function() {
-      //     router.navigate(mapView, voterResourcesView, { data: data });
-      //   })
 
       addressView.render();
     },

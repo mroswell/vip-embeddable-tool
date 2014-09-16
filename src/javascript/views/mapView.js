@@ -33,7 +33,8 @@ module.exports = View.extend({
     '#resources-toggle click' : 'toggleResources',
     '#plus-icon click' : 'openAboutModal',
     '#close-button click' : 'closeAboutModal',
-    '#ballot-information click' : 'toggleBallot'
+    '#ballot-information click' : 'toggleBallot',
+    '#alert click' : 'closeAlert'
   },
 
   map: null,
@@ -158,6 +159,14 @@ module.exports = View.extend({
   },
 
   onAfterRender: function(options) {
+    if (options.alert) {
+      this.find('#alert')
+        .find('#text')
+          .text(options.alert)
+        .end()
+        .show();
+    }
+
     $(window).on('resize', function() {
       if (this.modal) {
         var width  = $(window).innerWidth()
@@ -257,18 +266,20 @@ module.exports = View.extend({
   },
 
   _switchToLandscape: function() {
-    $('html, body')
-      .addClass('max-height')
-      .find('#_vitModal')
-        .show()
-        .one('click', function() {
-          $('#_vitModal').hide();
-          this.triggerRouteEvent('mapViewBack')
-        }.bind(this))
-      .end()
-      .find('#map-view')
-        .addClass('landscape');
-    if (this.modal) this.$container.addClass('floating-modal-container');
+    console.log(this.modal)
+    if (this.modal) {
+      $('html, body')
+        .addClass('max-height')
+        .find('#_vitModal')
+          .show()
+          .one('click', function() {
+            $('#_vitModal').hide();
+            this.triggerRouteEvent('mapViewBack')
+          }.bind(this))
+        .end()
+    }
+    $('#map-view')
+      .addClass('landscape');
     if (this.prevWidth && this.prevHeight) {
       this.$container.css({
         width: this.prevWidth,
@@ -812,6 +823,10 @@ module.exports = View.extend({
   closeAboutModal: function() {
     this.find('#about').style.hide();
     this.find('#fade').style.hide();
+  },
+
+  closeAlert: function() {
+    this.find('#alert').fadeOut('slow');
   }
 
 });
