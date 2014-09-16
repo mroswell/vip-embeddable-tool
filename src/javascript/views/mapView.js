@@ -322,7 +322,7 @@ module.exports = View.extend({
       // $('.left-wrapper .box:not(.info)').css({
       //   padding: '10px'
       // })
-      $('#more-resources').hide();
+      // $('#more-resources').hide();
       $('.contests.right').hide();
       // $('#info-icon').css({
       //   transform: 'none'
@@ -643,8 +643,9 @@ module.exports = View.extend({
           .find('.plus, .minus')
             .toggleClass('hidden');
       }.bind(this));
-    } else {
-      if ($('#more-resources').is(':visible')) return;
+    } else { 
+      // if ($('#more-resources').is(':visible')) return;
+      $('#about-resources').css("height", "initial")
       $('#map-canvas, #location, .contests').hide();
       $('#about-resources').show();
       $('.info.box')
@@ -674,7 +675,6 @@ module.exports = View.extend({
   toggleBallot: function() {
     // if (!this.landscape || $('.contests').css('display') !== 'none') return;
     if (!this.landscape) {
-      console.log("here")
       $('#all-contests').slideToggle(500, function() {
         this._scrollTo($('#ballot-information span'), 10);
         $('#ballot-information')
@@ -683,6 +683,7 @@ module.exports = View.extend({
       }.bind(this));
     } else { 
       $('#map-canvas, #location, #more-resources').hide();
+
       $('.info.box')
         .css({
           'background-color':'#1C7CA5',
@@ -701,6 +702,9 @@ module.exports = View.extend({
       $('#ballot-information .right-arrow').addClass('hidden');
       $('#ballot-information .left-arrow').removeClass('hidden');
       $('.contests').show();
+
+      $('#about-resources').css("height", "initial")
+      $('#about-resources').css("height", "0px")
     }
   },
 
