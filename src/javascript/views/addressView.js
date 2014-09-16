@@ -28,15 +28,9 @@ module.exports = View.extend({
 
     this.$container.css('max-width', 800);
 
-    // if (this.$container.width() > 600) {
-    //   $('#user-image').css('max-width', '450px');
-    // }
-
-    // $(window).on('resize', function() {
-    //   if (this.$container.width() > 600) {
-    //     $('#user-image').css('max-width', $(window).innerWidth() + 'px');
-    //   }
-    // })
+    if (this.$container.width() > 600) {
+      $('#user-image').css('max-width', '85%');
+    }
 
     $('body').on('click', function(e) {
       if (e.target !== $aboutModal) $aboutModal.hide();
