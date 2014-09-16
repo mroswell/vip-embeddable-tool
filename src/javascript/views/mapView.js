@@ -44,6 +44,7 @@ module.exports = View.extend({
   address: '',
 
   onBeforeRender: function(options) {
+    console.log("options: ", options)
     this.viewportWidthTag = $('<meta>')
       .attr('name', 'viewport')
       .attr('content', 'width=device-width')
@@ -111,6 +112,7 @@ module.exports = View.extend({
 
     // reformat the dates
     var date = new Date(options.data.election.electionDay);
+    options.data.election.dateForCalendar = date.toLocaleDateString();
     var newDate = date.toLocaleDateString('en-us', {
       weekday: 'long',
       year: 'numeric',
@@ -239,6 +241,20 @@ module.exports = View.extend({
     $('html,body').scrollLeft($(this.$container).scrollLeft());
     $('html,body').scrollTop($(this.$container).scrollTop());
 
+    //add this event
+    $.getScript("https://addthisevent.com/libs/1.5.8/ate.min.js", function () {
+      addthisevent.settings({
+        outlook   : {show:true, text:"Outlook Calendar"},
+        google    : {show:true, text:"Google Calendar"},
+        yahoo     : {show:false, text:"Yahoo Calendar"},
+        hotmail   : {show:false, text:"Hotmail Calendar"},
+        ical      : {show:true, text:"iCal Calendar"},
+        facebook  : {show:false, text:"Facebook Event"},
+        dropdown  : {order:"google,outlook,ical"},
+      });
+      $("#atedrop1-drop").css("left", "20px")
+      $("#atedrop1-drop").css("right", "0px")
+    })
 
     fastclick(document.body);
   },
