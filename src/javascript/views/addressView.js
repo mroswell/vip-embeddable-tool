@@ -23,7 +23,10 @@ module.exports = View.extend({
     var $address = this.find('#address-input');
     var $aboutModal = this.find('#about');
     var $notFoundModal = this.find('#address-not-found');
+    var $currentLocationModal = this.find('#current-location');
     // var electionChoiceTemplate = require('./templates/elections.hbs');
+
+    this.$container.css('max-width', 800);
 
     if (this.$container.width() > 600) {
       $('#user-image').css('max-width', '450px');
@@ -32,6 +35,7 @@ module.exports = View.extend({
     $('body').on('click', function(e) {
       if (e.target !== $aboutModal) $aboutModal.hide();
       if (e.target !== $notFoundModal) $notFoundModal.hide();
+      if (e.target !== $currentLocationModal) $currentLocationModal.hide();
       if (e.target !== this.find('#fade')) this.find('#fade').hide();
     }.bind(this));
     this.autocomplete = new google.maps.places.Autocomplete($address[0]);
@@ -81,6 +85,7 @@ module.exports = View.extend({
   },
 
   handleElectionData: function(response) {
+    var that = this;
     // if response has multiple elections, select which election
     // console.log('handling electiondata')
     // if (!response.otherElections) {
@@ -90,6 +95,47 @@ module.exports = View.extend({
     //     id: "2000"
     //   }];
     // }
+    var stateName = response.state[0].name;
+    console.log(stateName)
+    if (stateName === 'New York' || stateName === 'Oregon') {
+      $('#current-location, #fade')
+        .show();
+
+      $('#use-current-location').one('click', function() {
+        if ('geolocation' in navigator) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude
+              , lng = position.coords.longitude;
+            that._reverseGeocode(
+              position.coords.latitude,
+              position.coords.longitude,
+              function(address) {
+                console.log(address);
+                api({
+                  address: address,
+                  success: function(newResponse) {
+                    that.triggerRouteEvent('addressViewSubmit', newResponse);
+                  },
+                  error: function() {
+                    that.triggerRouteEvent('addressViewSubmit', response);
+                  }
+              });
+            });
+          });
+        } else {
+          $('#current-location, #fade').hide();
+          $('#address-input')
+            .val('')
+            .attr('placeholder', 'Enter Your Current Location');
+        }
+      });
+
+      $('#use-registered-address').one('click', function() {
+        that.triggerRouteEvent('addressViewSubmit', response);
+      })
+      return;
+    }
+
     if (response.otherElections) {
       this.$el.append(this.multipleElections({
         elections: [response.election].concat(response.otherElections)
@@ -141,6 +187,20 @@ module.exports = View.extend({
   closeAboutModal: function() {
     this.find('#about').hide();
     this.find('#fade').hide();
+  },
+
+  _reverseGeocode: function(lat, lng, callback) {
+    var latLng = new google.maps.LatLng(lat, lng);
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({
+      'latLng': latLng
+    }, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          callback(results[1].formatted_address);
+        }
+      }
+    })
   }
 
 });

@@ -1,0 +1,9 @@
+{
+  "logo" : "./images/vip-logo.png",
+  "textColor" : "#4b4b4b",
+  "headerColor" : "#1c7ca5",
+  "selectedHeaderColor" : "#26a8df",
+  "landscapeHeaderBackground" : " #0F6387",
+  "modalTitleColor" : "#a30000",
+  "footerColor" : "#898989"
+}
