@@ -20,16 +20,16 @@ module.exports = (function() {
     },
 
     _setOrientation: function() {
-      // var container = (this.modal ? window : this.$container);
-      // if (this.isPortrait() && $(container).innerWidth() < 600) {
+      var container = (this.modal ? window : this.$container);
+      if (this.isPortrait() && $(container).innerWidth() < 600) {
       //   $(this.$container).removeClass('floating-modal-container');
       //   this.triggerRouteEvent('mapViewRerender')
       //   this.landscape = false;
-      // } else {
-      //   $(this.$container).removeClass('floating-container');
-      //   this.landscape = true;
+      } else {
+        $(this.$container).removeClass('floating-container');
+        this.landscape = true;
       //   console.log(this.landscape);
-      // }
+      }
     },
 
     onBeforeRender: function() {},

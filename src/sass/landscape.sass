@@ -26,13 +26,28 @@
     z-index: 2
     width: 40%
     height: calc(100% - 40px)
+    background-color: $darkblue
     @include box-shadow(2px 0px 5px 0px rgba(50, 50, 50, 0.35))
 
-    img.box
-      width: 100px
-      margin: -12px auto
-      display: block
-      border-bottom: 0
+    .box:not(.info)
+      padding: 10px
+      background-color: white
+    //img.box
+    //  width: 100px
+    //  margin: -12px auto
+    //  display: block
+    //  border-bottom: 0
+    #vip-logo
+      height: 110px
+      background-image: url(images/vip-logo.png)
+      background-size: 105px
+      background-repeat: no-repeat
+      background-position: center
+      background-color: white
+  .dark-blue-box
+    //height: 100%
+    background-color: $darkblue
+    overflow: hidden
 
   .right-wrapper
     height: calc(100% - 40px)
@@ -57,9 +72,6 @@
   #polling-location
     width: 105%
     background-color: $highlightblue
-
-  .left-wrapper .box:not(.info)
-    padding: 10px
 
   #info-icon
     transform: none

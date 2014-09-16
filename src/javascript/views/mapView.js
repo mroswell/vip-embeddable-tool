@@ -47,6 +47,10 @@ module.exports = View.extend({
       .attr('name', 'viewport')
       .attr('content', 'width=device-width')
       .appendTo($('head'));
+    // this.viewportMobileWebTag = $('<meta>')
+    //   .attr('name', 'apple-mobile-web-app-capable')
+    //   .attr('content', 'yes')
+    //   .appendTo($('head'));
     // TESTING
     // var newPollingLocation = {
     //   address: {
@@ -213,7 +217,6 @@ module.exports = View.extend({
     } else this._encodeAddressAndInitializeMap();
 
     if (this.landscape) this._switchToLandscape();
-    else 
       // this.find('#ballot-information .toggle-image').hide();
 
 
@@ -261,8 +264,10 @@ module.exports = View.extend({
       // $('#location img').css('margin-right', '-10px');
       $('#map-view').prepend(($('.left').detach()));
       $('.left').wrapAll('<div class="left-wrapper" />');
-      $('.left-wrapper').prepend('<img src="./images/vip-logo.png" class="left box">');
-      $('.left-wrapper').append('<div class="light-blue-box"/>');
+      $('.left-wrapper').wrapAll('<div class="left-overflow-wrapper">');
+      // $('.left-wrapper').prepend('<img src="./images/vip-logo.png" class="left box">');
+      $('.left-wrapper').prepend('<div class="left box" id="vip-logo">');
+      $('.left-wrapper').append('<div class="dark-blue-box"/>');
       $('.right').wrapAll($('<div class="right-wrapper" />'));
       $('.toggle-image.plus').attr('src', './images/left-arrow-white.png').addClass('arrow right-arrow');
       $('.toggle-image.minus').attr('src', './images/right-arrow-white.png').addClass('arrow left-arrow');
