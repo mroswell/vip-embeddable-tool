@@ -44,7 +44,6 @@ module.exports = View.extend({
   address: '',
 
   onBeforeRender: function(options) {
-    console.log("options: ", options)
     this.viewportWidthTag = $('<meta>')
       .attr('name', 'viewport')
       .attr('content', 'width=device-width')
@@ -110,7 +109,9 @@ module.exports = View.extend({
 
     // reformat the dates
     var date = new Date(options.data.election.electionDay);
-    options.data.election.dateForCalendar = date.toLocaleDateString();
+
+    options.data.election.dateForCalendar = date.getMonth() + 1 + '/' + date.getDate() + '/' +  date.getFullYear();
+
     var newDate = date.toLocaleDateString('en-us', {
       weekday: 'long',
       year: 'numeric',
