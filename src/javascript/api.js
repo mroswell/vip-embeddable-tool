@@ -5,11 +5,20 @@ module.exports = function(options) {
   // (Alaska)
   if (options.electionId) url += '&electionId=' + options.electionId;
   else url += '&electionId=2000';
+  console.log('making ajax request...');
+  $.support.cors = true;
   $.ajax({
       url: url,
-      dataType: 'json',
-      error: function(){ options.error && options.error() },
-      success: function(response) { options.success(response) },
+      dataType: 'jsonp',
+      cache: false,
+      error: function(e){ 
+        console.log(e);
+        options.error && options.error();
+      },
+      success: function(response) {
+        console.log(response)
+        options.success(response);
+      },
       timeout: 15000
   });
 }
