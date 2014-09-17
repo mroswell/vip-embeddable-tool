@@ -10741,9 +10741,11 @@ module.exports = (function() {
   var mapView          = require('./views/mapView.js');
   var apiRequest       = require('./api.js');
   var text             = require('./config.js');
+  var $ = require('jquery');
 window.text = text;
   return {
     start: function(options) {
+      console.log('updated');
       var router = this;
       
       var modal = typeof options.modal !== 'undefined' ? options.modal : true;
@@ -10789,12 +10791,17 @@ window.text = text;
             modal: modal,
             assets: text
           });
-        })
+        });
+
+      if (options.textFile) {
+        $.getJSON(options.textFile, function(newText) {
+            addressView.render({ assets: newText });
+        });
+      } else {
+        addressView.render({ assets: text });
+      }
 
 
-      addressView.render({
-        assets: text
-      });
     },
 
     navigate: function(toView, fromView, options) {
@@ -10803,7 +10810,7 @@ window.text = text;
     }
   }
 })();
-},{"./api.js":13,"./config.js":15,"./views/addressView.js":19,"./views/mapView.js":20}],18:[function(require,module,exports){
+},{"./api.js":13,"./config.js":15,"./views/addressView.js":19,"./views/mapView.js":20,"jquery":12}],18:[function(require,module,exports){
 module.exports = (function() {
   if (!Function.prototype.bind) {
     Function.prototype.bind = function (oThis) {
