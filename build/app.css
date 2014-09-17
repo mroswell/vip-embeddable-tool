@@ -728,4 +728,7 @@ h1 {
 .footer {
   z-index: 2; }
 
+#map-view #alert {
+  position: absolute; }
+
 /*# sourceMappingURL=app.css.map */

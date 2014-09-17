@@ -224,4 +224,7 @@
 .footer {
   z-index: 2; }
 
+#map-view #alert {
+  position: absolute; }
+
 /*# sourceMappingURL=map-view.css.map */
