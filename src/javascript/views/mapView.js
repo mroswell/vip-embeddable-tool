@@ -193,6 +193,8 @@ module.exports = View.extend({
         .show();
     }
 
+    $('')
+
     $(window).on('resize', function() {
       if (this.modal) {
         var width  = $(window).innerWidth()
@@ -572,6 +574,9 @@ module.exports = View.extend({
       addressInput.prev().hide();
       addressInput.show();
       if (!this.landscape) this.find('#fade').show();
+
+      console.log($('.pac-container'))
+      $('.pac-container').addClass('pac-nudge');
 
       addressInput.on('focus', function() {
         addressInput.val("");
