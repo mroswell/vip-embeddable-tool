@@ -409,7 +409,8 @@ module.exports = View.extend({
         $('#map-canvas').on(that._transitionEnd(), function() {
           google.maps.event.trigger(that.map, 'resize');
           that.map.panTo(position);
-          if (that.find('#map-canvas').height() === '300px') that._fitMap();
+
+          // if (that.find('#map-canvas').height() === '300px') that._fitMap();
           // else that.map.setZoom(4);
         });
       })
@@ -454,9 +455,8 @@ module.exports = View.extend({
         $('#map-canvas').on(that._transitionEnd(), function() {
           google.maps.event.trigger(that.map, 'resize');
           that.map.panTo(that.markers[0].getPosition());
-          window.markers = that.markers;
-          if (that.find('#map-canvas').height() === '300px') that._fitMap();
-          else that.map.setZoom(12);
+          if (that.map.getZoom() !== 12) that.map.setZoom(12);
+          else that._fitMap();
         });
       });
     }
@@ -482,7 +482,8 @@ module.exports = View.extend({
         icon: './images/blue-marker.png'
       });
       var that = this;
-      google.maps.event.addListener(marker, 'click', this._toggleMapZoom.bind(this, marker, address));
+      // google.maps.event.addListener(marker, 'click', this._toggleMapZoom.bind(this, marker, address));
+      google.maps.event.addListener(marker, 'click', this.toggleMap.bind(this, null, marker, address));
       this.markers.push(marker);
   },
 
@@ -631,7 +632,9 @@ module.exports = View.extend({
     }
   },
 
-  toggleMap: function(e) {
+  toggleMap: function(e, marker, address) {
+    if (typeof marker === 'undefined') marker = this.markers[0];
+    console.log(this.landscape)
     if (!this.landscape) {
       var canvas = this.find('#map-canvas');
       var toggle = this.find('#map-toggle');
@@ -640,29 +643,46 @@ module.exports = View.extend({
         toggle.find('.minus').removeClass('hidden');
         toggle.find('.plus').addClass('hidden');
         this._scrollTo(toggle, 10);
+
+        if (address) this.find('#location .address').innerHTML = this.addressPartial(address);
+        $('.polling-location-info').show();
       } else {
         canvas.height(150);
         toggle.find('.plus').removeClass('hidden');
         toggle.find('.minus').addClass('hidden');
+
+        $('.polling-location-info').hide();
       }
     } else {
-      if ($('#location').is(':visible')) return;
-
-      $('.info.box').css({
-          'background-color':'#1C7CA5',
-          width: '100%'
-      });
-      $(':not(#polling-location) .right-arrow').removeClass('hidden');
-      $(':not(#polling-location) .left-arrow').addClass('hidden');
-      $('#more-resources, .contests').hide();
-      $('#map-canvas, #location').show();
-      $('#polling-location')
-        .css({
-          'background-color':'#57c4f7',
-          width: '105%',
+      if ($('#location').is(':visible')) {
+        if (this.map.getZoom() !== 12) {
+          this.map.panTo(marker.getPosition());
+          this.map.setZoom(12);
+          if (address) this.find('#location .address').innerHTML = this.addressPartial(address);
+          $('.polling-location-info').hide();
+        } else {
+          this._fitMap();
+          $('.polling-location-info').show();
+        }
+      } else {
+        $('.info.box').css({
+            'background-color':'#1C7CA5',
+            width: '100%'
         });
-      $('#polling-location .right-arrow').addClass('hidden');
-      $('#polling-location .left-arrow').removeClass('hidden');
+        $(':not(#polling-location) .right-arrow').removeClass('hidden');
+        $(':not(#polling-location) .left-arrow').addClass('hidden');
+        $('#more-resources, .contests').hide();
+        $('#map-canvas, #location').show();
+        $('#polling-location')
+          .css({
+            'background-color':'#57c4f7',
+            width: '105%',
+          });
+        $('#polling-location .right-arrow').addClass('hidden');
+        $('#polling-location .left-arrow').removeClass('hidden');
+      }
+
+
     }
   },
 
@@ -671,6 +691,10 @@ module.exports = View.extend({
     $('#election-list').slideToggle(100, function() {
       this._scrollTo($('#more-elections span'), 10)
     }.bind(this));
+    if (!this.landscape) {
+      $('#more-elections')
+        .find('.toggle-image').toggleClass('hidden');
+    }
 
   },
 
