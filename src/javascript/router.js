@@ -39,7 +39,9 @@ window.text = text;
         .onRouteEvent('mapViewBack', function() {
           // if the user chose the election, reroute to the election choice view
           // else go back to the address entry view
-          router.navigate(addressView, mapView);
+          router.navigate(addressView, mapView, {
+            assets: text
+          });
         })
         .onRouteEvent('mapViewRerender', function() {
           router.navigate(mapView, mapView, { data: data })

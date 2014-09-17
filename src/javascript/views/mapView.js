@@ -104,27 +104,33 @@ module.exports = View.extend({
       state.local_jurisdiction.name = "Local Jurisdiction";
     }
 
-    // delete duplicate state election administration body address
-    var correspondenceAddress = this._parseAddress(
-      state.electionAdministrationBody.correspondenceAddress
-    );
-    var physicalAddress = this._parseAddress(
-      state.electionAdministrationBody.physicalAddress
-    );
-    if (correspondenceAddress === physicalAddress) {
-      delete options.data.state[0].electionAdministrationBody.correspondenceAddress;
+    if (state.electionAdministrationBody.correspondenceAddress &&
+        state.electionAdministrationBody.physicalAddress) {
+
+      // delete duplicate state election administration body address
+      var correspondenceAddress = this._parseAddress(
+        state.electionAdministrationBody.correspondenceAddress
+      );
+      var physicalAddress = this._parseAddress(
+        state.electionAdministrationBody.physicalAddress
+      );
+      if (correspondenceAddress === physicalAddress) {
+        delete options.data.state[0].electionAdministrationBody.correspondenceAddress;
+      }
     }
+    if (state.local_jurisdiction.correspondenceAddress &&
+        state.local_jurisdiction.physicalAddress) {
+      // delete duplicate local jurisdiction addresses
+      var correspondenceAddress = this._parseAddress(
+        state.local_jurisdiction.electionAdministrationBody.correspondenceAddress
+      );
+      var physicalAddress = this._parseAddress(
+        state.local_jurisdiction.electionAdministrationBody.physicalAddress
+      );
 
-    // delete duplicate local jurisdiction addresses
-    var correspondenceAddress = this._parseAddress(
-      state.local_jurisdiction.electionAdministrationBody.correspondenceAddress
-    );
-    var physicalAddress = this._parseAddress(
-      state.local_jurisdiction.electionAdministrationBody.physicalAddress
-    );
-
-    if (correspondenceAddress === physicalAddress) {
-      delete options.data.state[0].electionAdministrationBody.correspondenceAddress;
+      if (correspondenceAddress === physicalAddress) {
+        delete options.data.state[0].electionAdministrationBody.correspondenceAddress;
+      }
     }
 
     // WA / OR mail-in case
