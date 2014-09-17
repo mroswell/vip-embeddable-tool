@@ -435,6 +435,15 @@ module.exports = View.extend({
           streetViewControl: false
         };
         that.map = new google.maps.Map(document.getElementById("map-canvas"), options);
+        that.map.set('styles', [
+          {
+            "featureType": "poi",
+            "stylers": [
+              { "visibility": "off" }
+            ]
+          }
+        ])
+
         that._addPollingLocation(position, address);
         google.maps.event.addListener(that.map, 'click', function() {
           that.toggleMap();
