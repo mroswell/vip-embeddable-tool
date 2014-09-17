@@ -19,7 +19,7 @@ module.exports = (function() {
         .onRouteEvent('addressViewSubmit', function(response) {
           data = response;
           window.console && console.log(data);
-          window.history && history.pushState(null, null, '?polling-location');
+          window.history && history.pushState && history.pushState(null, null, '?polling-location');
           $(window).on('popstate', function() {
             router.navigate(addressView, mapView);
           }.bind(this));

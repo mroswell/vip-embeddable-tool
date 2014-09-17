@@ -19,18 +19,8 @@ window.vit = {
     // Roboto font
     WebFontConfig = { google: { families: [ 'Roboto:400,500,700:latin' ] } };
 
-    // load Google Maps onto page
-    $('<script>')
-      .attr('type', 'text/javascript')
-      .attr('src', googleMapsUrl)
-      .appendTo($('body'));
-
-    // add Google Web Fonts
-    $('<script>')
-      .attr('src', googleWebFontsUrl)
-      .attr('type', 'text/javascript')
-      .attr('async', 'true')
-      .appendTo($('head'));
+    $.getScript(googleMapsUrl);
+    $.getScript(googleWebFontsUrl);
   }
 }
 
