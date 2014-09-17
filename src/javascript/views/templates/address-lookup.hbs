@@ -1,16 +1,13 @@
-<img id="user-image" src="./images/voting-information-project.png"></img>
+<img id="user-image" src="{{assets.logo}}"></img>
 <div class="address-info box">
-  <h1 class="title">Voter Information Tool</h1>
-  <h2 class="subtitle">Subheader Text</h2>
+  <h1 class="title">{{assets.text.title}}</h1>
+  <h2 class="subtitle">{{assets.text.subtitle}}</h2>
   <input type="text" id="address-input" placeholder="Enter Registered Voter Address">
   <img src="images/magnifying-glass.svg" class="magnifying-glass">
-  <div id="app-info">Find out about ballot information, polling location, early voting, ID requirements and more...</div>
+  <div id="app-info">{{assets.text.summary}}</div>
 </div>
 <div class="footer">
-  <span>
-  	For the most complete and up to date information, consult your local election official.
-  </span>
-  {{!-- <i id="info-icon">i</i> --}}
+  <span>{{ assets.text.footer.text }}</span>
   <i id="plus-icon"><img src="./images/plus.png"></i>
 </div>
 

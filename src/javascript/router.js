@@ -6,7 +6,8 @@ module.exports = (function() {
   var addressView      = require('./views/addressView.js');
   var mapView          = require('./views/mapView.js');
   var apiRequest       = require('./api.js');
-
+  var text             = require('./config.js');
+window.text = text;
   return {
     start: function(options) {
       var router = this;
@@ -27,7 +28,8 @@ module.exports = (function() {
           router.navigate(mapView, addressView, {
             data: data,
             modal: modal,
-            alert: alert
+            alert: alert,
+            assets: text
           });
         });
 
@@ -50,12 +52,15 @@ module.exports = (function() {
             router.navigate(electionsView, mapView, { data: data });
           } else router.navigate(mapView, mapView, { 
             data: data,
-            modal: modal
+            modal: modal,
+            assets: text
           });
         })
 
 
-      addressView.render();
+      addressView.render({
+        assets: text
+      });
     },
 
     navigate: function(toView, fromView, options) {

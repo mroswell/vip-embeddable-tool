@@ -4,8 +4,8 @@
 </div>
 
 <div class="info box left" id="registered-address">
-  Registered Voter Address
-  <span>Edit</span>
+  {{assets.text.headers.registeredVoterAddress}}
+  <span>{{assets.text.headers.edit}}</span>
 </div>
 
 <div class="box left">
@@ -15,7 +15,7 @@
 </div>
 
 <div class="info box left" id="more-elections">
-  Elections
+  {{assets.text.headers.elections}}
   <span>
     <img src="./images/plus.png" class="toggle-image plus">
     <img src="./images/minus.png" class="toggle-image minus hidden">
@@ -24,7 +24,6 @@
 
 <div class="info box left" id="election-list">
   <div class="election-selection">
-    {{!-- <div class="radio checked"><div class="radio-selected"></div></div> --}}
     <img src="./images/radio-checked.png" class="radio checked">
     <img src="./images/radio-unchecked.png" class="radio unchecked hidden">
     <span class="hidden">{{ data.election.id }}</span>
@@ -32,7 +31,6 @@
   </div>
   {{#each data.otherElections }}
   <div class="election-selection">
-    {{!-- <div class="radio"><div class="radio-selected"></div></div> --}}
     <img src="./images/radio-checked.png" class="radio checked hidden">
     <img src="./images/radio-unchecked.png" class="radio unchecked">
     <span class="hidden">{{ id }}</span>
@@ -57,7 +55,7 @@
 </div>
 
 <div class="info box left" id="polling-location">
-  Polling Location
+  {{assets.text.headers.pollingLocation}}
   <span id="map-toggle">
     <img src="./images/plus.png" class="toggle-image plus">
     <img src="./images/minus.png" class="toggle-image minus hidden">
@@ -75,18 +73,18 @@
 <div id="map-canvas" class="right"></div>
 
 <div class="info box left" id="resources-toggle">
-  Voter Resources
+  {{assets.text.headers.voterResources}}
   <span>
     <img src="./images/plus.png" class="toggle-image plus hidden">
     <img src="./images/minus.png" class="toggle-image minus">
   </span>
 </div>
 <div class="box information-items right" id="about-resources">
-  Information on how to navigate the elections process, including deadlines, Voter ID information, and registration links.
+  {{assets.text.resources.summary}}
 </div>
 <div id="more-resources" class="right">
   <div class="subsection box">
-  Local Election Administration
+  {{assets.text.resources}}
   </div>
   <div class="correspondence-address box">
   <h1>Local Jurisdiction</h1>

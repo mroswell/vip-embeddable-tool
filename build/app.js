@@ -10592,7 +10592,83 @@ window._VIT_GOOGLE_MAPS_INIT_CALLBACK = function() {
 // register partials and helpers for use in templates
 handlebars.registerPartials();
 handlebars.registerHelpers();
-},{"../../build/app.css":1,"./handlebars.js":15,"./router.js":16,"./util.js":17,"jquery":12}],15:[function(require,module,exports){
+},{"../../build/app.css":1,"./handlebars.js":16,"./router.js":17,"./util.js":18,"jquery":12}],15:[function(require,module,exports){
+module.exports = {
+  "logo" : "./images/voting-information-project.png",
+  "smallLogo" : "./images/vip-logo.png",
+  "colors" : {
+    "textColor" : "#4b4b4b",
+    "headerColor" : "#1c7ca5",
+    "selectedHeaderColor" : "#26a8df",
+    "landscapeHeaderBackground" : " #0f6387",
+    "alertTextColor" : "#a30000",
+    "footerColor" : "#898989",
+  },
+  "text" : {
+    "title" : "Voter Information Tool",
+    "subtitle" : "Subheader Text",
+    "summary" : "Find out about ballot information, polling location, early voting, ID requirements and more...",
+
+    "about" : {
+      "title" : "About the Voter Information Tool",
+      "content" : "The Voting Information Project (VIP) works to connect voters with the essential information needed to cast their ballot, such as where to vote and what is on the ballot. It is a project between The Pew Charitable Trusts, Google, and the states. Launched in 2008, VIP works with state and local election officials to provide official election information to citizens through a variety of means, including the Google Civic Information API. The Voting Information Tool is one of the many made available through VIP, ensuring official election information is accessible to voters before and on Election Day."
+    },
+    "footer" : {
+      "text" : "For the most complete and up to date information, consult your local election official."
+    },
+    "addressNotFound" : {
+      "title" : "No Information Found",
+      "text" : "You entered:<h1>1234 Main St<br>New York, NY 10000</h1>We couldn't find any election information for the address you entered. Please check to make sure you entered it correctly.",
+      "button" : "Try Again"
+    },
+    "mailInVoting" : {
+      "title" : "Mail-in Voting State",
+      "text" : "The registered address you entered is located in a mail-in voting state. This means you can submit your ballot at any official drop box. Would you like to continue searching for drop boxes based on your registered address, or would you like to resubmit your request using your current location?",
+      "currentLocation" : "Use Current Location",
+      "continue" : "Continue"
+    },
+    "headers" : {
+      "registeredVoterAddress" : "Registered Voter Address",
+      "edit" : "Edit",
+      "elections" : "Elections",
+      "pollingLocation" : "Polling Location",
+      "voterResources" : "Voter Resources",
+      "ballotInformation" : "Ballot Information"
+    },
+    "resources" : {
+      "summary" : "Information on how to navigate the elections process, including deadlines, Voter ID information, and registration links.",
+      "electionAdministration" : {
+        "title" : "Local Election Administration",
+        "local_jurisdiction" : "Local Jurisdiction",
+        "stateElectionsOffice" : "State Elections Office"
+      },
+      "moreResources" : {
+        "title" : "Additional Resources",
+        "electionInformationUrl" : "Election Information",
+        "registrationConfirmationUrl" : "Registration Confirmation",
+        "absenteeVotingInformationUrl" : "Absentee Voting Information",
+        "votingLocationFinderUrl" : "Voting Location Finder",
+        "ballotInformationUrl" : "Ballot Information"
+      },
+      "voterIdRequirements" : {
+        "title" : "Voter ID Requirements",
+        "certified" : "Certified?",
+        "state" : "State",
+        "needsId" : "Who must show identification to vote?",
+        "acceptableId" : "What forms of voter identification are acceptable?",
+        "canVote" : "If a voter does not present proper identification, can s/he still vote a regular ballot?"
+      }
+    },
+    "pollingLocations" : {
+      "getDirections" : "Get Directions"
+    },
+    "inputs" : {
+      "registeredAddress" : "Enter Registered Voting Address",
+      "differentAddress" : "Enter a different address"
+    }
+  }
+};
+},{}],16:[function(require,module,exports){
 var handlebars = require('hbsfy/runtime');
 
 module.exports = (function() {
@@ -10654,7 +10730,7 @@ module.exports = (function() {
     }
   }
 })(this);
-},{"./views/templates/partials/address.hbs":22,"./views/templates/partials/contest.hbs":23,"./views/templates/partials/election-administration-body.hbs":24,"./views/templates/partials/election-information-item.hbs":25,"./views/templates/partials/election-official.hbs":26,"./views/templates/partials/election.hbs":27,"./views/templates/partials/modals.hbs":28,"./views/templates/partials/normalized-address.hbs":30,"./views/templates/partials/polling-location-info.hbs":31,"./views/templates/partials/source.hbs":32,"hbsfy/runtime":11}],16:[function(require,module,exports){
+},{"./views/templates/partials/address.hbs":23,"./views/templates/partials/contest.hbs":24,"./views/templates/partials/election-administration-body.hbs":25,"./views/templates/partials/election-information-item.hbs":26,"./views/templates/partials/election-official.hbs":27,"./views/templates/partials/election.hbs":28,"./views/templates/partials/modals.hbs":29,"./views/templates/partials/normalized-address.hbs":31,"./views/templates/partials/polling-location-info.hbs":32,"./views/templates/partials/source.hbs":33,"hbsfy/runtime":11}],17:[function(require,module,exports){
 module.exports = (function() {
   var currentView;
   var data;
@@ -10663,7 +10739,8 @@ module.exports = (function() {
   var addressView      = require('./views/addressView.js');
   var mapView          = require('./views/mapView.js');
   var apiRequest       = require('./api.js');
-
+  var text             = require('./config.js');
+window.text = text;
   return {
     start: function(options) {
       var router = this;
@@ -10684,7 +10761,8 @@ module.exports = (function() {
           router.navigate(mapView, addressView, {
             data: data,
             modal: modal,
-            alert: alert
+            alert: alert,
+            assets: text
           });
         });
 
@@ -10707,12 +10785,15 @@ module.exports = (function() {
             router.navigate(electionsView, mapView, { data: data });
           } else router.navigate(mapView, mapView, { 
             data: data,
-            modal: modal
+            modal: modal,
+            assets: text
           });
         })
 
 
-      addressView.render();
+      addressView.render({
+        assets: text
+      });
     },
 
     navigate: function(toView, fromView, options) {
@@ -10721,7 +10802,7 @@ module.exports = (function() {
     }
   }
 })();
-},{"./api.js":13,"./views/addressView.js":18,"./views/mapView.js":19}],17:[function(require,module,exports){
+},{"./api.js":13,"./config.js":15,"./views/addressView.js":19,"./views/mapView.js":20}],18:[function(require,module,exports){
 module.exports = (function() {
   if (!Function.prototype.bind) {
     Function.prototype.bind = function (oThis) {
@@ -10766,7 +10847,7 @@ module.exports = (function() {
     }
   }
 })(this);
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 var View = require('./view.js');
 var api = require('../api.js');
 var $ = require('jquery');
@@ -10966,7 +11047,7 @@ module.exports = View.extend({
   }
 
 });
-},{"../api.js":13,"./templates/address-lookup.hbs":20,"./templates/partials/multiple-elections.hbs":29,"./view.js":33,"jquery":12}],19:[function(require,module,exports){
+},{"../api.js":13,"./templates/address-lookup.hbs":21,"./templates/partials/multiple-elections.hbs":30,"./view.js":34,"jquery":12}],20:[function(require,module,exports){
 var View = require('./view.js');
 var api  = require('../api.js');
 var voterIdData = require('../voterIdData.js');
@@ -11862,23 +11943,33 @@ module.exports = View.extend({
   }
 
 });
-},{"../api.js":13,"../voterIdData.js":34,"./templates/map.hbs":21,"./templates/partials/address.hbs":22,"./templates/partials/polling-location-info.hbs":31,"./view.js":33,"fastclick":3,"jquery":12}],20:[function(require,module,exports){
+},{"../api.js":13,"../voterIdData.js":35,"./templates/map.hbs":22,"./templates/partials/address.hbs":23,"./templates/partials/polling-location-info.hbs":32,"./view.js":34,"fastclick":3,"jquery":12}],21:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partials, Handlebars.partials); data = data || {};
-  var buffer = "", stack1, self=this;
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
 
 
-  buffer += "<img id=\"user-image\" src=\"./images/voting-information-project.png\"></img>\n<div class=\"address-info box\">\n  <h1 class=\"title\">Voter Information Tool</h1>\n  <h2 class=\"subtitle\">Subheader Text</h2>\n  <input type=\"text\" id=\"address-input\" placeholder=\"Enter Registered Voter Address\">\n  <img src=\"images/magnifying-glass.svg\" class=\"magnifying-glass\">\n  <div id=\"app-info\">Find out about ballot information, polling location, early voting, ID requirements and more...</div>\n</div>\n<div class=\"footer\">\n  <span>\n  	For the most complete and up to date information, consult your local election official.\n  </span>\n  \n  <i id=\"plus-icon\"><img src=\"./images/plus.png\"></i>\n</div>\n\n";
+  buffer += "<img id=\"user-image\" src=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.logo)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\"></img>\n<div class=\"address-info box\">\n  <h1 class=\"title\">"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h1>\n  <h2 class=\"subtitle\">"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.subtitle)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h2>\n  <input type=\"text\" id=\"address-input\" placeholder=\"Enter Registered Voter Address\">\n  <img src=\"images/magnifying-glass.svg\" class=\"magnifying-glass\">\n  <div id=\"app-info\">"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.summary)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</div>\n</div>\n<div class=\"footer\">\n  <span>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.footer)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</span>\n  <i id=\"plus-icon\"><img src=\"./images/plus.png\"></i>\n</div>\n\n";
   stack1 = self.invokePartial(partials.modals, 'modals', depth0, helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n\n<div id=\"fade\"></div>";
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],21:[function(require,module,exports){
+},{"hbsfy/runtime":11}],22:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -11995,7 +12086,7 @@ function program5(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],22:[function(require,module,exports){
+},{"hbsfy/runtime":11}],23:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12036,7 +12127,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],23:[function(require,module,exports){
+},{"hbsfy/runtime":11}],24:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12127,7 +12218,7 @@ function program8(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],24:[function(require,module,exports){
+},{"hbsfy/runtime":11}],25:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12209,7 +12300,7 @@ function program9(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],25:[function(require,module,exports){
+},{"hbsfy/runtime":11}],26:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12230,7 +12321,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],26:[function(require,module,exports){
+},{"hbsfy/runtime":11}],27:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12263,7 +12354,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],27:[function(require,module,exports){
+},{"hbsfy/runtime":11}],28:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12288,19 +12379,24 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],28:[function(require,module,exports){
+},{"hbsfy/runtime":11}],29:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  return "<div class=\"modal\" id=\"about\">\n  <h2>About the Voter Information Tool</h2>\n  <p>\n  	The Voting Information Project (VIP) works to connect voters with the essential information needed to cast their ballot, such as where to vote and what is on the ballot. It is a project between The Pew Charitable Trusts, Google, and the states. Launched in 2008, VIP works with state and local election officials to provide official election information to citizens through a variety of means, including the Google Civic Information API. The Voting Information Tool is one of the many made available through VIP, ensuring official election information is accessible to voters before and on Election Day.\n  </p>\n  <div id=\"close-button\"><img src=\"./images/plus.png\"></div>\n</div>\n<div class=\"modal\" id=\"address-not-found\">\n  <h2>No information found</h2>\n  You entered:\n  <h1>1234 Main St<br>New York, NY 10000</h1>\n  We couldn't find any election information for the address you entered. Please check to make sure you entered it correctly.\n  <button>Try Again</button>\n</div>\n<div class=\"modal\" id=\"current-location\">\n  <h2>Mail-in Voting State</h2>\n  <p>\n    The registered address you entered is located in a mail-in voting state. This means you can\n    submit your ballot at any official drop box. Would you like to continue searching for drop\n    boxes based on your registered address, or would you like to resubmit your request using\n    your current location?\n  </p>\n  <span>\n    <button id=\"use-registered-address\">Continue</button>\n    <button id=\"use-current-location\">Use Current Location</button>\n  </span>\n</div>";
+  buffer += "<div class=\"modal\" id=\"about\">\n  <h2>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.about)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h2>\n  <p>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.about)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</p>\n  <div id=\"close-button\"><img src=\"./images/plus.png\"></div>\n</div>\n<div class=\"modal\" id=\"address-not-found\">\n  <h2>No information found</h2>\n  You entered:\n  <h1>1234 Main St<br>New York, NY 10000</h1>\n  We couldn't find any election information for the address you entered. Please check to make sure you entered it correctly.\n  <button>Try Again</button>\n</div>\n<div class=\"modal\" id=\"current-location\">\n  <h2>Mail-in Voting State</h2>\n  <p>\n    The registered address you entered is located in a mail-in voting state. This means you can\n    submit your ballot at any official drop box. Would you like to continue searching for drop\n    boxes based on your registered address, or would you like to resubmit your request using\n    your current location?\n  </p>\n  <span>\n    <button id=\"use-registered-address\">Continue</button>\n    <button id=\"use-current-location\">Use Current Location</button>\n  </span>\n</div>";
+  return buffer;
   });
 
-},{"hbsfy/runtime":11}],29:[function(require,module,exports){
+},{"hbsfy/runtime":11}],30:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12334,7 +12430,7 @@ function program1(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],30:[function(require,module,exports){
+},{"hbsfy/runtime":11}],31:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12375,7 +12471,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],31:[function(require,module,exports){
+},{"hbsfy/runtime":11}],32:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12447,7 +12543,7 @@ function program7(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],32:[function(require,module,exports){
+},{"hbsfy/runtime":11}],33:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12468,7 +12564,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],33:[function(require,module,exports){
+},{"hbsfy/runtime":11}],34:[function(require,module,exports){
 module.exports = (function() {
   var view = {
 
@@ -12519,6 +12615,7 @@ module.exports = (function() {
         if (options.data) this.data = options.data;
         if (options.modal) this.modal = options.modal;
         if (options.alert) this.alert = options.alert;
+        if (options.assets) this.assets = options.assets;
       }
       this.$container = $container;
       this.onBeforeRender(options);
@@ -12655,7 +12752,7 @@ module.exports = (function() {
     }
   }
 })(this);
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 module.exports = [
   {
     "Certified?":"Yes",

@@ -1,27 +1,18 @@
 <div class="modal" id="about">
-  <h2>About the Voter Information Tool</h2>
-  <p>
-  	The Voting Information Project (VIP) works to connect voters with the essential information needed to cast their ballot, such as where to vote and what is on the ballot. It is a project between The Pew Charitable Trusts, Google, and the states. Launched in 2008, VIP works with state and local election officials to provide official election information to citizens through a variety of means, including the Google Civic Information API. The Voting Information Tool is one of the many made available through VIP, ensuring official election information is accessible to voters before and on Election Day.
-  </p>
+  <h2>{{assets.text.about.title}}</h2>
+  <p>{{assets.text.about.text}}</p>
   <div id="close-button"><img src="./images/plus.png"></div>
 </div>
 <div class="modal" id="address-not-found">
-  <h2>No information found</h2>
-  You entered:
-  <h1>1234 Main St<br>New York, NY 10000</h1>
-  We couldn't find any election information for the address you entered. Please check to make sure you entered it correctly.
-  <button>Try Again</button>
+  <h2>{{assets.text.addressNotFound.title}}</h2>
+  {{assets.text.addressNotFound.text}}
+  <button>{{assets.text.addressNotFound.button}}</button>
 </div>
 <div class="modal" id="current-location">
-  <h2>Mail-in Voting State</h2>
-  <p>
-    The registered address you entered is located in a mail-in voting state. This means you can
-    submit your ballot at any official drop box. Would you like to continue searching for drop
-    boxes based on your registered address, or would you like to resubmit your request using
-    your current location?
-  </p>
+  <h2>{{assets.text.addressNotFound.title}}</h2>
+  <p>{{assets.text.addressNotFound.text}}</p>
   <span>
-    <button id="use-registered-address">Continue</button>
-    <button id="use-current-location">Use Current Location</button>
+    <button id="use-registered-address">{{assets.text.addressNotFound.registeredAddress}}</button>
+    <button id="use-current-location">{{assets.text.addressNotFound.currentLocation}}</button>
   </span>
 </div>
