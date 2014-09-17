@@ -10679,6 +10679,7 @@ module.exports = (function() {
           window.history && history.pushState && history.pushState(null, null, '?polling-location');
           $(window).on('popstate', function() {
             router.navigate(addressView, mapView);
+            $('#_vitModal').hide();
           }.bind(this));
           router.navigate(mapView, addressView, {
             data: data,
