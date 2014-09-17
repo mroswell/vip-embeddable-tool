@@ -738,12 +738,25 @@ module.exports = View.extend({
   toggleBallot: function() {
     // if (!this.landscape || $('.contests').css('display') !== 'none') return;
     if (!this.landscape) {
-      $('#all-contests').slideToggle(500, function() {
-        this._scrollTo($('#ballot-information span'), 10);
-        $('#ballot-information')
-          .find('.plus, .minus')
-            .toggleClass('hidden');
-      }.bind(this));
+      var ballotInfoIsMaximized = $('#ballot-information').find('.plus').is(":hidden");
+
+      $('#ballot-information').find('.plus, .minus').toggleClass('hidden');
+      var that = this;
+      $(".contest-toggle").each(function (i, el) {
+        var candidateList = $(el).find('.candidate-list');
+        var toggleSign = $(el).find('span');
+        var subsectionIsMaximized = !candidateList.is(':hidden');
+
+        if (ballotInfoIsMaximized === subsectionIsMaximized) {
+          candidateList.slideToggle(500, function() {
+            var text = (subsectionIsMaximized ? '+ ' : '\u2014')
+            toggleSign.text(text);
+          }.bind(this));
+        }
+      })
+
+       if (!ballotInfoIsMaximized) that._scrollTo($("#ballot-information"), 20);
+
     } else { 
       $('#map-canvas, #location, #more-resources').hide();
 
@@ -784,7 +797,8 @@ module.exports = View.extend({
       candidateList.slideToggle(500, function() {
         var text = (candidateList.is(':hidden') ? '+ ' : '\u2014')
         toggleSign.text(text);
-        this._scrollTo(toggleSign, 20);
+
+        if (!candidateList.is(':hidden')) this._scrollTo(toggleSign, 20);
       }.bind(this));
 
     // // if (candidateList.css('max-height') !== '0px') {
