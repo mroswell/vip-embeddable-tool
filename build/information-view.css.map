@@ -1,0 +1,9 @@
+{
+  "version": 3,
+  "mappings": "AAMA,6BAA6B;EAC3B,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,OAAO;EACpB,+BAAC;IACC,OAAO,EAAE,KAAK;IACd,eAAe,EAAE,IAAI;IACrB,MAAM,EAAE,CAAC;IACT,SAAS,EAAE,IAAI",
+  "sources": [
+    "../sass/information-view.sass"
+  ],
+  "names": [],
+  "file": "information-view.css"
+}
