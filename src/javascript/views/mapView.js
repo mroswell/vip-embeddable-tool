@@ -676,7 +676,7 @@ module.exports = View.extend({
         $('#polling-location')
           .css({
             'background-color':'#57c4f7',
-            width: '105%',
+            width: '103%',
           });
         $('#polling-location .right-arrow').addClass('hidden');
         $('#polling-location .left-arrow').removeClass('hidden');
@@ -723,7 +723,7 @@ module.exports = View.extend({
       $('#resources-toggle')
         .css({
           'background-color':'#57c4f7',
-          width: '105%',
+          width: '103%',
         });
       $('#resources-toggle .right-arrow').addClass('hidden');
       $('#resources-toggle .left-arrow').removeClass('hidden');
@@ -759,7 +759,7 @@ module.exports = View.extend({
       $('#ballot-information')
         .css({
           'background-color':'#57c4f7',
-          'width': '105%',
+          'width': '103%',
         });
 
       $('#ballot-information .right-arrow').addClass('hidden');
