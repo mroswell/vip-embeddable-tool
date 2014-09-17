@@ -10656,7 +10656,8 @@ module.exports = {
         "state" : "State",
         "needsId" : "Who must show identification to vote?",
         "acceptableId" : "What forms of voter identification are acceptable?",
-        "canVote" : "If a voter does not present proper identification, can s/he still vote a regular ballot?"
+        "canVote" : "If a voter does not present proper identification, can s/he still vote a regular ballot?",
+        "linkTitle" : "Link"
       }
     },
     "pollingLocations" : {
@@ -12074,7 +12075,9 @@ function program5(depth0,data) {
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.summary)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\n</div>\n<div id=\"more-resources\" class=\"right\">\n  <div class=\"subsection box\">\n  "
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\n  </div>\n  <div class=\"correspondence-address box\">\n  <h1>Local Jurisdiction</h1>\n  <b>"
+    + "\n  </div>\n  <div class=\"correspondence-address box\">\n  <h1>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.local_jurisdiction)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h1>\n  <b>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.local_jurisdiction)),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</b>\n  <b>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.local_jurisdiction)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
@@ -12086,7 +12089,9 @@ function program5(depth0,data) {
   buffer += "\n  ";
   stack1 = self.invokePartial(partials['normalized-address'], 'normalized-address', ((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.local_jurisdiction)),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.physicalAddress), helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  <br>\n  <h1>State Elections Office</h1>\n  <b>"
+  buffer += "\n  <br>\n  <h1>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.stateElectionsOffice)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h1>\n  <b>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</b>\n  "
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.hoursOfOperation)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
@@ -12096,18 +12101,28 @@ function program5(depth0,data) {
   buffer += "\n  ";
   stack1 = self.invokePartial(partials['normalized-address'], 'normalized-address', ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.physicalAddress), helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  </div>\n  <div class=\"subsection box\">\n  Additional Resources\n  </div>\n  <div class=\"box information-links\">\n  ";
+  buffer += "\n  </div>\n  <div class=\"subsection box\">\n  "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.moreResources)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n  </div>\n  <div class=\"box information-links\">\n  ";
   stack1 = self.invokePartial(partials['election-administration-body'], 'election-administration-body', ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody), helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  </div>\n  <div class=\"subsection box\">\n  Voter ID Requirements\n  </div>\n  <div class=\"box information-items\">\n    <div class=\"voter-id-info\">\n    ";
+  buffer += "\n  </div>\n  <div class=\"subsection box\">\n  "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.voterIdRequirements)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n  </div>\n  <div class=\"box information-items\">\n    <div class=\"voter-id-info\">\n    ";
   stack1 = helpers.each.call(depth0, ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.voterId), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n    <a href=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.voterIdLink)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\">Link</a>\n    </div>\n  \n  </div>\n</div>\n\n\n<div class=\"info box left\" id=\"ballot-information\">\n  Ballot Information\n  <span>\n    <img src=\"./images/plus.png\" class=\"toggle-image plus hidden\">\n    <img src=\"./images/minus.png\" class=\"toggle-image minus\">\n  </span>\n</div>\n<div class=\"contests right\" id=\"all-contests\">\n";
+    + "\">"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.voterIdRequirements)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</a>\n    </div>\n  </div>\n</div>\n\n<div class=\"info box left\" id=\"ballot-information\">\n  "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.headers)),stack1 == null || stack1 === false ? stack1 : stack1.ballotInformation)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n  <span>\n    <img src=\"./images/plus.png\" class=\"toggle-image plus hidden\">\n    <img src=\"./images/minus.png\" class=\"toggle-image minus\">\n  </span>\n</div>\n<div class=\"contests right\" id=\"all-contests\">\n";
   stack1 = helpers.each.call(depth0, ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.contests), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n</div>\n\n<div class=\"footer\">\n  <span>\n  For the most complete and up to date information, consult your local election official.\n  </span>\n  <a href=\"#\" target=\"_blank\"><i id=\"info-icon\">i</i></a>\n  \n</div>\n\n";
+  buffer += "\n</div>\n\n<div class=\"footer\">\n  <span>\n  "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.footer)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n  </span>\n  <a href=\"#\" target=\"_blank\"><i id=\"info-icon\">i</i></a>\n</div>\n\n";
   stack1 = self.invokePartial(partials.modals, 'modals', depth0, helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n<div id=\"fade\"></div>";
@@ -12174,7 +12189,7 @@ function program1(depth0,data) {
   if (helper = helpers.referendumTitle) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.referendumTitle); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\n				<img src=\"./images/arrow.png\" class=\"arrow\">\n				\n				";
+    + "\n				<img src=\"./images/arrow.png\" class=\"arrow\">\n				";
   if (helper = helpers.referendumSubtitle) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.referendumSubtitle); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -12195,7 +12210,7 @@ function program3(depth0,data) {
     + "\n				</div>\n				";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.candidateUrl), {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n				\n				<div class=\"party\">\n				";
+  buffer += "\n				<div class=\"party\">\n				";
   if (helper = helpers.party) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.party); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -12261,7 +12276,9 @@ function program1(depth0,data) {
   if (helper = helpers.electionInfoUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.electionInfoUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" target=\"_blank\">\n    Election Information\n  </a>\n  <br><br>\n  ";
+    + "\" target=\"_blank\">\n    "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.moreResources)),stack1 == null || stack1 === false ? stack1 : stack1.electionInformationUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n  </a>\n  <br><br>\n  ";
   return buffer;
   }
 
@@ -12272,7 +12289,9 @@ function program3(depth0,data) {
   if (helper = helpers.electionRegistrationConfirmationUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.electionRegistrationConfirmationUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" target=\"_blank\">\n    Registration Confirmation\n  </a>\n  <br><br>\n  ";
+    + "\" target=\"_blank\">\n    "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.moreResources)),stack1 == null || stack1 === false ? stack1 : stack1.registrationConfirmationUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n  </a>\n  <br><br>\n  ";
   return buffer;
   }
 
@@ -12283,7 +12302,9 @@ function program5(depth0,data) {
   if (helper = helpers.absenteeVotingInfoUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.absenteeVotingInfoUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" target=\"_blank\">\n  Absentee Voting Information\n  </a>\n  <br><br>\n  ";
+    + "\" target=\"_blank\">\n    "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.moreResources)),stack1 == null || stack1 === false ? stack1 : stack1.absenteeVotingInformationUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n  </a>\n  <br><br>\n  ";
   return buffer;
   }
 
@@ -12294,7 +12315,9 @@ function program7(depth0,data) {
   if (helper = helpers.votingLocationFinderUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.votingLocationFinderUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" target=\"_blank\">\n    Voting Location Finder\n  </a>\n  <br><br>\n  ";
+    + "\" target=\"_blank\">\n    "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.moreResources)),stack1 == null || stack1 === false ? stack1 : stack1.votingLocationFinderUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n  </a>\n  <br><br>\n  ";
   return buffer;
   }
 
@@ -12305,11 +12328,13 @@ function program9(depth0,data) {
   if (helper = helpers.ballotInfoUrl) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.ballotInfoUrl); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" target=\"_blank\">\n    Ballot Information\n  </a>\n  <br>\n  ";
+    + "\" target=\"_blank\">\n    "
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.moreResources)),stack1 == null || stack1 === false ? stack1 : stack1.ballotInformationUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\n  </a>\n  <br>\n  ";
   return buffer;
   }
 
-  buffer += "<div class=\"election-administration-body\">\n\n  ";
+  buffer += "<div class=\"election-administration-body\">\n  ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.electionInfoUrl), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  ";
@@ -12465,7 +12490,9 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div class=\"modal\" id=\"multiple-elections\">\n  <h2>Multiple elections found. Select one:</h2>\n  ";
+  buffer += "<div class=\"modal\" id=\"multiple-elections\">\n  <h2>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.multipleElections)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</h2>\n  ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.elections), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n  <button>Done</button>\n</div>";
