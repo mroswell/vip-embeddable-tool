@@ -575,7 +575,6 @@ module.exports = View.extend({
       addressInput.show();
       if (!this.landscape) this.find('#fade').show();
 
-      console.log($('.pac-container'))
       $('.pac-container').addClass('pac-nudge');
 
       addressInput.on('focus', function() {
