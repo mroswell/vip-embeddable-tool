@@ -84,30 +84,30 @@
 </div>
 <div id="more-resources" class="right">
   <div class="subsection box">
-  {{assets.text.resources}}
+  {{assets.text.resources.title}}
   </div>
   <div class="correspondence-address box">
-  <h1>Local Jurisdiction</h1>
+  <h1>{{assets.text.resources.local_jurisdiction}}</h1>
   <b>{{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}</b>
   <b>{{ data.state.0.local_jurisdiction.name }}</b><br>
   {{ data.state.0.local_jurisdiction.electionAdministrationBody.hoursOfOperation }}
   {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
   {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.physicalAddress }}
   <br>
-  <h1>State Elections Office</h1>
+  <h1>{{assets.text.resources.stateElectionsOffice}}</h1>
   <b>{{ data.state.0.electionAdministrationBody.name }}</b>
   {{ data.state.0.electionAdministrationBody.hoursOfOperation }}
   {{> normalized-address data.state.0.electionAdministrationBody.correspondenceAddress }}
   {{> normalized-address data.state.0.electionAdministrationBody.physicalAddress }}
   </div>
   <div class="subsection box">
-  Additional Resources
+  {{assets.text.resources.moreResources.title}}
   </div>
   <div class="box information-links">
   {{> election-administration-body data.state.0.electionAdministrationBody }}
   </div>
   <div class="subsection box">
-  Voter ID Requirements
+  {{assets.text.resources.voterIdRequirements.title}}
   </div>
   <div class="box information-items">
     <div class="voter-id-info">
@@ -115,19 +115,13 @@
       <div class="question">{{ question }}</div>
       <div class="answer">{{ answer }}</div>
     {{/each}}
-    <a href="{{ data.voterIdLink }}">Link</a>
+    <a href="{{ data.voterIdLink }}">{{assets.text.resources.voterIdRequirements.title}}</a>
     </div>
-  {{!-- {{> election-administration-body data.state.0.electionAdministrationBody }}
-  {{> election-administration-body data.state.0.local_jurisdiction.electionAdministrationBody }} --}}
   </div>
 </div>
-{{!-- <div id="voter-resources" class="box">
-Voter Resources
-<div class="right-arrow"></div>
-</div> --}}
 
 <div class="info box left" id="ballot-information">
-  Ballot Information
+  {{assets.text.headers.ballotInformation}}
   <span>
     <img src="./images/plus.png" class="toggle-image plus hidden">
     <img src="./images/minus.png" class="toggle-image minus">
@@ -141,10 +135,9 @@ Voter Resources
 
 <div class="footer">
   <span>
-  For the most complete and up to date information, consult your local election official.
+  {{assets.text.footer.text}}
   </span>
   <a href="#" target="_blank"><i id="info-icon">i</i></a>
-  {{!-- <i id="plus-icon">+</i> --}}
 </div>
 
 {{> modals }}
