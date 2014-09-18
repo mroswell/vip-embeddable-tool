@@ -11481,7 +11481,7 @@ module.exports = View.extend({
     this.prevLeft = this.$container.css('left');
     this.prevTop = this.$container.css('top');
 
-    $(window).on('resize', this.resizeListener.bind(this));
+    $(window).on('resize.mapview', this.resizeListener.bind(this));
 
     this.resizeListener();
 
@@ -11573,6 +11573,8 @@ module.exports = View.extend({
 
     $(this.viewportMobileWebTag)
       .remove();
+
+    $(window).off('.mapview');
   },
 
   _switchToLandscape: function() {
