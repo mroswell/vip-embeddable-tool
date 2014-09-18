@@ -553,6 +553,7 @@ module.exports = View.extend({
 
       this.autocompleteListener = function() {
         console.log('autocomplete ' + this.hasSubmitted);
+        console.log(this.hasSubmitted)
         if (this.hasSubmitted) return;
         // var address = this.autocomplete.getPlace().formatted_address;
         var address;
@@ -601,6 +602,10 @@ module.exports = View.extend({
           // });
         }
       }.bind(this));
+
+      $(window).on('click', function() {
+        console.log('click!')
+      })
 
       // google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
       google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
