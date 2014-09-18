@@ -165,18 +165,9 @@ li {
 .floating-modal-container {
   position: absolute !important;
   z-index: 999 !important;
-  left: 50% !important;
-  top: 50% !important;
   margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  width: 728px !important;
-  height: 600px !important;
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  overflow: hidden !important; }
+  overflow: hidden !important;
+  min-height: 520px !important; }
 
 .modal {
   display: none;
@@ -508,10 +499,8 @@ h1 {
 #_vitModal {
   display: none;
   position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   z-index: 998;
   background-color: rgba(0, 0, 0, 0.75); }
 
