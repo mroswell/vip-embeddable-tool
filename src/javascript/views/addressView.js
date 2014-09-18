@@ -28,7 +28,7 @@ module.exports = View.extend({
 
     this.$container.css('max-width', 800);
 
-    if (this.$container.width() > 600) {
+    if (this.$container.width() > 768) {
       $('#user-image').css('max-width', '85%');
     }
 
@@ -43,7 +43,14 @@ module.exports = View.extend({
     this.autocompleteListener = function () {
       if (this.hasSubmitted) return;
       enteredAddress = this.autocomplete.getPlace().formatted_address;
-      if (typeof enteredAddress === 'undefined') return;
+      if (typeof enteredAddress === 'undefined') {
+        console.log('undefined address');
+        var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
+        enteredAddress = autocompleteContainer.text() + ' ' +
+          autocompleteContainer.next().text();
+        console.log(enteredAddress);
+        // return;
+      }
       this.address = enteredAddress;
       this.hasSubmitted = true;
 
@@ -57,15 +64,17 @@ module.exports = View.extend({
       if (this.hasSubmitted) return;
       var key = e.which || e.keyCode;
       if (key === 13) {
-        var address = this.find('#address-input').val();
-        this.address = address;
-        this.hasSubmitted = true;
+        google.maps.event.trigger(this.autocomplete, 'place_changed');
+        // return false;
+        // var address = this.find('#address-input').val();
+        // this.address = address;
+        // this.hasSubmitted = true;
 
-        api({
-          address: address, 
-          success: this.handleElectionData.bind(this), 
-          error: this.handleAddressNotFound.bind(this)
-        });
+        // api({
+        //   address: address, 
+        //   success: this.handleElectionData.bind(this), 
+        //   error: this.handleAddressNotFound.bind(this)
+        // });
       }
     }
 
