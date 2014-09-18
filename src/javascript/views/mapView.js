@@ -274,8 +274,10 @@ module.exports = View.extend({
     $('html,body').scrollTop($(this.$container).scrollTop());
 
     var formattedAddress = "";
-    for (var key in options.data.pollingLocations[0].address) {
-      formattedAddress += options.data.pollingLocations[0].address[key] + " "
+    if (options.data.pollingLocations) {
+      for (var key in options.data.pollingLocations[0].address) {
+        formattedAddress += options.data.pollingLocations[0].address[key] + " "
+      }
     }
 
     var myCalendar = createOUICalendar({

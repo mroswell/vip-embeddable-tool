@@ -44,22 +44,18 @@ module.exports = View.extend({
     this.autocompleteListener = function () {
       if (this.hasSubmitted) return;
       enteredAddress = this.autocomplete.getPlace();
-      if (typeof enteredAddress === 'undefined') {
-        console.log('undefined address');
+      if (typeof enteredAddress === 'undefined' || typeof enteredAddress.formatted_address === 'undefined') {
         var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
         enteredAddress = autocompleteContainer.text() + ' ' +
           autocompleteContainer.next().text();
-        console.log(enteredAddress);
-        // return;
-      } else {
-        enteredAddress = enteredAddress.formatted_address
-      }
+      } else enteredAddress = enteredAddress.formatted_address
       this.address = enteredAddress;
       this.hasSubmitted = true;
+      console.log(enteredAddress);
 
       api({
         address: enteredAddress, 
-        success: this.handleElectionData.bind(this), 
+        success: this.handleElectionData.bind(this),
         error: this.handleAddressNotFound.bind(this)
       });
     }.bind(this);
@@ -67,6 +63,7 @@ module.exports = View.extend({
       if (this.hasSubmitted) return;
       var key = e.which || e.keyCode;
       if (key === 13) {
+        console.log('enter key pressed')
         google.maps.event.trigger(this.autocomplete, 'place_changed');
         // return false;
         // var address = this.find('#address-input').val();
@@ -86,7 +83,8 @@ module.exports = View.extend({
     google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
   },
 
-  submitAddress: function () { 
+  submitAddress: function () {
+    console.log('go button pressed')
     google.maps.event.trigger(this.autocomplete, 'place_changed'); 
   }, 
 
