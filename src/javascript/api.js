@@ -17,7 +17,10 @@ module.exports = function(options) {
       },
       success: function(response) {
         console.log(response)
-        options.success(response);
+        // if (typeof response.error !== 'undefined')
+          options.success(response);
+        // else
+          // options.error && options.error();
       },
       timeout: 15000
   });

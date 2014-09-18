@@ -165,18 +165,9 @@ li {
 .floating-modal-container {
   position: absolute !important;
   z-index: 999 !important;
-  left: 50% !important;
-  top: 50% !important;
   margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  width: 728px !important;
-  height: 600px !important;
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  overflow: hidden !important; }
+  overflow: hidden !important;
+  min-height: 520px !important; }
 
 .modal {
   display: none;
@@ -257,6 +248,9 @@ li {
   opacity: 0.35;
   z-index: 2; }
 
+@media screen and (max-device-width: 480px) {
+  body {
+    -webkit-text-size-adjust: none; } }
 .pac-nudge {
   margin-top: 0 !important; }
 
@@ -529,10 +523,8 @@ h1 {
 #_vitModal {
   display: none;
   position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   z-index: 998;
   background-color: rgba(0, 0, 0, 0.75); }
 
@@ -604,7 +596,7 @@ h1 {
     -moz-box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);
     -webkit-box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);
     box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);
-    font-size: 13px; }
+    font-size: 17px; }
     #map-view .info:not(#more-elections) {
       border-bottom: 1px solid #0f6387; }
     #map-view .info span {

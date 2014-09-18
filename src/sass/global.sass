@@ -112,15 +112,9 @@ li
 .floating-modal-container
   position: absolute !important
   z-index: 999 !important
-  left: 50% !important
-  top: 50% !important
   margin: 0 !important
-  padding: 0 !important
-  border: 0 !important
-  width: 728px !important
-  height: 600px !important
-  @include translate(-50%, -50%)
   overflow: hidden !important
+  min-height: 520px !important
 
 .modal
   display: none
@@ -212,3 +206,7 @@ li
   background-color: black
   opacity: .35
   z-index: 2
+
+@media screen and (max-device-width: 480px)
+  body
+    -webkit-text-size-adjust: none

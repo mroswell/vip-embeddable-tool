@@ -47,37 +47,8 @@ module.exports = View.extend({
   address: '',
 
   onBeforeRender: function(options) {
-    this.viewportWidthTag = $('<meta>')
-      .attr('name', 'viewport')
-      .attr('content', 'width=device-width')
-      .appendTo($('head'));
 
     $(this.$container).css('-webkit-overflow-scrolling', 'touch')
-    // this.viewportMobileWebTag = $('<meta>')
-    //   .attr('name', 'apple-mobile-web-app-capable')
-    //   .attr('content', 'yes')
-    //   .appendTo($('head'));
-    // TESTING
-    // var newPollingLocation = {
-    //   address: {
-    //     line1: "233 Frost St.",
-    //     city: "Milwaukee",
-    //     state: "WI",
-    //     zip: "53211"
-    //   },
-    //   notes: "jsld",
-    //   pollingHours: "24/7"
-    // };
-    // if (options.data.pollingLocations) options.data.pollingLocations.push(newPollingLocation);
-
-    // TESTING multiple election scenario
-    // if (!options.data.otherElections) {
-    //   options.data.otherElections = [{
-    //     name: "VIP Test Election",
-    //     date: "01/25/1900",
-    //     id: "2000"
-    //   }];
-    // }
 
     // comb the voter id data
     var stateData = Array.prototype.filter.call(voterIdData, function(entry) {
@@ -176,20 +147,8 @@ module.exports = View.extend({
 
     this.data = options.data;
 
-    if ($.browser.mobile) {
-      $(this.$container).removeClass('floating-modal-container');
-      this.landscape = false;
-    } else {
-      $(this.$container).removeClass('floating-container');
-      this.landscape = true;
-      console.log(this.landscape);
-    }
-    
-    this._setOrientation();
-    $(document).on('orientationchange', this._setOrientation.bind(this))
-
     $('<div id="_vitModal">')
-      .appendTo($('body'));
+      .prependTo($('html'));
   },
 
   onAfterRender: function(options) {
@@ -201,30 +160,81 @@ module.exports = View.extend({
         .show();
     }
 
-    $(window).on('resize', function() {
-      if (this.modal) {
-        var width  = $(window).innerWidth()
-          , height = $(window).innerHeight();     
-      } else {
-        var width  = $(this.$container).innerWidth()
-          , height = $(this.$container).innerHeight();
-      }
-      console.log(width)
-      if (width > 768 && !this.landscape) {
-        this.$container.removeClass('floating-container');
-        this._switchToLandscape();
-      }
-      if (width < 768 && this.landscape) {
+    this.resizeListener = function() {
+      var width = $(window).width()
+        , height = $(window).height()
+        , screenWidth = screen.availWidth
+        , screenHeight = screen.availHeight;
+
+      console.log("Window width: %s, height: %s\n Screen width: %s, height: %s", width, height, screenWidth, screenHeight)
+
+      if (screenWidth < 600) {
+
+      this.viewportMobileWebTag = $('<meta>')
+        .attr('name', 'viewport')
+        .attr('content', 'width=device-width')
+        .appendTo($('head'));
+
+        var width = $(window).width()
+          , height = $(window).height()
+          , screenWidth = screen.availWidth
+          , screenHeight = screen.availHeight;
+
+        this.$container.width(width);
+        this.$container.height(height);
         this.landscape = false;
-        this.$container.removeClass('floating-modal-container');
-        this.triggerRouteEvent('mapViewRerender');
-        $('#_vitModal').hide();
-        console.log('rerendering')
+      } else {
+        // tablet sizing
+        this.$container
+          .width(width-40);
+
+        var containerWidth = this.$container.width();
+        this.$container
+          .height(containerWidth * (7/10));
+
+        var containerHeight = this.$container.height();
+
+        this.$container
+          .css({
+            'top':((height/2) - (containerHeight/2)) + 'px',
+            'left':((width/2) - (containerWidth/2)) + 'px'
+          });
+
+        console.log("Container width: %s, and height: %s", containerWidth, containerHeight)
+
+        this.landscape = true;
       }
-      if (width < 768 && !this.landscape) {
-        this.$container.width($(window).width());
-      }
-    }.bind(this));
+
+
+      if (this.modal && !this.landscape) {
+          this.$container
+            .addClass('floating-container')
+          $('html, body')
+            .removeClass('max-height')
+            .find('body')
+              .addClass('no-scroll');
+        } else if (this.modal && this.landscape) {
+          this.$container
+            .addClass('floating-modal-container')
+          $('html, body')
+            .addClass('max-height')
+            .find('body')
+              .removeClass('no-scroll')
+        }
+
+      $(window)
+        .scrollTop(0)
+        .scrollLeft(0)
+    };
+
+    this.prevWidth = this.$container.width();
+    this.prevHeight = this.$container.height();
+    this.prevLeft = this.$container.css('left');
+    this.prevTop = this.$container.css('top');
+
+    $(window).on('resize.mapview', this.resizeListener.bind(this));
+
+    this.resizeListener();
 
 
     var that = this;
@@ -240,10 +250,6 @@ module.exports = View.extend({
       var $locationInfo = $(this.pollingLocationPartial(primaryLocation));
       this.find('#location').append($locationInfo);
       $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + address);
-      // this.find('#location').on('click', function() {
-      //   if ($locationInfo.css('display') === 'none') $locationInfo.show();
-      //   else $locationInfo.hide();
-      // });
       $locationInfo.hide();
 
       if (options.data.pollingLocations.length > 1) {
@@ -255,43 +261,16 @@ module.exports = View.extend({
           })
         });
       }
-
-      // is distance going in?
-      // this._calculateDistance(
-      //   options.data.normalizedInput,
-      //   options.data.pollingLocations[0].address,
-      //   function(distance) {
-      //     document.querySelector('#map-view .address-distance').innerText = (Math.round(distance) / 1000) + ' mi';
-      // });
     } else this._encodeAddressAndInitializeMap();
 
     if (this.landscape) this._switchToLandscape();
-      // this.find('#ballot-information .toggle-image').hide();
-
 
 
     this.find('#info-icon').parent().attr('href', options.data.state[0].electionAdministrationBody.electionInfoUrl);
 
-    // this._toggleModal();
-
     $('html,body').scrollLeft($(this.$container).scrollLeft());
     $('html,body').scrollTop($(this.$container).scrollTop());
 
-    //add this event
-    // $.getScript("https://addthisevent.com/libs/1.5.8/ate.min.js", function () {
-    //   addthisevent.settings({
-    //     outlook   : {show:true, text:"Outlook Calendar"},
-    //     google    : {show:true, text:"Google Calendar"},
-    //     yahoo     : {show:false, text:"Yahoo Calendar"},
-    //     hotmail   : {show:false, text:"Hotmail Calendar"},
-    //     ical      : {show:true, text:"iCal Calendar"},
-    //     facebook  : {show:false, text:"Facebook Event"},
-    //     dropdown  : {order:"google,outlook,ical"},
-    //   });
-    //   $("#atedrop1-drop").css("left", "20px")
-    //   $("#atedrop1-drop").css("right", "0px")
-    // })
-    
     var formattedAddress = "";
     for (var key in options.data.pollingLocations[0].address) {
       formattedAddress += options.data.pollingLocations[0].address[key] + " "
@@ -336,11 +315,20 @@ module.exports = View.extend({
 
     this.markers = [];
 
-    $(this.viewportWidthTag).remove();
+    this.$container.css({
+      'width' : '',
+      'height' : '',
+      'left' : '',
+      'top' : ''
+    });
+
+    $(this.viewportMobileWebTag)
+      .remove();
+
+    $(window).off('.mapview');
   },
 
   _switchToLandscape: function() {
-    console.log(this.modal)
     if (this.modal) {
       $('html, body')
         .addClass('max-height')
@@ -352,82 +340,20 @@ module.exports = View.extend({
           }.bind(this))
         .end()
     }
-    $('#map-view')
-      .addClass('landscape');
-    if (this.prevWidth && this.prevHeight) {
-      this.$container.css({
-        width: this.prevWidth,
-        height: this.prevHeight
-      });
-    }
-      // $('#map-view').css('height', '100%');
-      // $('#map-view .info').css('font-size', '16px');
-      // $('#location img').css('margin-right', '-10px');
-      $('#map-view').prepend(($('.left').detach()));
-      $('.left').wrapAll('<div class="left-wrapper" />');
-      $('.left-wrapper').wrapAll('<div class="left-overflow-wrapper">');
-      // $('.left-wrapper').prepend('<img src="./images/vip-logo.png" class="left box">');
-      $('.left-wrapper').prepend('<div class="left box" id="vip-logo">');
-      $('.left-wrapper').append('<div class="dark-blue-box"/>');
-      $('.right').wrapAll($('<div class="right-wrapper" />'));
-      $('.toggle-image.plus').attr('src', './images/left-arrow-white.png').addClass('arrow right-arrow');
-      $('.toggle-image.minus').attr('src', './images/right-arrow-white.png').addClass('arrow left-arrow');
+    $('#map-view').addClass('landscape');
 
-      // $('.left-wrapper').css({
-      //   'float': 'left',
-      //   'position': 'absolute',
-      //   'z-index': 2,
-      //   'width': '40%',
-      //   'height': 'calc(100% - 40px)',
-      //   'overflow': 'visible',
-      //   'box-shadow': '8px 0px 5px 0px rgba(50, 50, 50, 0.35)'
-      // });
-      // $('.left-wrapper img.box').css({
-      //   'width': '100px',
-      //   'margin': '-12px auto',
-      //   'display': 'block',
-      //   'border-bottom': '0'      
-      // });
-      // $('.right-wrapper').css({
-      //   'height': 'calc(100% - 40px)',
-      //   'overflow-y': 'auto',
-      //   '-webkit-overflow-scrolling': 'touch',
-      //   'position': 'absolute'
-      // });
-      // $('.right').css({
-      //   'float': 'right',
-      //   'width': '60%'
-      // })
-      // $('.right .box').css({
-      //   'margin-left': '8px'
-      // });
-      // $('#map-canvas').css({
-      //   'position': 'absolute',
-      //   'left': '40%',
-      //   'height': '100%'
-      // });
-      // $('#location').css({
-      //   'position': 'absolute',
-      //   'left': '45%',
-      //   'top': '55%',
-      //   'width': '50%',
-      //   'background-color': 'white',
-      //   'z-index': 1
-      // });
-      $('#polling-location .right-arrow').addClass('hidden')
-      $('#polling-location .left-arrow').removeClass('hidden');
-      // $('#polling-location').css({
-      //   'width': '105%',
-      //   'background-color': '#57c4f7' // $highlightblue
-      // });
-      // $('.left-wrapper .box:not(.info)').css({
-      //   padding: '10px'
-      // })
-      $('#more-resources').hide();
-      $('.contests.right').hide();
-      // $('#info-icon').css({
-      //   transform: 'none'
-      // });
+    $('#map-view').prepend(($('.left').detach()));
+    $('.left').wrapAll('<div class="left-wrapper" />');
+    $('.left-wrapper').wrapAll('<div class="left-overflow-wrapper">');
+    $('.left-wrapper').prepend('<div class="left box" id="vip-logo">');
+    $('.left-wrapper').append('<div class="dark-blue-box"/>');
+    $('.right').wrapAll($('<div class="right-wrapper" />'));
+    $('.toggle-image.plus').attr('src', './images/left-arrow-white.png').addClass('arrow right-arrow');
+    $('.toggle-image.minus').attr('src', './images/right-arrow-white.png').addClass('arrow left-arrow');
+    $('#polling-location .right-arrow').addClass('hidden')
+    $('#polling-location .left-arrow').removeClass('hidden');
+    $('#more-resources').hide();
+    $('.contests.right').hide();
 
     this.landscape = true;
   },
@@ -480,17 +406,8 @@ module.exports = View.extend({
         $('#map-canvas').on(that._transitionEnd(), function() {
           google.maps.event.trigger(that.map, 'resize');
           that.map.panTo(position);
-
-          // if (that.find('#map-canvas').height() === '300px') that._fitMap();
-          // else that.map.setZoom(4);
         });
       })
-
-        // google.maps.event.addListener(that.map, 'click', function() {
-        //   that.toggleMap();
-
-        //   // that.find('#location .address').innerHTML = that.addressPartial(address);
-        // });
 
 
     } else {
@@ -788,7 +705,6 @@ module.exports = View.extend({
             .toggleClass('hidden');
       }.bind(this));
     } else { 
-      // if ($('#more-resources').is(':visible')) return;
       $('#about-resources').css("height", "initial")
       $('#map-canvas, #location, .contests').hide();
       $('#about-resources').show();
@@ -817,7 +733,6 @@ module.exports = View.extend({
   },
 
   toggleBallot: function() {
-    // if (!this.landscape || $('.contests').css('display') !== 'none') return;
     if (!this.landscape) {
       var ballotInfoIsMaximized = $('#ballot-information').find('.plus').is(":hidden");
 
@@ -866,10 +781,6 @@ module.exports = View.extend({
   },
 
   toggleContest: function(e) {
-    // this._slidePanel(
-    //   e.currentTarget.lastElementChild,
-    //   e.currentTarget.firstElementChild.lastElementChild
-    // );
 
     if ($(e.target).hasClass('subsection') || $(e.target).hasClass('subsection-plus')) {
       var candidateList = $(e.currentTarget).find('.candidate-list');
@@ -881,29 +792,6 @@ module.exports = View.extend({
 
         if (!candidateList.is(':hidden')) this._scrollTo(toggleSign, 20);
       }.bind(this));
-
-    // // if (candidateList.css('max-height') !== '0px') {
-    // //   candidateList.css('max-height', '0px');
-    //   toggleSign.text('+')
-    // // } else {
-    // //   candidateList.css('max-height', '2000px');
-    //   toggleSign.text('-')
-    //   this._scrollTo(toggleSign, 20);
-    // // }
-      // var inSymbol = '+';
-      // var out = '−';
-      // var max = '2000px';
-      // var min = '0px';
-      // if (getComputedStyle(e.currentTarget.lastElementChild)['max-height'] !== min) {
-      //   e.currentTarget.lastElementChild.style['max-height'] = min;
-      //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = inSymbol;
-      // } else {
-      //   e.currentTarget.lastElementChild.style['max-height'] = max;
-      //   e.currentTarget.firstElementChild.lastElementChild.innerHTML = out;
-      //   this._scrollTo(e.currentTarget.firstElementChild.lastElementChild, 20);
-      // }
-
-      // this.$container.scrollTop = e.currentTarget.firstElementChild.lastElementChild.getBoundingClientRect().top - this.$container.getBoundingClientRect().top;
     }
   },
 
@@ -923,8 +811,6 @@ module.exports = View.extend({
       button.find('.plus').addClass('hidden');
       this._scrollTo(button, 10);
     }
-
-    // this.$container.scrollTop = button.getBoundingClientRect().top - this.$container.getBoundingClientRect().top;
   },
 
   _scrollTo: function(target, padding) {

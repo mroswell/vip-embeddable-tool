@@ -20,19 +20,6 @@ module.exports = (function() {
       return true;
     },
 
-    _setOrientation: function() {
-      var container = (this.modal ? window : this.$container);
-      if (this.isPortrait() && $(container).innerWidth() < 600) {
-      //   $(this.$container).removeClass('floating-modal-container');
-      //   this.triggerRouteEvent('mapViewRerender')
-      //   this.landscape = false;
-      } else {
-        $(this.$container).removeClass('floating-container');
-        this.landscape = true;
-      //   console.log(this.landscape);
-      }
-    },
-
     onBeforeRender: function() {},
 
     onAfterRender: function() {},
@@ -67,34 +54,6 @@ module.exports = (function() {
         console.log(this.$el)
         this.$el.append(this.template(options));
         $container.append(this.$el);
-        if (this.modal && !this.landscape) {
-          var width = window.innerWidth;
-          var height = window.innerHeight;
-          console.log(width, height);
-          this.prevWidth = $container.css('width');
-          this.prevHeight = $container.css('height');
-          $container
-            .addClass('floating-container')
-            .css({
-              'width': width,
-              'height': height,
-            });
-          $('html, body')
-            .removeClass('max-height')
-            .find('body')
-              .addClass('no-scroll');
-        } else if (this.modal && this.landscape) {
-          $container
-            .addClass('floating-modal-container')
-            .css({
-              'width': width,
-              'height': height,
-            });
-          $('html, body')
-            .addClass('max-height')
-            .find('body')
-              .removeClass('no-scroll')
-        }
       }
 
       for (var key in this.events) {
