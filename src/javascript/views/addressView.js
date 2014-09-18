@@ -78,6 +78,12 @@ module.exports = View.extend({
       }
     }
 
+    $(document).on({
+      'DOMNodeInserted':function() {
+        $('.pac-item, .pac-item span', this).addClass('needsclick');
+      }
+    }, '.pac-container');
+
     $(window).on('keypress.keypressListener', this.keypressListener.bind(this));
 
     google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
