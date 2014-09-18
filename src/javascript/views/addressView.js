@@ -13,6 +13,7 @@ module.exports = View.extend({
   events : {
     '#plus-icon click' : 'openAboutModal',
     '#close-button click' : 'closeAboutModal',
+    '#submit-address-button click' : 'submitAddress'
   },
 
   hasSubmitted: false,
@@ -42,7 +43,7 @@ module.exports = View.extend({
     this.hasSubmitted = false;
     this.autocompleteListener = function () {
       if (this.hasSubmitted) return;
-      enteredAddress = this.autocomplete.getPlace().formatted_address;
+      enteredAddress = this.autocomplete.getPlace();
       if (typeof enteredAddress === 'undefined') {
         console.log('undefined address');
         var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
@@ -50,6 +51,8 @@ module.exports = View.extend({
           autocompleteContainer.next().text();
         console.log(enteredAddress);
         // return;
+      } else {
+        enteredAddress = enteredAddress.formatted_address
       }
       this.address = enteredAddress;
       this.hasSubmitted = true;
@@ -82,6 +85,10 @@ module.exports = View.extend({
 
     google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
   },
+
+  submitAddress: function () { 
+    google.maps.event.trigger(this.autocomplete, 'place_changed'); 
+  }, 
 
   onRemove: function() {
     google.maps.event.clearInstanceListeners(this.autocomplete);
