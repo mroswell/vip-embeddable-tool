@@ -2,6 +2,7 @@ var View = require('./view.js');
 var api  = require('../api.js');
 var voterIdData = require('../voterIdData.js');
 var $ = require('jquery');
+var browser = require('../mobile.js');
 var fastclick = require('fastclick');
 window.$ = $;
 
@@ -173,8 +174,9 @@ module.exports = View.extend({
 
     this.data = options.data;
 
-    var container = (this.modal ? window : this.$container);
-    if ($(container).innerWidth() < 600) {
+    // var container = (this.modal ? window : this.$container);
+    // if ($(container).innerWidth() < 600) {
+    if ($.browser.mobile) {
       $(this.$container).removeClass('floating-modal-container');
       this.landscape = false;
     } else {

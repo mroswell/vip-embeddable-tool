@@ -10592,7 +10592,7 @@ window._VIT_GOOGLE_MAPS_INIT_CALLBACK = function() {
 // register partials and helpers for use in templates
 handlebars.registerPartials();
 handlebars.registerHelpers();
-},{"../../build/app.css":1,"./handlebars.js":16,"./router.js":17,"./util.js":18,"jquery":12}],15:[function(require,module,exports){
+},{"../../build/app.css":1,"./handlebars.js":16,"./router.js":18,"./util.js":19,"jquery":12}],15:[function(require,module,exports){
 module.exports = {
   "logo" : "./images/voting-information-project.png",
   "smallLogo" : "./images/vip-logo.png",
@@ -10731,7 +10731,10 @@ module.exports = (function() {
     }
   }
 })(this);
-},{"./views/templates/partials/address.hbs":23,"./views/templates/partials/contest.hbs":24,"./views/templates/partials/election-administration-body.hbs":25,"./views/templates/partials/election-information-item.hbs":26,"./views/templates/partials/election-official.hbs":27,"./views/templates/partials/election.hbs":28,"./views/templates/partials/modals.hbs":29,"./views/templates/partials/normalized-address.hbs":31,"./views/templates/partials/polling-location-info.hbs":32,"./views/templates/partials/source.hbs":33,"hbsfy/runtime":11}],17:[function(require,module,exports){
+},{"./views/templates/partials/address.hbs":24,"./views/templates/partials/contest.hbs":25,"./views/templates/partials/election-administration-body.hbs":26,"./views/templates/partials/election-information-item.hbs":27,"./views/templates/partials/election-official.hbs":28,"./views/templates/partials/election.hbs":29,"./views/templates/partials/modals.hbs":30,"./views/templates/partials/normalized-address.hbs":32,"./views/templates/partials/polling-location-info.hbs":33,"./views/templates/partials/source.hbs":34,"hbsfy/runtime":11}],17:[function(require,module,exports){
+var jQuery = require('jquery')
+module.exports = (function(a){(jQuery.browser=jQuery.browser||{}).mobile=/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))})(navigator.userAgent||navigator.vendor||window.opera);
+},{"jquery":12}],18:[function(require,module,exports){
 module.exports = (function() {
   var currentView;
   var data;
@@ -10812,7 +10815,7 @@ window.text = text;
     }
   }
 })();
-},{"./api.js":13,"./config.js":15,"./views/addressView.js":19,"./views/mapView.js":20,"jquery":12}],18:[function(require,module,exports){
+},{"./api.js":13,"./config.js":15,"./views/addressView.js":20,"./views/mapView.js":21,"jquery":12}],19:[function(require,module,exports){
 module.exports = (function() {
   if (!Function.prototype.bind) {
     Function.prototype.bind = function (oThis) {
@@ -10857,7 +10860,7 @@ module.exports = (function() {
     }
   }
 })(this);
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 var View = require('./view.js');
 var api = require('../api.js');
 var $ = require('jquery');
@@ -11057,11 +11060,12 @@ module.exports = View.extend({
   }
 
 });
-},{"../api.js":13,"./templates/address-lookup.hbs":21,"./templates/partials/multiple-elections.hbs":30,"./view.js":34,"jquery":12}],20:[function(require,module,exports){
+},{"../api.js":13,"./templates/address-lookup.hbs":22,"./templates/partials/multiple-elections.hbs":31,"./view.js":35,"jquery":12}],21:[function(require,module,exports){
 var View = require('./view.js');
 var api  = require('../api.js');
 var voterIdData = require('../voterIdData.js');
 var $ = require('jquery');
+var browser = require('../mobile.js');
 var fastclick = require('fastclick');
 window.$ = $;
 
@@ -11233,8 +11237,9 @@ module.exports = View.extend({
 
     this.data = options.data;
 
-    var container = (this.modal ? window : this.$container);
-    if ($(container).innerWidth() < 600) {
+    // var container = (this.modal ? window : this.$container);
+    // if ($(container).innerWidth() < 600) {
+    if ($.browser.mobile) {
       $(this.$container).removeClass('floating-modal-container');
       this.landscape = false;
     } else {
@@ -11971,7 +11976,7 @@ module.exports = View.extend({
   }
 
 });
-},{"../api.js":13,"../voterIdData.js":35,"./templates/map.hbs":22,"./templates/partials/address.hbs":23,"./templates/partials/polling-location-info.hbs":32,"./view.js":34,"fastclick":3,"jquery":12}],21:[function(require,module,exports){
+},{"../api.js":13,"../mobile.js":17,"../voterIdData.js":36,"./templates/map.hbs":23,"./templates/partials/address.hbs":24,"./templates/partials/polling-location-info.hbs":33,"./view.js":35,"fastclick":3,"jquery":12}],22:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -11997,7 +12002,7 @@ helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partial
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],22:[function(require,module,exports){
+},{"hbsfy/runtime":11}],23:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12142,7 +12147,7 @@ function program5(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],23:[function(require,module,exports){
+},{"hbsfy/runtime":11}],24:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12183,7 +12188,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],24:[function(require,module,exports){
+},{"hbsfy/runtime":11}],25:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12274,7 +12279,7 @@ function program8(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],25:[function(require,module,exports){
+},{"hbsfy/runtime":11}],26:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12356,7 +12361,7 @@ function program9(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],26:[function(require,module,exports){
+},{"hbsfy/runtime":11}],27:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12377,7 +12382,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],27:[function(require,module,exports){
+},{"hbsfy/runtime":11}],28:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12410,7 +12415,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],28:[function(require,module,exports){
+},{"hbsfy/runtime":11}],29:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12435,7 +12440,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],29:[function(require,module,exports){
+},{"hbsfy/runtime":11}],30:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12466,7 +12471,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],30:[function(require,module,exports){
+},{"hbsfy/runtime":11}],31:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12502,7 +12507,7 @@ function program1(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],31:[function(require,module,exports){
+},{"hbsfy/runtime":11}],32:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12543,7 +12548,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],32:[function(require,module,exports){
+},{"hbsfy/runtime":11}],33:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12615,7 +12620,7 @@ function program7(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],33:[function(require,module,exports){
+},{"hbsfy/runtime":11}],34:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12636,7 +12641,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],34:[function(require,module,exports){
+},{"hbsfy/runtime":11}],35:[function(require,module,exports){
 module.exports = (function() {
   var view = {
 
@@ -12824,7 +12829,7 @@ module.exports = (function() {
     }
   }
 })(this);
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 module.exports = [
   {
     "Certified?":"Yes",
