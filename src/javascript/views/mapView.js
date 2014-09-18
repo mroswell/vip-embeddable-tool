@@ -268,7 +268,8 @@ module.exports = View.extend({
     if (this.landscape) this._switchToLandscape();
 
 
-    this.find('#info-icon').parent().attr('href', options.data.state[0].electionAdministrationBody.electionInfoUrl);
+    if (options.data.state[0].electionAdministrationBody)
+      this.find('#info-icon').parent().attr('href', options.data.state[0].electionAdministrationBody.electionInfoUrl);
 
     $('html,body').scrollLeft($(this.$container).scrollLeft());
     $('html,body').scrollTop($(this.$container).scrollTop());
@@ -325,6 +326,8 @@ module.exports = View.extend({
       'left' : '',
       'top' : ''
     });
+
+    $('#_vitModal').remove();
 
     $(this.viewportMobileWebTag)
       .remove();
