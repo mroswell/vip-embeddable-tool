@@ -174,8 +174,6 @@ module.exports = View.extend({
 
     this.data = options.data;
 
-    // var container = (this.modal ? window : this.$container);
-    // if ($(container).innerWidth() < 600) {
     if ($.browser.mobile) {
       $(this.$container).removeClass('floating-modal-container');
       this.landscape = false;
@@ -210,15 +208,19 @@ module.exports = View.extend({
           , height = $(this.$container).innerHeight();
       }
       console.log(width)
-      if (width > 600 && !this.landscape) {
+      if (width > 768 && !this.landscape) {
         this.$container.removeClass('floating-container');
         this._switchToLandscape();
       }
-      if (width < 600 && this.landscape) {
+      if (width < 768 && this.landscape) {
         this.landscape = false;
         this.$container.removeClass('floating-modal-container');
         this.triggerRouteEvent('mapViewRerender');
+        $('#_vitModal').hide();
         console.log('rerendering')
+      }
+      if (width < 768 && !this.landscape) {
+        this.$container.width($(window).width());
       }
     }.bind(this));
 
@@ -575,8 +577,8 @@ module.exports = View.extend({
     if ( $(e.currentTarget).hasClass("address") && $(e.currentTarget).closest("#location").length > 0 ) return;
 
     if (addressInput.is(':hidden')) {
-      // this.autocomplete = new google.maps.places.Autocomplete(addressInput[0]);
-      this.autocomplete = new google.maps.places.SearchBox(addressInput[0]);
+      this.autocomplete = new google.maps.places.Autocomplete(addressInput[0]);
+      // this.autocomplete = new google.maps.places.SearchBox(addressInput[0]);
       addressInput.prev().hide();
       addressInput.show();
       if (!this.landscape) this.find('#fade').show();
@@ -588,12 +590,19 @@ module.exports = View.extend({
       })
 
       this.autocompleteListener = function() {
-        // console.log('autocomplete ' + this.hasSubmitted);
+        console.log('autocomplete ' + this.hasSubmitted);
         if (this.hasSubmitted) return;
         // var address = this.autocomplete.getPlace().formatted_address;
-        var address = this.autocomplete.getPlaces()[0].formatted_address;
+        var address;
+        if (this.autocomplete.getPlace()) address = this.autocomplete.getPlace().formatted_address;
         // console.log('autocomplete ' + address);
-        if (typeof address === 'undefined') return;
+        if (typeof address === 'undefined') {
+          console.log('undefined address');
+          var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
+          address = autocompleteContainer.text() + ' ' +
+            autocompleteContainer.next().text();
+          console.log(address);
+        }
         this.hasSubmitted = true;
 
         api({
@@ -607,10 +616,11 @@ module.exports = View.extend({
       }.bind(this);
 
       $(window).on('keypress', function(e) {
-        this.address = addressInput.val();
+        // this.address = addressInput.val();
+        if (this.hasSubmitted) return;
         var key = e.which || e.keyCode;
         if (key === 13) {
-          // google.maps.event.trigger(autocomplete, 'places_changed');
+          google.maps.event.trigger(this.autocomplete, 'place_changed');
           // e.preventDefault();
           if (this.hasSubmitted) return;
           // var address = addressInput.val();
@@ -631,7 +641,7 @@ module.exports = View.extend({
       }.bind(this));
 
       // google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
-      google.maps.event.addListener(this.autocomplete, 'places_changed', this.autocompleteListener);
+      google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
     } else {
       google.maps.event.clearInstanceListeners(this.autocomplete);
 
