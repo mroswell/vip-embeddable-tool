@@ -16,11 +16,6 @@
       margin-top: 150px;
       border: 1px dashed black;
     }
-    #fill-address {
-      margin: 30px 0;
-      transform: translateX(-50%);
-      -webkit-transform: translateX(-50%);
-    }
     .header {
       margin: 30px;
       text-align: center;
@@ -29,18 +24,6 @@
   </head>
   <body>
     <h1 class="header">Voter Information Project Voter Tool</h1>
-    <button id="fill-address" style="position:absolute;left:50%;">Fill in address</button>
-    <div style="text-align: center;">Submitting a request will return the next upcoming election, but you can also choose to use the VIP Test Election.</div>
-    <script>
-    (function() {
-      function $(id) { return document.getElementById(id); }
-      $('fill-address').addEventListener('click', function() {
-        console.log(('address-input').value);
-        $('address-input').value='36 E. 20th St. New York, NY';
-        google.maps.event.trigger($('address-input'), 'place_changed', {});
-      });
-    })(this);
-    </script>
     <div id="_vit"></div>
     <script src="./app.js"></script>
     <script>
