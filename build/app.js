@@ -1,6 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var css = "body {\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  -moz-transform: translateZ(0);\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  color: #4b4b4b;\n  font-family: sans-serif; }\n\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font: inherit;\n  font-size: 100%;\n  vertical-align: baseline; }\n\nhtml {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\ncaption, th, td {\n  text-align: left;\n  font-weight: normal;\n  vertical-align: middle; }\n\nq, blockquote {\n  quotes: none; }\n  q:before, q:after, blockquote:before, blockquote:after {\n    content: \"\";\n    content: none; }\n\na img {\n  border: none; }\n\narticle, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {\n  display: block; }\n\n*, *:before, *:after {\n  outline: none;\n  -moz-box-sizing: border-box;\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-tap-highlight-color: transparent; }\n\nbody {\n  margin: 0;\n  font-family: \"Roboto\", sans-serif;\n  color: #494949; }\n\ninput[type=text] {\n  padding: 12px 0 12px 34px;\n  border: 1px solid #e9e9e9;\n  border-radius: 4px;\n  font-size: 16px;\n  font-family: sans-serif;\n  color: #b0b0b0;\n  color: #494949;\n  width: 100%;\n  background-color: #fafafa;\n  -moz-box-shadow: 1px 1px 6px 0px #cccccc;\n  -webkit-box-shadow: 1px 1px 6px 0px #cccccc;\n  box-shadow: 1px 1px 6px 0px #cccccc; }\n\ninput:focus {\n  outline: none; }\n\na {\n  color: #333333;\n  text-decoration: none; }\n  a:focus {\n    color: #333333; }\n\nbutton {\n  padding: 10px 20px;\n  border: 0;\n  background: #1c7ca5;\n  color: white;\n  text-transform: uppercase;\n  font-size: 12px; }\n\nli {\n  margin: 15px; }\n\n.box {\n  padding: 15px; }\n\n.container {\n  margin: 0 auto;\n  width: 85%;\n  -moz-box-shadow: 0px, 2px, 2px, 0px, rgba(50, 50, 50, 0.25);\n  -webkit-box-shadow: 0px, 2px, 2px, 0px, rgba(50, 50, 50, 0.25);\n  box-shadow: 0px, 2px, 2px, 0px, rgba(50, 50, 50, 0.25); }\n\n.container:first-child {\n  margin-top: 30px; }\n\n.footer {\n  font-weight: bold;\n  position: absolute;\n  width: 100%;\n  height: 40px;\n  padding: 10px 40px 10px 20px;\n  color: white;\n  font-size: 11px;\n  background-color: #494949; }\n  .footer span {\n    letter-spacing: -0.3px;\n    position: absolute;\n    width: 75%;\n    -moz-transform: translate(0%, -50%);\n    -ms-transform: translate(0%, -50%);\n    -webkit-transform: translate(0%, -50%);\n    transform: translate(0%, -50%);\n    top: 50%; }\n\n.bottom {\n  padding: 5px 0;\n  bottom: 0;\n  color: white;\n  background-color: #898989;\n  font-size: 8px;\n  font-weight: bold;\n  text-align: center; }\n\n.pac-container {\n  margin-top: -29px; }\n\n.no-scroll {\n  overflow: hidden;\n  position: fixed; }\n\n.max-height {\n  height: 100%;\n  transform: none;\n  -webkit-transform: none; }\n\n.floating-container {\n  position: fixed !important;\n  z-index: 99 !important;\n  left: 0 !important;\n  top: 0 !important;\n  overflow: scroll !important;\n  margin: 0 !important;\n  border: 0 !important; }\n\n.floating-modal-container {\n  position: absolute !important;\n  z-index: 999 !important;\n  left: 50% !important;\n  top: 50% !important;\n  margin: 0 !important;\n  padding: 0 !important;\n  border: 0 !important;\n  width: 800px !important;\n  height: 600px !important;\n  -moz-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  overflow: hidden !important; }\n\n.modal {\n  display: none;\n  position: absolute;\n  background-color: white;\n  border: 1px solid #e9e9e9;\n  padding: 15px;\n  width: 95%;\n  left: 50%;\n  top: 50%;\n  -moz-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  z-index: 3;\n  overflow: hidden;\n  -moz-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);\n  -webkit-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);\n  box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45); }\n  .modal h2 {\n    color: #1c7ca5;\n    margin: 20px 0; }\n\n.radio {\n  display: inline-block;\n  vertical-align: middle;\n  *vertical-align: auto;\n  *zoom: 1;\n  *display: inline;\n  width: 18px;\n  height: 18px;\n  -moz-border-radius: 18px;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  border: 2px solid white;\n  background-color: transparent; }\n  .radio .radio-selected {\n    display: none;\n    margin: 1px;\n    background-color: white;\n    width: 12px;\n    height: 12px;\n    border-radius: 12px; }\n  .radio.checked .radio-selected {\n    display: block; }\n\n.right-inner-arrow {\n  position: relative;\n  left: -3px;\n  border-left: 8px solid white; }\n\n.nav {\n  margin-bottom: 3px;\n  padding: 15px;\n  color: #b9b9b9;\n  -moz-box-shadow: 0, 3px, 2px, 0, rgba(50, 50, 50, 0.45);\n  -webkit-box-shadow: 0, 3px, 2px, 0, rgba(50, 50, 50, 0.45);\n  box-shadow: 0, 3px, 2px, 0, rgba(50, 50, 50, 0.45); }\n\n.magnifying-glass {\n  position: relative;\n  width: 18px;\n  top: -32px;\n  left: 10px;\n  stroke: #7c7c7c; }\n\n.hidden {\n  display: none; }\n\n#fade {\n  display: none;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  opacity: 0.35;\n  z-index: 2; }\n\n.pac-nudge {\n  margin-top: 0 !important; }\n\n.alert_ie {\n  position: absolute !important; }\n\n.landscape#map-view {\n  height: 100%; }\n  .landscape#map-view #about-resources {\n    padding-left: 25px; }\n  .landscape#map-view .footer {\n    bottom: 0; }\n  .landscape#map-view .info {\n    font-size: 16px; }\n  .landscape#map-view #location {\n    position: absolute;\n    left: 45%;\n    top: 55%;\n    width: 50%;\n    background-color: white;\n    z-index: 2; }\n    .landscape#map-view #location img {\n      margin-right: -10px; }\n  .landscape#map-view .left-wrapper {\n    float: left;\n    position: absolute;\n    z-index: 3;\n    width: 40%;\n    height: calc(100% - 40px);\n    background-color: #0f6387;\n    -moz-box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.35);\n    -webkit-box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.35);\n    box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.35); }\n    .landscape#map-view .left-wrapper .box:not(.info) {\n      padding: 10px;\n      background-color: white; }\n    .landscape#map-view .left-wrapper #vip-logo {\n      height: 110px;\n      background-image: url(images/vip-logo.png);\n      background-size: 105px;\n      background-repeat: no-repeat;\n      background-position: center;\n      background-color: white; }\n  .landscape#map-view .dark-blue-box {\n    background-color: #0f6387;\n    overflow: hidden; }\n  .landscape#map-view .right-wrapper {\n    height: calc(100% - 40px);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n    position: absolute; }\n    .landscape#map-view .right-wrapper #all-contests {\n      position: relative;\n      top: -30px; }\n  .landscape#map-view .right {\n    float: right;\n    width: 60%; }\n    .landscape#map-view .right .box {\n      padding-left: 30px; }\n  .landscape#map-view #map-canvas {\n    position: absolute !important;\n    left: 40%;\n    height: 100%;\n    background-color: white;\n    z-index: 1; }\n  .landscape#map-view #polling-location {\n    width: 105%;\n    background-color: #26a8df; }\n  .landscape#map-view #info-icon {\n    transform: none; }\n  .landscape#map-view #current-location button {\n    margin: 10px 25px 0 90px; }\n\nh1 {\n  font-size: 22px; }\n\n#address-view #about h2 {\n  margin: 10px 0 20px 0; }\n#address-view #about p {\n  margin-bottom: 30px; }\n#address-view .footer {\n  bottom: 0;\n  max-width: 800px; }\n  #address-view .footer #plus-icon {\n    position: relative;\n    top: 50%;\n    margin-top: -50px;\n    margin-right: -30px;\n    -moz-transform: translate(-50%, -50%);\n    -ms-transform: translate(-50%, -50%);\n    -webkit-transform: translate(-50%, -50%);\n    transform: translate(-50%, -50%);\n    color: white;\n    background-color: #1c7ca5;\n    font-family: times;\n    font-weight: bold;\n    text-align: center;\n    border: 6px solid #1c7ca5;\n    border-radius: 18px;\n    width: 18px;\n    font-size: 14px;\n    float: right;\n    display: block;\n    cursor: pointer; }\n    #address-view .footer #plus-icon img {\n      display: block;\n      width: 100%; }\n\n.address-info {\n  height: 100%;\n  border-bottom: 0; }\n\n.title {\n  margin: 10px 0 5px 0;\n  padding: 0;\n  text-align: center; }\n\n.subtitle {\n  margin: 0 0 25px 0;\n  text-align: center; }\n\n#app-info {\n  margin: 0 auto 50px;\n  text-align: center;\n  max-width: 235px; }\n\n#user-image {\n  max-height: 150px;\n  max-width: 300px;\n  display: block;\n  margin: 30px auto 0; }\n\n#get-information-on {\n  padding: 45px;\n  border-bottom: 0;\n  font-size: 12px;\n  font-weight: bold;\n  color: #898989;\n  text-transform: uppercase; }\n\n#info-icon {\n  position: relative;\n  top: 50%;\n  margin-top: -9px;\n  margin-right: -30px;\n  color: #494949;\n  font-family: times;\n  font-weight: bold;\n  font-style: italic;\n  text-align: center;\n  background-color: white;\n  border: 6px solid white;\n  border-top: 2px solid white;\n  border-bottom: 2px solid white;\n  border-radius: 18px;\n  width: 18px;\n  font-size: 14px;\n  float: right;\n  display: block; }\n\n#plus-icon {\n  position: relative;\n  top: 50%;\n  margin-top: -50px;\n  margin-right: -30px;\n  -moz-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  color: white;\n  background-color: #1c7ca5;\n  font-family: times;\n  font-weight: bold;\n  text-align: center;\n  border: 6px solid #1c7ca5;\n  border-top: 2px solid #1c7ca5;\n  border-bottom: 2px solid #1c7ca5;\n  border-radius: 18px;\n  width: 19px;\n  font-size: 14px;\n  float: right;\n  display: block;\n  cursor: pointer; }\n\n#close-button {\n  transform: rotate(45deg);\n  -webkit-transform: rotate(45deg);\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  color: white;\n  background-color: #1c7ca5;\n  font-family: times;\n  font-weight: bold;\n  text-align: center;\n  border: 6px solid #1c7ca5;\n  border-radius: 18px;\n  width: 19px;\n  font-size: 14px;\n  display: block;\n  cursor: pointer; }\n  #close-button img {\n    display: block;\n    width: 100%; }\n\n#address-not-found,\n#current-location {\n  display: none;\n  position: absolute;\n  width: 95%;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 3;\n  -moz-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);\n  -webkit-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);\n  box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45); }\n  #address-not-found h1,\n  #current-location h1 {\n    margin: 10px 0;\n    text-align: left; }\n  #address-not-found h2,\n  #current-location h2 {\n    color: #a30000; }\n  #address-not-found button,\n  #current-location button {\n    display: block;\n    margin: 0 auto;\n    margin-top: 20px; }\n\n#current-location span {\n  margin: 0 auto; }\n#current-location button {\n  display: inline-block; }\n\n#multiple-elections h2 {\n  color: #a30000; }\n#multiple-elections .election {\n  margin: 20px 0; }\n  #multiple-elections .election h1,\n  #multiple-elections .election h2 {\n    display: inline-block; }\n  #multiple-elections .election h1 {\n    font-size: 18px; }\n  #multiple-elections .election h2 {\n    margin: 5px 10px 20px 45px;\n    color: #494949; }\n\n#_vitModal {\n  display: none;\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 998;\n  background-color: rgba(0, 0, 0, 0.75); }\n\n.addthisevent {\n  visibility: hidden; }\n\n.container-modal-show {\n  position: fixed;\n  z-index: 999;\n  margin-top: 0; }\n\n.map-view-modal-show {\n  position: absolute; }\n\n.body-modal-show {\n  position: fixed;\n  width: 100%; }\n\n.radio {\n  margin: -5px 10px 0; }\n\n#map-canvas:not(.landscape) {\n  height: 150px;\n  -moz-transition: height, 200ms, ease-in-out;\n  -o-transition: height, 200ms, ease-in-out;\n  -webkit-transition: height, 200ms, ease-in-out;\n  transition: height, 200ms, ease-in-out; }\n\n#map-view:after {\n  content: \"\";\n  display: table;\n  clear: both; }\n\n#map-view {\n  display: table;\n  z-index: 999;\n  margin: 0 auto;\n  width: 100%;\n  background-color: white;\n  position: absolute; }\n  #map-view button {\n    position: absolute;\n    left: 2px;\n    margin-top: 100px;\n    padding: 4px 3px;\n    font-size: 10px;\n    background-color: white;\n    width: 34%; }\n  #map-view .info {\n    background-color: #1c7ca5;\n    color: white;\n    padding: 10px 20px;\n    -moz-box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);\n    -webkit-box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);\n    box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);\n    font-size: 13px; }\n    #map-view .info:not(#more-elections) {\n      border-bottom: 1px solid #0f6387; }\n    #map-view .info span {\n      float: right;\n      cursor: pointer; }\n  #map-view .box {\n    line-height: 1.15;\n    -moz-transition: height, 200ms, ease-in-out;\n    -o-transition: height, 200ms, ease-in-out;\n    -webkit-transition: height, 200ms, ease-in-out;\n    transition: height, 200ms, ease-in-out;\n    -moz-border-radius: 1px;\n    -webkit-border-radius: 1px;\n    border-radius: 1px; }\n  #map-view .address .address-name,\n  #map-view .address .address-line {\n    text-transform: capitalize;\n    font-size: 22px;\n    color: #333333; }\n  #map-view .subsection {\n    cursor: default;\n    background-color: #eeeeee;\n    padding: 15px;\n    font-size: 17px; }\n    #map-view .subsection p {\n      width: 90%; }\n    #map-view .subsection span {\n      cursor: pointer;\n      float: right;\n      -moz-transform: translateY(-50%);\n      -ms-transform: translateY(-50%);\n      -webkit-transform: translateY(-50%);\n      transform: translateY(-50%);\n      font-weight: bolder; }\n    #map-view .subsection .contest-type {\n      display: inline-block;\n      vertical-align: middle;\n      *vertical-align: auto;\n      *zoom: 1;\n      *display: inline;\n      font-style: italic; }\n  #map-view .candidate-list {\n    overflow: hidden; }\n  #map-view .candidate-item .right-arrow {\n    -moz-transform: translateY(-50%);\n    -ms-transform: translateY(-50%);\n    -webkit-transform: translateY(-50%);\n    transform: translateY(-50%); }\n  #map-view .change-address {\n    display: none;\n    position: relative;\n    z-index: 3;\n    margin: 0;\n    padding-left: 12px; }\n  #map-view .contests {\n    margin-bottom: 40px; }\n  #map-view .party {\n    font-style: italic; }\n  #map-view .election {\n    cursor: default; }\n  #map-view .election-selection {\n    margin: 5px 0; }\n    #map-view .election-selection:last-child {\n      margin-bottom: 10px; }\n  #map-view .question {\n    font-weight: bold;\n    margin: 15px 0; }\n  #map-view .answer {\n    display: inline-block;\n    vertical-align: middle;\n    *vertical-align: auto;\n    *zoom: 1;\n    *display: inline; }\n  #map-view .toggle-image {\n    width: 15px; }\n  #map-view .minus {\n    position: relative;\n    top: -5px; }\n  #map-view .arrow {\n    width: 10px;\n    float: right;\n    -moz-transform: translateY(-50%);\n    -ms-transform: translateY(-50%);\n    -webkit-transform: translateY(-50%);\n    transform: translateY(-50%); }\n    #map-view .arrow.toggle-image {\n      -moz-transform: translateY(0);\n      -ms-transform: translateY(0);\n      -webkit-transform: translateY(0);\n      transform: translateY(0); }\n    #map-view .arrow.left-arrow {\n      -moz-transform: translateY(27%);\n      -ms-transform: translateY(27%);\n      -webkit-transform: translateY(27%);\n      transform: translateY(27%); }\n  #map-view .polling-location-info {\n    margin: 5px 0; }\n  #map-view #registered-address {\n    cursor: pointer; }\n    #map-view #registered-address span {\n      color: #98c0da; }\n  #map-view #chosen-election {\n    font-size: 22px;\n    color: #333333; }\n    #map-view #chosen-election img {\n      width: 20px;\n      float: right;\n      margin-top: -30px;\n      margin-right: 2px; }\n    #map-view #chosen-election .date {\n      font-size: 16px; }\n  #map-view #location .address-line {\n    font-size: 16px; }\n  #map-view #location span {\n    float: right;\n    margin-top: -23px; }\n  #map-view #location img {\n    float: right;\n    width: 60px;\n    margin-right: -20px;\n    margin-top: -20px; }\n  #map-view #voter-resources {\n    margin-top: 125px; }\n  #map-view #other-elections {\n    overflow: hidden; }\n  #map-view #election-list {\n    display: none;\n    padding: 0 20px;\n    overflow: hidden; }\n  #map-view #more-elections, #map-view #polling-location, #map-view #resources-toggle, #map-view #ballot-information {\n    cursor: pointer; }\n  #map-view #more-resources {\n    overflow: hidden; }\n    #map-view #more-resources h1 {\n      font-size: 20px;\n      margin: 10px 0; }\n    #map-view #more-resources a {\n      font-size: 17px;\n      text-decoration: underline;\n      color: #1c7ca5;\n      margin: 30px 0; }\n  #map-view #plus-icon {\n    margin-top: -45px; }\n  #map-view #alert {\n    display: none;\n    position: fixed;\n    z-index: 10000;\n    background-color: rgba(200, 0, 0, 0.85);\n    width: 100%;\n    color: white;\n    font-weight: bold;\n    font-size: 20px; }\n    #map-view #alert #alert-close {\n      float: right;\n      width: 18px;\n      -moz-transform: rotate(45deg);\n      -ms-transform: rotate(45deg);\n      -webkit-transform: rotate(45deg);\n      transform: rotate(45deg);\n      cursor: pointer; }\n      #map-view #alert #alert-close img {\n        width: 100%; }\n\n.footer {\n  z-index: 2; }\n\n#map-view #alert {\n  position: absolute; }\n\n/*# sourceMappingURL=app.css.map */\n"; (require("/Users/alexkonrad/gulp-starter/node_modules/cssify"))(css); module.exports = css;
-},{"/Users/alexkonrad/gulp-starter/node_modules/cssify":2}],2:[function(require,module,exports){
+var css = "body {\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  -moz-transform: translateZ(0);\n  -webkit-transform: translateZ(0);\n  transform: translateZ(0);\n  color: #4b4b4b;\n  font-family: sans-serif; }\n\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font: inherit;\n  font-size: 100%;\n  vertical-align: baseline; }\n\nhtml {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\ncaption, th, td {\n  text-align: left;\n  font-weight: normal;\n  vertical-align: middle; }\n\nq, blockquote {\n  quotes: none; }\n  q:before, q:after, blockquote:before, blockquote:after {\n    content: \"\";\n    content: none; }\n\na img {\n  border: none; }\n\narticle, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {\n  display: block; }\n\n*, *:before, *:after {\n  outline: none;\n  -moz-box-sizing: border-box;\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-tap-highlight-color: transparent; }\n\nbody {\n  margin: 0;\n  font-family: \"Roboto\", sans-serif;\n  color: #494949; }\n\ninput[type=text] {\n  padding: 12px 0 12px 34px;\n  border: 1px solid #e9e9e9;\n  border-radius: 4px;\n  font-size: 16px;\n  font-family: sans-serif;\n  color: #b0b0b0;\n  color: #494949;\n  width: 100%;\n  background-color: #fafafa;\n  -moz-box-shadow: 1px 1px 6px 0px #cccccc;\n  -webkit-box-shadow: 1px 1px 6px 0px #cccccc;\n  box-shadow: 1px 1px 6px 0px #cccccc; }\n\ninput:focus {\n  outline: none; }\n\na {\n  color: #333333;\n  text-decoration: none; }\n  a:focus {\n    color: #333333; }\n\nbutton {\n  padding: 10px 20px;\n  border: 0;\n  background: #1c7ca5;\n  color: white;\n  text-transform: uppercase;\n  font-size: 12px; }\n\nli {\n  margin: 15px; }\n\n.box {\n  padding: 15px; }\n\n.container {\n  margin: 0 auto;\n  width: 85%;\n  -moz-box-shadow: 0px, 2px, 2px, 0px, rgba(50, 50, 50, 0.25);\n  -webkit-box-shadow: 0px, 2px, 2px, 0px, rgba(50, 50, 50, 0.25);\n  box-shadow: 0px, 2px, 2px, 0px, rgba(50, 50, 50, 0.25); }\n\n.container:first-child {\n  margin-top: 30px; }\n\n.footer {\n  font-weight: bold;\n  position: absolute;\n  width: 100%;\n  height: 40px;\n  padding: 10px 40px 10px 20px;\n  color: white;\n  font-size: 11px;\n  background-color: #494949; }\n  .footer span {\n    letter-spacing: -0.3px;\n    position: absolute;\n    width: 75%;\n    -moz-transform: translate(0%, -50%);\n    -ms-transform: translate(0%, -50%);\n    -webkit-transform: translate(0%, -50%);\n    transform: translate(0%, -50%);\n    top: 50%; }\n\n.bottom {\n  padding: 5px 0;\n  bottom: 0;\n  color: white;\n  background-color: #898989;\n  font-size: 8px;\n  font-weight: bold;\n  text-align: center; }\n\n.pac-container {\n  margin-top: -29px; }\n\n.no-scroll {\n  overflow: hidden;\n  position: fixed; }\n\n.max-height {\n  height: 100%;\n  transform: none;\n  -webkit-transform: none; }\n\n.floating-container {\n  position: fixed !important;\n  z-index: 99 !important;\n  left: 0 !important;\n  top: 0 !important;\n  overflow: scroll !important;\n  margin: 0 !important;\n  border: 0 !important; }\n\n.floating-modal-container {\n  position: absolute !important;\n  z-index: 999 !important;\n  left: 50% !important;\n  top: 50% !important;\n  margin: 0 !important;\n  padding: 0 !important;\n  border: 0 !important;\n  width: 800px !important;\n  height: 600px !important;\n  -moz-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  overflow: hidden !important; }\n\n.modal {\n  display: none;\n  position: absolute;\n  background-color: white;\n  border: 1px solid #e9e9e9;\n  padding: 15px;\n  width: 95%;\n  left: 50%;\n  top: 50%;\n  -moz-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  z-index: 3;\n  overflow: hidden;\n  -moz-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);\n  -webkit-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);\n  box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45); }\n  .modal h2 {\n    color: #1c7ca5;\n    margin: 20px 0; }\n\n.radio {\n  display: inline-block;\n  vertical-align: middle;\n  *vertical-align: auto;\n  *zoom: 1;\n  *display: inline;\n  width: 18px;\n  height: 18px;\n  -moz-border-radius: 18px;\n  -webkit-border-radius: 18px;\n  border-radius: 18px;\n  border: 2px solid white;\n  background-color: transparent; }\n  .radio .radio-selected {\n    display: none;\n    margin: 1px;\n    background-color: white;\n    width: 12px;\n    height: 12px;\n    border-radius: 12px; }\n  .radio.checked .radio-selected {\n    display: block; }\n\n.right-inner-arrow {\n  position: relative;\n  left: -3px;\n  border-left: 8px solid white; }\n\n.nav {\n  margin-bottom: 3px;\n  padding: 15px;\n  color: #b9b9b9;\n  -moz-box-shadow: 0, 3px, 2px, 0, rgba(50, 50, 50, 0.45);\n  -webkit-box-shadow: 0, 3px, 2px, 0, rgba(50, 50, 50, 0.45);\n  box-shadow: 0, 3px, 2px, 0, rgba(50, 50, 50, 0.45); }\n\n.magnifying-glass {\n  position: relative;\n  width: 18px;\n  top: -32px;\n  left: 10px;\n  stroke: #7c7c7c; }\n\n.hidden {\n  display: none; }\n\n#fade {\n  display: none;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  opacity: 0.35;\n  z-index: 2; }\n\n.pac-nudge {\n  margin-top: 0 !important; }\n\n.alert_ie {\n  position: absolute !important; }\n\n.landscape#map-view {\n  height: 100%; }\n  .landscape#map-view #about-resources {\n    padding-left: 25px; }\n  .landscape#map-view .footer {\n    bottom: 0; }\n  .landscape#map-view .info {\n    font-size: 16px; }\n  .landscape#map-view #location {\n    position: absolute;\n    left: 45%;\n    top: 55%;\n    width: 50%;\n    background-color: white;\n    z-index: 2; }\n    .landscape#map-view #location img {\n      margin-right: -10px; }\n  .landscape#map-view .left-wrapper {\n    float: left;\n    position: absolute;\n    z-index: 3;\n    width: 40%;\n    height: calc(100% - 40px);\n    background-color: #0f6387;\n    -moz-box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.35);\n    -webkit-box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.35);\n    box-shadow: 2px 0px 5px 0px rgba(50, 50, 50, 0.35); }\n    .landscape#map-view .left-wrapper .box:not(.info) {\n      padding: 10px;\n      background-color: white; }\n    .landscape#map-view .left-wrapper #vip-logo {\n      height: 110px;\n      background-image: url(images/vip-logo.png);\n      background-size: 105px;\n      background-repeat: no-repeat;\n      background-position: center;\n      background-color: white; }\n  .landscape#map-view .dark-blue-box {\n    background-color: #0f6387;\n    overflow: hidden; }\n  .landscape#map-view .right-wrapper {\n    height: calc(100% - 40px);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n    position: absolute; }\n    .landscape#map-view .right-wrapper #all-contests {\n      position: relative;\n      top: -30px; }\n  .landscape#map-view .right {\n    float: right;\n    width: 60%; }\n    .landscape#map-view .right .box {\n      padding-left: 30px; }\n  .landscape#map-view #map-canvas {\n    position: absolute !important;\n    left: 40%;\n    height: 100%;\n    background-color: white;\n    z-index: 1; }\n  .landscape#map-view #polling-location {\n    width: 105%;\n    background-color: #26a8df; }\n  .landscape#map-view #info-icon {\n    transform: none; }\n  .landscape#map-view #current-location button {\n    margin: 10px 25px 0 90px; }\n\nh1 {\n  font-size: 22px; }\n\n#address-view #about h2 {\n  margin: 10px 0 20px 0; }\n#address-view #about p {\n  margin-bottom: 30px; }\n#address-view .footer {\n  bottom: 0;\n  max-width: 800px; }\n  #address-view .footer #plus-icon {\n    position: relative;\n    top: 50%;\n    margin-top: -50px;\n    margin-right: -30px;\n    -moz-transform: translate(-50%, -50%);\n    -ms-transform: translate(-50%, -50%);\n    -webkit-transform: translate(-50%, -50%);\n    transform: translate(-50%, -50%);\n    color: white;\n    background-color: #1c7ca5;\n    font-family: times;\n    font-weight: bold;\n    text-align: center;\n    border: 6px solid #1c7ca5;\n    border-radius: 18px;\n    width: 18px;\n    font-size: 14px;\n    float: right;\n    display: block;\n    cursor: pointer; }\n    #address-view .footer #plus-icon img {\n      display: block;\n      width: 100%; }\n\n.address-info {\n  height: 100%;\n  border-bottom: 0; }\n\n.title {\n  margin: 10px 0 5px 0;\n  padding: 0;\n  text-align: center; }\n\n.subtitle {\n  margin: 0 0 25px 0;\n  text-align: center; }\n\n#app-info {\n  margin: 0 auto 50px;\n  text-align: center;\n  max-width: 235px; }\n\n#user-image {\n  max-height: 150px;\n  max-width: 300px;\n  display: block;\n  margin: 30px auto 0; }\n\n#get-information-on {\n  padding: 45px;\n  border-bottom: 0;\n  font-size: 12px;\n  font-weight: bold;\n  color: #898989;\n  text-transform: uppercase; }\n\n#info-icon {\n  position: relative;\n  top: 50%;\n  margin-top: -9px;\n  margin-right: -30px;\n  color: #494949;\n  font-family: times;\n  font-weight: bold;\n  font-style: italic;\n  text-align: center;\n  background-color: white;\n  border: 6px solid white;\n  border-top: 2px solid white;\n  border-bottom: 2px solid white;\n  border-radius: 18px;\n  width: 18px;\n  font-size: 14px;\n  float: right;\n  display: block; }\n\n#plus-icon {\n  position: relative;\n  top: 50%;\n  margin-top: -50px;\n  margin-right: -30px;\n  -moz-transform: translate(-50%, -50%);\n  -ms-transform: translate(-50%, -50%);\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  color: white;\n  background-color: #1c7ca5;\n  font-family: times;\n  font-weight: bold;\n  text-align: center;\n  border: 6px solid #1c7ca5;\n  border-top: 2px solid #1c7ca5;\n  border-bottom: 2px solid #1c7ca5;\n  border-radius: 18px;\n  width: 19px;\n  font-size: 14px;\n  float: right;\n  display: block;\n  cursor: pointer; }\n\n#close-button {\n  transform: rotate(45deg);\n  -webkit-transform: rotate(45deg);\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  color: white;\n  background-color: #1c7ca5;\n  font-family: times;\n  font-weight: bold;\n  text-align: center;\n  border: 6px solid #1c7ca5;\n  border-radius: 18px;\n  width: 19px;\n  font-size: 14px;\n  display: block;\n  cursor: pointer; }\n  #close-button img {\n    display: block;\n    width: 100%; }\n\n#address-not-found,\n#current-location {\n  display: none;\n  position: absolute;\n  width: 95%;\n  left: 50%;\n  top: 50%;\n  transform: translate(-50%, -50%);\n  z-index: 3;\n  -moz-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);\n  -webkit-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);\n  box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45); }\n  #address-not-found h1,\n  #current-location h1 {\n    margin: 10px 0;\n    text-align: left; }\n  #address-not-found h2,\n  #current-location h2 {\n    color: #a30000; }\n  #address-not-found button,\n  #current-location button {\n    display: block;\n    margin: 0 auto;\n    margin-top: 20px; }\n\n#current-location span {\n  margin: 0 auto; }\n#current-location button {\n  display: inline-block; }\n\n#multiple-elections h2 {\n  color: #a30000; }\n#multiple-elections .election {\n  margin: 20px 0; }\n  #multiple-elections .election h1,\n  #multiple-elections .election h2 {\n    display: inline-block; }\n  #multiple-elections .election h1 {\n    font-size: 18px; }\n  #multiple-elections .election h2 {\n    margin: 5px 10px 20px 45px;\n    color: #494949; }\n\n#_vitModal {\n  display: none;\n  position: fixed;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  z-index: 998;\n  background-color: rgba(0, 0, 0, 0.75); }\n\n#add-to-calendar-dropdown {\n  cursor: pointer;\n  display: block;\n  width: 20px;\n  height: 20px; }\n  #add-to-calendar-dropdown label {\n    cursor: pointer;\n    display: block;\n    width: 20px;\n    height: 20px; }\n  #add-to-calendar-dropdown a {\n    padding: 5px;\n    font-weight: bold;\n    background-color: white;\n    color: #1c7ca5;\n    font-size: 14px; }\n  #add-to-calendar-dropdown .icon-outlook {\n    border-bottom: 1px solid #898989; }\n\n.container-modal-show {\n  position: fixed;\n  z-index: 999;\n  margin-top: 0; }\n\n.map-view-modal-show {\n  position: absolute; }\n\n.body-modal-show {\n  position: fixed;\n  width: 100%; }\n\n.radio {\n  margin: -5px 10px 0; }\n\n#map-canvas:not(.landscape) {\n  height: 150px;\n  -moz-transition: height, 200ms, ease-in-out;\n  -o-transition: height, 200ms, ease-in-out;\n  -webkit-transition: height, 200ms, ease-in-out;\n  transition: height, 200ms, ease-in-out; }\n\n#map-view:after {\n  content: \"\";\n  display: table;\n  clear: both; }\n\n#map-view {\n  display: table;\n  z-index: 999;\n  margin: 0 auto;\n  width: 100%;\n  background-color: white;\n  position: absolute; }\n  #map-view button {\n    position: absolute;\n    left: 2px;\n    margin-top: 100px;\n    padding: 4px 3px;\n    font-size: 10px;\n    background-color: white;\n    width: 34%; }\n  #map-view .info {\n    background-color: #1c7ca5;\n    color: white;\n    padding: 10px 20px;\n    -moz-box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);\n    -webkit-box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);\n    box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);\n    font-size: 13px; }\n    #map-view .info:not(#more-elections) {\n      border-bottom: 1px solid #0f6387; }\n    #map-view .info span {\n      float: right;\n      cursor: pointer; }\n  #map-view .box {\n    line-height: 1.15;\n    -moz-transition: height, 200ms, ease-in-out;\n    -o-transition: height, 200ms, ease-in-out;\n    -webkit-transition: height, 200ms, ease-in-out;\n    transition: height, 200ms, ease-in-out;\n    -moz-border-radius: 1px;\n    -webkit-border-radius: 1px;\n    border-radius: 1px; }\n  #map-view .address .address-name,\n  #map-view .address .address-line {\n    text-transform: capitalize;\n    font-size: 22px;\n    color: #333333; }\n  #map-view .subsection {\n    cursor: default;\n    background-color: #eeeeee;\n    padding: 15px;\n    font-size: 17px; }\n    #map-view .subsection p {\n      width: 90%; }\n    #map-view .subsection span {\n      cursor: pointer;\n      float: right;\n      -moz-transform: translateY(-50%);\n      -ms-transform: translateY(-50%);\n      -webkit-transform: translateY(-50%);\n      transform: translateY(-50%);\n      font-weight: bolder; }\n    #map-view .subsection .contest-type {\n      display: inline-block;\n      vertical-align: middle;\n      *vertical-align: auto;\n      *zoom: 1;\n      *display: inline;\n      font-style: italic; }\n  #map-view .candidate-list {\n    overflow: hidden; }\n  #map-view .candidate-item .right-arrow {\n    -moz-transform: translateY(-50%);\n    -ms-transform: translateY(-50%);\n    -webkit-transform: translateY(-50%);\n    transform: translateY(-50%); }\n  #map-view .change-address {\n    display: none;\n    position: relative;\n    z-index: 3;\n    margin: 0;\n    padding-left: 12px; }\n  #map-view .contests {\n    margin-bottom: 40px; }\n  #map-view .party {\n    font-style: italic; }\n  #map-view .election {\n    cursor: default; }\n  #map-view .election-selection {\n    margin: 5px 0; }\n    #map-view .election-selection:last-child {\n      margin-bottom: 10px; }\n  #map-view .question {\n    font-weight: bold;\n    margin: 15px 0; }\n  #map-view .answer {\n    display: inline-block;\n    vertical-align: middle;\n    *vertical-align: auto;\n    *zoom: 1;\n    *display: inline; }\n  #map-view .toggle-image {\n    width: 15px; }\n  #map-view .minus {\n    position: relative;\n    top: -5px; }\n  #map-view .arrow {\n    width: 10px;\n    float: right;\n    -moz-transform: translateY(-50%);\n    -ms-transform: translateY(-50%);\n    -webkit-transform: translateY(-50%);\n    transform: translateY(-50%); }\n    #map-view .arrow.toggle-image {\n      -moz-transform: translateY(0);\n      -ms-transform: translateY(0);\n      -webkit-transform: translateY(0);\n      transform: translateY(0); }\n    #map-view .arrow.left-arrow {\n      -moz-transform: translateY(27%);\n      -ms-transform: translateY(27%);\n      -webkit-transform: translateY(27%);\n      transform: translateY(27%); }\n  #map-view .polling-location-info {\n    margin: 5px 0; }\n  #map-view #registered-address {\n    cursor: pointer; }\n    #map-view #registered-address span {\n      color: #98c0da; }\n  #map-view #chosen-election {\n    font-size: 22px;\n    color: #333333; }\n    #map-view #chosen-election img {\n      width: 20px;\n      float: right;\n      margin-top: -30px;\n      margin-right: 2px; }\n    #map-view #chosen-election .date {\n      font-size: 16px; }\n  #map-view #location .address-line {\n    font-size: 16px; }\n  #map-view #location span {\n    float: right;\n    margin-top: -23px; }\n  #map-view #location img {\n    float: right;\n    width: 60px;\n    margin-right: -20px;\n    margin-top: -20px; }\n  #map-view #voter-resources {\n    margin-top: 125px; }\n  #map-view #other-elections {\n    overflow: hidden; }\n  #map-view #election-list {\n    display: none;\n    padding: 0 20px;\n    overflow: hidden; }\n  #map-view #more-elections, #map-view #polling-location, #map-view #resources-toggle, #map-view #ballot-information {\n    cursor: pointer; }\n  #map-view #more-resources {\n    overflow: hidden; }\n    #map-view #more-resources h1 {\n      font-size: 20px;\n      margin: 10px 0; }\n    #map-view #more-resources a {\n      font-size: 17px;\n      text-decoration: underline;\n      color: #1c7ca5;\n      margin: 30px 0; }\n  #map-view #plus-icon {\n    margin-top: -45px; }\n  #map-view #alert {\n    display: none;\n    position: fixed;\n    z-index: 10000;\n    background-color: rgba(200, 0, 0, 0.85);\n    width: 100%;\n    color: white;\n    font-weight: bold;\n    font-size: 20px; }\n    #map-view #alert #alert-close {\n      float: right;\n      width: 18px;\n      -moz-transform: rotate(45deg);\n      -ms-transform: rotate(45deg);\n      -webkit-transform: rotate(45deg);\n      transform: rotate(45deg);\n      cursor: pointer; }\n      #map-view #alert #alert-close img {\n        width: 100%; }\n\n.footer {\n  z-index: 2; }\n\n#map-view #alert {\n  position: absolute; }\n\n/*# sourceMappingURL=app.css.map */\n"; (require("/Users/mickey/Desktop/vip-embeddable-tool/node_modules/cssify"))(css); module.exports = css;
+},{"/Users/mickey/Desktop/vip-embeddable-tool/node_modules/cssify":2}],2:[function(require,module,exports){
 module.exports = function (css, customDocument) {
   var doc = customDocument || document;
   if (doc.createStyleSheet) {
@@ -10592,7 +10592,7 @@ window._VIT_GOOGLE_MAPS_INIT_CALLBACK = function() {
 // register partials and helpers for use in templates
 handlebars.registerPartials();
 handlebars.registerHelpers();
-},{"../../build/app.css":1,"./handlebars.js":16,"./router.js":18,"./util.js":19,"jquery":12}],15:[function(require,module,exports){
+},{"../../build/app.css":1,"./handlebars.js":16,"./router.js":19,"./util.js":20,"jquery":12}],15:[function(require,module,exports){
 module.exports = {
   "logo" : "./images/voting-information-project.png",
   "smallLogo" : "./images/vip-logo.png",
@@ -10731,10 +10731,184 @@ module.exports = (function() {
     }
   }
 })(this);
-},{"./views/templates/partials/address.hbs":24,"./views/templates/partials/contest.hbs":25,"./views/templates/partials/election-administration-body.hbs":26,"./views/templates/partials/election-information-item.hbs":27,"./views/templates/partials/election-official.hbs":28,"./views/templates/partials/election.hbs":29,"./views/templates/partials/modals.hbs":30,"./views/templates/partials/normalized-address.hbs":32,"./views/templates/partials/polling-location-info.hbs":33,"./views/templates/partials/source.hbs":34,"hbsfy/runtime":11}],17:[function(require,module,exports){
+},{"./views/templates/partials/address.hbs":25,"./views/templates/partials/contest.hbs":26,"./views/templates/partials/election-administration-body.hbs":27,"./views/templates/partials/election-information-item.hbs":28,"./views/templates/partials/election-official.hbs":29,"./views/templates/partials/election.hbs":30,"./views/templates/partials/modals.hbs":31,"./views/templates/partials/normalized-address.hbs":33,"./views/templates/partials/polling-location-info.hbs":34,"./views/templates/partials/source.hbs":35,"hbsfy/runtime":11}],17:[function(require,module,exports){
 var jQuery = require('jquery')
 module.exports = (function(a){(jQuery.browser=jQuery.browser||{}).mobile=/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))})(navigator.userAgent||navigator.vendor||window.opera);
 },{"jquery":12}],18:[function(require,module,exports){
+;module.exports = (function(exports) {
+  var MS_IN_MINUTES = 60 * 1000;
+
+  var formatTime = function(date) {
+    return date.toISOString().replace(/-|:|\.\d+/g, '');
+  };
+
+  var calculateEndTime = function(event) {
+    return event.end ?
+      formatTime(event.end) :
+      formatTime(new Date(event.start.getTime() + (event.duration * MS_IN_MINUTES)));
+  };
+
+  var calendarGenerators = {
+    google: function(event) {
+      var startTime = formatTime(event.start);
+      var endTime = calculateEndTime(event);
+
+      var href = encodeURI([
+        'https://www.google.com/calendar/render',
+        '?action=TEMPLATE',
+        '&text=' + (event.title || ''),
+        '&dates=' + (startTime || ''),
+        '/' + (endTime || ''),
+        '&details=' + (event.description || ''),
+        '&location=' + (event.address || ''),
+        '&sprop=&sprop=name:'
+      ].join(''));
+      return '<a class="icon-google" style="border-top: 1px solid #898989; border-right: 1px solid #898989; border-left: 1px solid #898989" target="_blank" href="' +
+        href + '">Google Calendar</a>';
+    },
+
+    yahoo: function(event) {
+      var eventDuration = event.end ?
+        ((event.end.getTime() - event.start.getTime())/ MS_IN_MINUTES) :
+        event.duration;
+
+      // Yahoo dates are crazy, we need to convert the duration from minutes to hh:mm
+      var yahooHourDuration = eventDuration < 600 ?
+        '0' + Math.floor((eventDuration / 60)) :
+        Math.floor((eventDuration / 60)) + '';
+
+      var yahooMinuteDuration = eventDuration % 60 < 10 ?
+        '0' + eventDuration % 60 :
+        eventDuration % 60 + '';
+
+      var yahooEventDuration = yahooHourDuration + yahooMinuteDuration;
+
+      // Remove timezone from event time
+      var st = formatTime(new Date(event.start - (event.start.getTimezoneOffset() *
+                                                  MS_IN_MINUTES))) || '';
+
+      var href = encodeURI([
+        'http://calendar.yahoo.com/?v=60&view=d&type=20',
+        '&title=' + (event.title || ''),
+        '&st=' + st,
+        '&dur=' + (yahooEventDuration || ''),
+        '&desc=' + (event.description || ''),
+        '&in_loc=' + (event.address || '')
+      ].join(''));
+
+      return '<a class="icon-yahoo" target="_blank" href="' +
+        href + '">Yahoo! Calendar</a>';
+    },
+
+    ics: function(event, eClass, calendarName) {
+      var startTime = formatTime(event.start);
+      var endTime = calculateEndTime(event);
+
+      var href = encodeURI(
+        'data:text/calendar;charset=utf8,' + [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'BEGIN:VEVENT',
+          'URL:' + document.URL,
+          'DTSTART:' + (startTime || ''),
+          'DTEND:' + (endTime || ''),
+          'SUMMARY:' + (event.title || ''),
+          'DESCRIPTION:' + (event.description || ''),
+          'LOCATION:' + (event.address || ''),
+          'END:VEVENT',
+          'END:VCALENDAR'].join('\n'));
+
+      return '<a style="border-right: 1px solid #898989; border-left: 1px solid #898989"class="' + eClass + '" target="_blank" href="' +
+        href + '">' + calendarName + ' Calendar</a>';
+    },
+
+    ical: function(event) {
+      return this.ics(event, 'icon-ical', 'iCal');
+    },
+
+    outlook: function(event) {
+      return this.ics(event, 'icon-outlook', 'Outlook');
+    }
+  };
+
+  var generateCalendars = function(event) {
+    return {
+      google: calendarGenerators.google(event),
+      // yahoo: calendarGenerators.yahoo(event),
+      ical: calendarGenerators.ical(event),
+      outlook: calendarGenerators.outlook(event)
+    };
+  };
+
+  // Create CSS
+  var addCSS = function() {
+    if (!document.getElementById('ouical-css')) {
+      document.getElementsByTagName('head')[0].appendChild(generateCSS());
+    }
+  };
+
+  var generateCSS = function() {
+    var styles = document.createElement('style');
+    styles.id = 'ouical-css';
+
+    styles.innerHTML = "#add-to-calendar-checkbox-label{cursor:pointer}.add-to-calendar-checkbox~a{display:none}.add-to-calendar-checkbox:checked~a{display:block;width:125px;position:relative; right:125px; top: 0px}input[type=checkbox].add-to-calendar-checkbox{position:absolute;top:-9999px;left:-9999px}";
+
+    return styles;
+  };
+
+  // Make sure we have the necessary event data, such as start time and event duration
+  var validParams = function(params) {
+    return params.data !== undefined && params.data.start !== undefined &&
+      (params.data.end !== undefined || params.data.duration !== undefined);
+  };
+
+  var generateMarkup = function(calendars, clazz, calendarId) {
+    var result = document.createElement('div');
+
+    result.innerHTML = '<label for="checkbox-for-' +
+      calendarId + '" class="add-to-calendar-checkbox"></label>';
+    result.innerHTML += '<input name="add-to-calendar-checkbox" class="add-to-calendar-checkbox" id="checkbox-for-' + calendarId + '" type="checkbox">';
+
+    Object.keys(calendars).forEach(function(services) {
+      result.innerHTML += calendars[services];
+    });
+
+    result.className = 'add-to-calendar';
+    if (clazz !== undefined) {
+      result.className += (' ' + clazz);
+    }
+
+    addCSS();
+
+    result.id = calendarId;
+    return result;
+  };
+
+  var getClass = function(params) {
+    if (params.options && params.options.class) {
+      return params.options.class;
+    }
+  };
+
+  var getOrGenerateCalendarId = function(params) {
+    return params.options && params.options.id ?
+      params.options.id :
+      Math.floor(Math.random() * 1000000); // Generate a 6-digit random ID
+  };
+
+  exports.createOUICalendar = function(params) {
+    if (!validParams(params)) {
+      console.log('Event details missing.');
+      return;
+    }
+
+    return generateMarkup(generateCalendars(params.data),
+                          getClass(params),
+                          getOrGenerateCalendarId(params));
+  };
+})(window);
+
+},{}],19:[function(require,module,exports){
 module.exports = (function() {
   var currentView;
   var data;
@@ -10815,7 +10989,7 @@ window.text = text;
     }
   }
 })();
-},{"./api.js":13,"./config.js":15,"./views/addressView.js":20,"./views/mapView.js":21,"jquery":12}],19:[function(require,module,exports){
+},{"./api.js":13,"./config.js":15,"./views/addressView.js":21,"./views/mapView.js":22,"jquery":12}],20:[function(require,module,exports){
 module.exports = (function() {
   if (!Function.prototype.bind) {
     Function.prototype.bind = function (oThis) {
@@ -10860,7 +11034,7 @@ module.exports = (function() {
     }
   }
 })(this);
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 var View = require('./view.js');
 var api = require('../api.js');
 var $ = require('jquery');
@@ -11060,13 +11234,15 @@ module.exports = View.extend({
   }
 
 });
-},{"../api.js":13,"./templates/address-lookup.hbs":22,"./templates/partials/multiple-elections.hbs":31,"./view.js":35,"jquery":12}],21:[function(require,module,exports){
+},{"../api.js":13,"./templates/address-lookup.hbs":23,"./templates/partials/multiple-elections.hbs":32,"./view.js":36,"jquery":12}],22:[function(require,module,exports){
 var View = require('./view.js');
 var api  = require('../api.js');
 var voterIdData = require('../voterIdData.js');
 var $ = require('jquery');
 var browser = require('../mobile.js');
 var fastclick = require('fastclick');
+var ouiCal = require('../ouical.js');
+
 window.$ = $;
 
 module.exports = View.extend({
@@ -11337,19 +11513,55 @@ module.exports = View.extend({
     $('html,body').scrollTop($(this.$container).scrollTop());
 
     //add this event
-    $.getScript("https://addthisevent.com/libs/1.5.8/ate.min.js", function () {
-      addthisevent.settings({
-        outlook   : {show:true, text:"Outlook Calendar"},
-        google    : {show:true, text:"Google Calendar"},
-        yahoo     : {show:false, text:"Yahoo Calendar"},
-        hotmail   : {show:false, text:"Hotmail Calendar"},
-        ical      : {show:true, text:"iCal Calendar"},
-        facebook  : {show:false, text:"Facebook Event"},
-        dropdown  : {order:"google,outlook,ical"},
-      });
-      $("#atedrop1-drop").css("left", "20px")
-      $("#atedrop1-drop").css("right", "0px")
-    })
+    // $.getScript("https://addthisevent.com/libs/1.5.8/ate.min.js", function () {
+    //   addthisevent.settings({
+    //     outlook   : {show:true, text:"Outlook Calendar"},
+    //     google    : {show:true, text:"Google Calendar"},
+    //     yahoo     : {show:false, text:"Yahoo Calendar"},
+    //     hotmail   : {show:false, text:"Hotmail Calendar"},
+    //     ical      : {show:true, text:"iCal Calendar"},
+    //     facebook  : {show:false, text:"Facebook Event"},
+    //     dropdown  : {order:"google,outlook,ical"},
+    //   });
+    //   $("#atedrop1-drop").css("left", "20px")
+    //   $("#atedrop1-drop").css("right", "0px")
+    // })
+    
+    var formattedAddress = "";
+    for (var key in options.data.pollingLocations[0].address) {
+      formattedAddress += options.data.pollingLocations[0].address[key] + " "
+    }
+
+    var myCalendar = createOUICalendar({
+      options: {
+        class: 'add-to-calendar-drop-class',
+
+        // You can pass an ID. If you don't, one will be generated for you
+        id: 'add-to-calendar-dropdown'
+      },
+      data: {
+        // Event title
+        title: options.data.election.name,
+
+        // Event start date
+        start: new Date(options.data.election.dateForCalendar),
+
+        // Event duration (IN MINUTES)
+        duration: 1440,
+
+        // You can also choose to set an end time
+        // If an end time is set, this will take precedence over duration
+        // end: new Date('June 15, 2013 23:00'),     
+
+        // Event Address
+        address: formattedAddress,
+
+        // Event Description
+        description: options.data.election.name
+      }
+    });
+
+    document.querySelector('#calendar-icon').appendChild(myCalendar);
 
     fastclick(document.body);
   },
@@ -11976,7 +12188,7 @@ module.exports = View.extend({
   }
 
 });
-},{"../api.js":13,"../mobile.js":17,"../voterIdData.js":36,"./templates/map.hbs":23,"./templates/partials/address.hbs":24,"./templates/partials/polling-location-info.hbs":33,"./view.js":35,"fastclick":3,"jquery":12}],22:[function(require,module,exports){
+},{"../api.js":13,"../mobile.js":17,"../ouical.js":18,"../voterIdData.js":37,"./templates/map.hbs":24,"./templates/partials/address.hbs":25,"./templates/partials/polling-location-info.hbs":34,"./view.js":36,"fastclick":3,"jquery":12}],23:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12002,7 +12214,7 @@ helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partial
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],23:[function(require,module,exports){
+},{"hbsfy/runtime":11}],24:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12069,9 +12281,9 @@ function program5(depth0,data) {
   buffer += "\n</div>\n\n<div class=\"box left\" id=\"chosen-election\">\n  ";
   stack1 = self.invokePartial(partials.election, 'election', ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.election), helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  <a href=\"\" title=\""
+  buffer += "\n  <div id=\"calendar-icon\" title=\""
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.election)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" class=\"addthisevent\" style=\"background-image: url('./images/calendar.png'); float: right; margin-top: -30px; margin-right: 2px; background-color: transparent; border: 0; height: 20px; width: 20px; background-size: contain; padding: 0; background-position: center;\">\n\n      <span class=\"_start\"> "
+    + "\" class=\"addthisevent\" style=\"background-image: url('./images/calendar.png'); float: right; margin-top: -30px; margin-right: 2px; background-color: transparent; border: 0; height: 20px; width: 20px; background-size: contain; padding: 0; background-position: center;\">\n\n<!--       <span class=\"_start\"> "
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.election)),stack1 == null || stack1 === false ? stack1 : stack1.dateForCalendar)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</span>\n      <span class=\"_end\"> "
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.election)),stack1 == null || stack1 === false ? stack1 : stack1.dateForCalendar)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
@@ -12082,7 +12294,7 @@ function program5(depth0,data) {
     + "</span>\n      <span class=\"_location\">";
   stack1 = self.invokePartial(partials.address, 'address', ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.pollingLocations)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.address), helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</span>\n      <span class=\"_all_day_event\">true</span>\n      <span class=\"_date_format\">MM/DD/YYYY</span>\n  </a> \n  <!-- <img src=\"./images/calendar.png\"> -->\n</div>\n\n<div class=\"info box left\" id=\"polling-location\">\n  "
+  buffer += "</span>\n      <span class=\"_all_day_event\">true</span>\n      <span class=\"_date_format\">MM/DD/YYYY</span> -->\n  </div> \n</div>\n\n<div class=\"info box left\" id=\"polling-location\">\n  "
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.headers)),stack1 == null || stack1 === false ? stack1 : stack1.pollingLocation)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\n  <span id=\"map-toggle\">\n    <img src=\"./images/plus.png\" class=\"toggle-image plus\">\n    <img src=\"./images/minus.png\" class=\"toggle-image minus hidden\">\n  </span>\n</div>\n\n<div id=\"location\" class=\"box right\">\n  ";
   stack1 = self.invokePartial(partials.address, 'address', ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.pollingLocations)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.address), helpers, partials, data);
@@ -12147,7 +12359,7 @@ function program5(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],24:[function(require,module,exports){
+},{"hbsfy/runtime":11}],25:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12188,7 +12400,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],25:[function(require,module,exports){
+},{"hbsfy/runtime":11}],26:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12279,7 +12491,7 @@ function program8(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],26:[function(require,module,exports){
+},{"hbsfy/runtime":11}],27:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12361,7 +12573,7 @@ function program9(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],27:[function(require,module,exports){
+},{"hbsfy/runtime":11}],28:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12382,7 +12594,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],28:[function(require,module,exports){
+},{"hbsfy/runtime":11}],29:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12415,7 +12627,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],29:[function(require,module,exports){
+},{"hbsfy/runtime":11}],30:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12440,7 +12652,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],30:[function(require,module,exports){
+},{"hbsfy/runtime":11}],31:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12471,7 +12683,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],31:[function(require,module,exports){
+},{"hbsfy/runtime":11}],32:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12507,7 +12719,7 @@ function program1(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],32:[function(require,module,exports){
+},{"hbsfy/runtime":11}],33:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12548,7 +12760,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],33:[function(require,module,exports){
+},{"hbsfy/runtime":11}],34:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12620,7 +12832,7 @@ function program7(depth0,data) {
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],34:[function(require,module,exports){
+},{"hbsfy/runtime":11}],35:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -12641,7 +12853,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":11}],35:[function(require,module,exports){
+},{"hbsfy/runtime":11}],36:[function(require,module,exports){
 module.exports = (function() {
   var view = {
 
@@ -12829,7 +13041,7 @@ module.exports = (function() {
     }
   }
 })(this);
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 module.exports = [
   {
     "Certified?":"Yes",

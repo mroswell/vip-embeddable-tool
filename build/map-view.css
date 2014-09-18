@@ -8,8 +8,24 @@
   z-index: 998;
   background-color: rgba(0, 0, 0, 0.75); }
 
-.addthisevent {
-  visibility: hidden; }
+#add-to-calendar-dropdown {
+  cursor: pointer;
+  display: block;
+  width: 20px;
+  height: 20px; }
+  #add-to-calendar-dropdown label {
+    cursor: pointer;
+    display: block;
+    width: 20px;
+    height: 20px; }
+  #add-to-calendar-dropdown a {
+    padding: 5px;
+    font-weight: bold;
+    background-color: white;
+    color: #1c7ca5;
+    font-size: 14px; }
+  #add-to-calendar-dropdown .icon-outlook {
+    border-bottom: 1px solid #898989; }
 
 .container-modal-show {
   position: fixed;

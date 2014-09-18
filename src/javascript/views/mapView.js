@@ -4,6 +4,8 @@ var voterIdData = require('../voterIdData.js');
 var $ = require('jquery');
 var browser = require('../mobile.js');
 var fastclick = require('fastclick');
+var ouiCal = require('../ouical.js');
+
 window.$ = $;
 
 module.exports = View.extend({
@@ -274,19 +276,55 @@ module.exports = View.extend({
     $('html,body').scrollTop($(this.$container).scrollTop());
 
     //add this event
-    $.getScript("https://addthisevent.com/libs/1.5.8/ate.min.js", function () {
-      addthisevent.settings({
-        outlook   : {show:true, text:"Outlook Calendar"},
-        google    : {show:true, text:"Google Calendar"},
-        yahoo     : {show:false, text:"Yahoo Calendar"},
-        hotmail   : {show:false, text:"Hotmail Calendar"},
-        ical      : {show:true, text:"iCal Calendar"},
-        facebook  : {show:false, text:"Facebook Event"},
-        dropdown  : {order:"google,outlook,ical"},
-      });
-      $("#atedrop1-drop").css("left", "20px")
-      $("#atedrop1-drop").css("right", "0px")
-    })
+    // $.getScript("https://addthisevent.com/libs/1.5.8/ate.min.js", function () {
+    //   addthisevent.settings({
+    //     outlook   : {show:true, text:"Outlook Calendar"},
+    //     google    : {show:true, text:"Google Calendar"},
+    //     yahoo     : {show:false, text:"Yahoo Calendar"},
+    //     hotmail   : {show:false, text:"Hotmail Calendar"},
+    //     ical      : {show:true, text:"iCal Calendar"},
+    //     facebook  : {show:false, text:"Facebook Event"},
+    //     dropdown  : {order:"google,outlook,ical"},
+    //   });
+    //   $("#atedrop1-drop").css("left", "20px")
+    //   $("#atedrop1-drop").css("right", "0px")
+    // })
+    
+    var formattedAddress = "";
+    for (var key in options.data.pollingLocations[0].address) {
+      formattedAddress += options.data.pollingLocations[0].address[key] + " "
+    }
+
+    var myCalendar = createOUICalendar({
+      options: {
+        class: 'add-to-calendar-drop-class',
+
+        // You can pass an ID. If you don't, one will be generated for you
+        id: 'add-to-calendar-dropdown'
+      },
+      data: {
+        // Event title
+        title: options.data.election.name,
+
+        // Event start date
+        start: new Date(options.data.election.dateForCalendar),
+
+        // Event duration (IN MINUTES)
+        duration: 1440,
+
+        // You can also choose to set an end time
+        // If an end time is set, this will take precedence over duration
+        // end: new Date('June 15, 2013 23:00'),     
+
+        // Event Address
+        address: formattedAddress,
+
+        // Event Description
+        description: options.data.election.name
+      }
+    });
+
+    document.querySelector('#calendar-icon').appendChild(myCalendar);
 
     fastclick(document.body);
   },
