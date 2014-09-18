@@ -104,7 +104,8 @@
   {{assets.text.resources.moreResources.title}}
   </div>
   <div class="box information-links">
-  {{> election-administration-body data.state.0.electionAdministrationBody }}
+  {{!-- {{> election-administration-body data.state.0.electionAdministrationBody }} --}}
+  {{> election-administration-body }}
   </div>
   <div class="subsection box">
   {{assets.text.resources.voterIdRequirements.title}}
@@ -142,3 +143,8 @@
 
 {{> modals }}
 <div id="fade"></div>
+<!--[if gte IE 8]>
+<script type="text/javascript">
+document.getElementById('alert').classList.add('alert_ie')
+</script>
+<![endif]-->

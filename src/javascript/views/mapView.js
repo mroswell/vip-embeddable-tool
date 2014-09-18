@@ -199,8 +199,6 @@ module.exports = View.extend({
         .show();
     }
 
-    $('')
-
     $(window).on('resize', function() {
       if (this.modal) {
         var width  = $(window).innerWidth()
