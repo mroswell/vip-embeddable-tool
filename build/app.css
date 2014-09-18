@@ -575,7 +575,7 @@ h1 {
     -moz-box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);
     -webkit-box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);
     box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);
-    font-size: 13px; }
+    font-size: 17px; }
     #map-view .info:not(#more-elections) {
       border-bottom: 1px solid #0f6387; }
     #map-view .info span {
