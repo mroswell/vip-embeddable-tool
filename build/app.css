@@ -248,6 +248,9 @@ li {
   opacity: 0.35;
   z-index: 2; }
 
+@media screen and (max-device-width: 480px) {
+  body {
+    -webkit-text-size-adjust: none; } }
 .pac-nudge {
   margin-top: 0 !important; }
 
