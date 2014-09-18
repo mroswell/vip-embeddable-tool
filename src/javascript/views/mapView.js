@@ -78,7 +78,8 @@ module.exports = View.extend({
       state.local_jurisdiction.name = "Local Jurisdiction";
     }
 
-    if (state.electionAdministrationBody.correspondenceAddress &&
+    if (state.electionAdministrationBody &&
+        state.electionAdministrationBody.correspondenceAddress &&
         state.electionAdministrationBody.physicalAddress) {
 
       // delete duplicate state election administration body address
@@ -92,7 +93,8 @@ module.exports = View.extend({
         delete options.data.state[0].electionAdministrationBody.correspondenceAddress;
       }
     }
-    if (state.local_jurisdiction.correspondenceAddress &&
+    if (state.local_jurisdiction &&
+        state.local_jurisdiction.correspondenceAddress &&
         state.local_jurisdiction.physicalAddress) {
       // delete duplicate local jurisdiction addresses
       var correspondenceAddress = this._parseAddress(
