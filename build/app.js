@@ -11780,7 +11780,7 @@ module.exports = View.extend({
   toggleElections: function(e) {
     e.stopPropagation();
     $('#election-list').slideToggle(100, function() {
-      this._scrollTo($('#more-elections span'), 10)
+      if (!this.landscape) this._scrollTo($('#more-elections span'), 10)
     }.bind(this));
     if (!this.landscape) {
       $('#more-elections')
