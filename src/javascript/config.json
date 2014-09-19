@@ -2,12 +2,12 @@
   "logo" : "./images/voting-information-project.png",
   "smallLogo" : "./images/vip-logo.png",
   "colors" : {
-    "textColor" : "#4b4b4b",
-    "headerColor" : "#1c7ca5",
-    "selectedHeaderColor" : "#26a8df",
+    "text" : "#4b4b4b",
+    "header" : "#1c7ca5",
+    "selectedHeader" : "#26a8df",
     "landscapeHeaderBackground" : " #0f6387",
-    "alertTextColor" : "#a30000",
-    "footerColor" : "#898989",
+    "alertText" : "#a30000",
+    "footer" : "#898989",
   },
   "text" : {
     "title" : "Voter Information Tool",

@@ -26,6 +26,14 @@ vit.load({
 + `logo` - link to an alternative logo to display at the top of the tool
 + `smallLogo` - link to an alternative logo to display in the modal election information view
 
+### Colors
+You can also customize colors by passing an object to the `colors` key in the parameters of this form:
++ `text` - Main application text
++ `header` - Headers used for categorizing election result data
++ `selectedHeader` - Header currently selected by the user
++ `landscapeHeaderBackground` - Shown behind the headers in tablet/desktop view
++ `alertText` - Header for displaying alerts to the user
+
 # Setup Instructions
 
 1. `npm install -g gulp`
