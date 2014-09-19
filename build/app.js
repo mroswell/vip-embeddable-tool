@@ -12309,7 +12309,7 @@ function program5(depth0,data) {
     + "\n  </span>\n  <a href=\"#\" target=\"_blank\"><i id=\"info-icon\">i</i></a>\n</div>\n\n";
   stack1 = self.invokePartial(partials.modals, 'modals', depth0, helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n<div id=\"fade\"></div>\n<!--[if gte IE 8]>\n<script type=\"text/javascript\">\ndocument.getElementById('alert').classList.add('alert_ie')\n</script>\n<![endif]-->";
+  buffer += "\n<div id=\"fade\"></div>\n<!--[if gte IE 8]>\n<script type=\"text/javascript\">\ndocument.getElementById('alert').className += 'alert_ie';\n</script>\n<![endif]-->";
   return buffer;
   });
 
