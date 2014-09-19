@@ -11462,6 +11462,11 @@ module.exports = View.extend({
             'left':((width/2) - (containerWidth/2)) + 'px'
           });
 
+        $('#_vitModal').css({
+          'width': screenWidth,
+          'height': screenHeight
+        })
+
         console.log("Container width: %s, and height: %s", containerWidth, containerHeight)
 
         this.landscape = true;
