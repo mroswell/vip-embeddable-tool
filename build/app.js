@@ -11449,6 +11449,11 @@ module.exports = View.extend({
     }
 
     this.resizeListener = function() {
+      if (!this.modal) {
+        this.landscape = true;
+        return;
+      }
+
       var width = $(window).width()
         , height = $(window).height()
         , screenWidth = screen.availWidth
