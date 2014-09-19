@@ -182,8 +182,6 @@ module.exports = View.extend({
         , screenWidth = screen.availWidth
         , screenHeight = screen.availHeight;
 
-      console.log("Window width: %s, height: %s\n Screen width: %s, height: %s", width, height, screenWidth, screenHeight)
-
       if (!$('#viewport-mobile-web-tag').length) {
         $('<meta>')
           .attr('name', 'viewport')
@@ -223,8 +221,6 @@ module.exports = View.extend({
           'width': width,
           'height': height
         })
-
-        console.log("Container width: %s, and height: %s", containerWidth, containerHeight)
 
         this.landscape = true;
       }
@@ -573,19 +569,14 @@ module.exports = View.extend({
       })
 
       this.autocompleteListener = function() {
-        console.log('autocomplete ' + this.hasSubmitted);
-        console.log(this.hasSubmitted)
         if (this.hasSubmitted) return;
         // var address = this.autocomplete.getPlace().formatted_address;
         var address;
         if (this.autocomplete.getPlace()) address = this.autocomplete.getPlace().formatted_address;
-        // console.log('autocomplete ' + address);
         if (typeof address === 'undefined') {
-          console.log('undefined address');
           var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
           address = autocompleteContainer.text() + ' ' +
             autocompleteContainer.next().text();
-          console.log(address);
         }
         this.hasSubmitted = true;
 
@@ -610,7 +601,6 @@ module.exports = View.extend({
           // var address = addressInput.val();
           addressInput.replaceWith(addressInput.clone());
           // var address = $(".pac-container .pac-item:first").text();
-          // console.log('enterkey ' + address + addressInput.val())
           // this.hasSubmitted = true;
 
           // api({
@@ -623,10 +613,6 @@ module.exports = View.extend({
           // });
         }
       }.bind(this));
-
-      $(window).on('click', function() {
-        console.log('click!')
-      })
 
       // google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
       google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
@@ -665,7 +651,6 @@ module.exports = View.extend({
 
   toggleMap: function(e, marker, address) {
     if (typeof marker === 'undefined') marker = this.markers[0];
-    console.log(this.landscape)
     if (!this.landscape) {
       var canvas = this.find('#map-canvas');
       var toggle = this.find('#map-toggle');

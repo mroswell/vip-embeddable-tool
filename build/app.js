@@ -10540,18 +10540,15 @@ module.exports = function(options) {
   // (Alaska)
   if (options.electionId) url += '&electionId=' + options.electionId;
   else url += '&electionId=2000';
-  console.log('making ajax request...');
   $.support.cors = true;
   $.ajax({
       url: url,
       dataType: 'jsonp',
       cache: false,
       error: function(e){ 
-        console.log(e);
         options.error && options.error();
       },
       success: function(response) {
-        console.log(response)
         window.response = response
         if (typeof response.error === 'undefined')
           options.success(response);
@@ -10921,15 +10918,24 @@ module.exports = (function() {
   var apiRequest       = require('./api.js');
   var text             = require('./config.js');
   var $ = require('jquery');
-window.text = text;
+
+  // function parseOption(option, defaultVal) {
+    // var val = (typeof defaultVal !== 'undefined' ? defaultVal : null);
+    // if (typeof this[option] !== 'undefined') ?  : null;
+  // }
+  
+
   return {
     start: function(options) {
-      console.log('updated');
       var router = this;
+
+      // $.each(options, function(option) {
+      //   parseOption.call(options, option);
+      // })
       
       var modal = typeof options.modal !== 'undefined' ? options.modal : true;
       var alert = typeof options.alert !== 'undefined' ? options.alert : null;
-      console.log(alert)
+      var logo  = typeof options.logo  !== 'undefined' ? options.logo : null;
 
       addressView
         .onRouteEvent('addressViewSubmit', function(response) {
@@ -10963,7 +10969,6 @@ window.text = text;
         })
         .onRouteEvent('mapViewSubmit', function(response) {
           data = response;
-          console.log(data)
 
           // render the elections view if there's more than one election
           // returned for the entered address, otherwise render the map view
@@ -11092,7 +11097,6 @@ module.exports = View.extend({
       } else enteredAddress = enteredAddress.formatted_address
       this.address = enteredAddress;
       this.hasSubmitted = true;
-      console.log(enteredAddress);
 
       api({
         address: enteredAddress, 
@@ -11104,7 +11108,6 @@ module.exports = View.extend({
       if (this.hasSubmitted) return;
       var key = e.which || e.keyCode;
       if (key === 13) {
-        console.log('enter key pressed')
         google.maps.event.trigger(this.autocomplete, 'place_changed');
         // return false;
         // var address = this.find('#address-input').val();
@@ -11131,7 +11134,6 @@ module.exports = View.extend({
   },
 
   submitAddress: function () {
-    console.log('go button pressed')
     google.maps.event.trigger(this.autocomplete, 'place_changed'); 
   }, 
 
@@ -11143,7 +11145,6 @@ module.exports = View.extend({
   handleElectionData: function(response) {
     var that = this;
     // if response has multiple elections, select which election
-    // console.log('handling electiondata')
     // if (!response.otherElections) {
     //   response.otherElections = [{
     //     name: "VIP Test Election",
@@ -11443,8 +11444,6 @@ module.exports = View.extend({
         , screenWidth = screen.availWidth
         , screenHeight = screen.availHeight;
 
-      console.log("Window width: %s, height: %s\n Screen width: %s, height: %s", width, height, screenWidth, screenHeight)
-
       if (!$('#viewport-mobile-web-tag').length) {
         $('<meta>')
           .attr('name', 'viewport')
@@ -11484,8 +11483,6 @@ module.exports = View.extend({
           'width': width,
           'height': height
         })
-
-        console.log("Container width: %s, and height: %s", containerWidth, containerHeight)
 
         this.landscape = true;
       }
@@ -11834,19 +11831,14 @@ module.exports = View.extend({
       })
 
       this.autocompleteListener = function() {
-        console.log('autocomplete ' + this.hasSubmitted);
-        console.log(this.hasSubmitted)
         if (this.hasSubmitted) return;
         // var address = this.autocomplete.getPlace().formatted_address;
         var address;
         if (this.autocomplete.getPlace()) address = this.autocomplete.getPlace().formatted_address;
-        // console.log('autocomplete ' + address);
         if (typeof address === 'undefined') {
-          console.log('undefined address');
           var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
           address = autocompleteContainer.text() + ' ' +
             autocompleteContainer.next().text();
-          console.log(address);
         }
         this.hasSubmitted = true;
 
@@ -11871,7 +11863,6 @@ module.exports = View.extend({
           // var address = addressInput.val();
           addressInput.replaceWith(addressInput.clone());
           // var address = $(".pac-container .pac-item:first").text();
-          // console.log('enterkey ' + address + addressInput.val())
           // this.hasSubmitted = true;
 
           // api({
@@ -11884,10 +11875,6 @@ module.exports = View.extend({
           // });
         }
       }.bind(this));
-
-      $(window).on('click', function() {
-        console.log('click!')
-      })
 
       // google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
       google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
@@ -11926,7 +11913,6 @@ module.exports = View.extend({
 
   toggleMap: function(e, marker, address) {
     if (typeof marker === 'undefined') marker = this.markers[0];
-    console.log(this.landscape)
     if (!this.landscape) {
       var canvas = this.find('#map-canvas');
       var toggle = this.find('#map-toggle');
@@ -12861,7 +12847,6 @@ module.exports = (function() {
       if (!!$('#' + this.$id)[0]) this.toggle();
       else {
         this.$el = $('<div id=' + this.$id + '/>')
-        console.log(this.$el)
         this.$el.append(this.template(options));
         $container.append(this.$el);
       }

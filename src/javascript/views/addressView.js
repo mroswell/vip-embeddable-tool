@@ -51,7 +51,6 @@ module.exports = View.extend({
       } else enteredAddress = enteredAddress.formatted_address
       this.address = enteredAddress;
       this.hasSubmitted = true;
-      console.log(enteredAddress);
 
       api({
         address: enteredAddress, 
@@ -63,7 +62,6 @@ module.exports = View.extend({
       if (this.hasSubmitted) return;
       var key = e.which || e.keyCode;
       if (key === 13) {
-        console.log('enter key pressed')
         google.maps.event.trigger(this.autocomplete, 'place_changed');
         // return false;
         // var address = this.find('#address-input').val();
@@ -90,7 +88,6 @@ module.exports = View.extend({
   },
 
   submitAddress: function () {
-    console.log('go button pressed')
     google.maps.event.trigger(this.autocomplete, 'place_changed'); 
   }, 
 
@@ -102,7 +99,6 @@ module.exports = View.extend({
   handleElectionData: function(response) {
     var that = this;
     // if response has multiple elections, select which election
-    // console.log('handling electiondata')
     // if (!response.otherElections) {
     //   response.otherElections = [{
     //     name: "VIP Test Election",

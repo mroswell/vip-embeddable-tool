@@ -5,18 +5,15 @@ module.exports = function(options) {
   // (Alaska)
   if (options.electionId) url += '&electionId=' + options.electionId;
   else url += '&electionId=2000';
-  console.log('making ajax request...');
   $.support.cors = true;
   $.ajax({
       url: url,
       dataType: 'jsonp',
       cache: false,
       error: function(e){ 
-        console.log(e);
         options.error && options.error();
       },
       success: function(response) {
-        console.log(response)
         window.response = response
         if (typeof response.error === 'undefined')
           options.success(response);

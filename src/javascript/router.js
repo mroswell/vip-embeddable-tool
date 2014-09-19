@@ -8,15 +8,24 @@ module.exports = (function() {
   var apiRequest       = require('./api.js');
   var text             = require('./config.js');
   var $ = require('jquery');
-window.text = text;
+
+  // function parseOption(option, defaultVal) {
+    // var val = (typeof defaultVal !== 'undefined' ? defaultVal : null);
+    // if (typeof this[option] !== 'undefined') ?  : null;
+  // }
+  
+
   return {
     start: function(options) {
-      console.log('updated');
       var router = this;
+
+      // $.each(options, function(option) {
+      //   parseOption.call(options, option);
+      // })
       
       var modal = typeof options.modal !== 'undefined' ? options.modal : true;
       var alert = typeof options.alert !== 'undefined' ? options.alert : null;
-      console.log(alert)
+      var logo  = typeof options.logo  !== 'undefined' ? options.logo : null;
 
       addressView
         .onRouteEvent('addressViewSubmit', function(response) {
@@ -50,7 +59,6 @@ window.text = text;
         })
         .onRouteEvent('mapViewSubmit', function(response) {
           data = response;
-          console.log(data)
 
           // render the elections view if there's more than one election
           // returned for the entered address, otherwise render the map view
