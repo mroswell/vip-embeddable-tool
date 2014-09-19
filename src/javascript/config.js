@@ -57,12 +57,11 @@ module.exports = {
       },
       "voterIdRequirements" : {
         "title" : "Voter ID Requirements",
-        "certified" : "Certified?",
         "state" : "State",
         "needsId" : "Who must show identification to vote?",
         "acceptableId" : "What forms of voter identification are acceptable?",
         "canVote" : "If a voter does not present proper identification, can s/he still vote a regular ballot?",
-        "linkTitle" : "Link"
+        "linkTitle" : "Complete Voter ID Information"
       }
     },
     "pollingLocations" : {

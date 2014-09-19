@@ -66,7 +66,7 @@ module.exports = View.extend({
     var voterId = {};
     var i = 0;
     for (var key in stateData) {
-      if (key !== 'Link') {
+      if (key !== 'Complete Voter ID Information') {
         voterId[i] = { 
           'question' : key,
           'answer' : stateData[key]
