@@ -18,14 +18,6 @@ module.exports = (function() {
   return {
     start: function(options) {
       var router = this;
-
-      // $.each(options, function(option) {
-      //   parseOption.call(options, option);
-      // })
-
-      if (options.json !== 'undefined') {
-        $.getJSON()
-      }
       
       window.appOptions = {
         modal : typeof options.modal !== 'undefined' ? options.modal : true,
