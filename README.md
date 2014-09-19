@@ -22,7 +22,7 @@ vit.load({
 | Key | Description |
 |-----|-------------|
 |`modal`| if true, will open up in a modal box to display election information for mobile and tablet devices (defaults to true)|
-|`official`| if true, will only display information from official election information sources (defaults to false)|
+|`officialOnly`| if true, will only display information from official election information sources (defaults to false)|
 |`width`| set the width of the tool (e.g., `450px`)|
 |`height`| set the height of the tool|
 |`logo`| link to an alternative logo to display at the top of the tool|

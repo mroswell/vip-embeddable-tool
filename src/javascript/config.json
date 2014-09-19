@@ -28,7 +28,7 @@
     },
     "multipleElections" : {
       "text" : "Multiple elections found. Select one:"
-    }
+    },
     "mailInVoting" : {
       "title" : "Mail-in Voting State",
       "text" : "The registered address you entered is located in a mail-in voting state. This means you can submit your ballot at any official drop box. Would you like to continue searching for drop boxes based on your registered address, or would you like to resubmit your request using your current location?",

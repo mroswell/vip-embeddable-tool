@@ -23,9 +23,17 @@ module.exports = (function() {
       //   parseOption.call(options, option);
       // })
       
-      var modal = typeof options.modal !== 'undefined' ? options.modal : true;
-      var alert = typeof options.alert !== 'undefined' ? options.alert : null;
-      var logo  = typeof options.logo  !== 'undefined' ? options.logo : null;
+      window.appOptions = {
+        modal : typeof options.modal !== 'undefined' ? options.modal : true,
+        officialOnly : typeof options.officialOnly !== 'undefined' ? options.officialOnly : 'false',
+        alert : typeof options.alert !== 'undefined' ? options.alert : null,
+        logo : typeof options.logo  !== 'undefined' ? options.logo : './images/voter-information-project.png',
+        smallLogo : typeof options.smallLogo !== 'undefined' ? options.smallLogo : './images/vip-logo.png',
+        width : typeof options.width !== 'undefined' ? options.width : 640,
+        height : typeof options.height !== 'undefined' ? options.height : 480,
+        assets : text
+      };
+      // var colors = typeof options.colors !== 'undefined' ? options.colors : 
 
       addressView
         .onRouteEvent('addressViewSubmit', function(response) {
@@ -33,50 +41,43 @@ module.exports = (function() {
           window.console && console.log(data);
           window.history && history.pushState && history.pushState(null, null, '?polling-location');
           $(window).on('popstate', function() {
-            router.navigate(addressView, mapView, {
-              assets: text
-            });
+            router.navigate(addressView, mapView, appOptions);
             $('#_vitModal').hide();
           }.bind(this));
-          router.navigate(mapView, addressView, {
-            data: data,
-            modal: modal,
-            alert: alert,
-            assets: text
-          });
+          appOptions['data'] = data;
+          console.log(appOptions)
+          router.navigate(mapView, addressView, appOptions);
         });
 
       mapView
         .onRouteEvent('mapViewBack', function() {
           // if the user chose the election, reroute to the election choice view
           // else go back to the address entry view
-          router.navigate(addressView, mapView, {
-            assets: text
-          });
+          router.navigate(addressView, mapView, appOptions);
         })
         .onRouteEvent('mapViewRerender', function() {
-          router.navigate(mapView, mapView, { data: data })
+          appOptions['data'] = data;
+          router.navigate(mapView, mapView, appOptions)
         })
         .onRouteEvent('mapViewSubmit', function(response) {
           data = response;
+          appOptions['data'] = data;
 
           // render the elections view if there's more than one election
           // returned for the entered address, otherwise render the map view
           if (typeof data.otherElections !== 'undefined') {
-            router.navigate(electionsView, mapView, { data: data });
-          } else router.navigate(mapView, mapView, { 
-            data: data,
-            modal: modal,
-            assets: text
-          });
+            router.navigate(electionsView, mapView, appOptions);
+          } else router.navigate(mapView, mapView, appOptions);
         });
 
       if (options.textFile) {
         $.getJSON(options.textFile, function(newText) {
-            addressView.render({ assets: newText });
+            appOptions[assets] = newText;
+            // figure this out.
+            addressView.render(appOptions);
         });
       } else {
-        addressView.render({ assets: text });
+        addressView.render(appOptions);
       }
 
 
