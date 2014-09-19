@@ -32,11 +32,11 @@ vit.load({
 You can also customize colors by passing an object to the `colors` key in the parameters of this form:
 | Key | Description |
 |-----|-------------|
-|`text`| Main application text |
-|`header`| Headers used for categorizing election result data |
-|`selectedHeader`| Header currently selected by the user |
-|`landscapeHeaderBackground`| Shown behind the headers in tablet/desktop view |
-|`alertText`| Header for displaying alerts to the user |
+|`text`|Main application text|
+|`header`|Headers used for categorizing election result data|
+|`selectedHeader`|Header currently selected by the user|
+|`landscapeHeaderBackground`|Shown behind the headers in tablet/desktop view|
+|`alertText`|Header for displaying alerts to the user|
 
 # Setup Instructions
 
