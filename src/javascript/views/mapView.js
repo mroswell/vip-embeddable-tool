@@ -48,6 +48,14 @@ module.exports = View.extend({
 
   onBeforeRender: function(options) {
 
+    if(navigator.userAgent.match('CriOS')) {
+      $('<meta>')
+        .attr('name', 'viewport')
+        .attr('content', 'width=device-width,initial-scale=0.75')
+        .attr('id', 'viewport-mobile-web-tag')
+        .appendTo($('head'));
+    }
+
     $(this.$container).css('-webkit-overflow-scrolling', 'touch')
 
     // comb the voter id data
