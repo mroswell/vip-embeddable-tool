@@ -29,7 +29,8 @@ vit.load({
 |`smallLogo`| link to an alternative logo to display in the modal election information view|
 
 ### Colors
-You can also customize colors by passing an object to the `colors` key in the parameters of this form:
+You can also add colors by passing an object of this format to the `colors` parameter:
+
 | Key | Description |
 |-----|-------------|
 |`text`|Main application text|
