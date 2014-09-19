@@ -7,7 +7,7 @@ The Voting Information Project is developing a white-label, easily embedded web 
 ## Adding the Voter Information Tool to your page
 Append the following code to your website where you want the Voter Information Tool to appear:
 ```HTML
-<script type="text/javascript" src="http://preview.joystickinteractive.com/voter-information-project/vip-embeddable-tool/build/app.js"></script>
+<script type="text/javascript" src="//s3.amazonaws.com/vip-voter-information-tool/app.js"></script>
 <div id="_vit"></div>
 <script type="text/javascript">vit.load({});</script>
 ```
@@ -42,20 +42,10 @@ You can also add colors by passing an object of this format to the `colors` para
 |`alertText`|Header for displaying alerts to the user|
 
 ### Customization
-You can pass in the link to a json object of this format to the `json` parameter for language customization:
+For internationalization and language customization, supply a link to the `json` field containing a URL to a JSON file of the following format:
 
 ```JSON
 {
-  "logo" : "./images/voting-information-project.png",
-  "smallLogo" : "./images/vip-logo.png",
-  "colors" : {
-    "text" : "#4b4b4b",
-    "header" : "#1c7ca5",
-    "selectedHeader" : "#26a8df",
-    "landscapeHeaderBackground" : " #0f6387",
-    "alertText" : "#a30000",
-    "footer" : "#898989",
-  },
   "text" : {
     "title" : "Voter Information Tool",
     "subtitle" : "Subheader Text",
@@ -125,6 +115,26 @@ You can pass in the link to a json object of this format to the `json` parameter
   }
 }
 ```
+
+# Complete embed
+## Example
+```
+<script type="text/javascript" src="//s3.amazonaws.com/vip-voter-information-tool/app.js"></script>
+<div id="_vit"></div>
+<script type="text/javascript">vit.load({
+  modal: true,
+  officialOnly: false,
+  width: '600px',
+  height: '480px',
+  logo: 'http://yourlogourl.com/path/to/logo.jpg',
+  smallLogo: 'http://yourlogourl.com/path/to/smallLogo.jpg',
+  colors: {
+    'text': '#012345',
+    'header': '#543210'
+  }
+});</script>
+```
+
 # Source code instructions
 
 ## Setup Instructions
