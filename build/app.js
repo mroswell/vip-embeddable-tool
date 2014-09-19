@@ -10552,10 +10552,10 @@ module.exports = function(options) {
       },
       success: function(response) {
         console.log(response)
-        // if (typeof response.error !== 'undefined')
+        window.response = response
+        if (typeof response.error === 'undefined')
           options.success(response);
-        // else
-          // options.error && options.error();
+        else options.error && options.error();
       },
       timeout: 15000
   });
@@ -11069,7 +11069,7 @@ module.exports = View.extend({
 
     this.$container.css('max-width', 800);
 
-    if (this.$container.width() > 768) {
+    if (this.$container.width() > 600) {
       $('#user-image').css('max-width', '85%');
     }
 
@@ -12598,18 +12598,19 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.about)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</p>\n  <div id=\"close-button\"><img src=\"./images/plus.png\"></div>\n</div>\n<div class=\"modal\" id=\"address-not-found\">\n  <h2>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.addressNotFound)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</h2>\n  "
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.addressNotFound)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\n  <button>"
+    + "</h2>\n  ";
+  stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.addressNotFound)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n  <button>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.addressNotFound)),stack1 == null || stack1 === false ? stack1 : stack1.button)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</button>\n</div>\n<div class=\"modal\" id=\"current-location\">\n  <h2>"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.addressNotFound)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.mailInVoting)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</h2>\n  <p>"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.addressNotFound)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.mailInVoting)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</p>\n  <span>\n    <button id=\"use-registered-address\">"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.addressNotFound)),stack1 == null || stack1 === false ? stack1 : stack1.registeredAddress)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.mailInVoting)),stack1 == null || stack1 === false ? stack1 : stack1.registeredAddress)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</button>\n    <button id=\"use-current-location\">"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.addressNotFound)),stack1 == null || stack1 === false ? stack1 : stack1.currentLocation)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.mailInVoting)),stack1 == null || stack1 === false ? stack1 : stack1.currentLocation)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</button>\n  </span>\n</div>";
   return buffer;
   });

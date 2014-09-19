@@ -17,10 +17,10 @@ module.exports = function(options) {
       },
       success: function(response) {
         console.log(response)
-        // if (typeof response.error !== 'undefined')
+        window.response = response
+        if (typeof response.error === 'undefined')
           options.success(response);
-        // else
-          // options.error && options.error();
+        else options.error && options.error();
       },
       timeout: 15000
   });

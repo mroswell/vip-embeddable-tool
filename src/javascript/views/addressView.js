@@ -29,7 +29,7 @@ module.exports = View.extend({
 
     this.$container.css('max-width', 800);
 
-    if (this.$container.width() > 768) {
+    if (this.$container.width() > 600) {
       $('#user-image').css('max-width', '85%');
     }
 
