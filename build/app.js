@@ -10932,6 +10932,10 @@ module.exports = (function() {
       // $.each(options, function(option) {
       //   parseOption.call(options, option);
       // })
+
+      if (options.json !== 'undefined') {
+        $.getJSON()
+      }
       
       window.appOptions = {
         modal : typeof options.modal !== 'undefined' ? options.modal : true,
@@ -10955,7 +10959,6 @@ module.exports = (function() {
             $('#_vitModal').hide();
           }.bind(this));
           appOptions['data'] = data;
-          console.log(appOptions)
           router.navigate(mapView, addressView, appOptions);
         });
 
@@ -10980,9 +10983,9 @@ module.exports = (function() {
           } else router.navigate(mapView, mapView, appOptions);
         });
 
-      if (options.textFile) {
-        $.getJSON(options.textFile, function(newText) {
-            appOptions[assets] = newText;
+      if (options.json) {
+        $.getJSON(options.json, function(newText) {
+            appOptions['assets'] = newText;
             // figure this out.
             addressView.render(appOptions);
         });
@@ -11268,8 +11271,6 @@ var $ = require('jquery');
 var browser = require('../mobile.js');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
-
-window.$ = $;
 
 module.exports = View.extend({
 

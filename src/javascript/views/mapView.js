@@ -6,8 +6,6 @@ var browser = require('../mobile.js');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
 
-window.$ = $;
-
 module.exports = View.extend({
 
   $id : 'map-view',
