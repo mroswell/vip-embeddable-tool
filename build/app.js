@@ -11424,6 +11424,12 @@ module.exports = View.extend({
   },
 
   onAfterRender: function(options) {
+    var informationLinks = $('.information-links');
+    if (!informationLinks.val()) {
+      informationLinks.prev().hide();
+      informationLinks.hide();
+    }
+
     if (options.alert) {
       this.find('#alert')
         .find('#text')
