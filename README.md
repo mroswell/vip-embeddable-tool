@@ -118,7 +118,7 @@ For internationalization and language customization, supply a link to the `json`
 
 # Complete embed
 ## Example
-```
+```html
 <script type="text/javascript" src="//s3.amazonaws.com/vip-voter-information-tool/app.js"></script>
 <div id="_vit"></div>
 <script type="text/javascript">vit.load({
