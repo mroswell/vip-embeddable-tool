@@ -53,7 +53,8 @@ module.exports = View.extend({
       this.hasSubmitted = true;
 
       api({
-        address: enteredAddress, 
+        address: enteredAddress,
+        officialOnly: this.officialOnly,
         success: this.handleElectionData.bind(this),
         error: this.handleAddressNotFound.bind(this)
       });
@@ -122,6 +123,7 @@ module.exports = View.extend({
               function(address) {
                 api({
                   address: address,
+                  officialOnly: that.officialOnly,
                   success: function(newResponse) {
                     that.triggerRouteEvent('addressViewSubmit', newResponse);
                   },
@@ -157,7 +159,8 @@ module.exports = View.extend({
         // var id = this.find('.checked:not(.hidden)').parentNode.lastElementChild.innerHTML;
         var id = this.find('.checked:not(.hidden)').siblings('.hidden').eq(0).text();
         api({
-          address: this._parseAddress(response.normalizedInput), 
+          address: this._parseAddress(response.normalizedInput),
+          officialOnly: this.officialOnly,
           success: function(newResponse) {
             this.triggerRouteEvent('addressViewSubmit', newResponse);
           }.bind(this),

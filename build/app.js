@@ -10540,6 +10540,7 @@ module.exports = function(options) {
   // (Alaska)
   if (options.electionId) url += '&electionId=' + options.electionId;
   else url += '&electionId=2000';
+  if (options.officialOnly) url += '&officialOnly=' + options.officialOnly;
   $.support.cors = true;
   $.ajax({
       url: url,
@@ -11095,7 +11096,8 @@ module.exports = View.extend({
       this.hasSubmitted = true;
 
       api({
-        address: enteredAddress, 
+        address: enteredAddress,
+        officialOnly: this.officialOnly,
         success: this.handleElectionData.bind(this),
         error: this.handleAddressNotFound.bind(this)
       });
@@ -11164,6 +11166,7 @@ module.exports = View.extend({
               function(address) {
                 api({
                   address: address,
+                  officialOnly: that.officialOnly,
                   success: function(newResponse) {
                     that.triggerRouteEvent('addressViewSubmit', newResponse);
                   },
@@ -11199,7 +11202,8 @@ module.exports = View.extend({
         // var id = this.find('.checked:not(.hidden)').parentNode.lastElementChild.innerHTML;
         var id = this.find('.checked:not(.hidden)').siblings('.hidden').eq(0).text();
         api({
-          address: this._parseAddress(response.normalizedInput), 
+          address: this._parseAddress(response.normalizedInput),
+          officialOnly: this.officialOnly,
           success: function(newResponse) {
             this.triggerRouteEvent('addressViewSubmit', newResponse);
           }.bind(this),
@@ -12803,6 +12807,8 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   });
 
 },{"hbsfy/runtime":11}],36:[function(require,module,exports){
+var $ = require('jquery');
+
 module.exports = (function() {
   var view = {
 
@@ -12948,7 +12954,7 @@ module.exports = (function() {
     }
   }
 })(this);
-},{}],37:[function(require,module,exports){
+},{"jquery":12}],37:[function(require,module,exports){
 module.exports = [
   {
     "State":"AL",

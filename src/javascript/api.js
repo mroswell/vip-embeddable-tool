@@ -5,6 +5,7 @@ module.exports = function(options) {
   // (Alaska)
   if (options.electionId) url += '&electionId=' + options.electionId;
   else url += '&electionId=2000';
+  if (options.officialOnly) url += '&officialOnly=' + options.officialOnly;
   $.support.cors = true;
   $.ajax({
       url: url,
