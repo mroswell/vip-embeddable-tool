@@ -6,16 +6,18 @@ The Voting Information Project is developing a white-label, easily embedded web 
 # Embedding Instructions
 ## Adding the Voter Information Tool to your page
 Append the following code to your website where you want the Voter Information Tool to appear:
-    <script type="text/javascript" src="http://preview.joystickinteractive.com/voter-information-project/vip-embeddable-tool/build/app.js"></script>
-    <div id="_vit"></div>
-    <script type="text/javascript">vit.load({});</script>
-
+```
+<script type="text/javascript" src="http://preview.joystickinteractive.com/voter-information-project/vip-embeddable-tool/build/app.js"></script>
+<div id="_vit"></div>
+<script type="text/javascript">vit.load({});</script>
+```
 ## The `vit.load` method
 You can add parameters to the `vit.load` method to customize the appearance and functionality of the Voter Information Tool. They are passed into the `vit.load` method by an options object, that is, a comma-separated set of keys and string values inside the curly braces:
-    vit.load({
-      alert: "Remember to vote on Nov 7!"
-    });
-
+```
+vit.load({
+  alert: "Remember to vote on Nov 7!"
+});
+```
 ## Parameters
 + `modal` - if true, will open up in a modal box to display election information for mobile and tablet devices (defaults to true)
 + `width` - set the width of the tool (e.g., `450px`)
