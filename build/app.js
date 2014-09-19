@@ -11412,7 +11412,8 @@ module.exports = View.extend({
     var scrapeAddress = function(arr) {
       return Array.prototype.reduce.call(
         arr,
-        function(m, n) { return m + $(n).text().trim() }
+        function(m, n) { return m + $(n).text().trim() },
+        ''
       );
     }
     if (scrapeAddress($('#local-jurisdiction-correspondence-address').children().children()) 
@@ -11425,6 +11426,13 @@ module.exports = View.extend({
       $('#state-election-correspondence-address').remove();
     }
 
+    if (scrapeAddress($('#local-jurisdiction-correspondence-address').children().children()).length === 2) {
+      $('#local-jurisdiction-correspondence-address').remove();
+    }
+
+    if (scrapeAddress($('#state-election-correspondence-address').children().children()).length === 2) {
+      $('#state-election-correspondence-address').remove();
+    }
 
     var informationLinks = $('.information-links');
     if (!informationLinks.val()) {
