@@ -24,7 +24,9 @@ window.text = text;
           window.console && console.log(data);
           window.history && history.pushState && history.pushState(null, null, '?polling-location');
           $(window).on('popstate', function() {
-            router.navigate(addressView, mapView);
+            router.navigate(addressView, mapView, {
+              assets: text
+            });
             $('#_vitModal').hide();
           }.bind(this));
           router.navigate(mapView, addressView, {

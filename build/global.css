@@ -85,9 +85,6 @@ li {
   font-weight: bold;
   text-align: center; }
 
-.pac-container {
-  margin-top: -29px; }
-
 .no-scroll {
   overflow: hidden;
   position: fixed; }

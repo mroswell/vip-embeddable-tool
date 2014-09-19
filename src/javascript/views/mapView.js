@@ -170,12 +170,15 @@ module.exports = View.extend({
 
       console.log("Window width: %s, height: %s\n Screen width: %s, height: %s", width, height, screenWidth, screenHeight)
 
-      if (screenWidth < 600) {
+      if (!$('#viewport-mobile-web-tag').length) {
+        $('<meta>')
+          .attr('name', 'viewport')
+          .attr('content', 'width=device-width,initial-scale=1.0')
+          .attr('id', 'viewport-mobile-web-tag')
+          .appendTo($('head'));
+      }
 
-      this.viewportMobileWebTag = $('<meta>')
-        .attr('name', 'viewport')
-        .attr('content', 'width=device-width')
-        .appendTo($('head'));
+      if (screenWidth < 600) {
 
         var width = $(window).width()
           , height = $(window).height()
@@ -201,6 +204,11 @@ module.exports = View.extend({
             'top':((height/2) - (containerHeight/2)) + 'px',
             'left':((width/2) - (containerWidth/2)) + 'px'
           });
+
+        $('#_vitModal').css({
+          'width': width,
+          'height': height
+        })
 
         console.log("Container width: %s, and height: %s", containerWidth, containerHeight)
 
@@ -329,8 +337,7 @@ module.exports = View.extend({
 
     $('#_vitModal').remove();
 
-    $(this.viewportMobileWebTag)
-      .remove();
+    $('#viewport-mobile-web-tag').remove();
 
     $(window).off('.mapview');
   },
