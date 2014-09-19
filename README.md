@@ -19,20 +19,24 @@ vit.load({
 });
 ```
 ## Parameters
-+ `modal` - if true, will open up in a modal box to display election information for mobile and tablet devices (defaults to true)
-+ `official` - if true, will only display information from official election information sources (defaults to false)
-+ `width` - set the width of the tool (e.g., `450px`)
-+ `height` - set the height of the tool
-+ `logo` - link to an alternative logo to display at the top of the tool
-+ `smallLogo` - link to an alternative logo to display in the modal election information view
+| Key | Description |
+|-----|-------------|
+|`modal`| if true, will open up in a modal box to display election information for mobile and tablet devices (defaults to true)|
+|`official`| if true, will only display information from official election information sources (defaults to false)|
+|`width`| set the width of the tool (e.g., `450px`)|
+|`height`| set the height of the tool|
+|`logo`| link to an alternative logo to display at the top of the tool|
+|`smallLogo`| link to an alternative logo to display in the modal election information view|
 
 ### Colors
 You can also customize colors by passing an object to the `colors` key in the parameters of this form:
-+ `text` - Main application text
-+ `header` - Headers used for categorizing election result data
-+ `selectedHeader` - Header currently selected by the user
-+ `landscapeHeaderBackground` - Shown behind the headers in tablet/desktop view
-+ `alertText` - Header for displaying alerts to the user
+| Key | Description |
+|-----|-------------|
+|`text`| Main application text |
+|`header`| Headers used for categorizing election result data |
+|`selectedHeader`| Header currently selected by the user |
+|`landscapeHeaderBackground`| Shown behind the headers in tablet/desktop view |
+|`alertText`| Header for displaying alerts to the user |
 
 # Setup Instructions
 
