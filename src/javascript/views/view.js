@@ -32,6 +32,10 @@ module.exports = (function() {
       // last change
       var that = this;
       var $container = $('#_vit');
+      $container.css({
+        'position' : 'relative',
+        'border' : '1px solid #898989'
+      });
       if (options) {
         if (options.container) $container = options.container;
         if (options.data) this.data = options.data;

@@ -9,17 +9,11 @@ module.exports = (function() {
   var text             = require('./config.js');
   var $ = require('jquery');
 
-  // function parseOption(option, defaultVal) {
-    // var val = (typeof defaultVal !== 'undefined' ? defaultVal : null);
-    // if (typeof this[option] !== 'undefined') ?  : null;
-  // }
-  
-
   return {
     start: function(options) {
       var router = this;
       
-      window.appOptions = {
+      var appOptions = {
         modal : typeof options.modal !== 'undefined' ? options.modal : true,
         officialOnly : typeof options.officialOnly !== 'undefined' ? options.officialOnly : 'false',
         alert : typeof options.alert !== 'undefined' ? options.alert : null,
@@ -68,14 +62,9 @@ module.exports = (function() {
       if (options.json) {
         $.getJSON(options.json, function(newText) {
             appOptions['assets'] = newText;
-            // figure this out.
             addressView.render(appOptions);
         });
-      } else {
-        addressView.render(appOptions);
-      }
-
-
+      } else addressView.render(appOptions);
     },
 
     navigate: function(toView, fromView, options) {

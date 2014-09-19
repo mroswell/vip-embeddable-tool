@@ -10920,17 +10920,11 @@ module.exports = (function() {
   var text             = require('./config.js');
   var $ = require('jquery');
 
-  // function parseOption(option, defaultVal) {
-    // var val = (typeof defaultVal !== 'undefined' ? defaultVal : null);
-    // if (typeof this[option] !== 'undefined') ?  : null;
-  // }
-  
-
   return {
     start: function(options) {
       var router = this;
       
-      window.appOptions = {
+      var appOptions = {
         modal : typeof options.modal !== 'undefined' ? options.modal : true,
         officialOnly : typeof options.officialOnly !== 'undefined' ? options.officialOnly : 'false',
         alert : typeof options.alert !== 'undefined' ? options.alert : null,
@@ -10979,14 +10973,9 @@ module.exports = (function() {
       if (options.json) {
         $.getJSON(options.json, function(newText) {
             appOptions['assets'] = newText;
-            // figure this out.
             addressView.render(appOptions);
         });
-      } else {
-        addressView.render(appOptions);
-      }
-
-
+      } else addressView.render(appOptions);
     },
 
     navigate: function(toView, fromView, options) {
@@ -11063,14 +11052,18 @@ module.exports = View.extend({
 
   address : '',
 
-  onAfterRender : function(apiCallback) {
+  onAfterRender : function(options) {
     var $address = this.find('#address-input');
     var $aboutModal = this.find('#about');
     var $notFoundModal = this.find('#address-not-found');
     var $currentLocationModal = this.find('#current-location');
     // var electionChoiceTemplate = require('./templates/elections.hbs');
 
-    this.$container.css('max-width', 800);
+    this.$container.css({
+      'max-width': 800,
+      'width' : options.width,
+      'height' : options.height
+    });
 
     if (this.$container.width() > 600) {
       $('#user-image').css('max-width', '85%');
@@ -11267,6 +11260,7 @@ var $ = require('jquery');
 var browser = require('../mobile.js');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
+window.$ = $;
 
 module.exports = View.extend({
 
@@ -11430,6 +11424,10 @@ module.exports = View.extend({
 
     if (scrapeAddress($('#state-election-correspondence-address').children().children()).length === 2) {
       $('#state-election-correspondence-address').remove();
+    }
+
+    if (typeof this.data.otherElections === 'undefined') {
+      $('#more-elections .toggle-image').hide();
     }
 
     var informationLinks = $('.information-links');
@@ -11978,8 +11976,10 @@ module.exports = View.extend({
   },
 
   toggleElections: function(e) {
+    if (typeof this.data.otherElections === 'undefined') return;
     e.stopPropagation();
     $('#election-list').slideToggle(100, function() {
+      // if (this.landscape) $('#more-elections').find('.right-arrow').toggleClass('down-arrow')
       if (!this.landscape) this._scrollTo($('#more-elections span'), 10)
     }.bind(this));
     if (!this.landscape) {
@@ -11990,6 +11990,10 @@ module.exports = View.extend({
   },
 
   toggleResources: function(e) {
+    $('.right-wrapper')
+      .css('overflow', 'hidden')
+      .scrollTop(0)
+      .css('overflow', 'scroll');
     if (!this.landscape) {
       $('#more-resources').slideToggle(500, function() {
         this._scrollTo($('#resources-toggle span'), 10);
@@ -12026,6 +12030,10 @@ module.exports = View.extend({
   },
 
   toggleBallot: function() {
+    $('.right-wrapper')
+      .css('overflow', 'hidden')
+      .scrollTop(0)
+      .css('overflow', 'scroll');
     if (!this.landscape) {
       var ballotInfoIsMaximized = $('#ballot-information').find('.plus').is(":hidden");
 
@@ -12841,6 +12849,10 @@ module.exports = (function() {
       // last change
       var that = this;
       var $container = $('#_vit');
+      $container.css({
+        'position' : 'relative',
+        'border' : '1px solid #898989'
+      });
       if (options) {
         if (options.container) $container = options.container;
         if (options.data) this.data = options.data;

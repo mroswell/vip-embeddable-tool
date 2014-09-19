@@ -5,6 +5,7 @@ var $ = require('jquery');
 var browser = require('../mobile.js');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
+window.$ = $;
 
 module.exports = View.extend({
 
@@ -168,6 +169,10 @@ module.exports = View.extend({
 
     if (scrapeAddress($('#state-election-correspondence-address').children().children()).length === 2) {
       $('#state-election-correspondence-address').remove();
+    }
+
+    if (typeof this.data.otherElections === 'undefined') {
+      $('#more-elections .toggle-image').hide();
     }
 
     var informationLinks = $('.information-links');
@@ -716,8 +721,10 @@ module.exports = View.extend({
   },
 
   toggleElections: function(e) {
+    if (typeof this.data.otherElections === 'undefined') return;
     e.stopPropagation();
     $('#election-list').slideToggle(100, function() {
+      // if (this.landscape) $('#more-elections').find('.right-arrow').toggleClass('down-arrow')
       if (!this.landscape) this._scrollTo($('#more-elections span'), 10)
     }.bind(this));
     if (!this.landscape) {
@@ -728,6 +735,10 @@ module.exports = View.extend({
   },
 
   toggleResources: function(e) {
+    $('.right-wrapper')
+      .css('overflow', 'hidden')
+      .scrollTop(0)
+      .css('overflow', 'scroll');
     if (!this.landscape) {
       $('#more-resources').slideToggle(500, function() {
         this._scrollTo($('#resources-toggle span'), 10);
@@ -764,6 +775,10 @@ module.exports = View.extend({
   },
 
   toggleBallot: function() {
+    $('.right-wrapper')
+      .css('overflow', 'hidden')
+      .scrollTop(0)
+      .css('overflow', 'scroll');
     if (!this.landscape) {
       var ballotInfoIsMaximized = $('#ballot-information').find('.plus').is(":hidden");
 

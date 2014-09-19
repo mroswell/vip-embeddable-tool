@@ -20,14 +20,18 @@ module.exports = View.extend({
 
   address : '',
 
-  onAfterRender : function(apiCallback) {
+  onAfterRender : function(options) {
     var $address = this.find('#address-input');
     var $aboutModal = this.find('#about');
     var $notFoundModal = this.find('#address-not-found');
     var $currentLocationModal = this.find('#current-location');
     // var electionChoiceTemplate = require('./templates/elections.hbs');
 
-    this.$container.css('max-width', 800);
+    this.$container.css({
+      'max-width': 800,
+      'width' : options.width,
+      'height' : options.height
+    });
 
     if (this.$container.width() > 600) {
       $('#user-image').css('max-width', '85%');
