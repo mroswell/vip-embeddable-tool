@@ -10617,8 +10617,8 @@ module.exports = {
       "text" : "For the most complete and up to date information, consult your local election official."
     },
     "addressNotFound" : {
-      "title" : "No Information Found",
-      "text" : "You entered:<h1>1234 Main St<br>New York, NY 10000</h1>We couldn't find any election information for the address you entered. Please check to make sure you entered it correctly.",
+      "title" : "No Upcoming Elections Found",
+      "text" : "You entered:<h1>1234 Main St<br>New York, NY 10000</h1>We couldn't find any upcoming elections for the address you entered. Please check to make sure you entered it correctly, or try again closer to Election Day. Information will be available 2 - 4 weeks prior to the election.",
       "button" : "Try Again"
     },
     "mailInVoting" : {
