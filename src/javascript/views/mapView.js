@@ -101,21 +101,6 @@ module.exports = View.extend({
         delete options.data.state[0].electionAdministrationBody.correspondenceAddress;
       }
     }
-    if (state.local_jurisdiction &&
-        state.local_jurisdiction.correspondenceAddress &&
-        state.local_jurisdiction.physicalAddress) {
-      // delete duplicate local jurisdiction addresses
-      var correspondenceAddress = this._parseAddress(
-        state.local_jurisdiction.electionAdministrationBody.correspondenceAddress
-      );
-      var physicalAddress = this._parseAddress(
-        state.local_jurisdiction.electionAdministrationBody.physicalAddress
-      );
-
-      if (correspondenceAddress === physicalAddress) {
-        delete options.data.state[0].electionAdministrationBody.correspondenceAddress;
-      }
-    }
 
     // WA / OR mail-in case
     if (state.name === 'Washington' || state.name === 'Oregon') {
@@ -162,6 +147,23 @@ module.exports = View.extend({
   },
 
   onAfterRender: function(options) {
+    var scrapeAddress = function(arr) {
+      return Array.prototype.reduce.call(
+        arr,
+        function(m, n) { return m + $(n).text().trim() }
+      );
+    }
+    if (scrapeAddress($('#local-jurisdiction-correspondence-address').children().children()) 
+      === scrapeAddress($('#local-jurisdiction-physical-address').children().children())) {
+      $('#local-jurisdiction-correspondence-address').remove();
+    }
+
+    if (scrapeAddress($('#state-election-correspondence-address').children().children()) 
+      === scrapeAddress($('#state-election-physical-address').children().children())) {
+      $('#state-election-correspondence-address').remove();
+    }
+
+
     var informationLinks = $('.information-links');
     if (!informationLinks.val()) {
       informationLinks.prev().hide();

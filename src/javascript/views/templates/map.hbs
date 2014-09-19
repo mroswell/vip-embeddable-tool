@@ -90,14 +90,22 @@
   <b>{{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}</b>
   <b>{{ data.state.0.local_jurisdiction.name }}</b><br>
   {{ data.state.0.local_jurisdiction.electionAdministrationBody.hoursOfOperation }}
+  <div id="local-jurisdiction-correspondence-address">
   {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
+  </div>
+  <div id="local-jurisdiction-physical-address">
   {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.physicalAddress }}
+  </div>
   <br>
   <h1>{{assets.text.resources.electionAdministration.stateElectionsOffice}}</h1>
   <b>{{ data.state.0.electionAdministrationBody.name }}</b>
   {{ data.state.0.electionAdministrationBody.hoursOfOperation }}
+  <div id="state-election-correspondence-address">
   {{> normalized-address data.state.0.electionAdministrationBody.correspondenceAddress }}
+  </div>
+  <div id="state-election-physical-address">
   {{> normalized-address data.state.0.electionAdministrationBody.physicalAddress }}
+  </div>
   </div>
   <div class="subsection box">
   {{assets.text.resources.moreResources.title}}

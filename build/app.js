@@ -11363,21 +11363,6 @@ module.exports = View.extend({
         delete options.data.state[0].electionAdministrationBody.correspondenceAddress;
       }
     }
-    if (state.local_jurisdiction &&
-        state.local_jurisdiction.correspondenceAddress &&
-        state.local_jurisdiction.physicalAddress) {
-      // delete duplicate local jurisdiction addresses
-      var correspondenceAddress = this._parseAddress(
-        state.local_jurisdiction.electionAdministrationBody.correspondenceAddress
-      );
-      var physicalAddress = this._parseAddress(
-        state.local_jurisdiction.electionAdministrationBody.physicalAddress
-      );
-
-      if (correspondenceAddress === physicalAddress) {
-        delete options.data.state[0].electionAdministrationBody.correspondenceAddress;
-      }
-    }
 
     // WA / OR mail-in case
     if (state.name === 'Washington' || state.name === 'Oregon') {
@@ -11424,6 +11409,23 @@ module.exports = View.extend({
   },
 
   onAfterRender: function(options) {
+    var scrapeAddress = function(arr) {
+      return Array.prototype.reduce.call(
+        arr,
+        function(m, n) { return m + $(n).text().trim() }
+      );
+    }
+    if (scrapeAddress($('#local-jurisdiction-correspondence-address').children().children()) 
+      === scrapeAddress($('#local-jurisdiction-physical-address').children().children())) {
+      $('#local-jurisdiction-correspondence-address').remove();
+    }
+
+    if (scrapeAddress($('#state-election-correspondence-address').children().children()) 
+      === scrapeAddress($('#state-election-physical-address').children().children())) {
+      $('#state-election-correspondence-address').remove();
+    }
+
+
     var informationLinks = $('.information-links');
     if (!informationLinks.val()) {
       informationLinks.prev().hide();
@@ -12252,25 +12254,25 @@ function program5(depth0,data) {
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.local_jurisdiction)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</b><br>\n  "
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.local_jurisdiction)),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.hoursOfOperation)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\n  ";
+    + "\n  <div id=\"local-jurisdiction-correspondence-address\">\n  ";
   stack1 = self.invokePartial(partials['normalized-address'], 'normalized-address', ((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.local_jurisdiction)),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.correspondenceAddress), helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  ";
+  buffer += "\n  </div>\n  <div id=\"local-jurisdiction-physical-address\">\n  ";
   stack1 = self.invokePartial(partials['normalized-address'], 'normalized-address', ((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.local_jurisdiction)),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.physicalAddress), helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  <br>\n  <h1>"
+  buffer += "\n  </div>\n  <br>\n  <h1>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministration)),stack1 == null || stack1 === false ? stack1 : stack1.stateElectionsOffice)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</h1>\n  <b>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.name)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</b>\n  "
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.hoursOfOperation)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\n  ";
+    + "\n  <div id=\"state-election-correspondence-address\">\n  ";
   stack1 = self.invokePartial(partials['normalized-address'], 'normalized-address', ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.correspondenceAddress), helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  ";
+  buffer += "\n  </div>\n  <div id=\"state-election-physical-address\">\n  ";
   stack1 = self.invokePartial(partials['normalized-address'], 'normalized-address', ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.data)),stack1 == null || stack1 === false ? stack1 : stack1.state)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.electionAdministrationBody)),stack1 == null || stack1 === false ? stack1 : stack1.physicalAddress), helpers, partials, data);
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  </div>\n  <div class=\"subsection box\">\n  "
+  buffer += "\n  </div>\n  </div>\n  <div class=\"subsection box\">\n  "
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.assets)),stack1 == null || stack1 === false ? stack1 : stack1.text)),stack1 == null || stack1 === false ? stack1 : stack1.resources)),stack1 == null || stack1 === false ? stack1 : stack1.moreResources)),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\n  </div>\n  <div class=\"box information-links\">\n  \n  ";
   stack1 = self.invokePartial(partials['election-administration-body'], 'election-administration-body', depth0, helpers, partials, data);
