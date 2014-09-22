@@ -15,14 +15,14 @@ Append the following code to your website where you want the Voter Information T
 You can add parameters to the `vit.load` method to customize the appearance and functionality of the Voter Information Tool. They are passed into the `vit.load` method by an options object, that is, a comma-separated set of keys and string values inside the curly braces:
 ```JavaScript
 vit.load({
-  alert: "Remember to vote on Nov 7!"
+  alert: "Remember to vote on Nov 4!"
 });
 ```
 ## Parameters
 | Key | Description |
 |-----|-------------|
 |`modal`| if true, will open up in a modal box to display election information for mobile and tablet devices (defaults to true)|
-|`officialOnly`| if true, will only display information from official election information sources (defaults to false)|
+|`officialOnly`| if true, will only display information from official election information sources (defaults to true)|
 |`width`| set the width of the tool (e.g., `450px`); the default width is `640px` |
 |`height`| set the height of the tool (the default height is `480px`)|
 |`logo`| link to an alternative logo to display at the top of the tool|
