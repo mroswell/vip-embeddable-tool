@@ -1,95 +1,8 @@
 @import 'variables'
 @import 'compass/css3'
 
-*, *:before, *:after
-  outline: none
-  @include box-sizing(border-box)
-  -webkit-tap-highlight-color: transparent
 
-body
-  margin: 0
-  font-family: 'Roboto', sans-serif
-  color: $text
-
-input[type=text]
-  padding: 12px 0 12px 34px
-  border: 1px solid $border
-  border-radius: 4px
-  font-size: 16px
-  font-family: sans-serif
-  color: $input-text
-  color: $text
-  width: 100%
-  background-color: $input-background
-  @include box-shadow(1px 1px 6px 0px #ccc)
-
-input:focus
-  outline: none
-
-a
-  color: #333
-  text-decoration: none
-
-  &:focus
-    color: #333
-//  display: block
-//  margin-left: 45%
-//  color: $darkgray
-//  font-size: 13px
-//  border-bottom: 1px solid $darkgray
-
-button
-  padding: 10px 20px
-  border: 0
-  background: $blue
-  color: white
-  text-transform: uppercase
-  font-size: 12px
-
-li
-  margin: 15px
-
-.box
-  // border-bottom: 1px solid $border
-  padding: 15px
-
-.container
-  margin: 0 auto
-  width: 85%
-  @include box-shadow(0px, 2px, 2px, 0px, rgba(50, 50, 50, 0.25))
-
-.container:first-child
-  margin-top: 30px
-
-.footer
-  font-weight: bold
-  position: absolute
-  width: 100%
-  height: 40px
-  padding: 10px 40px 10px 20px
-  color: white
-  font-size: 11px
-  background-color: $text
-
-  span
-    letter-spacing: -0.3px
-    position: absolute
-    width: 75%
-    @include translate(0%, -50%)
-    top: 50%
-
-.bottom
-  padding: 5px 0
-  bottom: 0
-  color: white
-  background-color: $darkgray
-  font-size: 8px
-  font-weight: bold
-  text-align: center
-
-.pac-container
-  //margin-top: -29px
-//  margin-left: 1px
+// global styles added to html, body, vit elements
 
 .no-scroll
   overflow: hidden
@@ -116,97 +29,144 @@ li
   overflow: hidden !important
   min-height: 520px !important
 
-.modal
-  display: none
-  position: absolute
-  background-color: white
-  border: 1px solid $border
-  padding: 15px
-  width: 95%
-  left: 50%
-  top: 50%
-  @include translate(-50%, -50%)
-  z-index: 3
-  overflow: hidden
-  @include box-shadow(0 3px 2px 0 rgba(50,50,50,0.45))
+#_vit
+  font-family: 'Roboto', sans-serif
+  color: $text
 
-  h2
-    color: $blue
-    margin: 20px 0
+  *, *:before, *:after
+    outline: none
+    @include box-sizing(border-box)
+    -webkit-tap-highlight-color: transparent
 
-.radio
-  @include inline-block
-  width: 18px
-  height: 18px
-  @include border-radius(18px)
-  border: 2px solid white
-  background-color: transparent
+  input[type=text]
+    padding: 12px 0 12px 34px
+    border: 1px solid $border
+    border-radius: 4px
+    font-size: 16px
+    font-family: sans-serif
+    color: $input-text
+    color: $text
+    width: 100%
+    background-color: $input-background
+    @include box-shadow(1px 1px 6px 0px #ccc)
 
-  .radio-selected
+    &:focus
+      outline: none
+
+  a
+    color: #333
+    text-decoration: none
+
+    &:focus
+      color: #333
+
+  button
+    padding: 10px 20px
+    border: 0
+    background: $blue
+    color: white
+    text-transform: uppercase
+    font-size: 12px
+
+  li
+    margin: 15px
+
+  .box
+    padding: 15px
+
+  .container
+    margin: 0 auto
+    width: 85%
+    @include box-shadow(0px, 2px, 2px, 0px, rgba(50, 50, 50, 0.25))
+
+  .container:first-child
+    margin-top: 30px
+
+  .footer
+    font-weight: bold
+    position: absolute
+    width: 100%
+    height: 40px
+    padding: 10px 40px 10px 20px
+    color: white
+    font-size: 11px
+    background-color: $text
+
+    span
+      letter-spacing: -0.3px
+      position: absolute
+      width: 75%
+      @include translate(0%, -50%)
+      top: 50%
+
+  .bottom
+    padding: 5px 0
+    bottom: 0
+    color: white
+    background-color: $darkgray
+    font-size: 8px
+    font-weight: bold
+    text-align: center
+
+  .modal
     display: none
-    margin: 1px
+    position: absolute
     background-color: white
-    width: 12px
-    height: 12px
-    border-radius: 12px
+    border: 1px solid $border
+    padding: 15px
+    width: 95%
+    left: 50%
+    top: 50%
+    @include translate(-50%, -50%)
+    z-index: 3
+    overflow: hidden
+    @include box-shadow(0 3px 2px 0 rgba(50,50,50,0.45))
 
-  &.checked
+    h2
+      color: $blue
+      margin: 20px 0
+
+  .radio
+    @include inline-block
+    width: 18px
+    height: 18px
+    @include border-radius(18px)
+    border: 2px solid white
+    background-color: transparent
+
     .radio-selected
-      display: block
+      display: none
+      margin: 1px
+      background-color: white
+      width: 12px
+      height: 12px
+      border-radius: 12px
 
+    &.checked
+      .radio-selected
+        display: block
 
-.right-arrow
-  // float: right
-  // width: 0
-  // height: 0
-  // margin-left: 20px
-  // @include translateY(-50%)
-  // border-top: 8px solid transparent
-  // border-bottom: 8px solid transparent
-  // border-left: 8px solid $blue
+  .magnifying-glass
+    position: relative
+    width: 18px
+    top: -32px
+    left: 10px
+    stroke: $magnifying-glass
 
-.right-inner-arrow
-  position: relative
-  left: -3px
-  border-left: 8px solid white
+  .hidden
+    display: none
 
-.nav
-  margin-bottom: 3px
-  padding: 15px
-  color: #b9b9b9
-  @include box-shadow(0, 3px, 2px, 0, rgba(50,50,50,0.45))
-
-.left-arrow
-  //@include inline-block
-  //width: 0
-  //height: 0
-  //margin-left: 14px
-  //margin-right: 7px
-  //border-top: 6px solid transparent
-  //border-bottom: 6px solid transparent
-  //border-right: 10px solid #b9b9b9
-
-.magnifying-glass
-  position: relative
-  width: 18px
-  top: -32px
-  left: 10px
-  stroke: $magnifying-glass
-
-.hidden
-  display: none
-
-#fade
-  display: none
-  position: absolute
-  left: 0
-  top: 0
-  width: 100%
-  height: 100%
-  background-color: black
-  opacity: .35
-  z-index: 2
+  #fade
+    display: none
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    background-color: black
+    opacity: .35
+    z-index: 2
 
 @media screen and (max-device-width: 480px)
-  body
+  #_vit
     -webkit-text-size-adjust: none

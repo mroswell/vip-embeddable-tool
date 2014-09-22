@@ -23,10 +23,13 @@ vit.load({
 |-----|-------------|
 |`modal`| if true, will open up in a modal box to display election information for mobile and tablet devices (defaults to true)|
 |`officialOnly`| if true, will only display information from official election information sources (defaults to false)|
-|`width`| set the width of the tool (e.g., `450px`)|
-|`height`| set the height of the tool|
+|`width`| set the width of the tool (e.g., `450px`); the default width is `640px` |
+|`height`| set the height of the tool (the default height is `480px`)|
 |`logo`| link to an alternative logo to display at the top of the tool|
 |`smallLogo`| link to an alternative logo to display in the modal election information view|
+|`title`| text appearing beneath the logo of the tool (defaults to `Voter Information Tool`)|
+|`subtitle`|text appearing beneath the title (defaults to nothing)|
+|`language`| set to `en` by default|
 |`colors`| custom colors (detailed in the next section)|
 |`json`|Language and other customization via a link to a JSON object (detailed in the following section)|
 

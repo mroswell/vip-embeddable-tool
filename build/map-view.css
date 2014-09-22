@@ -25,18 +25,6 @@
   #add-to-calendar-dropdown .icon-outlook {
     border-bottom: 1px solid #898989; }
 
-.container-modal-show {
-  position: fixed;
-  z-index: 999;
-  margin-top: 0; }
-
-.map-view-modal-show {
-  position: absolute; }
-
-.body-modal-show {
-  position: fixed;
-  width: 100%; }
-
 .radio {
   margin: -5px 10px 0; }
 
@@ -47,11 +35,6 @@
   -webkit-transition: height, 200ms, ease-in-out;
   transition: height, 200ms, ease-in-out; }
 
-#map-view:after {
-  content: "";
-  display: table;
-  clear: both; }
-
 #map-view {
   display: table;
   z-index: 999;
@@ -59,6 +42,10 @@
   width: 100%;
   background-color: white;
   position: absolute; }
+  #map-view:after {
+    content: "";
+    display: table;
+    clear: both; }
   #map-view button {
     position: absolute;
     left: 2px;
@@ -89,8 +76,8 @@
     -moz-border-radius: 1px;
     -webkit-border-radius: 1px;
     border-radius: 1px; }
-  #map-view .address .address-name,
-  #map-view .address .address-line {
+  #map-view .address-name,
+  #map-view .address-line {
     text-transform: capitalize;
     font-size: 22px;
     color: #333333; }
@@ -204,7 +191,10 @@
     display: none;
     padding: 0 20px;
     overflow: hidden; }
-  #map-view #more-elections, #map-view #polling-location, #map-view #resources-toggle, #map-view #ballot-information {
+  #map-view #more-elections,
+  #map-view #polling-location,
+  #map-view #resources-toggle,
+  #map-view #ballot-information {
     cursor: pointer; }
   #map-view #more-resources {
     overflow: hidden; }
@@ -237,9 +227,8 @@
       cursor: pointer; }
       #map-view #alert #alert-close img {
         width: 100%; }
-
-.footer {
-  z-index: 2; }
+  #map-view .footer {
+    z-index: 2; }
 
 #map-view #alert {
   position: absolute; }

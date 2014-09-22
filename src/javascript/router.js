@@ -1,13 +1,10 @@
 module.exports = (function() {
-  var currentView;
-  var data;
-  var elections;
-  var $container       = document.body;
-  var addressView      = require('./views/addressView.js');
-  var mapView          = require('./views/mapView.js');
-  var apiRequest       = require('./api.js');
-  var text             = require('./config.js');
-  var $ = require('jquery');
+  var data
+    , addressView = require('./views/addressView.js')
+    , mapView     = require('./views/mapView.js')
+    , apiRequest  = require('./api.js')
+    , text        = require('./config.js')
+    , $           = require('jquery');
 
   return {
     start: function(options) {
@@ -15,15 +12,17 @@ module.exports = (function() {
       
       var appOptions = {
         modal : typeof options.modal !== 'undefined' ? options.modal : true,
-        officialOnly : typeof options.officialOnly !== 'undefined' ? options.officialOnly : 'false',
+        officialOnly : typeof options.officialOnly !== 'undefined' ? options.officialOnly : true,
         alert : typeof options.alert !== 'undefined' ? options.alert : null,
+        title : typeof options.title !== 'undefined' ? options.title : 'Voter Information Tool',
+        subtitle: typeof options.subtitle !== 'undefined' ? options.subtitle : '',
         logo : typeof options.logo  !== 'undefined' ? options.logo : './images/voter-information-project.png',
         smallLogo : typeof options.smallLogo !== 'undefined' ? options.smallLogo : './images/vip-logo.png',
+        language: typeof options.language !== 'undefined' ? options.language : 'en',
         width : typeof options.width !== 'undefined' ? options.width : 640,
         height : typeof options.height !== 'undefined' ? options.height : 480,
         assets : text
       };
-      // var colors = typeof options.colors !== 'undefined' ? options.colors : 
 
       addressView
         .onRouteEvent('addressViewSubmit', function(response) {
