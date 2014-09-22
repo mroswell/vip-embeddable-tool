@@ -23,7 +23,7 @@ gulp.task('browserify', function() {
   var bundler = bundleMethod({
     entries: ['./src/javascript/app.js'],
     extensions: ['.js', '.hbs'],
-    debug: true
+    debug: false
   });
 
   var bundle = function() {

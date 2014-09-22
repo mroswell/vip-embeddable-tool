@@ -11,7 +11,6 @@
 <div class="box left">
   {{> address data.normalizedInput }}
   <input type="text" class="change-address" placeholder="Enter a different address">
-  {{!-- <img src="images/magnifying-glass.svg" class="magnifying-glass change-address"> --}}
 </div>
 
 <div class="info box left" id="more-elections">
@@ -42,14 +41,6 @@
 <div class="box left" id="chosen-election">
   {{>election data.election}}
   <div id="calendar-icon" title="{{ data.election.name }}" class="addthisevent" style="background-image: url('./images/calendar.png'); float: right; margin-top: -30px; margin-right: 2px; background-color: transparent; border: 0; height: 20px; width: 20px; background-size: contain; padding: 0; background-position: center;">
-
-<!--       <span class="_start"> {{data.election.dateForCalendar }}</span>
-      <span class="_end"> {{data.election.dateForCalendar }}</span>
-      <span class="_summary">{{ data.election.name }}</span>
-      <span class="_description">{{ data.election.name }}</span>
-      <span class="_location">{{> address data.pollingLocations.0.address }}</span>
-      <span class="_all_day_event">true</span>
-      <span class="_date_format">MM/DD/YYYY</span> -->
   </div> 
 </div>
 
@@ -79,7 +70,7 @@
   </span>
 </div>
 <div class="box information-items right" id="about-resources">
-  {{assets.text.resources.summary}}
+  <span>{{assets.text.resources.summary}}</span>
 </div>
 <div id="more-resources" class="right">
   <div class="subsection box">
@@ -111,7 +102,6 @@
   {{assets.text.resources.moreResources.title}}
   </div>
   <div class="box information-links">
-  {{!-- {{> election-administration-body data.state.0.electionAdministrationBody }} --}}
   {{> election-administration-body }}
   </div>
   <div class="subsection box">

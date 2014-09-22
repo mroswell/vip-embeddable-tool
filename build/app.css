@@ -227,8 +227,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 
 .landscape#map-view {
   height: 100%; }
-  .landscape#map-view #about-resources {
-    padding-left: 25px; }
   .landscape#map-view .footer {
     bottom: 0; }
   .landscape#map-view .info {
@@ -289,6 +287,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     background-color: #26a8df; }
   .landscape#map-view #current-location button {
     margin: 10px 25px 0 90px; }
+  .landscape#map-view #about-resources {
+    padding-left: 30px; }
 
 h1 {
   font-size: 22px; }
@@ -647,6 +647,8 @@ h1 {
       margin-right: 2px; }
     #map-view #chosen-election .date {
       font-size: 16px; }
+  #map-view .address-line {
+    font-size: 16px; }
   #map-view #location .address-line {
     font-size: 16px; }
   #map-view #location span {

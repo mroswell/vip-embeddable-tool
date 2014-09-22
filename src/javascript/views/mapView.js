@@ -389,6 +389,7 @@ module.exports = View.extend({
     $('.left-wrapper').wrapAll('<div class="left-overflow-wrapper">');
     $('.left-wrapper').prepend('<div class="left box" id="vip-logo">');
     $('.left-wrapper').append('<div class="dark-blue-box"/>');
+    $('#about-resources').css('padding-left', '30px');
     $('.right').wrapAll($('<div class="right-wrapper" />'));
     $('.toggle-image.plus').attr('src', './images/left-arrow-white.png').addClass('arrow right-arrow');
     $('.toggle-image.minus').attr('src', './images/right-arrow-white.png').addClass('arrow left-arrow');

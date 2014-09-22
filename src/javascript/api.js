@@ -17,8 +17,9 @@ module.exports = function(options) {
         options.error && options.error();
       },
       success: function(response) {
-        if (typeof response.error === 'undefined')
+        if (typeof response.error === 'undefined') {
           options.success(response);
+        }
         else options.error && options.error();
       }
   });

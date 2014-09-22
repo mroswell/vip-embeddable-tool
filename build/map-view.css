@@ -173,6 +173,8 @@
       margin-right: 2px; }
     #map-view #chosen-election .date {
       font-size: 16px; }
+  #map-view .address-line {
+    font-size: 16px; }
   #map-view #location .address-line {
     font-size: 16px; }
   #map-view #location span {

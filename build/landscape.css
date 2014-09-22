@@ -7,8 +7,6 @@
 
 .landscape#map-view {
   height: 100%; }
-  .landscape#map-view #about-resources {
-    padding-left: 25px; }
   .landscape#map-view .footer {
     bottom: 0; }
   .landscape#map-view .info {
@@ -69,5 +67,7 @@
     background-color: #26a8df; }
   .landscape#map-view #current-location button {
     margin: 10px 25px 0 90px; }
+  .landscape#map-view #about-resources {
+    padding-left: 30px; }
 
 /*# sourceMappingURL=landscape.css.map */
