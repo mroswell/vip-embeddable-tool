@@ -2,7 +2,6 @@ var View = require('./view.js');
 var api  = require('../api.js');
 var voterIdData = require('../voterIdData.js');
 var $ = require('jquery');
-var browser = require('../mobile.js');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
 
@@ -278,15 +277,17 @@ module.exports = View.extend({
     if (options.data.pollingLocations && options.data.pollingLocations.length) {
       var primaryLocation = options.data.pollingLocations[0];
       var address = this._parseAddress(primaryLocation.address);
+      var daddr = this._parseAddressWithoutName(primaryLocation.address)
+      var saddr = this._parseAddressWithoutName(options.data.normalizedInput);
 
       this._encodeAddressAndInitializeMap(primaryLocation.address);
 
-      this.find('#location a').attr('href', 'https://maps.google.com?daddr=' + address);
+      this.find('#location a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
 
       primaryLocation.hours = "9am - 5pm";
       var $locationInfo = $(this.pollingLocationPartial(primaryLocation));
       this.find('#location').append($locationInfo);
-      $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + address);
+      $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
       $locationInfo.hide();
 
       if (options.data.pollingLocations.length > 1) {
