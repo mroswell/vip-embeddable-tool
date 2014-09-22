@@ -1,18 +1,18 @@
-Voter Information Tool
+Voting Information Tool
 ======================
 
 The Voting Information Project is developing a white-label, easily embedded web tool that will provide voters with ballot and polling place information based on their registered address.
 
 # Embedding Instructions
 ## Adding the Voter Information Tool to your page
-Append the following code to your website where you want the Voter Information Tool to appear:
+Append the following code to your website where you want the Voting Information Tool to appear:
 ```HTML
 <script type="text/javascript" src="//s3.amazonaws.com/vip-voter-information-tool/app.js"></script>
 <div id="_vit"></div>
 <script type="text/javascript">vit.load({});</script>
 ```
 ## The `vit.load` method
-You can add parameters to the `vit.load` method to customize the appearance and functionality of the Voter Information Tool. They are passed into the `vit.load` method by an options object, that is, a comma-separated set of keys and string values inside the curly braces:
+You can add parameters to the `vit.load` method to customize the appearance and functionality of the Voting Information Tool. They are passed into the `vit.load` method by an options object, that is, a comma-separated set of keys and string values inside the curly braces:
 ```JavaScript
 vit.load({
   alert: "Remember to vote on Nov 4!"
@@ -27,7 +27,7 @@ vit.load({
 |`height`| set the height of the tool (the default height is `480px`)|
 |`logo`| link to an alternative logo to display at the top of the tool|
 |`smallLogo`| link to an alternative logo to display in the modal election information view|
-|`title`| text appearing beneath the logo of the tool (defaults to `Voter Information Tool`)|
+|`title`| text appearing beneath the logo of the tool (defaults to `Voting Information Tool`)|
 |`subtitle`|text appearing beneath the title (defaults to nothing)|
 |`language`| set to `en` by default|
 |`colors`| custom colors (detailed in the next section)|
@@ -50,12 +50,9 @@ For internationalization and language customization, supply a link to the `json`
 ```JSON
 {
   "text" : {
-    "title" : "Voter Information Tool",
-    "subtitle" : "Subheader Text",
     "summary" : "Find out about ballot information, polling location, early voting, ID requirements and more...",
-
     "about" : {
-      "title" : "About the Voter Information Tool",
+      "title" : "About the Voting Information Tool",
       "content" : "The Voting Information Project (VIP) works to connect voters with the essential information needed to cast their ballot, such as where to vote and what is on the ballot. It is a project between The Pew Charitable Trusts, Google, and the states. Launched in 2008, VIP works with state and local election officials to provide official election information to citizens through a variety of means, including the Google Civic Information API. The Voting Information Tool is one of the many made available through VIP, ensuring official election information is accessible to voters before and on Election Day."
     },
     "footer" : {
@@ -126,7 +123,7 @@ For internationalization and language customization, supply a link to the `json`
 <div id="_vit"></div>
 <script type="text/javascript">vit.load({
   modal: true,
-  officialOnly: false,
+  officialOnly: true,
   width: '600px',
   height: '480px',
   logo: 'http://yourlogourl.com/path/to/logo.jpg',

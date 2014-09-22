@@ -14,7 +14,7 @@ module.exports = (function() {
         modal : typeof options.modal !== 'undefined' ? options.modal : true,
         officialOnly : typeof options.officialOnly !== 'undefined' ? options.officialOnly : true,
         alert : typeof options.alert !== 'undefined' ? options.alert : null,
-        title : typeof options.title !== 'undefined' ? options.title : 'Voter Information Tool',
+        title : typeof options.title !== 'undefined' ? options.title : 'Voting Information Tool',
         subtitle: typeof options.subtitle !== 'undefined' ? options.subtitle : '',
         logo : typeof options.logo  !== 'undefined' ? options.logo : './images/voter-information-project.png',
         smallLogo : typeof options.smallLogo !== 'undefined' ? options.smallLogo : './images/vip-logo.png',

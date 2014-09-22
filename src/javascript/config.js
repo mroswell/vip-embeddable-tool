@@ -10,12 +10,10 @@ module.exports = {
     "footerColor" : "#898989",
   },
   "text" : {
-    "title" : "Voter Information Tool",
-    "subtitle" : "Subheader Text",
     "summary" : "Find out about ballot information, polling location, early voting, ID requirements and more...",
 
     "about" : {
-      "title" : "About the Voter Information Tool",
+      "title" : "About the Voting Information Tool",
       "content" : "The Voting Information Project (VIP) works to connect voters with the essential information needed to cast their ballot, such as where to vote and what is on the ballot. It is a project between The Pew Charitable Trusts, Google, and the states. Launched in 2008, VIP works with state and local election officials to provide official election information to citizens through a variety of means, including the Google Civic Information API. The Voting Information Tool is one of the many made available through VIP, ensuring official election information is accessible to voters before and on Election Day."
     },
     "footer" : {

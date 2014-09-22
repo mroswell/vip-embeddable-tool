@@ -25,7 +25,6 @@ module.exports = View.extend({
     var $aboutModal = this.find('#about');
     var $notFoundModal = this.find('#address-not-found');
     var $currentLocationModal = this.find('#current-location');
-    // var electionChoiceTemplate = require('./templates/elections.hbs');
 
     this.$container.css({
       'max-width': 800,
@@ -68,16 +67,6 @@ module.exports = View.extend({
       var key = e.which || e.keyCode;
       if (key === 13) {
         google.maps.event.trigger(this.autocomplete, 'place_changed');
-        // return false;
-        // var address = this.find('#address-input').val();
-        // this.address = address;
-        // this.hasSubmitted = true;
-
-        // api({
-        //   address: address, 
-        //   success: this.handleElectionData.bind(this), 
-        //   error: this.handleAddressNotFound.bind(this)
-        // });
       }
     }
 
@@ -103,14 +92,7 @@ module.exports = View.extend({
 
   handleElectionData: function(response) {
     var that = this;
-    // if response has multiple elections, select which election
-    // if (!response.otherElections) {
-    //   response.otherElections = [{
-    //     name: "VIP Test Election",
-    //     date: "01/25/1900",
-    //     id: "2000"
-    //   }];
-    // }
+
     var stateName = response.state[0].name;
     if (stateName === 'Washington' || stateName === 'Oregon') {
       $('#current-location, #fade')
@@ -160,7 +142,6 @@ module.exports = View.extend({
       $('.checked:first').removeClass('hidden');
       $('.unchecked:first').addClass('hidden');
       $(this.find('#multiple-elections button')).on('click', function() {
-        // var id = this.find('.checked:not(.hidden)').parentNode.lastElementChild.innerHTML;
         var id = this.find('.checked:not(.hidden)').siblings('.hidden').eq(0).text();
         api({
           address: this._parseAddress(response.normalizedInput),
@@ -218,5 +199,4 @@ module.exports = View.extend({
       }
     })
   }
-
 });

@@ -72,15 +72,12 @@ module.exports = (function() {
         });
       }
 
-      // this.onAfterRender({data: this.data});
       this.onAfterRender(options);
 
       return this;
     },
 
     remove: function() {
-      // this.$el.parentNode.replaceChild(this.$el.cloneNode(true), this.$el);
-      // this.toggle();
       this.onRemove();
       $(this.$el).remove();
 
@@ -116,7 +113,6 @@ module.exports = (function() {
       var el = $('#' + this.$id);
       var val = (el.css('display') !== 'none') ? 'none' : 'block';
       el.css('display', val);
-      // el.get(0).style.display = (el.style.display != 'none' ? 'none' : '')
     },
 
     _parseAddress: function(address) {

@@ -5,7 +5,6 @@ var $ = require('jquery');
 var browser = require('../mobile.js');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
-window.$ = $;
 
 module.exports = View.extend({
 
@@ -588,7 +587,6 @@ module.exports = View.extend({
 
       this.autocompleteListener = function() {
         if (this.hasSubmitted) return;
-        // var address = this.autocomplete.getPlace().formatted_address;
         var address;
         if (this.autocomplete.getPlace()) address = this.autocomplete.getPlace().formatted_address;
         if (typeof address === 'undefined') {
@@ -609,30 +607,15 @@ module.exports = View.extend({
       }.bind(this);
 
       $(window).on('keypress', function(e) {
-        // this.address = addressInput.val();
         if (this.hasSubmitted) return;
         var key = e.which || e.keyCode;
         if (key === 13) {
           google.maps.event.trigger(this.autocomplete, 'place_changed');
-          // e.preventDefault();
           if (this.hasSubmitted) return;
-          // var address = addressInput.val();
           addressInput.replaceWith(addressInput.clone());
-          // var address = $(".pac-container .pac-item:first").text();
-          // this.hasSubmitted = true;
-
-          // api({
-          //   address: address,
-          //   success: function(response) {
-          //     this.hasSubmitted = false;
-          //     this.triggerRouteEvent('mapViewSubmit', response)
-          //   }.bind(this),
-          //   error: this.handleAddressNotFound
-          // });
         }
       }.bind(this));
 
-      // google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
       google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
     } else {
       google.maps.event.clearInstanceListeners(this.autocomplete);
@@ -644,9 +627,6 @@ module.exports = View.extend({
   },
 
   handleAddressNotFound: function() {
-    // this.find('#address-not-found').show();
-    // this.find('#fade').show();
-    // this.find('#address-not-found h1').text(this.address);
     $('.change-address').val("");
     this.hasSubmitted = false;
   },
@@ -724,14 +704,12 @@ module.exports = View.extend({
     if (typeof this.data.otherElections === 'undefined') return;
     e.stopPropagation();
     $('#election-list').slideToggle(100, function() {
-      // if (this.landscape) $('#more-elections').find('.right-arrow').toggleClass('down-arrow')
       if (!this.landscape) this._scrollTo($('#more-elections span'), 10)
     }.bind(this));
     if (!this.landscape) {
       $('#more-elections')
         .find('.toggle-image').toggleClass('hidden');
     }
-
   },
 
   toggleResources: function(e) {
@@ -795,9 +773,9 @@ module.exports = View.extend({
             toggleSign.text(text);
           }.bind(this));
         }
-      })
+      });
 
-       if (!ballotInfoIsMaximized) that._scrollTo($("#ballot-information"), 20);
+      if (!ballotInfoIsMaximized) that._scrollTo($("#ballot-information"), 20);
 
     } else { 
       $('#map-canvas, #location, #more-resources').hide();
@@ -891,5 +869,4 @@ module.exports = View.extend({
   closeAlert: function() {
     this.find('#alert').fadeOut('slow');
   }
-
 });
