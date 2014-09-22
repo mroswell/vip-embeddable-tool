@@ -67,8 +67,6 @@
   .landscape#map-view #polling-location {
     width: 105%;
     background-color: #26a8df; }
-  .landscape#map-view #info-icon {
-    transform: none; }
   .landscape#map-view #current-location button {
     margin: 10px 25px 0 90px; }
 

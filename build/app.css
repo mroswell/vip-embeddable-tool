@@ -287,8 +287,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   .landscape#map-view #polling-location {
     width: 105%;
     background-color: #26a8df; }
-  .landscape#map-view #info-icon {
-    transform: none; }
   .landscape#map-view #current-location button {
     margin: 10px 25px 0 90px; }
 
@@ -684,6 +682,16 @@ h1 {
       margin: 30px 0; }
   #map-view #plus-icon {
     margin-top: -45px; }
+  #map-view #info-icon {
+    background-color: white;
+    border: 6px solid white;
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+    border-right: 7px solid white;
+    border-radius: 8px;
+    font-style: italic;
+    float: right;
+    margin-right: -25px; }
   #map-view #alert {
     display: none;
     position: fixed;
