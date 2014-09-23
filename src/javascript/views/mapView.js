@@ -20,6 +20,7 @@ module.exports = View.extend({
   hasSubmitted: false,
 
   events: {
+    '#map-view click' : "closePopUps",
     '.nav click' : 'back',
     '.contest-toggle click' : 'toggleContest',
     '.election-selection click' : 'changeElection',
@@ -350,6 +351,12 @@ module.exports = View.extend({
     document.querySelector('#calendar-icon').appendChild(myCalendar);
 
     fastclick(document.body);
+  },
+
+  closePopUps: function (e) {
+    if ( !$(e.target).is( $(".add-to-calendar-checkbox") ) ) {
+      $(".add-to-calendar-checkbox").attr("checked", false);
+    }
   },
 
   onRemove: function() {
