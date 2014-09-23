@@ -7,51 +7,44 @@ body {
   color: #4b4b4b;
   font-family: sans-serif; }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+#_vit html, #_vit body, #_vit div, #_vit span, #_vit applet, #_vit object, #_vit iframe,
+#_vit h1, #_vit h2, #_vit h3, #_vit h4, #_vit h5, #_vit h6, #_vit p, #_vit blockquote, #_vit pre,
+#_vit a, #_vit abbr, #_vit acronym, #_vit address, #_vit big, #_vit cite, #_vit code,
+#_vit del, #_vit dfn, #_vit em, #_vit img, #_vit ins, #_vit kbd, #_vit q, #_vit s, #_vit samp,
+#_vit small, #_vit strike, #_vit strong, #_vit sub, #_vit sup, #_vit tt, #_vit var,
+#_vit b, #_vit u, #_vit i, #_vit center,
+#_vit dl, #_vit dt, #_vit dd, #_vit ol, #_vit ul, #_vit li,
+#_vit fieldset, #_vit form, #_vit label, #_vit legend,
+#_vit table, #_vit caption, #_vit tbody, #_vit tfoot, #_vit thead, #_vit tr, #_vit th, #_vit td,
+#_vit article, #_vit aside, #_vit canvas, #_vit details, #_vit embed,
+#_vit figure, #_vit figcaption, #_vit footer, #_vit header, #_vit hgroup,
+#_vit menu, #_vit nav, #_vit output, #_vit ruby, #_vit section, #_vit summary,
+#_vit time, #_vit mark, #_vit audio, #_vit video {
   margin: 0;
   padding: 0;
   border: 0;
   font: inherit;
   font-size: 100%;
   vertical-align: baseline; }
-
-html {
+#_vit html {
   line-height: 1; }
-
-ol, ul {
+#_vit ol, #_vit ul {
   list-style: none; }
-
-table {
+#_vit table {
   border-collapse: collapse;
   border-spacing: 0; }
-
-caption, th, td {
+#_vit caption, #_vit th, #_vit td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle; }
-
-q, blockquote {
+#_vit q, #_vit blockquote {
   quotes: none; }
-  q:before, q:after, blockquote:before, blockquote:after {
+  #_vit q:before, #_vit q:after, #_vit blockquote:before, #_vit blockquote:after {
     content: "";
     content: none; }
-
-a img {
+#_vit a img {
   border: none; }
-
-article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+#_vit article, #_vit aside, #_vit details, #_vit figcaption, #_vit figure, #_vit footer, #_vit header, #_vit hgroup, #_vit main, #_vit menu, #_vit nav, #_vit section, #_vit summary {
   display: block; }
 
 .no-scroll {
@@ -218,13 +211,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 @media screen and (max-device-width: 480px) {
   #_vit {
     -webkit-text-size-adjust: none; } }
-.pac-nudge {
-  margin-top: 0 !important; }
-
-.alert_ie {
-  position: absolute !important;
-  padding: 10px; }
-
 .landscape#map-view {
   height: 100%; }
   .landscape#map-view .footer {
@@ -471,43 +457,6 @@ h1 {
       display: block;
       width: 100%; }
 
-#_vitModal {
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 998;
-  background-color: rgba(0, 0, 0, 0.75); }
-
-#add-to-calendar-dropdown {
-  cursor: pointer;
-  display: block;
-  width: 20px;
-  height: 20px; }
-  #add-to-calendar-dropdown label {
-    cursor: pointer;
-    display: block;
-    width: 20px;
-    height: 20px; }
-  #add-to-calendar-dropdown a {
-    padding: 5px;
-    font-weight: bold;
-    background-color: white;
-    color: #1c7ca5;
-    font-size: 14px; }
-  #add-to-calendar-dropdown .icon-outlook {
-    border-bottom: 1px solid #898989; }
-
-.radio {
-  margin: -5px 10px 0; }
-
-#map-canvas:not(.landscape) {
-  height: 150px;
-  -moz-transition: height, 200ms, ease-in-out;
-  -o-transition: height, 200ms, ease-in-out;
-  -webkit-transition: height, 200ms, ease-in-out;
-  transition: height, 200ms, ease-in-out; }
-
 #map-view {
   display: table;
   z-index: 999;
@@ -725,5 +674,49 @@ h1 {
 
 #map-view #alert {
   position: absolute; }
+
+.pac-nudge {
+  margin-top: 0 !important; }
+
+.alert_ie {
+  position: absolute !important;
+  padding: 10px; }
+
+.radio {
+  margin: -5px 10px 0; }
+
+#_vitModal {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 998;
+  background-color: rgba(0, 0, 0, 0.75); }
+
+#add-to-calendar-dropdown {
+  cursor: pointer;
+  display: block;
+  width: 20px;
+  height: 20px; }
+  #add-to-calendar-dropdown label {
+    cursor: pointer;
+    display: block;
+    width: 20px;
+    height: 20px; }
+  #add-to-calendar-dropdown a {
+    padding: 5px;
+    font-weight: bold;
+    background-color: white;
+    color: #1c7ca5;
+    font-size: 14px; }
+  #add-to-calendar-dropdown .icon-outlook {
+    border-bottom: 1px solid #898989; }
+
+#map-canvas:not(.landscape) {
+  height: 150px;
+  -moz-transition: height, 200ms, ease-in-out;
+  -o-transition: height, 200ms, ease-in-out;
+  -webkit-transition: height, 200ms, ease-in-out;
+  transition: height, 200ms, ease-in-out; }
 
 /*# sourceMappingURL=app.css.map */
