@@ -1,42 +1,45 @@
-#_vit html, #_vit body, #_vit div, #_vit span, #_vit applet, #_vit object, #_vit iframe,
-#_vit h1, #_vit h2, #_vit h3, #_vit h4, #_vit h5, #_vit h6, #_vit p, #_vit blockquote, #_vit pre,
-#_vit a, #_vit abbr, #_vit acronym, #_vit address, #_vit big, #_vit cite, #_vit code,
-#_vit del, #_vit dfn, #_vit em, #_vit img, #_vit ins, #_vit kbd, #_vit q, #_vit s, #_vit samp,
-#_vit small, #_vit strike, #_vit strong, #_vit sub, #_vit sup, #_vit tt, #_vit var,
-#_vit b, #_vit u, #_vit i, #_vit center,
-#_vit dl, #_vit dt, #_vit dd, #_vit ol, #_vit ul, #_vit li,
-#_vit fieldset, #_vit form, #_vit label, #_vit legend,
-#_vit table, #_vit caption, #_vit tbody, #_vit tfoot, #_vit thead, #_vit tr, #_vit th, #_vit td,
-#_vit article, #_vit aside, #_vit canvas, #_vit details, #_vit embed,
-#_vit figure, #_vit figcaption, #_vit footer, #_vit header, #_vit hgroup,
-#_vit menu, #_vit nav, #_vit output, #_vit ruby, #_vit section, #_vit summary,
-#_vit time, #_vit mark, #_vit audio, #_vit video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  font-size: 100%;
-  vertical-align: baseline; }
-#_vit html {
-  line-height: 1; }
-#_vit ol, #_vit ul {
-  list-style: none; }
-#_vit table {
-  border-collapse: collapse;
-  border-spacing: 0; }
-#_vit caption, #_vit th, #_vit td {
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle; }
-#_vit q, #_vit blockquote {
-  quotes: none; }
-  #_vit q:before, #_vit q:after, #_vit blockquote:before, #_vit blockquote:after {
-    content: "";
-    content: none; }
-#_vit a img {
-  border: none; }
-#_vit article, #_vit aside, #_vit details, #_vit figcaption, #_vit figure, #_vit footer, #_vit header, #_vit hgroup, #_vit main, #_vit menu, #_vit nav, #_vit section, #_vit summary {
-  display: block; }
+#_vit {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased; }
+  #_vit html, #_vit body, #_vit div, #_vit span, #_vit applet, #_vit object, #_vit iframe,
+  #_vit h1, #_vit h2, #_vit h3, #_vit h4, #_vit h5, #_vit h6, #_vit p, #_vit blockquote, #_vit pre,
+  #_vit a, #_vit abbr, #_vit acronym, #_vit address, #_vit big, #_vit cite, #_vit code,
+  #_vit del, #_vit dfn, #_vit em, #_vit img, #_vit ins, #_vit kbd, #_vit q, #_vit s, #_vit samp,
+  #_vit small, #_vit strike, #_vit strong, #_vit sub, #_vit sup, #_vit tt, #_vit var,
+  #_vit b, #_vit u, #_vit i, #_vit center,
+  #_vit dl, #_vit dt, #_vit dd, #_vit ol, #_vit ul, #_vit li,
+  #_vit fieldset, #_vit form, #_vit label, #_vit legend,
+  #_vit table, #_vit caption, #_vit tbody, #_vit tfoot, #_vit thead, #_vit tr, #_vit th, #_vit td,
+  #_vit article, #_vit aside, #_vit canvas, #_vit details, #_vit embed,
+  #_vit figure, #_vit figcaption, #_vit footer, #_vit header, #_vit hgroup,
+  #_vit menu, #_vit nav, #_vit output, #_vit ruby, #_vit section, #_vit summary,
+  #_vit time, #_vit mark, #_vit audio, #_vit video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline; }
+  #_vit html {
+    line-height: 1; }
+  #_vit ol, #_vit ul {
+    list-style: none; }
+  #_vit table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+  #_vit caption, #_vit th, #_vit td {
+    text-align: left;
+    font-weight: normal;
+    vertical-align: middle; }
+  #_vit q, #_vit blockquote {
+    quotes: none; }
+    #_vit q:before, #_vit q:after, #_vit blockquote:before, #_vit blockquote:after {
+      content: "";
+      content: none; }
+  #_vit a img {
+    border: none; }
+  #_vit article, #_vit aside, #_vit details, #_vit figcaption, #_vit figure, #_vit footer, #_vit header, #_vit hgroup, #_vit main, #_vit menu, #_vit nav, #_vit section, #_vit summary {
+    display: block; }
 
 .no-scroll {
   overflow: hidden;

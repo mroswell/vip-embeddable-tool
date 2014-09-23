@@ -675,6 +675,7 @@ module.exports = View.extend({
         $('.polling-location-info').hide();
       }
     } else {
+      this.find('.right-wrapper').css('overflow', 'hidden');
       if ($('#location').is(':visible')) {
         if (this.map.getZoom() !== 12) {
           this.map.panTo(marker.getPosition());
@@ -723,7 +724,9 @@ module.exports = View.extend({
     $('.right-wrapper')
       .css('overflow', 'hidden')
       .scrollTop(0)
-      .css('overflow', 'scroll');
+      .css({
+        'overflow-y': 'scroll',
+        'overflow-x': 'hidden'});
     if (!this.landscape) {
       $('#more-resources').slideToggle(500, function() {
         this._scrollTo($('#resources-toggle span'), 10);
@@ -763,7 +766,10 @@ module.exports = View.extend({
     $('.right-wrapper')
       .css('overflow', 'hidden')
       .scrollTop(0)
-      .css('overflow', 'scroll');
+      .css({
+        'overflow-y':'scroll',
+        'overflow-x':'hidden'
+      });
     if (!this.landscape) {
       var ballotInfoIsMaximized = $('#ballot-information').find('.plus').is(":hidden");
 
