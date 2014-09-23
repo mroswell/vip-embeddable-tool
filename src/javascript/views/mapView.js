@@ -203,16 +203,13 @@ module.exports = View.extend({
             this.find('.right .box').css({ 'padding': '5px 15px' });
             this.find('#more-resources h1').css({ 'font-size': '16px' });
           } else {
-            console.log($('.left-wrapper').css('overflow-y'))
             if (this.$container.height() < 480) {
-              console.log($('.left-wrapper').css('overflow-x'))
               // $('.left-wrapper')[0].style['overflow-y'] = 'auto';
               // $('.left-wrapper')[0].style['overflow-x'] = 'hidden';
               // css({
               //   overflowY: 'auto',
               //   overflowX: 'hidden'
               // })
-              console.log($('.left-wrapper').css('overflow-y'))
             }
           }
         }
