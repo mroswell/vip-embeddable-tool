@@ -19,8 +19,8 @@ vit.load({
 });
 ```
 ## Parameters
-| Key | Type |Description |
-|-----|------|-------------|
+| Key |    Type    | Description |
+|-----|------------|-------------|
 |`modal`| boolean | if true, will open up in a modal box to display election information for mobile and tablet devices (defaults to true)|
 |`officialOnly`| boolean | if true, will only display information from official election information sources (defaults to true)|
 |`width`| string | set the width of the tool (e.g., `450px`); the default width is `640px` |
