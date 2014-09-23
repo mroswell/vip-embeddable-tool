@@ -20,6 +20,10 @@ module.exports = View.extend({
 
   address : '',
 
+  resizer: function () {
+    
+  },
+
   onAfterRender : function(options) {
     var $address = this.find('#address-input');
     var $aboutModal = this.find('#about');
