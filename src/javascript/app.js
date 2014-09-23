@@ -6,7 +6,8 @@ var util       = require('./util.js')
 
 window.vit = {
   load: function(options) {
-    var protocol = (document.location.protocol ? 'https' : 'http')
+    // var protocol = (document.location.protocol ? 'https' : 'http')
+    var protocol = 'https'
       , googleMapsUrl = protocol 
         + '://maps.googleapis.com/maps/api/js?libraries=places,geometry&callback='
         + '_VIT_GOOGLE_MAPS_INIT_CALLBACK'
