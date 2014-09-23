@@ -19,19 +19,19 @@ vit.load({
 });
 ```
 ## Parameters
-| Key | Description |
-|-----|-------------|
-|`modal`| if true, will open up in a modal box to display election information for mobile and tablet devices (defaults to true)|
-|`officialOnly`| if true, will only display information from official election information sources (defaults to true)|
-|`width`| set the width of the tool (e.g., `450px`); the default width is `640px` |
-|`height`| set the height of the tool (the default height is `480px`)|
-|`logo`| link to an alternative logo to display at the top of the tool|
-|`smallLogo`| link to an alternative logo to display in the modal election information view|
-|`title`| text appearing beneath the logo of the tool (defaults to `Voting Information Tool`)|
-|`subtitle`|text appearing beneath the title (defaults to nothing)|
-|`language`| set to `en` by default|
-|`colors`| custom colors (detailed in the next section)|
-|`json`|Language and other customization via a link to a JSON object (detailed in the following section)|
+| Key | Type |Description |
+|-----|------|-------------|
+|`modal`| boolean | if true, will open up in a modal box to display election information for mobile and tablet devices (defaults to true)|
+|`officialOnly`| boolean | if true, will only display information from official election information sources (defaults to true)|
+|`width`| string | set the width of the tool (e.g., `450px`); the default width is `640px` |
+|`height`| string | set the height of the tool (the default height is `480px`)|
+|`logo`| string (URL) | link to an alternative logo to display at the top of the tool|
+|`smallLogo`| string (URL) | link to an alternative logo to display in the modal election information view|
+|`title`| string | text appearing beneath the logo of the tool (defaults to `Voting Information Tool`)|
+|`subtitle`| string | text appearing beneath the title (defaults to nothing)|
+|`language`| string | set to `en` by default|
+|`colors`| object | custom colors (detailed in the next section) |
+|`json`| string (URL) | Language and other customization via a link to a JSON object (detailed in the following section)|
 
 ### Colors
 You can also add colors by passing an object of this format to the `colors` parameter:
@@ -43,6 +43,24 @@ You can also add colors by passing an object of this format to the `colors` para
 |`selectedHeader`|Header currently selected by the user|
 |`landscapeHeaderBackground`|Shown behind the headers in tablet/desktop view|
 |`alertText`|Header for displaying alerts to the user|
+
+## Example Embed With Parameters:
+```html
+<script type="text/javascript" src="//s3.amazonaws.com/vip-voter-information-tool/app.js"></script>
+<div id="_vit"></div>
+<script type="text/javascript">vit.load({
+  modal: true,
+  officialOnly: true,
+  width: '600px',
+  height: '480px',
+  logo: 'http://yourlogourl.com/path/to/logo.jpg',
+  smallLogo: 'http://yourlogourl.com/path/to/smallLogo.jpg',
+  colors: {
+    'text': '#012345',
+    'header': '#543210'
+  }
+});</script>
+```
 
 ### Customization
 For internationalization and language customization, supply a link to the `json` field containing a URL to a JSON file of the following format:
@@ -115,28 +133,7 @@ For internationalization and language customization, supply a link to the `json`
   }
 }
 ```
-
-# Complete embed
-## Example
-```html
-<script type="text/javascript" src="//s3.amazonaws.com/vip-voter-information-tool/app.js"></script>
-<div id="_vit"></div>
-<script type="text/javascript">vit.load({
-  modal: true,
-  officialOnly: true,
-  width: '600px',
-  height: '480px',
-  logo: 'http://yourlogourl.com/path/to/logo.jpg',
-  smallLogo: 'http://yourlogourl.com/path/to/smallLogo.jpg',
-  colors: {
-    'text': '#012345',
-    'header': '#543210'
-  }
-});</script>
-```
-
 # Source code instructions
-
 ## Setup Instructions
 
 1. Download [npm](https://github.com/npm/npm)
