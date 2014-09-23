@@ -86,13 +86,13 @@
   {{/if}}
   {{ data.state.0.local_jurisdiction.electionAdministrationBody.hoursOfOperation }}
   {{#if data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
-  <div id="local-jurisdiction-correspondence-address">
+  <div id="local-jurisdiction-correspondence-address" class="election-administration-address">
   <span>Correspondence Address:</span>
   {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
   </div>
   {{/if}}
   {{#if data.state.0.local_jurisdiction.electionAdministrationBody.physicalAddress }}
-  <div id="local-jurisdiction-physical-address">
+  <div id="local-jurisdiction-physical-address" class="election-administration-address">
   <span>Physical Address:</span>
   {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.physicalAddress }}
   </div>
@@ -104,13 +104,13 @@
   <b>{{ data.state.0.electionAdministrationBody.name }}</b>
   {{ data.state.0.electionAdministrationBody.hoursOfOperation }}
   {{#if data.state.0.electionAdministrationBody.correspondenceAddress }}
-  <div id="state-election-correspondence-address">
+  <div id="state-election-correspondence-address" class="election-administration-address">
   <span>Correspondence Address:</span>
   {{> normalized-address data.state.0.electionAdministrationBody.correspondenceAddress }}
   </div>
   {{/if}}
   {{#if data.state.0.electionAdministrationBody.physicalAddress }}
-  <div id="state-election-physical-address">
+  <div id="state-election-physical-address" class="election-administration-address">
   <span>Physical Address:</span>
   {{> normalized-address data.state.0.electionAdministrationBody.physicalAddress }}
   </div>

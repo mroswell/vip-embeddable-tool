@@ -163,13 +163,9 @@ module.exports = View.extend({
       $('#state-election-correspondence-address').remove();
     }
 
-    if (scrapeAddress($('#local-jurisdiction-correspondence-address').children().children()).length === 2) {
-      $('#local-jurisdiction-correspondence-address').remove();
-    }
-
-    if (scrapeAddress($('#state-election-correspondence-address').children().children()).length === 2) {
-      $('#state-election-correspondence-address').remove();
-    }
+    $('.election-administration-address').each(function() {
+      if (scrapeAddress($(this).children().children()).length === 2) $(this).remove();
+    })
 
     if (typeof this.data.otherElections === 'undefined') {
       $('#more-elections .toggle-image').hide();
