@@ -133,7 +133,18 @@
   #_vit #map-view #registered-address {
     cursor: pointer; }
     #_vit #map-view #registered-address span {
-      color: #98c0da; }
+      color: #98c0da;
+      float: none;
+      position: absolute;
+      right: 5px; }
+  #_vit #map-view #vote-address-edit {
+    color: #98c0da;
+    float: none;
+    position: absolute;
+    right: 8px;
+    cursor: pointer;
+    color: #d6d5d5;
+    margin-top: -17px; }
   #_vit #map-view #chosen-election {
     font-size: 22px;
     color: #333333; }

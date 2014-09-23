@@ -24,6 +24,7 @@ module.exports = View.extend({
     '.contest-toggle click' : 'toggleContest',
     '.election-selection click' : 'changeElection',
     '#registered-address click' : 'changeAddress',
+     '#vote-address-edit click' : 'changeAddress',
     '.address click' : 'changeAddress',
     '#fade click' : 'changeAddress',
     '#more-locations click' : 'moreLocations',

@@ -5,12 +5,12 @@
 
 <div class="info box left" id="registered-address">
   {{assets.text.headers.registeredVoterAddress}}
-  <span class="vote-address-edit">{{assets.text.headers.edit}}</span>
 </div>
 
 <div class="box left">
   {{> address data.normalizedInput }}
   <input type="text" class="change-address" placeholder="Enter a different address">
+  <span id="vote-address-edit">{{assets.text.headers.edit}}</span>
 </div>
 
 <div class="info box left" id="more-elections">
