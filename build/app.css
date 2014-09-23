@@ -221,6 +221,8 @@
     .landscape#map-view #location img {
       margin-right: -10px; }
   .landscape#map-view .left-wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
     float: left;
     position: absolute;
     z-index: 3;
