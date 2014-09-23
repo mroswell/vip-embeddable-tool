@@ -824,7 +824,7 @@ module.exports = View.extend({
       var toggleSign = $(e.currentTarget).find('span');
 
       candidateList.slideToggle(500, function() {
-        var text = (candidateList.is(':hidden') ? '+ ' : '\u2014')
+        var text = (candidateList.is(':hidden') ? '+ ' : '-')
         toggleSign.text(text);
 
         if (!candidateList.is(':hidden')) this._scrollTo(toggleSign, 20);
