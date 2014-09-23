@@ -301,7 +301,7 @@ module.exports = View.extend({
       }
     } else this._encodeAddressAndInitializeMap();
 
-    if (this.landscape) this._switchToLandscape();
+    if (this.landscape) this._switchToLandscape(options);
 
 
     if (options.data.state[0].electionAdministrationBody)
@@ -370,7 +370,7 @@ module.exports = View.extend({
     $(window).off('.mapview');
   },
 
-  _switchToLandscape: function() {
+  _switchToLandscape: function(options) {
     if (this.modal) {
       $('html, body')
         .addClass('max-height')
@@ -397,6 +397,10 @@ module.exports = View.extend({
     $('#polling-location .left-arrow').removeClass('hidden');
     $('#more-resources').hide();
     $('.contests.right').hide();
+
+    $('#vip-logo').css({
+      'background-image': 'url(' + options.smallLogo + ')'
+    });
 
     this.landscape = true;
   },
