@@ -1,6 +1,6 @@
 module.exports = {
-  "logo" : "./images/voting-information-project.png",
-  "smallLogo" : "./images/vip-logo.png",
+  "logo" : "//s3.amazonaws.com/vip-voter-information-tool/images/voting-information-project.png",
+  "smallLogo" : "//s3.amazonaws.com/vip-voter-information-tool/images/vip-logo.png",
   "colors" : {
     "textColor" : "#4b4b4b",
     "headerColor" : "#1c7ca5",

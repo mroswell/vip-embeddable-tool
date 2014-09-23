@@ -81,22 +81,34 @@
   <b>{{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}</b>
   <b>{{ data.state.0.local_jurisdiction.name }}</b><br>
   {{ data.state.0.local_jurisdiction.electionAdministrationBody.hoursOfOperation }}
+  {{#if data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
   <div id="local-jurisdiction-correspondence-address">
+  <span>Correspondence Address:</span>
   {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
   </div>
+  {{/if}}
+  {{#if data.state.0.local_jurisdiction.electionAdministrationBody.physicalAddress }}
   <div id="local-jurisdiction-physical-address">
+  <span>Physical Address:</span>
   {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.physicalAddress }}
   </div>
+  {{/if}}
   <br>
   <h1>{{assets.text.resources.electionAdministration.stateElectionsOffice}}</h1>
   <b>{{ data.state.0.electionAdministrationBody.name }}</b>
   {{ data.state.0.electionAdministrationBody.hoursOfOperation }}
+  {{#if data.state.0.electionAdministrationBody.correspondenceAddress }}
   <div id="state-election-correspondence-address">
+  <span>Correspondence Address:</span>
   {{> normalized-address data.state.0.electionAdministrationBody.correspondenceAddress }}
   </div>
+  {{/if}}
+  {{#if data.state.0.electionAdministrationBody.physicalAddress }}
   <div id="state-election-physical-address">
+  <span>Physical Address:</span>
   {{> normalized-address data.state.0.electionAdministrationBody.physicalAddress }}
   </div>
+  {{/if}}
   </div>
   <div class="subsection box">
   {{assets.text.resources.moreResources.title}}

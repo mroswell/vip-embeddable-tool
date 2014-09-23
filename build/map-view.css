@@ -157,6 +157,14 @@
       -ms-transform: translateY(27%);
       -webkit-transform: translateY(27%);
       transform: translateY(27%); }
+  #map-view #local-jurisdiction-correspondence-address span {
+    font-weight: bold; }
+  #map-view #local-jurisdiction-physical-address span {
+    font-weight: bold; }
+  #map-view #state-election-correspondence-address span {
+    font-weight: bold; }
+  #map-view #state-election-physical-address span {
+    font-weight: bold; }
   #map-view .polling-location-info {
     margin: 5px 0; }
   #map-view #registered-address {
