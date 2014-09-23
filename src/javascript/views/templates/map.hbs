@@ -1,6 +1,6 @@
 <div class="box" id="alert">
   <span id="text"></span>
-  <span id="alert-close"><img src="./images/plus.png"></span>
+  <span id="alert-close"><img src="https://s3.amazonaws.com/vip-voter-information-tool/images/plus.png"></span>
 </div>
 
 <div class="info box left" id="registered-address">
@@ -16,22 +16,22 @@
 <div class="info box left" id="more-elections">
   {{assets.text.headers.elections}}
   <span>
-    <img src="./images/plus.png" class="toggle-image plus">
-    <img src="./images/minus.png" class="toggle-image minus hidden">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/plus.png" class="toggle-image plus">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/minus.png" class="toggle-image minus hidden">
   </span>
 </div>
 
 <div class="info box left" id="election-list">
   <div class="election-selection">
-    <img src="./images/radio-checked.png" class="radio checked">
-    <img src="./images/radio-unchecked.png" class="radio unchecked hidden">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/radio-checked.png" class="radio checked">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/radio-unchecked.png" class="radio unchecked hidden">
     <span class="hidden">{{ data.election.id }}</span>
     {{ data.election.name }}
   </div>
   {{#each data.otherElections }}
   <div class="election-selection">
-    <img src="./images/radio-checked.png" class="radio checked hidden">
-    <img src="./images/radio-unchecked.png" class="radio unchecked">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/radio-checked.png" class="radio checked hidden">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/radio-unchecked.png" class="radio unchecked">
     <span class="hidden">{{ id }}</span>
     {{ name }}
   </div>
@@ -40,15 +40,15 @@
 
 <div class="box left" id="chosen-election">
   {{>election data.election}}
-  <div id="calendar-icon" title="{{ data.election.name }}" class="addthisevent" style="background-image: url('./images/calendar.png'); float: right; margin-top: -30px; margin-right: 2px; background-color: transparent; border: 0; height: 20px; width: 20px; background-size: contain; padding: 0; background-position: center;">
+  <div id="calendar-icon" title="{{ data.election.name }}" class="addthisevent" style="background-image: url('https://s3.amazonaws.com/vip-voter-information-tool/images/calendar.png'); float: right; margin-top: -30px; margin-right: 2px; background-color: transparent; border: 0; height: 20px; width: 20px; background-size: contain; padding: 0; background-position: center;">
   </div> 
 </div>
 
 <div class="info box left" id="polling-location">
   {{assets.text.headers.pollingLocation}}
   <span id="map-toggle">
-    <img src="./images/plus.png" class="toggle-image plus">
-    <img src="./images/minus.png" class="toggle-image minus hidden">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/plus.png" class="toggle-image plus">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/minus.png" class="toggle-image minus hidden">
   </span>
 </div>
 
@@ -56,7 +56,7 @@
   {{> address data.pollingLocations.0.address }}
   <span>
     <a href="#" target="_blank">
-      <img src="./images/directions.png">
+      <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/directions.png">
     </a>
   </span>
 </div>
@@ -65,8 +65,8 @@
 <div class="info box left" id="resources-toggle">
   {{assets.text.headers.voterResources}}
   <span>
-    <img src="./images/plus.png" class="toggle-image plus hidden">
-    <img src="./images/minus.png" class="toggle-image minus">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/plus.png" class="toggle-image plus hidden">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/minus.png" class="toggle-image minus">
   </span>
 </div>
 <div class="box information-items right" id="about-resources">
@@ -133,8 +133,8 @@
 <div class="info box left" id="ballot-information">
   {{assets.text.headers.ballotInformation}}
   <span>
-    <img src="./images/plus.png" class="toggle-image plus hidden">
-    <img src="./images/minus.png" class="toggle-image minus">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/plus.png" class="toggle-image plus hidden">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/minus.png" class="toggle-image minus">
   </span>
 </div>
 <div class="contests right" id="all-contests">
