@@ -580,6 +580,7 @@ module.exports = View.extend({
     if ( $(e.currentTarget).hasClass("address") && $(e.currentTarget).closest("#location").length > 0 ) return;
 
     if (addressInput.is(':hidden')) {
+      $("#vote-address-edit").hide();
       this.autocomplete = new google.maps.places.Autocomplete(addressInput[0]);
       // this.autocomplete = new google.maps.places.SearchBox(addressInput[0]);
       addressInput.prev().hide();
@@ -625,6 +626,7 @@ module.exports = View.extend({
 
       google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
     } else {
+      $("#vote-address-edit").show();
       google.maps.event.clearInstanceListeners(this.autocomplete);
 
       addressInput.prev().show()
