@@ -392,8 +392,8 @@ module.exports = View.extend({
     $('.left-wrapper').append('<div class="dark-blue-box"/>');
     $('#about-resources').css('padding-left', '30px');
     $('.right').wrapAll($('<div class="right-wrapper" />'));
-    $('.toggle-image.plus').attr('src', './images/left-arrow-white.png').addClass('arrow right-arrow');
-    $('.toggle-image.minus').attr('src', './images/right-arrow-white.png').addClass('arrow left-arrow');
+    $('.toggle-image.plus').attr('src', 'https://s3.amazonaws.com/vip-voter-information-tool/images/left-arrow-white.png').addClass('arrow right-arrow');
+    $('.toggle-image.minus').attr('src', 'https://s3.amazonaws.com/vip-voter-information-tool/images/right-arrow-white.png').addClass('arrow left-arrow');
     $('#polling-location .right-arrow').addClass('hidden')
     $('#polling-location .left-arrow').removeClass('hidden');
     $('#more-resources').hide();
@@ -515,7 +515,7 @@ module.exports = View.extend({
       var marker = new google.maps.Marker({
         map: this.map,
         position: position,
-        icon: './images/blue-marker.png'
+        icon: 'https://s3.amazonaws.com/vip-voter-information-tool/images/blue-marker.png'
       });
       var that = this;
       // google.maps.event.addListener(marker, 'click', this._toggleMapZoom.bind(this, marker, address));
