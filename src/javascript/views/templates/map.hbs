@@ -77,7 +77,9 @@
   {{assets.text.resources.electionAdministration.title}}
   </div>
   <div class="correspondence-address box">
+  {{#if data.state.0.local_jurisdiction}}
   <h1>{{assets.text.resources.electionAdministration.local_jurisdiction}}</h1>
+  {{/if}}
   <b>{{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}</b>
   <b>{{ data.state.0.local_jurisdiction.name }}</b><br>
   {{ data.state.0.local_jurisdiction.electionAdministrationBody.hoursOfOperation }}
@@ -94,7 +96,9 @@
   </div>
   {{/if}}
   <br>
+  {{#if data.state.0.electionAdministrationBody}}
   <h1>{{assets.text.resources.electionAdministration.stateElectionsOffice}}</h1>
+  {{/if}}
   <b>{{ data.state.0.electionAdministrationBody.name }}</b>
   {{ data.state.0.electionAdministrationBody.hoursOfOperation }}
   {{#if data.state.0.electionAdministrationBody.correspondenceAddress }}
