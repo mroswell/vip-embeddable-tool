@@ -81,7 +81,9 @@
   <h1>{{assets.text.resources.electionAdministration.local_jurisdiction}}</h1>
   {{/if}}
   <b>{{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}</b>
+  {{#if data.state.0.local_jurisdiction.name}}
   <b>{{ data.state.0.local_jurisdiction.name }}</b><br>
+  {{/if}}
   {{ data.state.0.local_jurisdiction.electionAdministrationBody.hoursOfOperation }}
   {{#if data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
   <div id="local-jurisdiction-correspondence-address">
