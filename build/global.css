@@ -17,7 +17,7 @@
   border: 0 !important; }
 
 .floating-modal-container {
-  position: absolute !important;
+  position: fixed !important;
   z-index: 999 !important;
   margin: 0 !important;
   overflow: hidden !important;

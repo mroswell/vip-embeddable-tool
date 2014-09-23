@@ -60,7 +60,7 @@
   border: 0 !important; }
 
 .floating-modal-container {
-  position: absolute !important;
+  position: fixed !important;
   z-index: 999 !important;
   margin: 0 !important;
   overflow: hidden !important;
@@ -691,7 +691,7 @@ h1 {
 
 #_vitModal {
   display: none;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   z-index: 998;
