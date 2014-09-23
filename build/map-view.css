@@ -1,15 +1,15 @@
-#map-view {
+#_vit #map-view {
   display: table;
   z-index: 999;
   margin: 0 auto;
   width: 100%;
   background-color: white;
   position: absolute; }
-  #map-view:after {
+  #_vit #map-view:after {
     content: "";
     display: table;
     clear: both; }
-  #map-view button {
+  #_vit #map-view button {
     position: absolute;
     left: 2px;
     margin-top: 100px;
@@ -17,7 +17,7 @@
     font-size: 10px;
     background-color: white;
     width: 34%; }
-  #map-view .info {
+  #_vit #map-view .info {
     background-color: #1c7ca5;
     color: white;
     padding: 10px 20px;
@@ -25,12 +25,12 @@
     -webkit-box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);
     box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);
     font-size: 17px; }
-    #map-view .info:not(#more-elections) {
+    #_vit #map-view .info:not(#more-elections) {
       border-bottom: 1px solid #0f6387; }
-    #map-view .info span {
+    #_vit #map-view .info span {
       float: right;
       cursor: pointer; }
-  #map-view .box {
+  #_vit #map-view .box {
     line-height: 1.15;
     -moz-transition: height, 200ms, ease-in-out;
     -o-transition: height, 200ms, ease-in-out;
@@ -39,19 +39,19 @@
     -moz-border-radius: 1px;
     -webkit-border-radius: 1px;
     border-radius: 1px; }
-  #map-view .address-name,
-  #map-view .address-line {
+  #_vit #map-view .address-name,
+  #_vit #map-view .address-line {
     text-transform: capitalize;
     font-size: 22px;
     color: #333333; }
-  #map-view .subsection {
+  #_vit #map-view .subsection {
     cursor: default;
     background-color: #eeeeee;
     padding: 15px;
     font-size: 17px; }
-    #map-view .subsection p {
+    #_vit #map-view .subsection p {
       width: 90%; }
-    #map-view .subsection span {
+    #_vit #map-view .subsection span {
       cursor: pointer;
       float: right;
       -moz-transform: translateY(-50%);
@@ -59,129 +59,129 @@
       -webkit-transform: translateY(-50%);
       transform: translateY(-50%);
       font-weight: bolder; }
-    #map-view .subsection .contest-type {
+    #_vit #map-view .subsection .contest-type {
       display: inline-block;
       vertical-align: middle;
       *vertical-align: auto;
       *zoom: 1;
       *display: inline;
       font-style: italic; }
-  #map-view .candidate-list {
+  #_vit #map-view .candidate-list {
     overflow: hidden; }
-  #map-view .candidate-item .right-arrow {
+  #_vit #map-view .candidate-item .right-arrow {
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%); }
-  #map-view .change-address {
+  #_vit #map-view .change-address {
     display: none;
     position: relative;
     z-index: 3;
     margin: 0;
     padding-left: 12px; }
-  #map-view .contests {
+  #_vit #map-view .contests {
     margin-bottom: 40px; }
-  #map-view .party {
+  #_vit #map-view .party {
     font-style: italic; }
-  #map-view .election {
+  #_vit #map-view .election {
     cursor: default; }
-  #map-view .election-selection {
+  #_vit #map-view .election-selection {
     margin: 5px 0; }
-    #map-view .election-selection:last-child {
+    #_vit #map-view .election-selection:last-child {
       margin-bottom: 10px; }
-  #map-view .question {
+  #_vit #map-view .question {
     font-weight: bold;
     margin: 15px 0; }
-  #map-view .answer {
+  #_vit #map-view .answer {
     display: inline-block;
     vertical-align: middle;
     *vertical-align: auto;
     *zoom: 1;
     *display: inline; }
-  #map-view .toggle-image {
+  #_vit #map-view .toggle-image {
     width: 15px; }
-  #map-view .minus {
+  #_vit #map-view .minus {
     position: relative;
     top: -5px; }
-  #map-view .arrow {
+  #_vit #map-view .arrow {
     width: 10px;
     float: right;
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%); }
-    #map-view .arrow.toggle-image {
+    #_vit #map-view .arrow.toggle-image {
       -moz-transform: translateY(0);
       -ms-transform: translateY(0);
       -webkit-transform: translateY(0);
       transform: translateY(0); }
-    #map-view .arrow.left-arrow {
+    #_vit #map-view .arrow.left-arrow {
       -moz-transform: translateY(27%);
       -ms-transform: translateY(27%);
       -webkit-transform: translateY(27%);
       transform: translateY(27%); }
-  #map-view #local-jurisdiction-correspondence-address span {
+  #_vit #map-view #local-jurisdiction-correspondence-address span {
     font-weight: bold; }
-  #map-view #local-jurisdiction-physical-address span {
+  #_vit #map-view #local-jurisdiction-physical-address span {
     font-weight: bold; }
-  #map-view #state-election-correspondence-address span {
+  #_vit #map-view #state-election-correspondence-address span {
     font-weight: bold; }
-  #map-view #state-election-physical-address span {
+  #_vit #map-view #state-election-physical-address span {
     font-weight: bold; }
-  #map-view .polling-location-info {
+  #_vit #map-view .polling-location-info {
     margin: 5px 0; }
-  #map-view #registered-address {
+  #_vit #map-view #registered-address {
     cursor: pointer; }
-    #map-view #registered-address span {
+    #_vit #map-view #registered-address span {
       color: #98c0da; }
-  #map-view #chosen-election {
+  #_vit #map-view #chosen-election {
     font-size: 22px;
     color: #333333; }
-    #map-view #chosen-election img {
+    #_vit #map-view #chosen-election img {
       width: 20px;
       float: right;
       margin-top: -30px;
       margin-right: 2px; }
-    #map-view #chosen-election .date {
+    #_vit #map-view #chosen-election .date {
       font-size: 16px; }
-  #map-view .address-line {
+  #_vit #map-view .address-line {
     font-size: 16px; }
-  #map-view #location .address-line {
+  #_vit #map-view #location .address-line {
     font-size: 16px; }
-  #map-view #location span {
+  #_vit #map-view #location span {
     float: right;
     margin-top: -23px; }
-  #map-view #location img {
+  #_vit #map-view #location img {
     float: right;
     width: 60px;
     margin-right: -20px;
     margin-top: -20px; }
-  #map-view #voter-resources {
+  #_vit #map-view #voter-resources {
     margin-top: 125px; }
-  #map-view #other-elections {
+  #_vit #map-view #other-elections {
     overflow: hidden; }
-  #map-view #election-list {
+  #_vit #map-view #election-list {
     display: none;
     padding: 0 20px;
     overflow: hidden; }
-  #map-view #more-elections,
-  #map-view #polling-location,
-  #map-view #resources-toggle,
-  #map-view #ballot-information {
+  #_vit #map-view #more-elections,
+  #_vit #map-view #polling-location,
+  #_vit #map-view #resources-toggle,
+  #_vit #map-view #ballot-information {
     cursor: pointer; }
-  #map-view #more-resources {
+  #_vit #map-view #more-resources {
     overflow: hidden; }
-    #map-view #more-resources h1 {
+    #_vit #map-view #more-resources h1 {
       font-size: 20px;
       margin: 10px 0; }
-    #map-view #more-resources a {
+    #_vit #map-view #more-resources a {
       font-size: 17px;
       text-decoration: underline;
       color: #1c7ca5;
       margin: 30px 0; }
-  #map-view #plus-icon {
+  #_vit #map-view #plus-icon {
     margin-top: -45px; }
-  #map-view #info-icon {
+  #_vit #map-view #info-icon {
     background-color: white;
     border: 6px solid white;
     border-top: 3px solid white;
@@ -191,7 +191,7 @@
     font-style: italic;
     float: right;
     margin-right: -25px; }
-  #map-view #alert {
+  #_vit #map-view #alert {
     display: none;
     position: fixed;
     z-index: 10000;
@@ -200,7 +200,7 @@
     color: white;
     font-weight: bold;
     font-size: 20px; }
-    #map-view #alert #alert-close {
+    #_vit #map-view #alert #alert-close {
       float: right;
       width: 18px;
       -moz-transform: rotate(45deg);
@@ -208,12 +208,11 @@
       -webkit-transform: rotate(45deg);
       transform: rotate(45deg);
       cursor: pointer; }
-      #map-view #alert #alert-close img {
+      #_vit #map-view #alert #alert-close img {
         width: 100%; }
-  #map-view .footer {
+  #_vit #map-view .footer {
     z-index: 2; }
-
-#map-view #alert {
+#_vit #map-view #alert {
   position: absolute; }
 
 /*# sourceMappingURL=map-view.css.map */

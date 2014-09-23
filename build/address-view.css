@@ -1,33 +1,33 @@
 h1 {
   font-size: 22px; }
 
-#address-view .address-info {
+#_vit #address-view .address-info {
   height: 100%;
   border-bottom: 0; }
-#address-view .title {
+#_vit #address-view .title {
   margin: 10px 0 5px 0;
   padding: 0;
   text-align: center; }
-#address-view .subtitle {
+#_vit #address-view .subtitle {
   margin: 0 0 25px 0;
   text-align: center; }
-#address-view #app-info {
+#_vit #address-view #app-info {
   margin: 0 auto 50px;
   text-align: center;
   max-width: 235px; }
-#address-view #user-image {
+#_vit #address-view #user-image {
   max-height: 150px;
   max-width: 300px;
   display: block;
   margin: 30px auto 0; }
-#address-view #get-information-on {
+#_vit #address-view #get-information-on {
   padding: 45px;
   border-bottom: 0;
   font-size: 12px;
   font-weight: bold;
   color: #898989;
   text-transform: uppercase; }
-#address-view #info-icon {
+#_vit #address-view #info-icon {
   position: relative;
   top: 50%;
   margin-top: -9px;
@@ -46,7 +46,7 @@ h1 {
   font-size: 14px;
   float: right;
   display: block; }
-#address-view #plus-icon {
+#_vit #address-view #plus-icon {
   position: relative;
   top: 50%;
   margin-top: -50px;
@@ -69,7 +69,7 @@ h1 {
   float: right;
   display: block;
   cursor: pointer; }
-#address-view #close-button {
+#_vit #address-view #close-button {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   position: absolute;
@@ -86,10 +86,10 @@ h1 {
   font-size: 14px;
   display: block;
   cursor: pointer; }
-  #address-view #close-button img {
+  #_vit #address-view #close-button img {
     display: block;
     width: 100%; }
-#address-view #submit-address-button {
+#_vit #address-view #submit-address-button {
   position: relative;
   height: 46px;
   width: 50px;
@@ -105,11 +105,11 @@ h1 {
   box-shadow: 1px 1px 6px 0px #cccccc;
   border: 1px solid #e9e9e9;
   cursor: pointer; }
-#address-view #submit-address-button:active {
+#_vit #address-view #submit-address-button:active {
   top: -66px;
   margin-left: -49px; }
-#address-view #address-not-found,
-#address-view #current-location {
+#_vit #address-view #address-not-found,
+#_vit #address-view #current-location {
   display: none;
   position: absolute;
   width: 95%;
@@ -120,42 +120,42 @@ h1 {
   -moz-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);
   -webkit-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);
   box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45); }
-  #address-view #address-not-found h1,
-  #address-view #current-location h1 {
+  #_vit #address-view #address-not-found h1,
+  #_vit #address-view #current-location h1 {
     margin: 10px 0;
     text-align: left; }
-  #address-view #address-not-found h2,
-  #address-view #current-location h2 {
+  #_vit #address-view #address-not-found h2,
+  #_vit #address-view #current-location h2 {
     color: #a30000; }
-  #address-view #address-not-found button,
-  #address-view #current-location button {
+  #_vit #address-view #address-not-found button,
+  #_vit #address-view #current-location button {
     display: block;
     margin: 0 auto;
     margin-top: 20px; }
-#address-view #current-location span {
+#_vit #address-view #current-location span {
   margin: 0 auto; }
-#address-view #current-location button {
+#_vit #address-view #current-location button {
   display: inline-block; }
-#address-view #multiple-elections h2 {
+#_vit #address-view #multiple-elections h2 {
   color: #a30000; }
-#address-view #multiple-elections .election {
+#_vit #address-view #multiple-elections .election {
   margin: 20px 0; }
-  #address-view #multiple-elections .election h1,
-  #address-view #multiple-elections .election h2 {
+  #_vit #address-view #multiple-elections .election h1,
+  #_vit #address-view #multiple-elections .election h2 {
     display: inline-block; }
-  #address-view #multiple-elections .election h1 {
+  #_vit #address-view #multiple-elections .election h1 {
     font-size: 18px; }
-  #address-view #multiple-elections .election h2 {
+  #_vit #address-view #multiple-elections .election h2 {
     margin: 5px 10px 20px 45px;
     color: #494949; }
-#address-view #about h2 {
+#_vit #address-view #about h2 {
   margin: 10px 0 20px 0; }
-#address-view #about p {
+#_vit #address-view #about p {
   margin-bottom: 30px; }
-#address-view .footer {
+#_vit #address-view .footer {
   bottom: 0;
   max-width: 800px; }
-  #address-view .footer #plus-icon {
+  #_vit #address-view .footer #plus-icon {
     position: relative;
     top: 50%;
     margin-top: -50px;
@@ -176,7 +176,7 @@ h1 {
     float: right;
     display: block;
     cursor: pointer; }
-    #address-view .footer #plus-icon img {
+    #_vit #address-view .footer #plus-icon img {
       display: block;
       width: 100%; }
 

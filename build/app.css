@@ -1,12 +1,3 @@
-body {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  -moz-transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  color: #4b4b4b;
-  font-family: sans-serif; }
-
 #_vit html, #_vit body, #_vit div, #_vit span, #_vit applet, #_vit object, #_vit iframe,
 #_vit h1, #_vit h2, #_vit h3, #_vit h4, #_vit h5, #_vit h6, #_vit p, #_vit blockquote, #_vit pre,
 #_vit a, #_vit abbr, #_vit acronym, #_vit address, #_vit big, #_vit cite, #_vit code,
@@ -278,33 +269,33 @@ body {
 h1 {
   font-size: 22px; }
 
-#address-view .address-info {
+#_vit #address-view .address-info {
   height: 100%;
   border-bottom: 0; }
-#address-view .title {
+#_vit #address-view .title {
   margin: 10px 0 5px 0;
   padding: 0;
   text-align: center; }
-#address-view .subtitle {
+#_vit #address-view .subtitle {
   margin: 0 0 25px 0;
   text-align: center; }
-#address-view #app-info {
+#_vit #address-view #app-info {
   margin: 0 auto 50px;
   text-align: center;
   max-width: 235px; }
-#address-view #user-image {
+#_vit #address-view #user-image {
   max-height: 150px;
   max-width: 300px;
   display: block;
   margin: 30px auto 0; }
-#address-view #get-information-on {
+#_vit #address-view #get-information-on {
   padding: 45px;
   border-bottom: 0;
   font-size: 12px;
   font-weight: bold;
   color: #898989;
   text-transform: uppercase; }
-#address-view #info-icon {
+#_vit #address-view #info-icon {
   position: relative;
   top: 50%;
   margin-top: -9px;
@@ -323,7 +314,7 @@ h1 {
   font-size: 14px;
   float: right;
   display: block; }
-#address-view #plus-icon {
+#_vit #address-view #plus-icon {
   position: relative;
   top: 50%;
   margin-top: -50px;
@@ -346,7 +337,7 @@ h1 {
   float: right;
   display: block;
   cursor: pointer; }
-#address-view #close-button {
+#_vit #address-view #close-button {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   position: absolute;
@@ -363,10 +354,10 @@ h1 {
   font-size: 14px;
   display: block;
   cursor: pointer; }
-  #address-view #close-button img {
+  #_vit #address-view #close-button img {
     display: block;
     width: 100%; }
-#address-view #submit-address-button {
+#_vit #address-view #submit-address-button {
   position: relative;
   height: 46px;
   width: 50px;
@@ -382,11 +373,11 @@ h1 {
   box-shadow: 1px 1px 6px 0px #cccccc;
   border: 1px solid #e9e9e9;
   cursor: pointer; }
-#address-view #submit-address-button:active {
+#_vit #address-view #submit-address-button:active {
   top: -66px;
   margin-left: -49px; }
-#address-view #address-not-found,
-#address-view #current-location {
+#_vit #address-view #address-not-found,
+#_vit #address-view #current-location {
   display: none;
   position: absolute;
   width: 95%;
@@ -397,42 +388,42 @@ h1 {
   -moz-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);
   -webkit-box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45);
   box-shadow: 0 3px 2px 0 rgba(50, 50, 50, 0.45); }
-  #address-view #address-not-found h1,
-  #address-view #current-location h1 {
+  #_vit #address-view #address-not-found h1,
+  #_vit #address-view #current-location h1 {
     margin: 10px 0;
     text-align: left; }
-  #address-view #address-not-found h2,
-  #address-view #current-location h2 {
+  #_vit #address-view #address-not-found h2,
+  #_vit #address-view #current-location h2 {
     color: #a30000; }
-  #address-view #address-not-found button,
-  #address-view #current-location button {
+  #_vit #address-view #address-not-found button,
+  #_vit #address-view #current-location button {
     display: block;
     margin: 0 auto;
     margin-top: 20px; }
-#address-view #current-location span {
+#_vit #address-view #current-location span {
   margin: 0 auto; }
-#address-view #current-location button {
+#_vit #address-view #current-location button {
   display: inline-block; }
-#address-view #multiple-elections h2 {
+#_vit #address-view #multiple-elections h2 {
   color: #a30000; }
-#address-view #multiple-elections .election {
+#_vit #address-view #multiple-elections .election {
   margin: 20px 0; }
-  #address-view #multiple-elections .election h1,
-  #address-view #multiple-elections .election h2 {
+  #_vit #address-view #multiple-elections .election h1,
+  #_vit #address-view #multiple-elections .election h2 {
     display: inline-block; }
-  #address-view #multiple-elections .election h1 {
+  #_vit #address-view #multiple-elections .election h1 {
     font-size: 18px; }
-  #address-view #multiple-elections .election h2 {
+  #_vit #address-view #multiple-elections .election h2 {
     margin: 5px 10px 20px 45px;
     color: #494949; }
-#address-view #about h2 {
+#_vit #address-view #about h2 {
   margin: 10px 0 20px 0; }
-#address-view #about p {
+#_vit #address-view #about p {
   margin-bottom: 30px; }
-#address-view .footer {
+#_vit #address-view .footer {
   bottom: 0;
   max-width: 800px; }
-  #address-view .footer #plus-icon {
+  #_vit #address-view .footer #plus-icon {
     position: relative;
     top: 50%;
     margin-top: -50px;
@@ -453,22 +444,22 @@ h1 {
     float: right;
     display: block;
     cursor: pointer; }
-    #address-view .footer #plus-icon img {
+    #_vit #address-view .footer #plus-icon img {
       display: block;
       width: 100%; }
 
-#map-view {
+#_vit #map-view {
   display: table;
   z-index: 999;
   margin: 0 auto;
   width: 100%;
   background-color: white;
   position: absolute; }
-  #map-view:after {
+  #_vit #map-view:after {
     content: "";
     display: table;
     clear: both; }
-  #map-view button {
+  #_vit #map-view button {
     position: absolute;
     left: 2px;
     margin-top: 100px;
@@ -476,7 +467,7 @@ h1 {
     font-size: 10px;
     background-color: white;
     width: 34%; }
-  #map-view .info {
+  #_vit #map-view .info {
     background-color: #1c7ca5;
     color: white;
     padding: 10px 20px;
@@ -484,12 +475,12 @@ h1 {
     -webkit-box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);
     box-shadow: 0px, 2px, 2px, rgba(50, 50, 50, 0.25);
     font-size: 17px; }
-    #map-view .info:not(#more-elections) {
+    #_vit #map-view .info:not(#more-elections) {
       border-bottom: 1px solid #0f6387; }
-    #map-view .info span {
+    #_vit #map-view .info span {
       float: right;
       cursor: pointer; }
-  #map-view .box {
+  #_vit #map-view .box {
     line-height: 1.15;
     -moz-transition: height, 200ms, ease-in-out;
     -o-transition: height, 200ms, ease-in-out;
@@ -498,19 +489,19 @@ h1 {
     -moz-border-radius: 1px;
     -webkit-border-radius: 1px;
     border-radius: 1px; }
-  #map-view .address-name,
-  #map-view .address-line {
+  #_vit #map-view .address-name,
+  #_vit #map-view .address-line {
     text-transform: capitalize;
     font-size: 22px;
     color: #333333; }
-  #map-view .subsection {
+  #_vit #map-view .subsection {
     cursor: default;
     background-color: #eeeeee;
     padding: 15px;
     font-size: 17px; }
-    #map-view .subsection p {
+    #_vit #map-view .subsection p {
       width: 90%; }
-    #map-view .subsection span {
+    #_vit #map-view .subsection span {
       cursor: pointer;
       float: right;
       -moz-transform: translateY(-50%);
@@ -518,129 +509,129 @@ h1 {
       -webkit-transform: translateY(-50%);
       transform: translateY(-50%);
       font-weight: bolder; }
-    #map-view .subsection .contest-type {
+    #_vit #map-view .subsection .contest-type {
       display: inline-block;
       vertical-align: middle;
       *vertical-align: auto;
       *zoom: 1;
       *display: inline;
       font-style: italic; }
-  #map-view .candidate-list {
+  #_vit #map-view .candidate-list {
     overflow: hidden; }
-  #map-view .candidate-item .right-arrow {
+  #_vit #map-view .candidate-item .right-arrow {
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%); }
-  #map-view .change-address {
+  #_vit #map-view .change-address {
     display: none;
     position: relative;
     z-index: 3;
     margin: 0;
     padding-left: 12px; }
-  #map-view .contests {
+  #_vit #map-view .contests {
     margin-bottom: 40px; }
-  #map-view .party {
+  #_vit #map-view .party {
     font-style: italic; }
-  #map-view .election {
+  #_vit #map-view .election {
     cursor: default; }
-  #map-view .election-selection {
+  #_vit #map-view .election-selection {
     margin: 5px 0; }
-    #map-view .election-selection:last-child {
+    #_vit #map-view .election-selection:last-child {
       margin-bottom: 10px; }
-  #map-view .question {
+  #_vit #map-view .question {
     font-weight: bold;
     margin: 15px 0; }
-  #map-view .answer {
+  #_vit #map-view .answer {
     display: inline-block;
     vertical-align: middle;
     *vertical-align: auto;
     *zoom: 1;
     *display: inline; }
-  #map-view .toggle-image {
+  #_vit #map-view .toggle-image {
     width: 15px; }
-  #map-view .minus {
+  #_vit #map-view .minus {
     position: relative;
     top: -5px; }
-  #map-view .arrow {
+  #_vit #map-view .arrow {
     width: 10px;
     float: right;
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%); }
-    #map-view .arrow.toggle-image {
+    #_vit #map-view .arrow.toggle-image {
       -moz-transform: translateY(0);
       -ms-transform: translateY(0);
       -webkit-transform: translateY(0);
       transform: translateY(0); }
-    #map-view .arrow.left-arrow {
+    #_vit #map-view .arrow.left-arrow {
       -moz-transform: translateY(27%);
       -ms-transform: translateY(27%);
       -webkit-transform: translateY(27%);
       transform: translateY(27%); }
-  #map-view #local-jurisdiction-correspondence-address span {
+  #_vit #map-view #local-jurisdiction-correspondence-address span {
     font-weight: bold; }
-  #map-view #local-jurisdiction-physical-address span {
+  #_vit #map-view #local-jurisdiction-physical-address span {
     font-weight: bold; }
-  #map-view #state-election-correspondence-address span {
+  #_vit #map-view #state-election-correspondence-address span {
     font-weight: bold; }
-  #map-view #state-election-physical-address span {
+  #_vit #map-view #state-election-physical-address span {
     font-weight: bold; }
-  #map-view .polling-location-info {
+  #_vit #map-view .polling-location-info {
     margin: 5px 0; }
-  #map-view #registered-address {
+  #_vit #map-view #registered-address {
     cursor: pointer; }
-    #map-view #registered-address span {
+    #_vit #map-view #registered-address span {
       color: #98c0da; }
-  #map-view #chosen-election {
+  #_vit #map-view #chosen-election {
     font-size: 22px;
     color: #333333; }
-    #map-view #chosen-election img {
+    #_vit #map-view #chosen-election img {
       width: 20px;
       float: right;
       margin-top: -30px;
       margin-right: 2px; }
-    #map-view #chosen-election .date {
+    #_vit #map-view #chosen-election .date {
       font-size: 16px; }
-  #map-view .address-line {
+  #_vit #map-view .address-line {
     font-size: 16px; }
-  #map-view #location .address-line {
+  #_vit #map-view #location .address-line {
     font-size: 16px; }
-  #map-view #location span {
+  #_vit #map-view #location span {
     float: right;
     margin-top: -23px; }
-  #map-view #location img {
+  #_vit #map-view #location img {
     float: right;
     width: 60px;
     margin-right: -20px;
     margin-top: -20px; }
-  #map-view #voter-resources {
+  #_vit #map-view #voter-resources {
     margin-top: 125px; }
-  #map-view #other-elections {
+  #_vit #map-view #other-elections {
     overflow: hidden; }
-  #map-view #election-list {
+  #_vit #map-view #election-list {
     display: none;
     padding: 0 20px;
     overflow: hidden; }
-  #map-view #more-elections,
-  #map-view #polling-location,
-  #map-view #resources-toggle,
-  #map-view #ballot-information {
+  #_vit #map-view #more-elections,
+  #_vit #map-view #polling-location,
+  #_vit #map-view #resources-toggle,
+  #_vit #map-view #ballot-information {
     cursor: pointer; }
-  #map-view #more-resources {
+  #_vit #map-view #more-resources {
     overflow: hidden; }
-    #map-view #more-resources h1 {
+    #_vit #map-view #more-resources h1 {
       font-size: 20px;
       margin: 10px 0; }
-    #map-view #more-resources a {
+    #_vit #map-view #more-resources a {
       font-size: 17px;
       text-decoration: underline;
       color: #1c7ca5;
       margin: 30px 0; }
-  #map-view #plus-icon {
+  #_vit #map-view #plus-icon {
     margin-top: -45px; }
-  #map-view #info-icon {
+  #_vit #map-view #info-icon {
     background-color: white;
     border: 6px solid white;
     border-top: 3px solid white;
@@ -650,7 +641,7 @@ h1 {
     font-style: italic;
     float: right;
     margin-right: -25px; }
-  #map-view #alert {
+  #_vit #map-view #alert {
     display: none;
     position: fixed;
     z-index: 10000;
@@ -659,7 +650,7 @@ h1 {
     color: white;
     font-weight: bold;
     font-size: 20px; }
-    #map-view #alert #alert-close {
+    #_vit #map-view #alert #alert-close {
       float: right;
       width: 18px;
       -moz-transform: rotate(45deg);
@@ -667,12 +658,11 @@ h1 {
       -webkit-transform: rotate(45deg);
       transform: rotate(45deg);
       cursor: pointer; }
-      #map-view #alert #alert-close img {
+      #_vit #map-view #alert #alert-close img {
         width: 100%; }
-  #map-view .footer {
+  #_vit #map-view .footer {
     z-index: 2; }
-
-#map-view #alert {
+#_vit #map-view #alert {
   position: absolute; }
 
 .pac-nudge {
