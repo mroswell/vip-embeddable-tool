@@ -187,7 +187,35 @@ module.exports = View.extend({
 
     this.resizeListener = function() {
       if (!this.modal) {
-        this.landscape = true;
+        if (this.$container.width() < 500) {
+          // set to mobile view
+          this.landscape = false;
+          this.$container.css({
+            'overflow-y':'scroll',
+            'overflow-x':'hidden'
+          })
+        } else {
+          this.landscape = true;
+          if (this.$container.width() < 600) {
+            this.find('.info').css({ 'font-size': '14px' });
+            this.find('.election').css({ 'font-size': '16px' });
+            this.find('.subsection').css({ 'font-size': '15px' });
+            this.find('.right .box').css({ 'padding': '5px 15px' });
+            this.find('#more-resources h1').css({ 'font-size': '16px' });
+          } else {
+            console.log($('.left-wrapper').css('overflow-y'))
+            if (this.$container.height() < 480) {
+              console.log($('.left-wrapper').css('overflow-x'))
+              // $('.left-wrapper')[0].style['overflow-y'] = 'auto';
+              // $('.left-wrapper')[0].style['overflow-x'] = 'hidden';
+              // css({
+              //   overflowY: 'auto',
+              //   overflowX: 'hidden'
+              // })
+              console.log($('.left-wrapper').css('overflow-y'))
+            }
+          }
+        }
         return;
       }
 
@@ -239,22 +267,21 @@ module.exports = View.extend({
         this.landscape = true;
       }
 
-
       if (this.modal && !this.landscape) {
-          this.$container
-            .addClass('floating-container')
-          $('html, body')
-            .removeClass('max-height')
-            .find('body')
-              .addClass('no-scroll');
-        } else if (this.modal && this.landscape) {
-          this.$container
-            .addClass('floating-modal-container')
-          $('html, body')
-            .addClass('max-height')
-            .find('body')
-              .removeClass('no-scroll')
-        }
+        this.$container
+          .addClass('floating-container')
+        $('html, body')
+          .removeClass('max-height')
+          .find('body')
+            .addClass('no-scroll');
+      } else if (this.modal && this.landscape) {
+        this.$container
+          .addClass('floating-modal-container')
+        $('html, body')
+          .addClass('max-height')
+          .find('body')
+            .removeClass('no-scroll')
+      }
 
       $(window)
         .scrollTop(0)
