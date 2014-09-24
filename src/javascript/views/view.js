@@ -39,6 +39,7 @@ module.exports = (function() {
       if (options) {
         if (options.container) $container = options.container;
         if (options.data) this.data = options.data;
+        if (options.key) this.key = options.key;
         if (options.modal) this.modal = options.modal;
         if (options.alert) this.alert = options.alert;
         if (options.test) this.test = options.test;
