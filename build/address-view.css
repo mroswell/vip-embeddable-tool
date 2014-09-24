@@ -2,6 +2,7 @@ h1 {
   font-size: 22px; }
 
 #_vit #address-view {
+  background-color: white;
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto; }
