@@ -5,9 +5,9 @@
     "../sass/fonts.sass",
     "../sass/address-view.sass",
     "../sass/variables.sass",
-    "../sass/Users/alexkonrad/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/compass-core-1.0.0.rc.1/stylesheets/compass/_support.scss",
-    "../sass/Users/alexkonrad/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/compass-core-1.0.0.rc.1/stylesheets/compass/css3/_transform.scss",
-    "../sass/Users/alexkonrad/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/compass-core-1.0.0.rc.1/stylesheets/compass/css3/_box-shadow.scss"
+    "../sass/Users/mickey/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/compass-core-1.0.0.rc.1/stylesheets/compass/_support.scss",
+    "../sass/Users/mickey/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/compass-core-1.0.0.rc.1/stylesheets/compass/css3/_transform.scss",
+    "../sass/Users/mickey/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/compass-core-1.0.0.rc.1/stylesheets/compass/css3/_box-shadow.scss"
   ],
   "names": [],
   "file": "address-view.css"
