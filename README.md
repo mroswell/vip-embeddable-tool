@@ -23,6 +23,7 @@ vit.load({
 |-----|------------|-------------|
 |`modal`| boolean | if true, will open up in a modal box to display election information for mobile and tablet devices (defaults to true)|
 |`officialOnly`| boolean | if true, will only display information from official election information sources (defaults to true)|
+|`test`| boolean | if true, returns the VIP Test Election--otherwise returns the next upcoming election (defaults to false)|
 |`width`| string | set the width of the tool (e.g., `450px`); the default width is `640px` |
 |`height`| string | set the height of the tool (the default height is `480px`)|
 |`logo`| string (URL) | link to an alternative logo to display at the top of the tool|

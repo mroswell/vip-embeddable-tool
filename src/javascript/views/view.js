@@ -41,6 +41,7 @@ module.exports = (function() {
         if (options.data) this.data = options.data;
         if (options.modal) this.modal = options.modal;
         if (options.alert) this.alert = options.alert;
+        if (options.test) this.test = options.test;
         if (options.officialOnly) this.officialOnly = options.officialOnly;
         if (options.assets) this.assets = options.assets;
       }
