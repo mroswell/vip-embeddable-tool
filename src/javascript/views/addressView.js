@@ -62,6 +62,7 @@ module.exports = View.extend({
       api({
         address: enteredAddress,
         officialOnly: this.officialOnly,
+        test: this.test,
         success: this.handleElectionData.bind(this),
         error: this.handleAddressNotFound.bind(this)
       });
@@ -114,6 +115,7 @@ module.exports = View.extend({
                 api({
                   address: address,
                   officialOnly: that.officialOnly,
+                  test: that.test,
                   success: function(newResponse) {
                     that.triggerRouteEvent('addressViewSubmit', newResponse);
                   },
@@ -150,6 +152,7 @@ module.exports = View.extend({
         api({
           address: this._parseAddress(response.normalizedInput),
           officialOnly: this.officialOnly,
+          test: this.test,
           success: function(newResponse) {
             this.triggerRouteEvent('addressViewSubmit', newResponse);
           }.bind(this),
