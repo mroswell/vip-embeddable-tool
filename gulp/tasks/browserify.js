@@ -23,7 +23,7 @@ gulp.task('browserify', function() {
   var bundler = bundleMethod({
     entries: ['./src/javascript/app.js'],
     extensions: ['.js', '.hbs'],
-    debug: false
+    debug: true
   });
 
   var bundle = function() {
@@ -33,7 +33,7 @@ gulp.task('browserify', function() {
       .bundle()
       .on('error', handleErrors)
       .pipe(source('app.js'))
-      .pipe(streamify(uglify()))
+      // .pipe(streamify(uglify()))
       .pipe(gulp.dest('./build/'))
       .on('end', bundleLogger.end);
   };
