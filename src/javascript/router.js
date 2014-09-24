@@ -15,6 +15,7 @@ module.exports = (function() {
         officialOnly : typeof options.officialOnly !== 'undefined' ? options.officialOnly : true,
         alert : typeof options.alert !== 'undefined' ? options.alert : null,
         test : typeof options.test !== 'undefined' ? options.test : false,
+        key: typeof options.key !== 'undefined' ? options.key : 'AIzaSyCLNlhlWcKcozqYRq9M1_j25GLUzqrJxH8',
         title : typeof options.title !== 'undefined' ? options.title : 'Voting Information Tool',
         subtitle: typeof options.subtitle !== 'undefined' ? options.subtitle : '',
         logo : typeof options.logo  !== 'undefined' ? options.logo : 'https://s3.amazonaws.com/vip-voter-information-tool/images/voting-information-project.png',
