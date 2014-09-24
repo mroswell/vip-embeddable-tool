@@ -82,6 +82,8 @@ module.exports = View.extend({
     }, '.pac-container');
 
     $(window).on('keypress.keypressListener', this.keypressListener.bind(this));
+    this.resizer();
+    $(window).on('resize', this.resizer.bind(this));
 
     google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
   },
