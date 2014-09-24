@@ -46,7 +46,10 @@ module.exports = View.extend({
       if (e.target !== $currentLocationModal) $currentLocationModal.hide();
       if (e.target !== this.find('#fade')) this.find('#fade').hide();
     }.bind(this));
-    this.autocomplete = new google.maps.places.Autocomplete($address[0]);
+    this.autocomplete = new google.maps.places.Autocomplete($address[0], {
+      types: ['address'],
+      componentRestrictions: { country: 'us' }
+    });
     this.hasSubmitted = false;
     this.autocompleteListener = function () {
       if (this.hasSubmitted) return;

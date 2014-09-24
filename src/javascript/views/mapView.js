@@ -608,7 +608,10 @@ module.exports = View.extend({
 
     if (addressInput.is(':hidden')) {
       $("#vote-address-edit").hide();
-      this.autocomplete = new google.maps.places.Autocomplete(addressInput[0]);
+      this.autocomplete = new google.maps.places.Autocomplete(addressInput[0], {
+        types: ['address'],
+        componentRestrictions: { country: 'us' }
+      });
       // this.autocomplete = new google.maps.places.SearchBox(addressInput[0]);
       addressInput.prev().hide();
       addressInput.show();

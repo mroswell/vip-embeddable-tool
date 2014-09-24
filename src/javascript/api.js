@@ -8,6 +8,8 @@ module.exports = function(options) {
   if (options.test) url += '&electionId=2000';
   if (options.officialOnly) url += '&officialOnly=' + options.officialOnly;
 
+  window.console && console.log(options.address);
+
   $.support.cors = true;
   $.ajax({
       url: url,
