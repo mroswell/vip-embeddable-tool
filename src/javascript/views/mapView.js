@@ -750,6 +750,7 @@ module.exports = View.extend({
             .toggleClass('hidden');
       }.bind(this));
     } else { 
+      $("#about-resources span").show();
       $('#about-resources').css("height", "initial")
       $('#map-canvas, #location, .contests').hide();
       $('#about-resources').show();
@@ -800,6 +801,8 @@ module.exports = View.extend({
       if (!ballotInfoIsMaximized) that._scrollTo($("#ballot-information"), 20);
 
     } else { 
+      $("#about-resources span").hide();
+
       $('#map-canvas, #location, #more-resources').hide();
 
       $('.info.box')
