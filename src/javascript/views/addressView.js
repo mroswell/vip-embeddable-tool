@@ -61,10 +61,10 @@ module.exports = View.extend({
       } else enteredAddress = enteredAddress.formatted_address
       this.address = enteredAddress;
       this.hasSubmitted = true;
-
       api({
         address: enteredAddress,
         officialOnly: this.officialOnly,
+        productionDataOnly: this.productionDataOnly,
         key: this.key,
         test: this.test,
         success: this.handleElectionData.bind(this),
@@ -121,6 +121,7 @@ module.exports = View.extend({
                 api({
                   address: address,
                   officialOnly: that.officialOnly,
+                  productionDataOnly: that.productionDataOnly,
                   key: that.key,
                   test: that.test,
                   success: function(newResponse) {
@@ -159,6 +160,7 @@ module.exports = View.extend({
         api({
           address: this._parseAddress(response.normalizedInput),
           officialOnly: this.officialOnly,
+          productionDataOnly: this.productionDataOnly,
           key: this.key,
           test: this.test,
           success: function(newResponse) {

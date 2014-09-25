@@ -23,6 +23,7 @@ module.exports = (function() {
         language: typeof options.language !== 'undefined' ? options.language : 'en',
         width : typeof options.width !== 'undefined' ? options.width : 640,
         height : typeof options.height !== 'undefined' ? options.height : 480,
+        productionDataOnly: typeof options.productionOnly !== 'undefined' ? options.productionOnly : true,
         assets : text
       };
 
