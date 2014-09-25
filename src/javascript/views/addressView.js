@@ -21,7 +21,7 @@ module.exports = View.extend({
   address : '',
 
   resizer: function () {
-    
+    $("#_vit").find("#about.modal").css({"max-height": $("#_vit").height() - 120 + "px"});
   },
 
   onAfterRender : function(options) {
@@ -195,6 +195,12 @@ module.exports = View.extend({
   openAboutModal: function(e) {
     this.find('#about').toggle();
     this.find('#fade').toggle();
+   
+    if ( ($("#_vit").find("#about.modal").find("p").height() + $("#_vit").find("#about.modal").find("h2").height()) > ($("#_vit").height() - 120) ) {
+      $("#_vit").find("#about.modal").find("#close-button").hide();
+       $("#_vit").find("#about.modal").find(".close-modal-text-button").toggle();
+    }
+
     e.stopPropagation();
   },
 
