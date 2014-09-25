@@ -4,8 +4,28 @@ var util       = require('./util.js')
   , $          = require('jquery')
   , css        = require('../../build/app.css')
 
-window.vit = {
-  load: function(options) {
+function loadScript() {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' + 
+    '&libraries=places,geometry' +
+    '&callback=_VIT_GOOGLE_MAPS_INIT_CALLBACK';
+  document.body.appendChild(script);
+}
+
+window.vit = (function () {
+  var once = function (fn) {
+    var done = false;
+    window.console && console.log('done %s', done);
+
+    return function () {
+      return done ? void 0 : ((done = true), fn.apply(this, arguments))
+    }
+  }
+
+  var load = function(options) {
+    if (window._vitOptions) return;
+
     // var protocol = (document.location.protocol ? 'https' : 'http')
     var protocol = 'https'
       , googleMapsUrl = protocol 
@@ -15,15 +35,18 @@ window.vit = {
         + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
 
     // save the options to pass in to the router
+    window.console && console.log(options);
     window._vitOptions = typeof options !== 'undefined' ? options : {}
 
     // Roboto font
     WebFontConfig = { google: { families: [ 'Roboto:400,500,700:latin' ] } };
 
-    $.getScript(googleMapsUrl);
     $.getScript(googleWebFontsUrl);
+    loadScript();
   }
-}
+
+  return { load: once(load) }
+})(window);
 
 // callback on load of Google Maps
 window._VIT_GOOGLE_MAPS_INIT_CALLBACK = function() {
