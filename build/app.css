@@ -143,6 +143,8 @@
   #_vit .modal {
     display: none;
     position: absolute;
+    max-height: 50%;
+    overflow-y: scroll;
     background-color: white;
     border: 1px solid #e9e9e9;
     padding: 15px;
@@ -184,22 +186,18 @@
     #_vit .radio.checked .radio-selected {
       display: block; }
   #_vit .magnifying-glass {
-    -moz-transform: scaleX(-1);
-    -ms-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
     background-color: #494949;
     float: right;
-    padding: 5px;
+    padding: 8px;
     position: relative;
     display: inline-block;
     width: 43px;
-    -moz-border-radius: 5px 2px 2px 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px 2px 2px 5px;
-    -moz-box-shadow: -2px 1px 5px 0px rgba(0, 0, 0, 0.25);
-    -webkit-box-shadow: -2px 1px 5px 0px rgba(0, 0, 0, 0.25);
-    box-shadow: -2px 1px 5px 0px rgba(0, 0, 0, 0.25);
+    -moz-border-radius: 2px 5px 5px 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px 5px 5px 2px;
+    -moz-box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 1px 5px 0px rgba(0, 0, 0, 0.25);
     top: -44px; }
   #_vit .hidden {
     display: none; }
@@ -256,6 +254,7 @@
     overflow: hidden; }
   .landscape#map-view .right-wrapper {
     height: calc(100% - 40px);
+    width: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     position: absolute; }
@@ -300,7 +299,7 @@ h1 {
     margin: 0 0 25px 0;
     text-align: center; }
   #_vit #address-view #app-info {
-    margin: 0px auto 10%;
+    margin: 15px auto 10%;
     text-align: center;
     max-width: 235px; }
   #_vit #address-view #user-image {
@@ -504,6 +503,7 @@ h1 {
     padding: 15px;
     font-size: 17px; }
     #_vit #map-view .subsection p {
+      transform: translateY(50%);
       width: 90%; }
     #_vit #map-view .subsection span {
       cursor: pointer;

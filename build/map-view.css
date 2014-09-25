@@ -50,6 +50,7 @@
     padding: 15px;
     font-size: 17px; }
     #_vit #map-view .subsection p {
+      transform: translateY(50%);
       width: 90%; }
     #_vit #map-view .subsection span {
       cursor: pointer;

@@ -37,6 +37,7 @@
     overflow: hidden; }
   .landscape#map-view .right-wrapper {
     height: calc(100% - 40px);
+    width: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     position: absolute; }
