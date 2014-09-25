@@ -122,6 +122,12 @@
       &.left-arrow
         @include translateY(27%)
 
+    .expanded-pane
+      background-color: #57c4f7 !important
+      width: 103% !important
+      border-bottom: 0 !important
+      @include box-shadow(3px 3px 7px rgba(0,0,0,.35))
+
     #local-jurisdiction-correspondence-address
       span    
         font-weight: bold
@@ -204,10 +210,6 @@
     #resources-toggle,
     #ballot-information 
       cursor: pointer
-
-    #polling-location 
-      width: 103%
-      background-color: rgb(87, 196, 247)
 
     #more-resources
       overflow: hidden

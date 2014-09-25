@@ -369,6 +369,13 @@ module.exports = View.extend({
       }
     });
 
+    $('.info.box').removeClass('expanded-pane');
+    $('#polling-location').addClass('expanded-pane')
+    $(':not(#polling-location) .right-arrow').removeClass('hidden');
+    $(':not(#polling-location) .left-arrow').addClass('hidden');
+    $('#polling-location .right-arrow').addClass('hidden');
+    $('#polling-location .left-arrow').removeClass('hidden');
+
     document.querySelector('#calendar-icon').appendChild(myCalendar);
 
     if ( this.$container.height() < 465 ) {
@@ -436,28 +443,6 @@ module.exports = View.extend({
     });
 
     this.landscape = true;
-  },
-
-  _toggleModal: function() {
-    var modal = $('#_vitModal');
-    var that = this;
-
-    if (modal.is(':hidden')) {
-      modal.show();
-      modal.on('click', function() {
-        modal.hide()
-        that.triggerRouteEvent('mapViewBack')
-      });
-
-      $(document.body).addClass('body-modal-show');
-      $(this.$el.parentNode).addClass('container-modal-show');
-      $(this.$el).addClass('map-view-modal-show');
-    } else {
-      modal.hide()
-      $(document.body).removeClass('body-modal-show');
-      $(this.$el.parentNode).removeClass('container-modal-show');
-      $(this.$el).removeClass('map-view-modal-show');
-    }
   },
 
   _encodeAddressAndInitializeMap : function(address) {
@@ -724,19 +709,12 @@ module.exports = View.extend({
           $('.polling-location-info').show();
         }
       } else {
-        $('.info.box').css({
-            'background-color':'#1C7CA5',
-            width: '100%'
-        });
+        $('.info.box').removeClass('expanded-pane');
+        $('#polling-location').addClass('expanded-pane')
         $(':not(#polling-location) .right-arrow').removeClass('hidden');
         $(':not(#polling-location) .left-arrow').addClass('hidden');
         $('#more-resources, .contests').hide();
         $('#map-canvas, #location').show();
-        $('#polling-location')
-          .css({
-            'background-color':'#57c4f7',
-            width: '103%',
-          });
         $('#polling-location .right-arrow').addClass('hidden');
         $('#polling-location .left-arrow').removeClass('hidden');
       }
@@ -776,21 +754,15 @@ module.exports = View.extend({
       $('#map-canvas, #location, .contests').hide();
       $('#about-resources').show();
       $('.info.box')
-        .css({
-          'background-color':'#1C7CA5',
-          width: '100%'
-        });
+        .removeClass('expanded-pane');
+      $('#resources-toggle')
+        .addClass('expanded-pane')
 
       $(':not(#resources-toggle) .right-arrow').removeClass('hidden');
       $(':not(#resources-toggle) .left-arrow').addClass('hidden');
-
-      $('#resources-toggle')
-        .css({
-          'background-color':'#57c4f7',
-          width: '103%',
-        });
       $('#resources-toggle .right-arrow').addClass('hidden');
       $('#resources-toggle .left-arrow').removeClass('hidden');
+
 
       $('#more-resources')
         .css({
@@ -831,22 +803,16 @@ module.exports = View.extend({
       $('#map-canvas, #location, #more-resources').hide();
 
       $('.info.box')
-        .css({
-          'background-color':'#1C7CA5',
-          'width': '100%'
-        });
+        .removeClass('expanded-pane');
+      $('#ballot-information')
+        .addClass('expanded-pane');
+
 
       $(':not(#ballot-information) .right-arrow').removeClass('hidden');
       $(':not(#ballot-information) .left-arrow').addClass('hidden');
-
-      $('#ballot-information')
-        .css({
-          'background-color':'#57c4f7',
-          'width': '103%',
-        });
-
       $('#ballot-information .right-arrow').addClass('hidden');
       $('#ballot-information .left-arrow').removeClass('hidden');
+
       $('.contests').show();
 
       $('#about-resources').css("height", "initial")
@@ -855,6 +821,7 @@ module.exports = View.extend({
   },
 
   toggleContest: function(e) {
+
     if ($(e.target).hasClass('subsection') ||
         $(e.target).hasClass('subsection-plus') ||
         $(e.target).parent().hasClass('subsection') || 
