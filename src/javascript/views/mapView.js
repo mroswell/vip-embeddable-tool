@@ -25,7 +25,7 @@ module.exports = View.extend({
     '.contest-toggle click' : 'toggleContest',
     '.election-selection click' : 'changeElection',
     '#registered-address click' : 'changeAddress',
-     '#vote-address-edit click' : 'changeAddress',
+    '#vote-address-edit click' : 'changeAddress',
     '.address click' : 'changeAddress',
     '#fade click' : 'changeAddress',
     '#more-locations click' : 'moreLocations',
@@ -861,8 +861,20 @@ module.exports = View.extend({
       var toggleSign = $(e.currentTarget).find('span');
 
       candidateList.slideToggle(500, function() {
-        var text = (candidateList.is(':hidden') ? '+ ' : '\u2014')
+        var isHidden = candidateList.is(':hidden')
+        var text = (isHidden ? '+' : '\u2013');
         toggleSign.text(text);
+        if (isHidden) {
+          toggleSign.css({
+            'position' : 'relative',
+            'left' : '2px'
+          });
+        } else {
+          toggleSign.css({
+            'position': '',
+            'left' : ''
+          })
+        }
 
         if (!candidateList.is(':hidden')) this._scrollTo(toggleSign, 20);
       }.bind(this));
