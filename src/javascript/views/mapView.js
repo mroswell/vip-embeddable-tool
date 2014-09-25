@@ -855,8 +855,10 @@ module.exports = View.extend({
   },
 
   toggleContest: function(e) {
-
-    if ($(e.target).hasClass('subsection') || $(e.target).hasClass('subsection-plus')) {
+    if ($(e.target).hasClass('subsection') ||
+        $(e.target).hasClass('subsection-plus') ||
+        $(e.target).parent().hasClass('subsection') || 
+        $(e.target).parent().hasClass('subsection-plus')) {
       var candidateList = $(e.currentTarget).find('.candidate-list');
       var toggleSign = $(e.currentTarget).find('span');
 
