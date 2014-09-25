@@ -16,7 +16,6 @@ function loadScript() {
 window.vit = (function () {
   var once = function (fn) {
     var done = false;
-    window.console && console.log('done %s', done);
 
     return function () {
       return done ? void 0 : ((done = true), fn.apply(this, arguments))
@@ -35,7 +34,6 @@ window.vit = (function () {
         + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
 
     // save the options to pass in to the router
-    window.console && console.log(options);
     window._vitOptions = typeof options !== 'undefined' ? options : {}
 
     // Roboto font

@@ -36,6 +36,7 @@ module.exports = (function() {
         'position' : 'relative',
         'border' : '1px solid #898989'
       });
+
       if (options) {
         if (options.container) $container = options.container;
         if (options.data) this.data = options.data;
@@ -44,8 +45,10 @@ module.exports = (function() {
         if (options.alert) this.alert = options.alert;
         if (options.test) this.test = options.test;
         if (options.officialOnly) this.officialOnly = options.officialOnly;
+        if (!options.productionDataOnly) this.productionDataOnly = options.productionDataOnly;
         if (options.assets) this.assets = options.assets;
       }
+
       this.$container = $container;
       this.onBeforeRender(options);
 
