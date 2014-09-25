@@ -180,6 +180,9 @@
   #_vit #map-view #resources-toggle,
   #_vit #map-view #ballot-information {
     cursor: pointer; }
+  #_vit #map-view #polling-location {
+    width: 103%;
+    background-color: #57c4f7; }
   #_vit #map-view #more-resources {
     overflow: hidden; }
     #_vit #map-view #more-resources h1 {

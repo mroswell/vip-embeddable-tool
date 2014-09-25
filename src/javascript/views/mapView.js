@@ -186,6 +186,7 @@ module.exports = View.extend({
     }
 
     this.resizeListener = function() {
+
       if (!this.modal) {
         if (this.$container.width() < 500) {
           // set to mobile view
@@ -369,6 +370,10 @@ module.exports = View.extend({
     });
 
     document.querySelector('#calendar-icon').appendChild(myCalendar);
+
+    if ( this.$container.height() < 465 ) {
+      this.find('.left-overflow-wrapper').find('.left-wrapper').css({'overflow-y': 'auto', 'overflow-x': 'hidden'});
+    }
 
     fastclick(document.body);
   },
