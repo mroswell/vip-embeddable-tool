@@ -188,10 +188,10 @@
   #_vit .magnifying-glass {
     background-color: #494949;
     float: right;
-    padding: 8px;
+    padding: 9px;
     position: relative;
     display: inline-block;
-    width: 43px;
+    width: 41px;
     -moz-border-radius: 2px 5px 5px 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px 5px 5px 2px;
