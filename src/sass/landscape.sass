@@ -1,77 +1,84 @@
 @import 'variables'
 @import 'compass/css3'
 
-.landscape#map-view
-  height: 100%
-
-  .footer
-    bottom: 0
-
-  .info
-    font-size: 16px
-
-  #location
-    position: absolute,
-    left: 45%,
-    top: 55%,
-    width: 50%,
-    background-color: white,
-    z-index: 2
-    img
-      margin-right: -10px
-
-  .left-wrapper
-    float: left
-    position: absolute
-    z-index: 3
-    width: 40%
-    height: calc(100% - 40px)
-    background-color: $darkblue
-    @include box-shadow(2px 0px 5px 0px rgba(50, 50, 50, 0.35))
-
-    .box:not(.info)
-      padding: 10px
-      background-color: white
-
-    #vip-logo
-      height: 110px
-      background-size: 105px
-      background-repeat: no-repeat
-      background-position: center
-      background-color: white
-
-  .dark-blue-box
-    background-color: $darkblue
-    overflow: hidden
-
-  .right-wrapper
-    height: calc(100% - 40px)
-    width: 100%
-    overflow-y: auto
-    -webkit-overflow-scrolling: touch
-    position: absolute
-
-    #all-contests
-      position: relative
-      top: -30px
-
-  .right
-    float: right
-    width: 60%
-
-    .box
-      padding-left: 30px
-
-  #map-canvas
-    position: absolute !important
-    left: 40%
+#_vit
+  .landscape#map-view
     height: 100%
-    background-color: white
-    z-index: 1
 
-  #current-location
-    button
-      margin: 10px 25px 0 90px
+    .footer
+      bottom: 0
 
-  #about-resources
-    padding-left: 30px
+    .info
+      font-size: 16px
+
+    .subsection
+      @include box-shadow(0 2px 5px 0 rgba(0,0,0,.15))
+      span
+        font-weight: normal
+
+    #location
+      position: absolute,
+      left: 45%,
+      top: 55%,
+      width: 50%,
+      background-color: white,
+      z-index: 2
+      @include box-shadow(2px 2px 8px rgba(0,0,0,.25))
+      img
+        margin-right: -10px
+
+    .left-wrapper
+      float: left
+      position: absolute
+      z-index: 3
+      width: 40%
+      height: calc(100% - 40px)
+      background-color: $darkblue
+      @include box-shadow(2px 0px 5px 0px rgba(50, 50, 50, 0.35))
+
+      .box:not(.info)
+        padding: 10px
+        background-color: white
+
+      #vip-logo
+        height: 110px
+        background-size: 105px
+        background-repeat: no-repeat
+        background-position: center
+        background-color: white
+
+    .dark-blue-box
+      background-color: $darkblue
+      overflow: hidden
+
+    .right-wrapper
+      height: calc(100% - 40px)
+      width: 100%
+      overflow-y: auto
+      -webkit-overflow-scrolling: touch
+      position: absolute
+
+      #all-contests
+        position: relative
+
+    .right
+      float: right
+      width: 60%
+
+      .box
+        padding-left: 30px
+        border-bottom: 1px solid #dfdfdf
+
+    #map-canvas
+      position: absolute !important
+      left: 40%
+      height: 100%
+      background-color: white
+      z-index: 1
+
+    #current-location
+      button
+        margin: 10px 25px 0 90px
+
+    #about-resources
+      padding-left: 30px
