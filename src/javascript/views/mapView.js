@@ -819,7 +819,7 @@ module.exports = View.extend({
 
         if (ballotInfoIsMaximized === subsectionIsMaximized) {
           candidateList.slideToggle(500, function() {
-            var text = (subsectionIsMaximized ? '+ ' : '\u2014')
+            var text = (subsectionIsMaximized ? '+ ' : '\u2013')
             toggleSign.text(text);
           }.bind(this));
         }
@@ -867,7 +867,7 @@ module.exports = View.extend({
         if (isHidden) {
           toggleSign.css({
             'position' : 'relative',
-            'left' : '2px'
+            'left' : '-2px'
           });
         } else {
           toggleSign.css({
