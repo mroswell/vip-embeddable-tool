@@ -490,12 +490,67 @@ module.exports = View.extend({
         };
         that.map = new google.maps.Map(document.getElementById("map-canvas"), options);
         that.map.set('styles', [
-          {
-            "featureType": "poi",
-            "stylers": [
-              { "visibility": "off" }
-            ]
-          }
+          // {
+          //   "featureType": "poi",
+          //   "stylers": [
+          //     { "visibility": "off" }
+          //   ]
+          // },
+            {
+    featureType: "road",
+    elementType: "labels",
+    stylers: [ 
+      // { visibility: "simplified" }, 
+      { lightness: 20 } 
+    ]
+  },{
+    featureType: "administrative.land_parcel",
+    elementType: "all",
+    stylers: [ { visibility: "off" } ]
+  },{
+    featureType: "landscape.man_made",
+    elementType: "all",
+    stylers: [ { visibility: "off" } ]
+  },{
+    featureType: "transit",
+    elementType: "all",
+    stylers: [ { visibility: "off" } ]
+  },
+  // {
+  //   featureType: "road.local",
+  //   elementType: "labels",
+  //   stylers: [ { visibility: "simplified" } ]
+  // },{
+  //   featureType: "road.local",
+  //   elementType: "geometry",
+  //   stylers: [ { visibility: "simplified" } ]
+  // },
+  {
+    featureType: "road.highway",
+    elementType: "labels",
+    stylers: [ { visibility: "off" } ]
+  },{
+    featureType: "road.arterial",
+    elementType: "labels",
+    stylers: [ { visibility: "off" } ]
+  },{
+    featureType: "water",
+    elementType: "all",
+    stylers: [ 
+      { hue: "#a1cdfc" },
+      { saturation: 39 },
+      { lightness: 49 }
+    ]
+  },{
+    featureType: "road.highway",
+    elementType: "geometry",
+    stylers: [ { hue: "#f49935" } ]
+  },{
+    featureType: "road.arterial",
+    elementType: "geometry",
+    stylers: [ { hue: "#fad959" } ]
+  }
+
         ])
 
         that._addPollingLocation(position, address);
@@ -545,10 +600,10 @@ module.exports = View.extend({
         this.map.panTo(marker.getPosition());
         this.map.setZoom(12);
         this.find('#location .address').innerHTML = this.addressPartial(address);
-        $('.polling-location-info').hide();
+        $('.polling-location-info').slideDown('slow');
       } else {
         this._fitMap();
-        $('.polling-location-info').show();
+        $('.polling-location-info').slideUp('slow');
       }
   },
 
@@ -703,10 +758,10 @@ module.exports = View.extend({
           this.map.panTo(marker.getPosition());
           this.map.setZoom(12);
           if (address) this.find('#location .address').innerHTML = this.addressPartial(address);
-          $('.polling-location-info').hide();
+          $('.polling-location-info').slideUp('fast');
         } else {
           this._fitMap();
-          $('.polling-location-info').show();
+          $('.polling-location-info').slideDown('fast');
         }
       } else {
         $('.info.box').removeClass('expanded-pane');
@@ -803,7 +858,7 @@ module.exports = View.extend({
     } else { 
       $("#about-resources span").hide();
 
-      $('#map-canvas, #location, #more-resources').hide();
+      $('#map-canvas, #location, #more-resources, #about-resources').hide();
 
       $('.info.box')
         .removeClass('expanded-pane');
