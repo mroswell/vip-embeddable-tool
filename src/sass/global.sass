@@ -111,6 +111,8 @@
   .modal
     display: none
     position: absolute
+    max-height: 50%
+    overflow-y: scroll
     background-color: white
     border: 1px solid $border
     padding: 15px
@@ -147,15 +149,17 @@
         display: block
 
   .magnifying-glass
-    @include scaleX(-1)
+    //@include scaleX(-1)
     background-color: $text
     float: right
-    padding: 5px
+    padding: 8px
     position: relative
     display: inline-block
     width: 43px
-    @include border-radius(5px 2px 2px 5px)
-    @include box-shadow(-2px 1px 5px 0px rgba(0,0,0,0.25))
+    //@include border-radius(5px 2px 2px 5px)
+    //@include box-shadow(-2px 1px 5px 0px rgba(0,0,0,0.25))
+    @include border-radius(2px 5px 5px 2px)
+    @include box-shadow(2px 1px 5px 0px rgba(0,0,0,0.25))
     top: -44px
 
   .hidden
