@@ -153,11 +153,16 @@ module.exports = View.extend({
     //     var questions = csvArray[0];
     //     var states = csvArray.slice(1);
     //     var voterIdInfo = [];
-    //     $.each(states, function(state) {
-    //       $.each(questions, function(question, index) {
-    //         console.log(question, index)
-    //       })
-    //     })
+    //     window.states = states;
+    //     window.questions = questions;
+    //     states.forEach(function(state) {
+    //       var stateObj = {};
+    //       questions.forEach(function(question, index) {
+    //         stateObj[question] = state[index]
+    //       });
+    //       voterIdInfo.push(stateObj);
+    //     });
+    //     window.voterId = voterIdInfo
     //   }
     // })
   },
