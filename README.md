@@ -71,6 +71,10 @@ For internationalization and language customization, supply a link to the `json`
 {
   "text" : {
     "summary" : "Find out about ballot information, polling location, early voting, ID requirements and more...",
+    "placeholderText" : {
+      "enterAddress" : "Enter Registered Voting Address",
+      "changeAddress" : "Enter a different address"
+    }
     "about" : {
       "title" : "About the Voting Information Tool",
       "content" : "The Voting Information Project (VIP) works to connect voters with the essential information needed to cast their ballot, such as where to vote and what is on the ballot. It is a project between The Pew Charitable Trusts, Google, and the states. Launched in 2008, VIP works with state and local election officials to provide official election information to citizens through a variety of means, including the Google Civic Information API. The Voting Information Tool is one of the many made available through VIP, ensuring official election information is accessible to voters before and on Election Day."
@@ -105,7 +109,9 @@ For internationalization and language customization, supply a link to the `json`
       "electionAdministration" : {
         "title" : "Local Election Administration",
         "local_jurisdiction" : "Election Administration",
-        "stateElectionsOffice" : "State Elections Office"
+        "stateElectionsOffice" : "State Elections Office",
+        "physicalAddress" : "Physical Address",
+        "correspondenceAddress" : "Correspondence Address"
       },
       "moreResources" : {
         "title" : "Additional Resources",
