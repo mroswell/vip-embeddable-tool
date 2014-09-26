@@ -28,8 +28,6 @@ window.$ = $
         assets: text
       };
       $.extend(options, config);
-      
-
 
       addressView
         .onRouteEvent('addressViewSubmit', function(response) {
@@ -57,12 +55,9 @@ window.$ = $
         .onRouteEvent('mapViewSubmit', function(response) {
           data = response;
           $.extend(options, { data: data })
-
           // render the elections view if there's more than one election
           // returned for the entered address, otherwise render the map view
-          if (typeof data.otherElections !== 'undefined') {
-            router.navigate(electionsView, mapView, options);
-          } else router.navigate(mapView, mapView, options);
+          router.navigate(mapView, mapView, options);
         });
 
       if (options.json) {

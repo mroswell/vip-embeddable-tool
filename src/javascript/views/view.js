@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var api = require('../api.js')
 
 module.exports = (function() {
   var view = {
@@ -129,6 +130,28 @@ module.exports = (function() {
         this.find('#fade').hide();
         this.find('.loading').hide();
       }
+    },
+
+    _makeRequest: function (options) {
+      var requestParams = {
+        officialOnly: this.officialOnly,
+        productionDataOnly: this.productionDataOnly,
+        key: this.key,
+        test: this.test,
+        success: this.handleElectionData.bind(this),
+        error: this.handleAddressNotFound.bind(this),
+        complete: this.toggleLoadingDisplay.bind(this)
+      };
+
+      $.extend(requestParams, options)
+
+      api(requestParams);
+    },
+
+    handleElectionData: function(response) {
+      var routeEvent = (this.$id === 'address-view') ? 'addressViewSubmit' : 'mapViewSubmit';
+      this.hasSubmitted = false;
+      this.triggerRouteEvent(routeEvent, response);
     },
 
     _parseAddress: function(address) {

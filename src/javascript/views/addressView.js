@@ -61,15 +61,8 @@ module.exports = View.extend({
       } else enteredAddress = enteredAddress.formatted_address
       this.address = enteredAddress;
       this.hasSubmitted = true;
-      api({
-        address: enteredAddress,
-        officialOnly: this.officialOnly,
-        productionDataOnly: this.productionDataOnly,
-        key: this.key,
-        test: this.test,
-        success: this.handleElectionData.bind(this),
-        error: this.handleAddressNotFound.bind(this),
-        complete: this.toggleLoadingDisplay.bind(this)
+      this._makeRequest({
+        address: enteredAddress
       });
 
       this.toggleLoadingDisplay();
@@ -121,12 +114,8 @@ module.exports = View.extend({
               position.coords.latitude,
               position.coords.longitude,
               function(address) {
-                api({
+                that._makeRequest({
                   address: address,
-                  officialOnly: that.officialOnly,
-                  productionDataOnly: that.productionDataOnly,
-                  key: that.key,
-                  test: that.test,
                   success: function(newResponse) {
                     that.triggerRouteEvent('addressViewSubmit', newResponse);
                   },
@@ -160,12 +149,8 @@ module.exports = View.extend({
       $('.unchecked:first').addClass('hidden');
       $(this.find('#multiple-elections button')).on('click', function() {
         var id = this.find('.checked:not(.hidden)').siblings('.hidden').eq(0).text();
-        api({
+        this._makeRequest({
           address: this._parseAddress(response.normalizedInput),
-          officialOnly: this.officialOnly,
-          productionDataOnly: this.productionDataOnly,
-          key: this.key,
-          test: this.test,
           success: function(newResponse) {
             this.triggerRouteEvent('addressViewSubmit', newResponse);
           }.bind(this),

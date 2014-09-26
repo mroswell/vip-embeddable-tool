@@ -197,6 +197,8 @@ module.exports = View.extend({
           })
         } else {
           this.landscape = true;
+          this.$container.width(options.width);
+          this.$container.height(options.height)
           if (this.$container.width() < 600) {
             this.find('.info').css({ 'font-size': '14px' });
             this.find('.election').css({ 'font-size': '16px' });
@@ -660,7 +662,7 @@ module.exports = View.extend({
       // this.autocomplete = new google.maps.places.SearchBox(addressInput[0]);
       addressInput.prev().hide();
       addressInput.show();
-      if (!this.landscape) this.find('#fade').show();
+      if (!this.landscape) this.find('#fade').fadeTo('fast', .25);
 
       $('.pac-container').addClass('pac-nudge');
 
@@ -679,7 +681,7 @@ module.exports = View.extend({
         }
         this.hasSubmitted = true;
 
-        api({
+        this._makeRequest({
           address: address,
           success: function(response) {
             this.hasSubmitted = false;
@@ -706,7 +708,7 @@ module.exports = View.extend({
 
       addressInput.prev().show()
       addressInput.hide()
-      this.find('#fade').hide()
+      this.find('#fade').fadeOut()
     }
   },
 
@@ -945,14 +947,14 @@ module.exports = View.extend({
   },
 
   openAboutModal: function(e) {
-    this.find('#about').show();
-    this.find('#fade').show();
+    this.find('#about').fadeIn('fast');
+    this.find('#fade').fadeTo('fast', .2);
     e.stopPropagation();
   },
 
   closeAboutModal: function() {
-    this.find('#about').style.hide();
-    this.find('#fade').style.hide();
+    this.find('#about').fadeOut('fast')
+    this.find('#fade').fadeOut('fast')
   },
 
   closeAlert: function() {
