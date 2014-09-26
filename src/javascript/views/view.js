@@ -121,6 +121,16 @@ module.exports = (function() {
       el.css('display', val);
     },
 
+    toggleLoadingDisplay: function() {
+      if (this.find('.loading').is(':hidden')) {
+        this.find('#fade').fadeTo('slow', .1);
+        this.find('.loading').fadeIn('slow');
+      } else {
+        this.find('#fade').hide();
+        this.find('.loading').hide();
+      }
+    },
+
     _parseAddress: function(address) {
       if (typeof address === 'object') {
         var parsedAddress = '';

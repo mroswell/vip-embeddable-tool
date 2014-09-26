@@ -44,7 +44,7 @@ module.exports = View.extend({
       if (e.target !== $aboutModal) $aboutModal.hide();
       if (e.target !== $notFoundModal) $notFoundModal.hide();
       if (e.target !== $currentLocationModal) $currentLocationModal.hide();
-      if (e.target !== this.find('#fade')) this.find('#fade').hide();
+      if (e.target !== this.find('#fade')) this.find('#fade').fadeOut('fast');
     }.bind(this));
     this.autocomplete = new google.maps.places.Autocomplete($address[0], {
       types: ['address'],
@@ -68,8 +68,11 @@ module.exports = View.extend({
         key: this.key,
         test: this.test,
         success: this.handleElectionData.bind(this),
-        error: this.handleAddressNotFound.bind(this)
+        error: this.handleAddressNotFound.bind(this),
+        complete: this.toggleLoadingDisplay.bind(this)
       });
+
+      this.toggleLoadingDisplay();
     }.bind(this);
     this.keypressListener = function(e) {
       if (this.hasSubmitted) return;
@@ -106,8 +109,8 @@ module.exports = View.extend({
 
     var stateName = response.state[0].name;
     if (stateName === 'Washington' || stateName === 'Oregon') {
-      $('#current-location, #fade')
-        .show();
+      this.find('#current-location').fadeIn('fast');
+      this.find('#fade').fadeTo('fast', .2);
 
       $('#use-current-location').one('click', function() {
         if ('geolocation' in navigator) {
@@ -134,7 +137,7 @@ module.exports = View.extend({
             });
           });
         } else {
-          $('#current-location, #fade').hide();
+          $('#current-location, #fade').fadeOut('fast');
           $('#address-input')
             .val('')
             .attr('placeholder', 'Enter Your Current Location');
@@ -151,8 +154,8 @@ module.exports = View.extend({
       this.$el.append(this.multipleElections({
         elections: [response.election].concat(response.otherElections)
       }));
-      this.find('#multiple-elections').show();
-      this.find('#fade').show();
+      this.find('#multiple-elections').fadeIn('fast');
+      this.find('#fade').fadeTo('fast', .2);
       $('.checked:first').removeClass('hidden');
       $('.unchecked:first').addClass('hidden');
       $(this.find('#multiple-elections button')).on('click', function() {
@@ -180,8 +183,8 @@ module.exports = View.extend({
   },
 
   handleAddressNotFound: function() {
-    this.find('#address-not-found').show();
-    this.find('#fade').show();
+    this.find('#address-not-found').fadeIn();
+    this.find('#fade').fadeTo('fast', .2);
     this.find('#address-not-found h1').text(this.address);
     this.find('#address-input').value = "";
     this.hasSubmitted = false;
@@ -193,8 +196,8 @@ module.exports = View.extend({
   },
 
   openAboutModal: function(e) {
-    this.find('#about').toggle();
-    this.find('#fade').toggle();
+    this.find('#fade').fadeTo('fast', .2);
+    this.find('#about').fadeIn('fast')
    
     if ( ($("#_vit").find("#about.modal").find("p").height() + $("#_vit").find("#about.modal").find("h2").height()) > ($("#_vit").height() - 120) ) {
       $("#_vit").find("#about.modal").find("#close-button").hide();
@@ -205,8 +208,8 @@ module.exports = View.extend({
   },
 
   closeAboutModal: function() {
-    this.find('#about').hide();
-    this.find('#fade').hide();
+    this.find('#about').fadeOut('fast');
+    this.find('#fade').fadeOut('fast');
   },
 
   _reverseGeocode: function(lat, lng, callback) {
