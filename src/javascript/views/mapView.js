@@ -1,10 +1,11 @@
 var View = require('./view.js');
 var api  = require('../api.js');
 var voterIdData = require('../voterIdData.js');
+var csv = require('csv-string');
 var $ = require('jquery');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
-
+window.csv = csv;
 module.exports = View.extend({
 
   $id : 'map-view',
@@ -143,6 +144,22 @@ module.exports = View.extend({
 
     $('<div id="_vitModal">')
       .prependTo($('html'));
+
+    // $.ajax({
+    //   url: 'https://s3.amazonaws.com/vip-voter-information-tool/voterId/voterIdInfo.csv',
+    //   cache: false,
+    //   success: function(resp) {
+    //     var csvArray = csv.parse(resp)
+    //     var questions = csvArray[0];
+    //     var states = csvArray.slice(1);
+    //     var voterIdInfo = [];
+    //     $.each(states, function(state) {
+    //       $.each(questions, function(question, index) {
+    //         console.log(question, index)
+    //       })
+    //     })
+    //   }
+    // })
   },
 
   onAfterRender: function(options) {

@@ -4,10 +4,11 @@ var util       = require('./util.js')
   , $          = require('jquery')
   , css        = require('../../build/app.css')
 
-function loadScript() {
+function loadScript(language) {
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' + 
+    '&language=' + language +
     '&libraries=places,geometry' +
     '&callback=_VIT_GOOGLE_MAPS_INIT_CALLBACK';
   document.body.appendChild(script);
@@ -28,7 +29,7 @@ window.vit = (function () {
     // var protocol = (document.location.protocol ? 'https' : 'http')
     var protocol = 'https'
       , googleMapsUrl = protocol 
-        + '://maps.googleapis.com/maps/api/js?libraries=places,geometry&callback='
+        + '://maps.googleapis.com/maps/api/js?libraries=places,geometry&language=iw&callback='
         + '_VIT_GOOGLE_MAPS_INIT_CALLBACK'
       , googleWebFontsUrl = protocol
         + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
@@ -40,7 +41,14 @@ window.vit = (function () {
     WebFontConfig = { google: { families: [ 'Roboto:400,500,700:latin' ] } };
 
     $.getScript(googleWebFontsUrl);
-    loadScript();
+
+    if ((window._vitOptions.language && window._vitOptions.language !== 'en') ||
+      !navigator.language.match(/en/)) {
+      language = window._vitOptions.language || navigator.language;
+      var supportedLanguages = ['en', 'es'];
+      if (supportedLanguages.indexOf(language) !== -1) loadScript(language);
+      else loadScript('en-US');
+    } else loadScript('en-US');
   }
 
   return { load: once(load) }

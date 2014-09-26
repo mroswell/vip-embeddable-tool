@@ -41,6 +41,9 @@
   "dependencies": {
     "jquery": "^2.1.1",
     "fastclick": "^1.0.3",
-    "cssify": "^0.6.0"
+    "cssify": "^0.6.0",
+    "csv-to-json": "0.0.1",
+    "csvtojson": "^0.3.13",
+    "csv-string": "^2.2.2"
   }
 }

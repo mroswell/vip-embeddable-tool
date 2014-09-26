@@ -60,11 +60,24 @@ window.$ = $
           router.navigate(mapView, mapView, options);
         });
 
-      if (options.json) {
-        $.getJSON(options.json, function(newText) {
-          $.extend(options, { assets: newText });
+      if ((options.language && options.language !== 'en') || !navigator.language.match(/en/)) {
+        var language = options.language || navigator.language;
+        var supportedLanguages = ['en', 'es'];
+        if (supportedLanguages.indexOf(language) === -1) addressView.render(options);
+        var url = 'https://s3.amazonaws.com/vip-voter-information-tool/languages/' + language + '-config.json';
+
+        $.ajax({
+          url: url,
+          // dataType: 'jsonp',
+          cache: false,
+          success: function(newText) {
+          $.extend(options, { assets: JSON.parse(newText) });
           addressView.render(options);
+          }
         });
+      // } else if (!navigator.language.match(/en/)) {
+      //   var language = navigator.language;
+
       } else addressView.render(options);
     },
 
