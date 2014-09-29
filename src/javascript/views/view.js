@@ -1,5 +1,6 @@
 var $ = require('jquery');
-var api = require('../api.js')
+var api = require('../api.js');
+var csv = require('csv-string');
 
 module.exports = (function() {
   var view = {
@@ -28,6 +29,42 @@ module.exports = (function() {
     onAfterRender: function() {},
 
     onRemove: function() {},
+
+    fetchVoterIdData: function(state, callback) {
+      $.ajax({
+        url: 'https://s3.amazonaws.com/vip-voter-information-tool/voter-id/voterIdInfo.csv',
+        cache: false,
+        success: function(resp) {
+          var csvArray = csv.parse(resp);
+          var questions = csvArray[0];
+          var states = csvArray.slice(1);
+          var stateData = Array.prototype.filter.call(states, function(entry) {
+            return entry[0] === state;
+          });
+          var voterIdInfo = {};
+          var voterIdLink;
+          stateData.forEach(function(state) {
+            questions.forEach(function(question, index) {
+              if (question !== 'Complete Voter ID Information') {
+                var answer = state[index];
+                for (var i = 0, len = answer.length; i < len; i++) {
+                  if (answer.charCodeAt(i) === 65533) {
+                    var newStr = answer.slice(0, i) + answer.slice(i + 1, answer.length);
+                    answer = newStr;
+                  }
+                }
+                voterIdInfo[index] = {
+                  'question' : question,
+                  'answer': answer
+                }
+              } else voterIdLink = state[index];
+            });
+          });
+
+          callback({ data: voterIdInfo, link: voterIdLink });
+        }
+      });
+    },
 
     render: function(options) {
       // last change
@@ -59,13 +96,26 @@ module.exports = (function() {
           .removeClass('no-scroll')
           .find($container)
             .removeClass('floating-container')
-            .removeClass('floating-modal-container')
+            .removeClass('floating-modal-container');
 
+      if (this.$id === 'map-view') {
+        this.fetchVoterIdData(options.data.normalizedInput.state, function(voterId) {
+          options.data.voterId = voterId.data;
+          console.log(voterId.data)
+          options.data.voterIdLink = voterId.link;
+          this.insertView(options);
+        }.bind(this))
+      } else this.insertView(options);
+
+      return this;
+    },
+
+    insertView: function(options) {
       if (!!$('#' + this.$id)[0]) this.toggle();
       else {
         this.$el = $('<div id=' + this.$id + '/>')
         this.$el.append(this.template(options));
-        $container.append(this.$el);
+        this.$container.append(this.$el);
       }
 
       for (var key in this.events) {
@@ -75,13 +125,11 @@ module.exports = (function() {
         var els = $(this.$el).find(el);
         if (!els.length) els = $(el);
         $.map(els, function(e) {
-          $(e).on(ev, that[that.events[key]].bind(that));
-        });
+          $(e).on(ev, this[this.events[key]].bind(this));
+        }.bind(this));
       }
 
       this.onAfterRender(options);
-
-      return this;
     },
 
     remove: function() {

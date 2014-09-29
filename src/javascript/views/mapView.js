@@ -1,11 +1,10 @@
 var View = require('./view.js');
 var api  = require('../api.js');
-var voterIdData = require('../voterIdData.js');
-var csv = require('csv-string');
+
 var $ = require('jquery');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
-window.csv = csv;
+
 module.exports = View.extend({
 
   $id : 'map-view',
@@ -57,24 +56,6 @@ module.exports = View.extend({
     }
 
     $(this.$container).css('-webkit-overflow-scrolling', 'touch')
-
-    // comb the voter id data
-    var stateData = Array.prototype.filter.call(voterIdData, function(entry) {
-      return entry.State === options.data.normalizedInput.state;
-    });
-    stateData = stateData[0];
-    var voterId = {};
-    var i = 0;
-    for (var key in stateData) {
-      if (key !== 'Complete Voter ID Information') {
-        voterId[i] = { 
-          'question' : key,
-          'answer' : stateData[key]
-        }
-        i += 1;
-      } else options.data.voterIdLink = stateData[key];
-    }
-    options.data.voterId = voterId;
 
     // comb the address data
     var state = options.data.state[0];
@@ -144,27 +125,6 @@ module.exports = View.extend({
 
     $('<div id="_vitModal">')
       .prependTo($('html'));
-
-    // $.ajax({
-    //   url: 'https://s3.amazonaws.com/vip-voter-information-tool/voterId/voterIdInfo.csv',
-    //   cache: false,
-    //   success: function(resp) {
-    //     var csvArray = csv.parse(resp)
-    //     var questions = csvArray[0];
-    //     var states = csvArray.slice(1);
-    //     var voterIdInfo = [];
-    //     window.states = states;
-    //     window.questions = questions;
-    //     states.forEach(function(state) {
-    //       var stateObj = {};
-    //       questions.forEach(function(question, index) {
-    //         stateObj[question] = state[index]
-    //       });
-    //       voterIdInfo.push(stateObj);
-    //     });
-    //     window.voterId = voterIdInfo
-    //   }
-    // })
   },
 
   onAfterRender: function(options) {
