@@ -41,8 +41,8 @@ module.exports = {
     "resources" : {
       "summary" : "Information on how to navigate the elections process, including deadlines, Voter ID information, and registration links.",
       "electionAdministration" : {
-        "title" : "Local Election Administration",
-        "local_jurisdiction" : "Election Administration",
+        "title" : "Election Administration",
+        "local_jurisdiction" : "Local Jurisdiction",
         "stateElectionsOffice" : "State Elections Office"
       },
       "moreResources" : {

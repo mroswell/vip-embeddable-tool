@@ -171,6 +171,9 @@ module.exports = View.extend({
     // this.toggleLoadingDisplay()
     // this.find('#fade').hide();
     this.find('.loading').hide();
+    setTimeout(function() {
+      this.find('.loading').hide();
+    }.bind(this), 500);
     this.find('#address-not-found').fadeIn();
     this.find('#fade').fadeTo('fast', .2);
     this.find('#address-not-found h1').text(this.address);

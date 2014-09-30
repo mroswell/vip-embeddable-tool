@@ -1,6 +1,5 @@
 var View = require('./view.js');
 var api  = require('../api.js');
-
 var $ = require('jquery');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
@@ -28,8 +27,6 @@ module.exports = View.extend({
     '#vote-address-edit click' : 'changeAddress',
     '.address click' : 'changeAddress',
     '#fade click' : 'changeAddress',
-    '#more-locations click' : 'moreLocations',
-    '#voter-resources click' : 'voterResources',
     '#polling-location click' : 'toggleMap',
     '#more-elections click' : 'toggleElections',
     '#resources-toggle click' : 'toggleResources',
@@ -61,10 +58,12 @@ module.exports = View.extend({
     var pollingLocations = options.data.pollingLocations;
     var earlyVoteSites = options.data.earlyVoteSites;
 
-    pollingLocations.forEach(function(pollingLocation) {
-      if (pollingLocation.name) pollingLocation.address.name = pollingLocation.name;
-      pollingLocation.isEarlyVoteSite = false
-    });
+    if (pollingLocations) {
+      pollingLocations.forEach(function(pollingLocation) {
+        if (pollingLocation.name) pollingLocation.address.name = pollingLocation.name;
+        pollingLocation.isEarlyVoteSite = false
+      });
+    }
 
     if (earlyVoteSites) {
       earlyVoteSites.forEach(function(earlyVoteSite, idx) {
@@ -101,11 +100,6 @@ module.exports = View.extend({
         delete options.data.state[0].electionAdministrationBody.correspondenceAddress;
       }
     }
-
-    // WA / OR mail-in case
-    if (state.name === 'Washington' || state.name === 'Oregon') {
-      
-    }    
 
     // reformat the dates
     var date = new Date(options.data.election.electionDay);
@@ -146,6 +140,102 @@ module.exports = View.extend({
       .prependTo($('html'));
   },
 
+  _resizeHandler: function () {
+    if (!this.modal) {
+      if (this.$container.width() < 500) {
+        // set to mobile view
+        this.landscape = false;
+        this.$container.css({
+          'overflow-y':'scroll',
+          'overflow-x':'hidden'
+        })
+      } else {
+        this.landscape = true;
+        this.$container.width(options.width);
+        this.$container.height(options.height)
+        if (this.$container.width() < 600) {
+          this.find('.info').css({ 'font-size': '14px' });
+          this.find('.election').css({ 'font-size': '16px' });
+          this.find('.subsection').css({ 'font-size': '15px' });
+          this.find('.right .box').css({ 'padding': '5px 15px' });
+          this.find('#more-resources h1').css({ 'font-size': '16px' });
+        } else {
+          if (this.$container.height() < 480) {
+            // $('.left-wrapper')[0].style['overflow-y'] = 'auto';
+            // $('.left-wrapper')[0].style['overflow-x'] = 'hidden';
+            // css({
+            //   overflowY: 'auto',
+            //   overflowX: 'hidden'
+            // })
+          }
+        }
+      }
+      return;
+    }
+
+    var width = $(window).width()
+      , height = $(window).height()
+      , screenWidth = screen.availWidth
+      , screenHeight = screen.availHeight;
+
+    if (!$('#viewport-mobile-web-tag').length) {
+      $('<meta>')
+        .attr('name', 'viewport')
+        .attr('content', 'width=device-width,initial-scale=1.0')
+        .attr('id', 'viewport-mobile-web-tag')
+        .appendTo($('head'));
+    }
+
+    if (screenWidth < 600) {
+      this.$container.width(width);
+      this.$container.height(height);
+      this.landscape = false;
+    } else {
+      // tablet sizing
+      this.$container
+        .width(width-40);
+
+      var containerWidth = this.$container.width();
+      this.$container
+        .height(containerWidth * (7/10));
+
+      var containerHeight = this.$container.height();
+
+      this.$container
+        .css({
+          'top':((height/2) - (containerHeight/2)) + 'px',
+          'left':((width/2) - (containerWidth/2)) + 'px'
+        });
+
+      $('#_vitModal').css({
+        'width': width,
+        'height': height
+      })
+
+      this.landscape = true;
+    }
+
+    if (this.modal && !this.landscape) {
+      this.$container
+        .addClass('floating-container')
+      $('html, body')
+        .removeClass('max-height')
+        .find('body')
+          .addClass('no-scroll');
+    } else if (this.modal && this.landscape) {
+      this.$container
+        .addClass('floating-modal-container')
+      $('html, body')
+        .addClass('max-height')
+        .find('body')
+          .removeClass('no-scroll')
+    }
+
+    $(window)
+      .scrollTop(0)
+      .scrollLeft(0)
+  },
+
   onAfterRender: function(options) {
     var scrapeAddress = function(arr) {
       return Array.prototype.reduce.call(
@@ -154,6 +244,8 @@ module.exports = View.extend({
         ''
       );
     }
+
+    // remove duplicate election administration addresses
     if (scrapeAddress($('#local-jurisdiction-correspondence-address').children().children()) 
       === scrapeAddress($('#local-jurisdiction-physical-address').children().children())) {
       $('#local-jurisdiction-correspondence-address').remove();
@@ -164,6 +256,7 @@ module.exports = View.extend({
       $('#state-election-correspondence-address').remove();
     }
 
+    // remove election administration addresses that are only state acronyms
     $('.election-administration-address').each(function() {
       if (scrapeAddress($(this).children().children()).length === 2) $(this).remove();
     })
@@ -173,130 +266,27 @@ module.exports = View.extend({
     }
 
     var informationLinks = $('.information-links');
-    if (!informationLinks.val()) {
-      informationLinks.prev().hide();
-      informationLinks.hide();
-    }
+    if (!informationLinks.val())
+      informationLinks
+        .hide()
+        .prev()
+          .hide();
 
-    if (options.alert) {
+    if (options.alert)
       this.find('#alert')
         .find('#text')
           .text(options.alert)
         .end()
         .show();
-    }
-
-    this.resizeListener = function() {
-
-      if (!this.modal) {
-        if (this.$container.width() < 500) {
-          // set to mobile view
-          this.landscape = false;
-          this.$container.css({
-            'overflow-y':'scroll',
-            'overflow-x':'hidden'
-          })
-        } else {
-          this.landscape = true;
-          this.$container.width(options.width);
-          this.$container.height(options.height)
-          if (this.$container.width() < 600) {
-            this.find('.info').css({ 'font-size': '14px' });
-            this.find('.election').css({ 'font-size': '16px' });
-            this.find('.subsection').css({ 'font-size': '15px' });
-            this.find('.right .box').css({ 'padding': '5px 15px' });
-            this.find('#more-resources h1').css({ 'font-size': '16px' });
-          } else {
-            if (this.$container.height() < 480) {
-              // $('.left-wrapper')[0].style['overflow-y'] = 'auto';
-              // $('.left-wrapper')[0].style['overflow-x'] = 'hidden';
-              // css({
-              //   overflowY: 'auto',
-              //   overflowX: 'hidden'
-              // })
-            }
-          }
-        }
-        return;
-      }
-
-      var width = $(window).width()
-        , height = $(window).height()
-        , screenWidth = screen.availWidth
-        , screenHeight = screen.availHeight;
-
-      if (!$('#viewport-mobile-web-tag').length) {
-        $('<meta>')
-          .attr('name', 'viewport')
-          .attr('content', 'width=device-width,initial-scale=1.0')
-          .attr('id', 'viewport-mobile-web-tag')
-          .appendTo($('head'));
-      }
-
-      if (screenWidth < 600) {
-
-        var width = $(window).width()
-          , height = $(window).height()
-          , screenWidth = screen.availWidth
-          , screenHeight = screen.availHeight;
-
-        this.$container.width(width);
-        this.$container.height(height);
-        this.landscape = false;
-      } else {
-        // tablet sizing
-        this.$container
-          .width(width-40);
-
-        var containerWidth = this.$container.width();
-        this.$container
-          .height(containerWidth * (7/10));
-
-        var containerHeight = this.$container.height();
-
-        this.$container
-          .css({
-            'top':((height/2) - (containerHeight/2)) + 'px',
-            'left':((width/2) - (containerWidth/2)) + 'px'
-          });
-
-        $('#_vitModal').css({
-          'width': width,
-          'height': height
-        })
-
-        this.landscape = true;
-      }
-
-      if (this.modal && !this.landscape) {
-        this.$container
-          .addClass('floating-container')
-        $('html, body')
-          .removeClass('max-height')
-          .find('body')
-            .addClass('no-scroll');
-      } else if (this.modal && this.landscape) {
-        this.$container
-          .addClass('floating-modal-container')
-        $('html, body')
-          .addClass('max-height')
-          .find('body')
-            .removeClass('no-scroll')
-      }
-
-      $(window)
-        .scrollTop(0)
-        .scrollLeft(0)
-    };
 
     this.prevWidth = this.$container.width();
     this.prevHeight = this.$container.height();
     this.prevLeft = this.$container.css('left');
     this.prevTop = this.$container.css('top');
 
-    $(window).on('resize.mapview', this.resizeListener.bind(this));
+    $(window).on('resize.mapview', this._resizeHandler.bind(this));
 
-    this.resizeListener();
+    this._resizeHandler();
 
 
     var that = this;
@@ -346,38 +336,23 @@ module.exports = View.extend({
     var myCalendar = createOUICalendar({
       options: {
         class: 'add-to-calendar-drop-class',
-
-        // You can pass an ID. If you don't, one will be generated for you
         id: 'add-to-calendar-dropdown'
       },
       data: {
-        // Event title
         title: options.data.election.name,
-
-        // Event start date
         start: new Date(options.data.election.dateForCalendar),
-
-        // Event duration (IN MINUTES)
         duration: 1440,
-
-        // You can also choose to set an end time
-        // If an end time is set, this will take precedence over duration
-        // end: new Date('June 15, 2013 23:00'),     
-
-        // Event Address
         address: formattedAddress,
-
-        // Event Description
         description: options.data.election.name
       }
     });
 
-    $('.info.box').removeClass('expanded-pane');
-    $('#polling-location').addClass('expanded-pane')
-    $(':not(#polling-location) .right-arrow').removeClass('hidden');
-    $(':not(#polling-location) .left-arrow').addClass('hidden');
-    $('#polling-location .right-arrow').addClass('hidden');
-    $('#polling-location .left-arrow').removeClass('hidden');
+    this.find('.info.box').removeClass('expanded-pane');
+    this.find('#polling-location').addClass('expanded-pane')
+    this.find(':not(#polling-location) .right-arrow').removeClass('hidden');
+    this.find(':not(#polling-location) .left-arrow').addClass('hidden');
+    this.find('#polling-location .right-arrow').addClass('hidden');
+    this.find('#polling-location .left-arrow').removeClass('hidden');
 
     document.querySelector('#calendar-icon').appendChild(myCalendar);
 
@@ -390,7 +365,7 @@ module.exports = View.extend({
 
   closePopUps: function (e) {
     if ( !$(e.target).is( $(".add-to-calendar-checkbox") ) ) {
-      $(".add-to-calendar-checkbox").attr("checked", false);
+      this.find(".add-to-calendar-checkbox").attr("checked", false);
     }
   },
 
@@ -413,171 +388,146 @@ module.exports = View.extend({
     $(window).off('.mapview');
   },
 
+  _modifyExternals: function () {
+    $('html, body')
+      .addClass('max-height')
+      .find('#_vitModal')
+        .show()
+        .one('click', function() {
+          $(this).hide();
+          this.triggerRouteEvent('mapViewBack')
+        }.bind(this))
+      .end()
+  },
+
   _switchToLandscape: function(options) {
-    if (this.modal) {
-      $('html, body')
-        .addClass('max-height')
-        .find('#_vitModal')
-          .show()
-          .one('click', function() {
-            $('#_vitModal').hide();
-            this.triggerRouteEvent('mapViewBack')
-          }.bind(this))
+    if (this.modal) this._modifyExternals();
+    this.$el
+      .addClass('landscape')
+      .prepend(
+        this.find('.left')
+          .detach()
+          .wrapAll('<div class="left-overflow-wrapper"><div class="left-wrapper" />')
+          .parent()
+          .prepend($('<div class="left box" id="vip-logo">')
+            .css('background-image', 'url(' + options.smallLogo + ')')
+          )
+      )
+      .find('.right')
+        .wrapAll('<div class="right-wrapper" />')
+      .end()
+      .find('.toggle-image')
+        .addClass('arrow')
+        .filter('.plus')
+          .attr('src', 'https://s3.amazonaws.com/vip-voter-information-tool/images/left-arrow-white.png')
+          .addClass('right-arrow')
         .end()
-    }
-    $('#map-view').addClass('landscape');
-
-    $('#map-view').prepend(($('.left').detach()));
-    $('.left').wrapAll('<div class="left-wrapper" />');
-    $('.left-wrapper').wrapAll('<div class="left-overflow-wrapper">');
-    $('.left-wrapper').prepend('<div class="left box" id="vip-logo">');
-    $('.left-wrapper').append('<div class="dark-blue-box"/>');
-    $('#about-resources').css('padding-left', '30px');
-    $('.right').wrapAll($('<div class="right-wrapper" />'));
-    $('.toggle-image.plus').attr('src', 'https://s3.amazonaws.com/vip-voter-information-tool/images/left-arrow-white.png').addClass('arrow right-arrow');
-    $('.toggle-image.minus').attr('src', 'https://s3.amazonaws.com/vip-voter-information-tool/images/right-arrow-white.png').addClass('arrow left-arrow');
-    $('#polling-location .right-arrow').addClass('hidden')
-    $('#polling-location .left-arrow').removeClass('hidden');
-    $('#more-resources').hide();
-    $('.contests.right').hide();
-
-    $('#vip-logo').css({
-      'background-image': 'url(' + options.smallLogo + ')'
-    });
+        .filter('.minus')
+          .attr('src', 'https://s3.amazonaws.com/vip-voter-information-tool/images/right-arrow-white.png')
+          .addClass('left-arrow')
+      .end()
+      .find('#polling-location .arrow')
+        .toggleClass('hidden')
+      .end()
+      .find('#more-resources, .contests.right')
+        .hide()
+      .end()
 
     this.landscape = true;
   },
 
+  _generateMap: function (position, zoom, $el) {
+    var options = {
+      zoom: zoom,
+      center: position,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      draggable: false,
+      panControl: false,
+      zoomControl: false,
+      scrollwheel: false,
+      mapTypeControl: false,
+      streetViewControl: false
+    };
+    var map = new google.maps.Map($el, options)
+    map.set('styles', [
+      {
+        featureType: "road",
+        elementType: "labels",
+        stylers: [ { lightness: 20 } ]
+      },{
+        featureType: "administrative.land_parcel",
+        elementType: "all",
+        stylers: [ { visibility: "off" } ]
+      },{
+        featureType: "landscape.man_made",
+        elementType: "all",
+        stylers: [ { visibility: "off" } ]
+      },{
+        featureType: "transit",
+        elementType: "all",
+        stylers: [ { visibility: "off" } ]
+      },{
+        featureType: "road.highway",
+        elementType: "labels",
+        stylers: [ { visibility: "off" } ]
+      },{
+        featureType: "road.arterial",
+        elementType: "labels",
+        stylers: [ { visibility: "off" } ]
+      },{
+        featureType: "water",
+        elementType: "all",
+        stylers: [ 
+          { hue: "#a1cdfc" },
+          { saturation: 39 },
+          { lightness: 49 }
+        ]
+      },{
+        featureType: "road.highway",
+        elementType: "geometry",
+        stylers: [ { hue: "#f49935" } ]
+      },{
+        featureType: "road.arterial",
+        elementType: "geometry",
+        stylers: [ { hue: "#fad959" } ]
+      }
+    ]);
+    return map;
+  },
+
   _encodeAddressAndInitializeMap : function(address) {
     var that = this;
+    var any = (address !== void 0);
+    var zoom = any ? 12 : 3;
+    var geocodeAddress = any ? address : "United States of America";
 
-    // no polling location found
-    if (typeof address === 'undefined') {
-      this._geocode("United States of America", function(position) {
-        var options = {
-          zoom: 3,
-          center: position,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-          draggable: false,
-          panControl: false,
-          zoomControl: false,
-          scrollwheel: false,
-          mapTypeControl: false,
-          streetViewControl: false
-        };
-        that.map = new google.maps.Map(document.getElementById("map-canvas"), options);
-        that.find('#location').find('a').remove();
-        that.find('#location .address')
-          .css('text-align', 'center')
-          .text('No Polling Locations Found');
-
-        $('#map-canvas').on(that._transitionEnd(), function() {
-          google.maps.event.trigger(that.map, 'resize');
-          that.map.panTo(position);
-        });
-      })
-
-
-    } else {
-      this._geocode(address, function(position) {
-        var options = {
-          zoom: 12,
-          center: position,
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-          draggable: false,
-          panControl: false,
-          zoomControl: false,
-          scrollwheel: false,
-          mapTypeControl: false,
-          streetViewControl: false
-        };
-        that.map = new google.maps.Map(document.getElementById("map-canvas"), options);
-        that.map.set('styles', [
-          // {
-          //   "featureType": "poi",
-          //   "stylers": [
-          //     { "visibility": "off" }
-          //   ]
-          // },
-            {
-    featureType: "road",
-    elementType: "labels",
-    stylers: [ 
-      // { visibility: "simplified" }, 
-      { lightness: 20 } 
-    ]
-  },{
-    featureType: "administrative.land_parcel",
-    elementType: "all",
-    stylers: [ { visibility: "off" } ]
-  },{
-    featureType: "landscape.man_made",
-    elementType: "all",
-    stylers: [ { visibility: "off" } ]
-  },{
-    featureType: "transit",
-    elementType: "all",
-    stylers: [ { visibility: "off" } ]
-  },
-  // {
-  //   featureType: "road.local",
-  //   elementType: "labels",
-  //   stylers: [ { visibility: "simplified" } ]
-  // },{
-  //   featureType: "road.local",
-  //   elementType: "geometry",
-  //   stylers: [ { visibility: "simplified" } ]
-  // },
-  {
-    featureType: "road.highway",
-    elementType: "labels",
-    stylers: [ { visibility: "off" } ]
-  },{
-    featureType: "road.arterial",
-    elementType: "labels",
-    stylers: [ { visibility: "off" } ]
-  },{
-    featureType: "water",
-    elementType: "all",
-    stylers: [ 
-      { hue: "#a1cdfc" },
-      { saturation: 39 },
-      { lightness: 49 }
-    ]
-  },{
-    featureType: "road.highway",
-    elementType: "geometry",
-    stylers: [ { hue: "#f49935" } ]
-  },{
-    featureType: "road.arterial",
-    elementType: "geometry",
-    stylers: [ { hue: "#fad959" } ]
-  }
-
-        ])
-
+    this._geocode(geocodeAddress, function(position) {
+      that.map = that._generateMap(position, zoom, that.find('#map-canvas').get(0));
+      if (any) {
         that._addPollingLocation(position, address);
         google.maps.event.addListener(that.map, 'click', function() {
           that.toggleMap();
-          that.find('#location .address').innerHTML = that.addressPartial(address);
+          that.find('#location .address').html(that.addressPartial(address));
         });
 
         $('#map-canvas').on(that._transitionEnd(), function() {
           google.maps.event.trigger(that.map, 'resize');
-          that.map.panTo(that.markers[0].getPosition());
-          // if (that.map.getZoom() !== 12) that.map.setZoom(12);
-          // else that._fitMap();
-          // that.map.setZoom(12);
-          window.map = that.map;
         });
-      });
-    }
+      } else {
+        that.find('#location')
+          .find('a')
+            .remove()
+          .end()
+          .find('#location .address')
+            .css('text-align', 'center')
+            .text('No Polling Locations Found')
+      }
+    });
   },
 
   _fitMap: function() {
-    if (this.markers.length === 1) {
-      this.map.setZoom(15);
-    } else {
+    if (this.markers.length === 1) this.map.setZoom(15);
+    else {
       var bounds = new google.maps.LatLngBounds();
       for(i=0;i<this.markers.length;i++) {
         bounds.extend(this.markers[i].getPosition());
@@ -588,38 +538,27 @@ module.exports = View.extend({
   },
 
   _addPollingLocation: function(position, address, location, saddr) {
-      var marker = new google.maps.Marker({
-        map: this.map,
-        position: position,
-        icon: 'https://s3.amazonaws.com/vip-voter-information-tool/images/blue-marker.png'
-      });
-      var that = this;
+    var that = this;
+    var daddr = this._parseAddressWithoutName(address);
+    var saddr = this._parseAddressWithoutName(saddr);
+    var marker = new google.maps.Marker({
+      map: this.map,
+      position: position,
+      icon: 'https://s3.amazonaws.com/vip-voter-information-tool/images/blue-marker.png'
+    });
+    this.markers.push(marker);
 
-      var daddr = this._parseAddressWithoutName(address);
-      var saddr = this._parseAddressWithoutName(saddr);
-
-      google.maps.event.addListener(marker, 'click', function() {
-        var $locationInfo = $(this.pollingLocationPartial(location));
-        if (!(this.map.getCenter() === marker.getPosition())) {
-          this.find('.polling-location-info').replaceWith($locationInfo);
-          $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
-          $locationInfo.hide();
-        }
-        this.toggleMap.call(this, null, marker, address);
-      }.bind(this));
-      this.markers.push(marker);
+    google.maps.event.addListener(marker, 'click', this._markerFocusHandler.bind(this, marker, address, location, saddr, daddr));
   },
 
-  _toggleMapZoom: function(marker, address) {
-      if (this.map.getZoom() !== 12) {
-        this.map.panTo(marker.getPosition());
-        this.map.setZoom(12);
-        this.find('#location .address').html(this.addressPartial(address));
-        $('.polling-location-info').slideDown('slow');
-      } else {
-        this._fitMap();
-        $('.polling-location-info').slideUp('slow');
-      }
+  _markerFocusHandler: function (marker, address, location, saddr, daddr) {
+    var $locationInfo = $(this.pollingLocationPartial(location));
+    if (!(this.map.getCenter() === marker.getPosition())) {
+      this.find('.polling-location-info').replaceWith($locationInfo);
+      $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
+      $locationInfo.hide();
+    }
+    this.toggleMap.call(this, null, marker, address);
   },
 
   _calculateDistance: function(fromLocation, toLocation, callback) {
@@ -659,9 +598,30 @@ module.exports = View.extend({
     });
   },
 
+  _autocompleteHandler: function () {
+    if (this.hasSubmitted) return;
+    var address;
+    if (this.autocomplete.getPlace()) address = this.autocomplete.getPlace().formatted_address;
+    if (typeof address === 'undefined') {
+      var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
+      address = autocompleteContainer.text() + ' ' +
+        autocompleteContainer.next().text();
+    }
+    this.hasSubmitted = true;
+
+    this._makeRequest({
+      address: address,
+      success: function(response) {
+        this.hasSubmitted = false;
+        this.triggerRouteEvent('mapViewSubmit', response);
+      }.bind(this),
+      error: this.handleAddressNotFound
+    });
+  },
+
   changeAddress: function(e) {
-    var addressInput = this.find('.change-address');
     var that = this;
+    var addressInput = this.find('.change-address');
 
     // brings up change address bar if you click .address on left, but not if you click .address on map:
     if ( $(e.currentTarget).hasClass("address") && $(e.currentTarget).closest("#location").length > 0 ) return;
@@ -672,7 +632,6 @@ module.exports = View.extend({
         types: ['address'],
         componentRestrictions: { country: 'us' }
       });
-      // this.autocomplete = new google.maps.places.SearchBox(addressInput[0]);
       addressInput.prev().hide();
       addressInput.show();
       if (!this.landscape) this.find('#fade').fadeTo('fast', .25);
@@ -682,27 +641,6 @@ module.exports = View.extend({
       addressInput.on('focus', function() {
         addressInput.val("");
       })
-
-      this.autocompleteListener = function() {
-        if (this.hasSubmitted) return;
-        var address;
-        if (this.autocomplete.getPlace()) address = this.autocomplete.getPlace().formatted_address;
-        if (typeof address === 'undefined') {
-          var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
-          address = autocompleteContainer.text() + ' ' +
-            autocompleteContainer.next().text();
-        }
-        this.hasSubmitted = true;
-
-        this._makeRequest({
-          address: address,
-          success: function(response) {
-            this.hasSubmitted = false;
-            this.triggerRouteEvent('mapViewSubmit', response);
-          }.bind(this),
-          error: this.handleAddressNotFound
-        });
-      }.bind(this);
 
       $(window).on('keypress', function(e) {
         if (this.hasSubmitted) return;
@@ -714,7 +652,7 @@ module.exports = View.extend({
         }
       }.bind(this));
 
-      google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
+      google.maps.event.addListener(this.autocomplete, 'place_changed', this._autocompleteHandler);
     } else {
       $("#vote-address-edit").show();
       google.maps.event.clearInstanceListeners(this.autocomplete);
@@ -789,8 +727,6 @@ module.exports = View.extend({
         $('#polling-location .right-arrow').addClass('hidden');
         $('#polling-location .left-arrow').removeClass('hidden');
       }
-
-
     }
   },
 
@@ -807,7 +743,7 @@ module.exports = View.extend({
   },
 
   toggleResources: function(e) {
-    $('.right-wrapper')
+    this.find('.right-wrapper')
       .css('overflow', 'hidden')
       .scrollTop(0)
       .css({
@@ -820,23 +756,41 @@ module.exports = View.extend({
           .find('.plus, .minus')
             .toggleClass('hidden');
       }.bind(this));
-    } else { 
-      $("#about-resources span").show();
-      $('#about-resources').css("height", "initial")
-      $('#map-canvas, #location, .contests').hide();
-      $('#about-resources').show();
-      $('.info.box')
-        .removeClass('expanded-pane');
-      $('#resources-toggle')
-        .addClass('expanded-pane')
+    } else {
+      this.$el
+        .find('#about-resources')
+          .css("height", "initial")
+          .show()
+          .find('span')
+            .show()
+          .end()
+        .end()
+        .find('#map-canvas, #location, .contests')
+          .hide()
+        .end()
+        .find('.info.box')
+          .removeClass('expanded-pane')
+        .end()
+        .find('#resources-toggle')
+          .addClass('expanded-pane')
+        .end()
+        .find(':not(#resources-toggle)')
+          .find('.right-arrow')
+            .removeClass('hidden')
+          .end()
+          .find('.left-arrow')
+            .addClass('hidden')
+          .end()
+        .find('#resources-toggle')
+          .find('.right-arrow')
+            .addClass('hidden')
+          .end()
+          .find('.left-arrow')
+            .removeClass('hidden')
+          .end()
 
-      $(':not(#resources-toggle) .right-arrow').removeClass('hidden');
-      $(':not(#resources-toggle) .left-arrow').addClass('hidden');
-      $('#resources-toggle .right-arrow').addClass('hidden');
-      $('#resources-toggle .left-arrow').removeClass('hidden');
 
-
-      $('#more-resources')
+      this.find('#more-resources')
         .css({
           'max-height':'2000px'
         }).show();
@@ -872,30 +826,33 @@ module.exports = View.extend({
       if (!ballotInfoIsMaximized) that._scrollTo($("#ballot-information"), 20);
 
     } else { 
-      $("#about-resources span").hide();
+      this.find("#about-resources span").hide().end()
+        .find('#map-canvas, #location, #more-resources, #about-resources').hide().end()
+        .find('.info.box').removeClass('expanded-pane').end()
+        .find('#ballot-information').addClass('expanded-pane')
+          .find('.right-arrow')
+            .addClass('hidden')
+          .end()
+          .find('.left-arrow')
+            .removeClass('hidden')
+          .end()
+          // .find('.arrow').toggleClass('hidden')
+        .end()
+        .find(':not(#ballot-information)')
+          .find('.right-arrow')
+            .removeClass('hidden')
+          .end()
+          .find('.left-arrow')
+            .addClass('hidden')
+          .end()
 
-      $('#map-canvas, #location, #more-resources, #about-resources').hide();
-
-      $('.info.box')
-        .removeClass('expanded-pane');
-      $('#ballot-information')
-        .addClass('expanded-pane');
-
-
-      $(':not(#ballot-information) .right-arrow').removeClass('hidden');
-      $(':not(#ballot-information) .left-arrow').addClass('hidden');
-      $('#ballot-information .right-arrow').addClass('hidden');
-      $('#ballot-information .left-arrow').removeClass('hidden');
-
-      $('.contests').show();
-
-      $('#about-resources').css("height", "initial")
-      $('#about-resources').css("height", "0px")
+        .find('.contests').show().end()
+        .find('#about-resources').css("height", "initial").end()
+        .find('#about-resources').css("height", "0px")
     }
   },
 
   toggleContest: function(e) {
-
     if ($(e.target).hasClass('subsection') ||
         $(e.target).hasClass('subsection-plus') ||
         $(e.target).parent().hasClass('subsection') || 
@@ -905,40 +862,20 @@ module.exports = View.extend({
 
       candidateList.slideToggle(500, function() {
         var isHidden = candidateList.is(':hidden')
-        var text = (isHidden ? '+' : '\u2013');
-        toggleSign.text(text);
         if (isHidden) {
           toggleSign.css({
             'position' : 'relative',
             'left' : '-2px'
           });
+          this._scrollTo(toggleSign, 20);
         } else {
           toggleSign.css({
             'position': '',
             'left' : ''
           })
         }
-
-        if (!candidateList.is(':hidden')) this._scrollTo(toggleSign, 20);
+        toggleSign.text((isHidden ? '+' : '\u2013'));
       }.bind(this));
-    }
-  },
-
-  _slidePanel: function(panel, button, options) {
-    var inSymbol = (options && options.in ? options.in : '+');
-    var out = (options && options.out ? options.out : '−');
-    var max = (options && options.max ? options.max : '2000px');
-    var min = (options && options.min ? options.min : '0px');
-    if (panel.css('max-height') !== min) {
-      panel.css('max-height', min);
-      button.find('.plus').removeClass('hidden');
-      button.find('.minus').addClass('hidden');
-    } else {
-      panel.css('max-height', max);
-
-      button.find('.minus').removeClass('hidden');
-      button.find('.plus').addClass('hidden');
-      this._scrollTo(button, 10);
     }
   },
 
@@ -946,14 +883,6 @@ module.exports = View.extend({
     $(this.$container).animate({
       scrollTop: target.offset().top - $(this.$container).offset().top + $(this.$container).scrollTop() - padding
     }, 500);
-  },
-
-  moreLocations: function() {
-    this.triggerRouteEvent('moreLocations');
-  },
-
-  voterResources: function() {
-    this.triggerRouteEvent('voterResources');
   },
 
   back: function() {
