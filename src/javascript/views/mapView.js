@@ -55,7 +55,26 @@ module.exports = View.extend({
         .appendTo($('head'));
     }
 
-    $(this.$container).css('-webkit-overflow-scrolling', 'touch')
+    $(this.$container).css('-webkit-overflow-scrolling', 'touch');
+
+    // add the early vote sites to the regular polling places
+    var pollingLocations = options.data.pollingLocations;
+    var earlyVoteSites = options.data.earlyVoteSites;
+
+    pollingLocations.forEach(function(pollingLocation) {
+      if (pollingLocation.name) pollingLocation.address.name = pollingLocation.name;
+      pollingLocation.isEarlyVoteSite = false
+    });
+
+    if (earlyVoteSites) {
+      earlyVoteSites.forEach(function(earlyVoteSite, idx) {
+        if (earlyVoteSite.name) {
+          earlyVoteSite.address.name = earlyVoteSite.name;
+        }
+        earlyVoteSite.isEarlyVoteSite = true;
+      });
+      options.data.pollingLocations = pollingLocations.concat(earlyVoteSites);
+    }
 
     // comb the address data
     var state = options.data.state[0];
@@ -291,7 +310,7 @@ module.exports = View.extend({
 
       this.find('#location a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
 
-      primaryLocation.hours = "9am - 5pm";
+      // primaryLocation.hours = "9am - 5pm";
       var $locationInfo = $(this.pollingLocationPartial(primaryLocation));
       this.find('#location').append($locationInfo);
       $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
@@ -302,7 +321,7 @@ module.exports = View.extend({
 
         otherLocations.forEach(function(location) {
           that._geocode(location.address, function(position) {
-            that._addPollingLocation(position, location.address);
+            that._addPollingLocation(position, location.address, location, options.data.normalizedInput);
           })
         });
       }
@@ -540,15 +559,16 @@ module.exports = View.extend({
         that._addPollingLocation(position, address);
         google.maps.event.addListener(that.map, 'click', function() {
           that.toggleMap();
-
           that.find('#location .address').innerHTML = that.addressPartial(address);
         });
 
         $('#map-canvas').on(that._transitionEnd(), function() {
           google.maps.event.trigger(that.map, 'resize');
           that.map.panTo(that.markers[0].getPosition());
-          if (that.map.getZoom() !== 12) that.map.setZoom(12);
-          else that._fitMap();
+          // if (that.map.getZoom() !== 12) that.map.setZoom(12);
+          // else that._fitMap();
+          // that.map.setZoom(12);
+          window.map = that.map;
         });
       });
     }
@@ -567,15 +587,26 @@ module.exports = View.extend({
     }
   },
 
-  _addPollingLocation: function(position, address) {
+  _addPollingLocation: function(position, address, location, saddr) {
       var marker = new google.maps.Marker({
         map: this.map,
         position: position,
         icon: 'https://s3.amazonaws.com/vip-voter-information-tool/images/blue-marker.png'
       });
       var that = this;
-      // google.maps.event.addListener(marker, 'click', this._toggleMapZoom.bind(this, marker, address));
-      google.maps.event.addListener(marker, 'click', this.toggleMap.bind(this, null, marker, address));
+
+      var daddr = this._parseAddressWithoutName(address);
+      var saddr = this._parseAddressWithoutName(saddr);
+
+      google.maps.event.addListener(marker, 'click', function() {
+        var $locationInfo = $(this.pollingLocationPartial(location));
+        if (!(this.map.getCenter() === marker.getPosition())) {
+          this.find('.polling-location-info').replaceWith($locationInfo);
+          $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
+          $locationInfo.hide();
+        }
+        this.toggleMap.call(this, null, marker, address);
+      }.bind(this));
       this.markers.push(marker);
   },
 
@@ -583,7 +614,7 @@ module.exports = View.extend({
       if (this.map.getZoom() !== 12) {
         this.map.panTo(marker.getPosition());
         this.map.setZoom(12);
-        this.find('#location .address').innerHTML = this.addressPartial(address);
+        this.find('#location .address').html(this.addressPartial(address));
         $('.polling-location-info').slideDown('slow');
       } else {
         this._fitMap();
@@ -738,14 +769,15 @@ module.exports = View.extend({
     } else {
       this.find('.right-wrapper').css('overflow', 'hidden');
       if ($('#location').is(':visible')) {
+        // we are already in map view mode
         if (this.map.getZoom() !== 12) {
           this.map.panTo(marker.getPosition());
-          this.map.setZoom(12);
-          if (address) this.find('#location .address').innerHTML = this.addressPartial(address);
-          $('.polling-location-info').slideUp('fast');
+          // this.map.setZoom(12);
+          if (address) this.find('#location .address').html(this.addressPartial(address));
+          $('.polling-location-info').slideToggle('fast');
         } else {
           this._fitMap();
-          $('.polling-location-info').slideDown('fast');
+          $('.polling-location-info').slideToggle('fast');
         }
       } else {
         $('.info.box').removeClass('expanded-pane');

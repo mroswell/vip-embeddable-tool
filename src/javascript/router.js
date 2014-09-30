@@ -5,7 +5,6 @@ module.exports = (function() {
     , apiRequest  = require('./api.js')
     , text        = require('./config.js')
     , $           = require('jquery');
-window.$ = $
 
   return {
     start: function(config) {
@@ -28,6 +27,7 @@ window.$ = $
         assets: text
       };
       $.extend(options, config);
+      if (options.productionOnly === false) options.productionDataOnly = options.productionOnly;
 
       addressView
         .onRouteEvent('addressViewSubmit', function(response) {

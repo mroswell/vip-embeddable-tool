@@ -168,7 +168,9 @@ module.exports = View.extend({
   },
 
   handleAddressNotFound: function() {
-    this.toggleLoadingDisplay()
+    // this.toggleLoadingDisplay()
+    // this.find('#fade').hide();
+    this.find('.loading').hide();
     this.find('#address-not-found').fadeIn();
     this.find('#fade').fadeTo('fast', .2);
     this.find('#address-not-found h1').text(this.address);
