@@ -21,6 +21,7 @@ vit.load({
 ## Parameters
 | Key |    Type    | Description |
 |-----|------------|-------------|
+|`alert`| string | special message to display in a red alert box at the top of the expanded tool |
 |`modal`| boolean | if true, will open up in a modal box to display election information for mobile and tablet devices (defaults to true)|
 |`officialOnly`| boolean | if true, will only display information from official election information sources (defaults to true)|
 |`key`| string | supplies an API key to the tool (optional)|

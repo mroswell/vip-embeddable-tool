@@ -3,7 +3,6 @@ var api  = require('../api.js');
 var $ = require('jquery');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
-window.$ = $;
 
 module.exports = View.extend({
 
@@ -601,19 +600,6 @@ module.exports = View.extend({
     google.maps.event.addListener(marker, 'click', this._markerFocusHandler.bind(this, marker, address, location, saddr, daddr));
   },
 
-  _markerFocusHandler: function (marker, address, location, saddr, daddr) {
-    var $locationInfo = $(this.pollingLocationPartial(location));
-    if (!(this.map.getCenter() === marker.getPosition())) {
-    //   this.find('.polling-location-info').slideUp('fast', function() {
-        this.find('.polling-location-info').replaceWith($locationInfo);
-    //     // if (!this.landscape) this.find('.polling-locaiton-info').slideDown('fast');
-    //   }.bind(this));
-      $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
-    //   $locationInfo.hide();
-    }
-    this.toggleMap.call(this, null, marker, address);
-  },
-
   _calculateDistance: function(fromLocation, toLocation, callback) {
     var that = this;
     this._geocode(fromLocation, function(fromCoords) {
@@ -737,7 +723,29 @@ module.exports = View.extend({
     }
   },
 
+  _markerFocusHandler: function (marker, address, location, saddr, daddr) {
+    // additional info partial that goes below the address
+    var $locationInfo = $(this.pollingLocationPartial(location));
+
+    // slide up the current polling location information partial
+    // and then replace its information with new
+    this.find('.polling-location-info').slideUp('fast', function() {
+      this.find('.polling-location-info').replaceWith($locationInfo);
+      // if (!this.landscape) this.find('.polling-location-info').slideDown('fast');
+    }.bind(this));
+
+    // replace the directions link with the correct address
+    this.find('#location a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
+    $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
+    
+    // hide the additional information
+    $locationInfo.hide();
+
+    this.toggleMap.call(this, null, marker, address);
+  },
+
   toggleMap: function(e, marker, address) {
+    // console.log('toggleMap')
     var markerSelected = true;
     if (typeof marker === 'undefined') {
       markerSelected = false;
@@ -790,26 +798,23 @@ module.exports = View.extend({
           this.map.panTo(marker.getPosition());
           if (address) {
             var isSameLocation = (this.find('#location .address').text() === $(this.addressPartial(address)).text());
-            console.log(isSameLocation)
-            if (isSameLocation) {}//this.find('.polling-location-info').slideToggle('fast');
+            console.log('is same location? %s', isSameLocation)
+            if (isSameLocation) this.find('.polling-location-info').slideToggle('fast');
             else {
+              this.find('#location .address').replaceWith($(this.addressPartial(address)));
               if (this.find('.polling-location-info').is(':hidden')) {
-                console.log('hiddn')
-                this.find('#location .address').replaceWith($(this.addressPartial(address)));
                 this.find('.polling-location-info').slideDown('fast');
               } else {
-                console.log('not hiddne')
-                // this.find('.polling-location-info').slideUp('fast', function() {
-                  // console.log('sliding up...')
-                  this.find('#location .address').replaceWith($(this.addressPartial(address)));
+                setTimeout(function() {
                   this.find('.polling-location-info').slideDown('fast');
-                // }.bind(this));
+                }.bind(this), 500);
               }
             }
           }
         } else {
           this._fitMap();
-          this.find('.polling-location-info').slideUp('fast').hide();
+          // this.map.panTo(this.markers[0].getPosition());
+          this.find('.polling-location-info').slideDown('fast') //.hide();
         }
       } else {
         this.find('.info.box').removeClass('expanded-pane');
