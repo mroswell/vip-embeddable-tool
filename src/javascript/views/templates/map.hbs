@@ -59,6 +59,11 @@
       <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/directions.png">
     </a>
   </span>
+  {{#if data.pollingLocations.0.isEarlyVoteSite}}
+  <div class="early-vote-site">
+  Early Vote Site
+  </div>
+  {{/if}}
 </div>
 <div id="map-canvas" class="right"></div>
 

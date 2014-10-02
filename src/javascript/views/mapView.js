@@ -3,6 +3,7 @@ var api  = require('../api.js');
 var $ = require('jquery');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
+window.$ = $;
 
 module.exports = View.extend({
 
@@ -151,8 +152,8 @@ module.exports = View.extend({
         })
       } else {
         this.landscape = true;
-        this.$container.width(options.width);
-        this.$container.height(options.height)
+        this.$container.width(this.width);
+        this.$container.height(this.height)
         if (this.$container.width() < 600) {
           this.find('.info').css({ 'font-size': '14px' });
           this.find('.election').css({ 'font-size': '16px' });
@@ -187,8 +188,8 @@ module.exports = View.extend({
     }
 
     if (screenWidth < 600) {
-      this.$container.width(width);
-      this.$container.height(height);
+      this.$container.width(screenWidth);
+      this.$container.height(screenHeight);
       this.landscape = false;
     } else {
       // tablet sizing
@@ -246,23 +247,23 @@ module.exports = View.extend({
     }
 
     // remove duplicate election administration addresses
-    if (scrapeAddress($('#local-jurisdiction-correspondence-address').children().children()) 
-      === scrapeAddress($('#local-jurisdiction-physical-address').children().children())) {
-      $('#local-jurisdiction-correspondence-address').remove();
+    if (scrapeAddress(this.find('#local-jurisdiction-correspondence-address').children().children()) 
+      === scrapeAddress(this.find('#local-jurisdiction-physical-address').children().children())) {
+      this.find('#local-jurisdiction-correspondence-address').remove();
     }
 
-    if (scrapeAddress($('#state-election-correspondence-address').children().children()) 
-      === scrapeAddress($('#state-election-physical-address').children().children())) {
-      $('#state-election-correspondence-address').remove();
+    if (scrapeAddress(this.find('#state-election-correspondence-address').children().children()) 
+      === scrapeAddress(this.find('#state-election-physical-address').children().children())) {
+      this.find('#state-election-correspondence-address').remove();
     }
 
     // remove election administration addresses that are only state acronyms
-    $('.election-administration-address').each(function() {
+    this.find('.election-administration-address').each(function() {
       if (scrapeAddress($(this).children().children()).length === 2) $(this).remove();
     })
 
     if (typeof this.data.otherElections === 'undefined') {
-      $('#more-elections .toggle-image').hide();
+      this.find('#more-elections .toggle-image').hide();
     }
 
     var informationLinks = $('.information-links');
@@ -279,6 +280,9 @@ module.exports = View.extend({
         .end()
         .show();
 
+    this.width = options.width;
+    this.height = options.height;
+
     this.prevWidth = this.$container.width();
     this.prevHeight = this.$container.height();
     this.prevLeft = this.$container.css('left');
@@ -287,6 +291,7 @@ module.exports = View.extend({
     $(window).on('resize.mapview', this._resizeHandler.bind(this));
 
     this._resizeHandler();
+
 
 
     var that = this;
@@ -306,10 +311,10 @@ module.exports = View.extend({
       $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
       $locationInfo.hide();
 
-      if (options.data.pollingLocations.length > 1) {
-        var otherLocations = options.data.pollingLocations.slice(1);
+      if (options.data.pollingLocations.length) {
+        var locations = options.data.pollingLocations;
 
-        otherLocations.forEach(function(location) {
+        locations.forEach(function(location) {
           that._geocode(location.address, function(position) {
             that._addPollingLocation(position, location.address, location, options.data.normalizedInput);
           })
@@ -347,12 +352,15 @@ module.exports = View.extend({
       }
     });
 
-    this.find('.info.box').removeClass('expanded-pane');
-    this.find('#polling-location').addClass('expanded-pane')
-    this.find(':not(#polling-location) .right-arrow').removeClass('hidden');
-    this.find(':not(#polling-location) .left-arrow').addClass('hidden');
-    this.find('#polling-location .right-arrow').addClass('hidden');
-    this.find('#polling-location .left-arrow').removeClass('hidden');
+    if (this.landscape) {
+      this.find('.info.box').removeClass('expanded-pane');
+      this.find('#polling-location').addClass('expanded-pane')
+      this.find(':not(#polling-location) .right-arrow').removeClass('hidden');
+      this.find(':not(#polling-location) .left-arrow').addClass('hidden');
+      this.find('#polling-location .right-arrow').addClass('hidden');
+      this.find('#polling-location .left-arrow').removeClass('hidden');
+      this.find('#more-resources, .contests').hide();
+    }
 
     document.querySelector('#calendar-icon').appendChild(myCalendar);
 
@@ -361,6 +369,8 @@ module.exports = View.extend({
     }
 
     fastclick(document.body);
+
+    // if (!this.landscape) this._preventiOSBounce();
   },
 
   closePopUps: function (e) {
@@ -398,6 +408,37 @@ module.exports = View.extend({
           this.triggerRouteEvent('mapViewBack')
         }.bind(this))
       .end()
+  },
+
+  _preventiOSBounce: function() {
+    var allowUp
+      , allowDown
+      , slideBeginY
+      , slideBeginX;
+    this.$container.on('touchstart', function(event){
+      allowUp = (this.scrollTop > 0);
+      allowDown = (this.scrollTop < this.scrollHeight - this.clientHeight);
+      slideBeginY = event.originalEvent.pageY;
+      slideBeginX = event.originalEvent.pageX
+      console.log(event)
+      console.log('allowUp: %s, allowDown: %s, slideBeginY: %s',
+        allowUp, allowDown, slideBeginY);
+    });
+
+    this.$container.on('touchmove', function(event){
+      var up = (event.originalEvent.pageY > slideBeginY);
+      var down = (event.originalEvent.pageY < slideBeginY);
+      var horizontal = (event.originalEvent.pageX !== slideBeginX);
+      console.log('allowUp: %s, allowDown: %s, horizontal: %s',
+        allowUp, allowDown, horizontal);
+      $(window).scrollLeft(0);
+      slideBeginY = event.originalEvent.pageY;
+      if (((up && allowUp) || (down && allowDown))) {}
+      else {
+        event.preventDefault();
+        // console.log('intolerable scroll!')
+      }
+    });
   },
 
   _switchToLandscape: function(options) {
@@ -448,6 +489,10 @@ module.exports = View.extend({
       mapTypeControl: false,
       streetViewControl: false
     };
+    if (this.landscape) {
+      options.draggable = true;
+      options.scrollWheel = true;
+    }
     var map = new google.maps.Map($el, options)
     map.set('styles', [
       {
@@ -504,13 +549,18 @@ module.exports = View.extend({
     this._geocode(geocodeAddress, function(position) {
       that.map = that._generateMap(position, zoom, that.find('#map-canvas').get(0));
       if (any) {
-        that._addPollingLocation(position, address);
         google.maps.event.addListener(that.map, 'click', function() {
-          that.toggleMap();
-          that.find('#location .address').html(that.addressPartial(address));
+          if (that.landscape) {
+            that.find('.polling-location-info').slideUp('fast');
+            that.toggleMap();
+            that.map.panTo(position)
+          }
+          that._fitMap();
+          // that.map.panTo(position)
+          that.find('#location .address').replaceWith($(that.addressPartial(address)));
         });
 
-        $('#map-canvas').on(that._transitionEnd(), function() {
+        that.find('#map-canvas').on(that._transitionEnd(), function() {
           google.maps.event.trigger(that.map, 'resize');
         });
       } else {
@@ -554,9 +604,12 @@ module.exports = View.extend({
   _markerFocusHandler: function (marker, address, location, saddr, daddr) {
     var $locationInfo = $(this.pollingLocationPartial(location));
     if (!(this.map.getCenter() === marker.getPosition())) {
-      this.find('.polling-location-info').replaceWith($locationInfo);
+    //   this.find('.polling-location-info').slideUp('fast', function() {
+        this.find('.polling-location-info').replaceWith($locationInfo);
+    //     // if (!this.landscape) this.find('.polling-locaiton-info').slideDown('fast');
+    //   }.bind(this));
       $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
-      $locationInfo.hide();
+    //   $locationInfo.hide();
     }
     this.toggleMap.call(this, null, marker, address);
   },
@@ -627,7 +680,7 @@ module.exports = View.extend({
     if ( $(e.currentTarget).hasClass("address") && $(e.currentTarget).closest("#location").length > 0 ) return;
 
     if (addressInput.is(':hidden')) {
-      $("#vote-address-edit").hide();
+      this.find("#vote-address-edit").hide();
       this.autocomplete = new google.maps.places.Autocomplete(addressInput[0], {
         types: ['address'],
         componentRestrictions: { country: 'us' }
@@ -654,7 +707,7 @@ module.exports = View.extend({
 
       google.maps.event.addListener(this.autocomplete, 'place_changed', this._autocompleteHandler);
     } else {
-      $("#vote-address-edit").show();
+      this.find("#vote-address-edit").show();
       google.maps.event.clearInstanceListeners(this.autocomplete);
 
       addressInput.prev().show()
@@ -685,47 +738,88 @@ module.exports = View.extend({
   },
 
   toggleMap: function(e, marker, address) {
-    if (typeof marker === 'undefined') marker = this.markers[0];
+    var markerSelected = true;
+    if (typeof marker === 'undefined') {
+      markerSelected = false;
+      marker = this.markers[0];
+    }
     if (!this.landscape) {
       var canvas = this.find('#map-canvas');
       var toggle = this.find('#map-toggle');
-      if (canvas.height() !== 300) {
-        canvas.height(300);
+      if (canvas.height() !== 300 && (!markerSelected)) {
         toggle.find('.minus').removeClass('hidden');
         toggle.find('.plus').addClass('hidden');
-        this._scrollTo(toggle, 10);
 
-        if (address) this.find('#location .address').innerHTML = this.addressPartial(address);
-        $('.polling-location-info').show();
-      } else {
-        canvas.height(150);
+        canvas.animate({ height: '300px' }, {
+          duration: 500,
+          complete: function() {
+            this._scrollTo(toggle, 10);
+            // this.map.panTo(marker.getPosition());
+            this._fitMap();
+          }.bind(this)
+        });
+
+        if (address) this.find('#location .address').replaceWith($(this.addressPartial(address)));
+        this.find('.polling-location-info').slideDown('fast');
+      } else if (!markerSelected) {
+        canvas.animate({ height: '150px' }, {
+          duration: 500,
+          complete: function() {
+            this._scrollTo(toggle, 10);
+            this.map.panTo(marker.getPosition());
+            this.map.setZoom(12);
+            // this._fitMap();
+          }.bind(this)
+        });
         toggle.find('.plus').removeClass('hidden');
         toggle.find('.minus').addClass('hidden');
 
-        $('.polling-location-info').hide();
+        this.find('.polling-location-info').slideUp('fast');
+      } else {
+        this.map.panTo(marker.getPosition());
+        var isSameLocation = (this.find('#location .address').text() === $(this.addressPartial(address)).text());
+        if (address) this.find('#location .address').replaceWith($(this.addressPartial(address)));
+        if (isSameLocation) this.find('.polling-location-info').slideToggle('fast');
+        else this.find('.polling-location-info').slideUp('fast');
       }
     } else {
       this.find('.right-wrapper').css('overflow', 'hidden');
-      if ($('#location').is(':visible')) {
+      if (this.find('#location').is(':visible')) {
         // we are already in map view mode
         if (this.map.getZoom() !== 12) {
           this.map.panTo(marker.getPosition());
-          // this.map.setZoom(12);
-          if (address) this.find('#location .address').html(this.addressPartial(address));
-          $('.polling-location-info').slideToggle('fast');
+          if (address) {
+            var isSameLocation = (this.find('#location .address').text() === $(this.addressPartial(address)).text());
+            console.log(isSameLocation)
+            if (isSameLocation) {}//this.find('.polling-location-info').slideToggle('fast');
+            else {
+              if (this.find('.polling-location-info').is(':hidden')) {
+                console.log('hiddn')
+                this.find('#location .address').replaceWith($(this.addressPartial(address)));
+                this.find('.polling-location-info').slideDown('fast');
+              } else {
+                console.log('not hiddne')
+                // this.find('.polling-location-info').slideUp('fast', function() {
+                  // console.log('sliding up...')
+                  this.find('#location .address').replaceWith($(this.addressPartial(address)));
+                  this.find('.polling-location-info').slideDown('fast');
+                // }.bind(this));
+              }
+            }
+          }
         } else {
           this._fitMap();
-          $('.polling-location-info').slideToggle('fast');
+          this.find('.polling-location-info').slideUp('fast').hide();
         }
       } else {
-        $('.info.box').removeClass('expanded-pane');
-        $('#polling-location').addClass('expanded-pane')
-        $(':not(#polling-location) .right-arrow').removeClass('hidden');
-        $(':not(#polling-location) .left-arrow').addClass('hidden');
-        $('#more-resources, .contests').hide();
-        $('#map-canvas, #location').show();
-        $('#polling-location .right-arrow').addClass('hidden');
-        $('#polling-location .left-arrow').removeClass('hidden');
+        this.find('.info.box').removeClass('expanded-pane');
+        this.find('#polling-location').addClass('expanded-pane')
+        this.find(':not(#polling-location) .right-arrow').removeClass('hidden');
+        this.find(':not(#polling-location) .left-arrow').addClass('hidden');
+        this.find('#more-resources, .contests').hide();
+        this.find('#map-canvas, #location').show();
+        this.find('#polling-location .right-arrow').addClass('hidden');
+        this.find('#polling-location .left-arrow').removeClass('hidden');
       }
     }
   },
@@ -733,11 +827,11 @@ module.exports = View.extend({
   toggleElections: function(e) {
     if (typeof this.data.otherElections === 'undefined') return;
     e.stopPropagation();
-    $('#election-list').slideToggle(100, function() {
+    this.find('#election-list').slideToggle(100, function() {
       if (!this.landscape) this._scrollTo($('#more-elections span'), 10)
     }.bind(this));
     if (!this.landscape) {
-      $('#more-elections')
+      this.find('#more-elections')
         .find('.toggle-image').toggleClass('hidden');
     }
   },
@@ -750,9 +844,9 @@ module.exports = View.extend({
         'overflow-y': 'scroll',
         'overflow-x': 'hidden'});
     if (!this.landscape) {
-      $('#more-resources').slideToggle(500, function() {
+      this.find('#more-resources').slideToggle(500, function() {
         this._scrollTo($('#resources-toggle span'), 10);
-        $('#resources-toggle')
+        this.find('#resources-toggle')
           .find('.plus, .minus')
             .toggleClass('hidden');
       }.bind(this));
@@ -798,7 +892,7 @@ module.exports = View.extend({
   },
 
   toggleBallot: function() {
-    $('.right-wrapper')
+    this.find('.right-wrapper')
       .css('overflow', 'hidden')
       .scrollTop(0)
       .css({
@@ -806,11 +900,10 @@ module.exports = View.extend({
         'overflow-x':'hidden'
       });
     if (!this.landscape) {
-      var ballotInfoIsMaximized = $('#ballot-information').find('.plus').is(":hidden");
+      var ballotInfoIsMaximized = this.find('#ballot-information').find('.plus').is(":hidden");
 
-      $('#ballot-information').find('.plus, .minus').toggleClass('hidden');
-      var that = this;
-      $(".contest-toggle").each(function (i, el) {
+      this.find('#ballot-information').find('.plus, .minus').toggleClass('hidden');
+      this.find(".contest-toggle").each(function (i, el) {
         var candidateList = $(el).find('.candidate-list');
         var toggleSign = $(el).find('span');
         var subsectionIsMaximized = !candidateList.is(':hidden');
@@ -823,7 +916,7 @@ module.exports = View.extend({
         }
       });
 
-      if (!ballotInfoIsMaximized) that._scrollTo($("#ballot-information"), 20);
+      if (!ballotInfoIsMaximized) this._scrollTo($("#ballot-information"), 20);
 
     } else { 
       this.find("#about-resources span").hide().end()

@@ -64,13 +64,20 @@
       padding: 15px
       font-size: 17px
 
-      p
-        transform: translateY(50%)
-        width: 90%
+      // vertical align:
+      height: 75px
+
+      p,
       span
         cursor: pointer
-        float: right
+        position: relative
+        top: 50%
         @include translateY(-50%)
+      p
+        display: inline-block
+        width: 90%
+      span
+        float: right
         font-weight: bolder
 
       .contest-type
@@ -134,6 +141,9 @@
       width: 103% !important
       border-bottom: 0 !important
       @include box-shadow(3px 3px 7px rgba(0,0,0,.35))
+
+    #map-canvas
+      @include transition(height, 2s, ease-in-out)
 
     #local-jurisdiction-correspondence-address
       span    

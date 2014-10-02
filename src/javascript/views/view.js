@@ -101,7 +101,6 @@ module.exports = (function() {
       if (this.$id === 'map-view') {
         this.fetchVoterIdData(options.data.normalizedInput.state, function(voterId) {
           options.data.voterId = voterId.data;
-          console.log(voterId.data)
           options.data.voterIdLink = voterId.link;
           this.insertView(options);
         }.bind(this))

@@ -54,11 +54,16 @@ module.exports = View.extend({
     this.autocompleteListener = function () {
       if (this.hasSubmitted) return;
       enteredAddress = this.autocomplete.getPlace();
-      if (typeof enteredAddress === 'undefined' || typeof enteredAddress.formatted_address === 'undefined') {
-        var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
-        enteredAddress = autocompleteContainer.text() + ' ' +
-          autocompleteContainer.next().text();
-      } else enteredAddress = enteredAddress.formatted_address
+      var addrStr = JSON.stringify(enteredAddress);
+      if (typeof enteredAddress === 'undefined' ||
+          typeof enteredAddress.formatted_address === 'undefined') {
+        if (typeof enteredAddress !== 'undefined' && typeof enteredAddress.name !== 'undefined') enteredAddress = enteredAddress.name;
+        else {
+          var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
+          enteredAddress = autocompleteContainer.text() + ' ' +
+            autocompleteContainer.next().text();
+        }
+      } else enteredAddress = enteredAddress.formatted_address;
       this.address = enteredAddress;
       this.hasSubmitted = true;
       this._makeRequest({
@@ -71,7 +76,7 @@ module.exports = View.extend({
       if (this.hasSubmitted) return;
       var key = e.which || e.keyCode;
       if (key === 13) {
-        google.maps.event.trigger(this.autocomplete, 'place_changed');
+        // google.maps.event.trigger(this.autocomplete, 'place_changed');
       }
     }
 
