@@ -3,6 +3,7 @@ var api  = require('../api.js');
 var $ = require('jquery');
 var fastclick = require('fastclick');
 var ouiCal = require('../ouical.js');
+window.$ = $;
 
 module.exports = View.extend({
 
@@ -66,17 +67,49 @@ module.exports = View.extend({
     }
 
     if (earlyVoteSites) {
+      var now = new Date();
+
       earlyVoteSites.forEach(function(earlyVoteSite, idx) {
-        if (earlyVoteSite.name) {
-          earlyVoteSite.address.name = earlyVoteSite.name;
-        }
+        var endDate = new Date(earlyVoteSite.endDate);
         earlyVoteSite.isEarlyVoteSite = true;
+
+        if (earlyVoteSite.name)
+          earlyVoteSite.address.name = earlyVoteSite.name;
+
+        if (endDate < now)
+          earlyVoteSites.splice(idx, 1);
       });
+
       options.data.pollingLocations = pollingLocations.concat(earlyVoteSites);
     }
 
+    if (options.data.pollingLocations) {
+      options.data.pollingLocations.forEach(function(location) {
+        if (location.startDate) {
+          var date = new Date(location.startDate);
+          var newDate = date.toLocaleDateString('en-us', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          location.startDate = newDate;
+        }
+        if (location.endDate) {
+          var date = new Date(location.endDate);
+          var newDate = date.toLocaleDateString('en-us', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          location.endDate = newDate;
+        }
+      })
+    }
+
     // comb the address data
-    var state = options.data.state[0];
+    var state = (options.data.state && options.data.state.length ? options.data.state[0] : {});
     if (state.electionAdministrationBody && !state.electionAdministrationBody.name) {
       state.electionAdministrationBody.name = "Election Administration Body";
     }
@@ -113,7 +146,7 @@ module.exports = View.extend({
       day: 'numeric'
     });
 
-    options.data.election.electionDay = newDate;
+    // options.data.election.electionDay = newDate;
 
     // sort the contests by their placement on the ballot
     function contestComparator(firstContest, secondContest) {
@@ -187,8 +220,8 @@ module.exports = View.extend({
     }
 
     if (screenWidth < 600) {
-      this.$container.width(screenWidth);
-      this.$container.height(screenHeight);
+      this.$container.width(window.innerWidth);
+      this.$container.height(window.innerHeight);
       this.landscape = false;
     } else {
       // tablet sizing
@@ -291,7 +324,9 @@ module.exports = View.extend({
 
     this._resizeHandler();
 
-
+    if (options.alert && this.landscape)
+      this.find('#location-legend')
+        .css('top', '11%');
 
     var that = this;
     if (options.data.pollingLocations && options.data.pollingLocations.length) {
@@ -315,7 +350,7 @@ module.exports = View.extend({
 
         locations.forEach(function(location) {
           that._geocode(location.address, function(position) {
-            that._addPollingLocation(position, location.address, location, options.data.normalizedInput);
+            that._addPollingLocation(position, location.address, location, options.data.normalizedInput, location.isEarlyVoteSite);
           })
         });
       }
@@ -324,7 +359,9 @@ module.exports = View.extend({
     if (this.landscape) this._switchToLandscape(options);
 
 
-    if (options.data.state[0].electionAdministrationBody)
+    if (options.data.state && 
+        options.data.state.length &&
+        options.data.state[0].electionAdministrationBody)
       this.find('#info-icon').parent().attr('href', options.data.state[0].electionAdministrationBody.electionInfoUrl);
 
     $('html,body').scrollLeft($(this.$container).scrollLeft());
@@ -370,12 +407,31 @@ module.exports = View.extend({
     fastclick(document.body);
 
     // if (!this.landscape) this._preventiOSBounce();
+
+    this.autocomplete = new google.maps.places.Autocomplete(this.find('.change-address')[0], {
+      types: ['address'],
+      componentRestrictions: { country: 'us' }
+    });
+
+    this.earlyVoteSites = options.data.earlyVoteSites;
+    if (this.earlyVoteSites)
+      this.find('#location-legend')
+        .show()
+
+    if (!options.data.contests)
+      this.find('#ballot-information')
+        .remove()
+
+    var electionAdministrationBody = this.find('#more-resources .correspondence-address.box');
+    if (!electionAdministrationBody.text().trim().length)
+      electionAdministrationBody.prev().remove(), electionAdministrationBody.remove()
+
+    window.setTimeout(this.closeAlert.bind(this), 8000);
   },
 
   closePopUps: function (e) {
-    if ( !$(e.target).is( $(".add-to-calendar-checkbox") ) ) {
-      this.find(".add-to-calendar-checkbox").attr("checked", false);
-    }
+    if ( !$(e.target).is( $(".add-to-calendar-checkbox") ) )
+      this.find(".add-to-calendar-checkbox").attr("checked", false)
   },
 
   onRemove: function() {
@@ -419,23 +475,17 @@ module.exports = View.extend({
       allowDown = (this.scrollTop < this.scrollHeight - this.clientHeight);
       slideBeginY = event.originalEvent.pageY;
       slideBeginX = event.originalEvent.pageX
-      console.log(event)
-      console.log('allowUp: %s, allowDown: %s, slideBeginY: %s',
-        allowUp, allowDown, slideBeginY);
     });
 
     this.$container.on('touchmove', function(event){
       var up = (event.originalEvent.pageY > slideBeginY);
       var down = (event.originalEvent.pageY < slideBeginY);
       var horizontal = (event.originalEvent.pageX !== slideBeginX);
-      console.log('allowUp: %s, allowDown: %s, horizontal: %s',
-        allowUp, allowDown, horizontal);
       $(window).scrollLeft(0);
       slideBeginY = event.originalEvent.pageY;
       if (((up && allowUp) || (down && allowDown))) {}
       else {
         event.preventDefault();
-        // console.log('intolerable scroll!')
       }
     });
   },
@@ -567,7 +617,7 @@ module.exports = View.extend({
           .find('a')
             .remove()
           .end()
-          .find('#location .address')
+          .find('.address')
             .css('text-align', 'center')
             .text('No Polling Locations Found')
       }
@@ -586,14 +636,17 @@ module.exports = View.extend({
     }
   },
 
-  _addPollingLocation: function(position, address, location, saddr) {
+  _addPollingLocation: function(position, address, location, saddr, isEarlyVote) {
     var that = this;
     var daddr = this._parseAddressWithoutName(address);
     var saddr = this._parseAddressWithoutName(saddr);
+    var url = 'https://s3.amazonaws.com/vip-voter-information-tool/images/' +
+      (isEarlyVote ? 'red-marker.png' : 'blue-marker.png');
+
     var marker = new google.maps.Marker({
       map: this.map,
       position: position,
-      icon: 'https://s3.amazonaws.com/vip-voter-information-tool/images/blue-marker.png'
+      icon: url
     });
     this.markers.push(marker);
 
@@ -667,10 +720,6 @@ module.exports = View.extend({
 
     if (addressInput.is(':hidden')) {
       this.find("#vote-address-edit").hide();
-      this.autocomplete = new google.maps.places.Autocomplete(addressInput[0], {
-        types: ['address'],
-        componentRestrictions: { country: 'us' }
-      });
       addressInput.prev().hide();
       addressInput.show();
       if (!this.landscape) this.find('#fade').fadeTo('fast', .25);
@@ -691,7 +740,7 @@ module.exports = View.extend({
         }
       }.bind(this));
 
-      google.maps.event.addListener(this.autocomplete, 'place_changed', this._autocompleteHandler);
+      google.maps.event.addListener(this.autocomplete, 'place_changed', this._autocompleteHandler.bind(this));
     } else {
       this.find("#vote-address-edit").show();
       google.maps.event.clearInstanceListeners(this.autocomplete);
@@ -729,10 +778,10 @@ module.exports = View.extend({
 
     // slide up the current polling location information partial
     // and then replace its information with new
-    this.find('.polling-location-info').slideUp('fast', function() {
+    // this.find('.polling-location-info').slideUp('fast', function() {
       this.find('.polling-location-info').replaceWith($locationInfo);
       // if (!this.landscape) this.find('.polling-location-info').slideDown('fast');
-    }.bind(this));
+    // }.bind(this));
 
     // replace the directions link with the correct address
     this.find('#location a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
@@ -742,10 +791,14 @@ module.exports = View.extend({
     $locationInfo.hide();
 
     this.toggleMap.call(this, null, marker, address);
+
+    // this.find('#location').hide();
+    // setTimeout(function() {
+    //   this.find('#location').show()
+    // }.bind(this), 100);
   },
 
   toggleMap: function(e, marker, address) {
-    // console.log('toggleMap')
     var markerSelected = true;
     if (typeof marker === 'undefined') {
       markerSelected = false;
@@ -793,28 +846,22 @@ module.exports = View.extend({
     } else {
       this.find('.right-wrapper').css('overflow', 'hidden');
       if (this.find('#location').is(':visible')) {
-        // we are already in map view mode
-        if (this.map.getZoom() !== 12) {
-          this.map.panTo(marker.getPosition());
-          if (address) {
-            var isSameLocation = (this.find('#location .address').text() === $(this.addressPartial(address)).text());
-            console.log('is same location? %s', isSameLocation)
-            if (isSameLocation) this.find('.polling-location-info').slideToggle('fast');
-            else {
-              this.find('#location .address').replaceWith($(this.addressPartial(address)));
-              if (this.find('.polling-location-info').is(':hidden')) {
-                this.find('.polling-location-info').slideDown('fast');
-              } else {
-                setTimeout(function() {
-                  this.find('.polling-location-info').slideDown('fast');
-                }.bind(this), 500);
-              }
+        this._fitMap();
+        this.map.panTo(marker.getPosition());
+        if (address) {
+          var isSameLocation = (this.find('#location .address').text() === $(this.addressPartial(address)).text());
+          if (isSameLocation) this.find('.polling-location-info').show();
+          else {
+            this.find('#location .address').replaceWith($(this.addressPartial(address)));
+            this.find('.polling-location-info').show();
+            if (this.find('.polling-location-info').is(':hidden')) {
+              // this.find('.polling-location-info').slideDown('fast');
+            } else {
+              // setTimeout(function() {
+                // this.find('.polling-location-info').slideDown('fast');
+              // }.bind(this), 500);
             }
           }
-        } else {
-          this._fitMap();
-          // this.map.panTo(this.markers[0].getPosition());
-          this.find('.polling-location-info').slideDown('fast') //.hide();
         }
       } else {
         this.find('.info.box').removeClass('expanded-pane');
@@ -825,8 +872,14 @@ module.exports = View.extend({
         this.find('#map-canvas, #location').show();
         this.find('#polling-location .right-arrow').addClass('hidden');
         this.find('#polling-location .left-arrow').removeClass('hidden');
+        if (this.earlyVoteSites) this.find('#location-legend').show();
       }
     }
+
+    var addressNames = this.find('#location .address-name');
+    if (addressNames.length > 1 &&
+      (addressNames.first().text() === addressNames.last().text()))
+      addressNames.first().remove();
   },
 
   toggleElections: function(e) {
@@ -835,10 +888,9 @@ module.exports = View.extend({
     this.find('#election-list').slideToggle(100, function() {
       if (!this.landscape) this._scrollTo($('#more-elections span'), 10)
     }.bind(this));
-    if (!this.landscape) {
+    if (!this.landscape)
       this.find('#more-elections')
         .find('.toggle-image').toggleClass('hidden');
-    }
   },
 
   toggleResources: function(e) {
@@ -848,14 +900,14 @@ module.exports = View.extend({
       .css({
         'overflow-y': 'scroll',
         'overflow-x': 'hidden'});
-    if (!this.landscape) {
+    if (!this.landscape)
       this.find('#more-resources').slideToggle(500, function() {
         this._scrollTo($('#resources-toggle span'), 10);
         this.find('#resources-toggle')
           .find('.plus, .minus')
             .toggleClass('hidden');
       }.bind(this));
-    } else {
+    else {
       this.$el
         .find('#about-resources')
           .css("height", "initial")
@@ -864,7 +916,7 @@ module.exports = View.extend({
             .show()
           .end()
         .end()
-        .find('#map-canvas, #location, .contests')
+        .find('#map-canvas, #location, #location-legend, .contests')
           .hide()
         .end()
         .find('.info.box')
@@ -923,17 +975,11 @@ module.exports = View.extend({
 
       if (!ballotInfoIsMaximized) this._scrollTo($("#ballot-information"), 20);
 
-    } else { 
+    } else {
       this.find("#about-resources span").hide().end()
-        .find('#map-canvas, #location, #more-resources, #about-resources').hide().end()
+        .find('#map-canvas, #location, #location-legend, #more-resources, #about-resources').hide().end()
         .find('.info.box').removeClass('expanded-pane').end()
         .find('#ballot-information').addClass('expanded-pane')
-          .find('.right-arrow')
-            .addClass('hidden')
-          .end()
-          .find('.left-arrow')
-            .removeClass('hidden')
-          .end()
           // .find('.arrow').toggleClass('hidden')
         .end()
         .find(':not(#ballot-information)')
@@ -943,6 +989,15 @@ module.exports = View.extend({
           .find('.left-arrow')
             .addClass('hidden')
           .end()
+        .end()
+        .find('#ballot-information')
+          .find('.right-arrow')
+            .addClass('hidden')
+          .end()
+          .find('.left-arrow')
+            .removeClass('hidden')
+          .end()
+        .end()
 
         .find('.contests').show().end()
         .find('#about-resources').css("height", "initial").end()
@@ -999,6 +1054,10 @@ module.exports = View.extend({
   },
 
   closeAlert: function() {
-    this.find('#alert').fadeOut('slow');
+    this.find('#alert').fadeOut('slow', function() {
+      if (this.find('#location-legend').is(':visible'))
+        this.find('#location-legend')
+          .css('top', '2%');
+    }.bind(this));
   }
 });

@@ -40,7 +40,7 @@ module.exports = View.extend({
       $('#user-image').css('max-width', '85%');
     }
 
-    $('body').on('click', function(e) {
+    this.$container.on('click', function(e) {
       if (e.target !== $aboutModal) $aboutModal.hide();
       if (e.target !== $notFoundModal) $notFoundModal.hide();
       if (e.target !== $currentLocationModal) $currentLocationModal.hide();
@@ -51,34 +51,6 @@ module.exports = View.extend({
       componentRestrictions: { country: 'us' }
     });
     this.hasSubmitted = false;
-    this.autocompleteListener = function () {
-      if (this.hasSubmitted) return;
-      enteredAddress = this.autocomplete.getPlace();
-      var addrStr = JSON.stringify(enteredAddress);
-      if (typeof enteredAddress === 'undefined' ||
-          typeof enteredAddress.formatted_address === 'undefined') {
-        if (typeof enteredAddress !== 'undefined' && typeof enteredAddress.name !== 'undefined') enteredAddress = enteredAddress.name;
-        else {
-          var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
-          enteredAddress = autocompleteContainer.text() + ' ' +
-            autocompleteContainer.next().text();
-        }
-      } else enteredAddress = enteredAddress.formatted_address;
-      this.address = enteredAddress;
-      this.hasSubmitted = true;
-      this._makeRequest({
-        address: enteredAddress
-      });
-
-      this.toggleLoadingDisplay();
-    }.bind(this);
-    this.keypressListener = function(e) {
-      if (this.hasSubmitted) return;
-      var key = e.which || e.keyCode;
-      if (key === 13) {
-        // google.maps.event.trigger(this.autocomplete, 'place_changed');
-      }
-    }
 
     $(document).on({
       'DOMNodeInserted':function() {
@@ -86,11 +58,33 @@ module.exports = View.extend({
       }
     }, '.pac-container');
 
-    $(window).on('keypress.keypressListener', this.keypressListener.bind(this));
     this.resizer();
     $(window).on('resize', this.resizer.bind(this));
 
-    google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener);
+    google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener.bind(this));
+  },
+
+  autocompleteListener: function () {
+    if (this.hasSubmitted) return;
+    var enteredAddress = this.autocomplete.getPlace();
+    var addrStr = JSON.stringify(enteredAddress);
+    if (typeof enteredAddress === 'undefined' ||
+        typeof enteredAddress.formatted_address === 'undefined') {
+      if (typeof enteredAddress !== 'undefined' && typeof enteredAddress.name !== 'undefined') enteredAddress = enteredAddress.name;
+      else {
+        // may not be necessary
+        var autocompleteContainer = $('.pac-container').last().find('.pac-item-query').first();
+        enteredAddress = autocompleteContainer.text() + ' ' +
+          autocompleteContainer.next().text();
+      }
+    } else enteredAddress = enteredAddress.formatted_address;
+    this.address = enteredAddress;
+    this.hasSubmitted = true;
+    this._makeRequest({
+      address: enteredAddress
+    });
+
+    this.toggleLoadingDisplay();
   },
 
   submitAddress: function () {
@@ -99,13 +93,14 @@ module.exports = View.extend({
 
   onRemove: function() {
     google.maps.event.clearInstanceListeners(this.autocomplete);
-    $(window).unbind('keypress.keypressListener')
   },
 
   handleElectionData: function(response) {
     var that = this;
 
-    var stateName = response.state[0].name;
+    window.console && console.log(response)
+
+    var stateName = ((response.state && response.state.length) ? response.state[0].name : '');
     if (stateName === 'Washington' || stateName === 'Oregon') {
       this.find('#current-location').fadeIn('fast');
       this.find('#fade').fadeTo('fast', .2);
@@ -175,6 +170,8 @@ module.exports = View.extend({
   handleAddressNotFound: function() {
     // this.toggleLoadingDisplay()
     // this.find('#fade').hide();
+    this.$el.unbind('click');
+    google.maps.event.addListener(this.autocomplete, 'place_changed', this.autocompleteListener.bind(this));
     this.find('.loading').hide();
     setTimeout(function() {
       this.find('.loading').hide();

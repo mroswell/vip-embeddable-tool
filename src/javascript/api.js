@@ -5,7 +5,7 @@ module.exports = function(options) {
 
   if (options.key) url += 'key=' + options.key;
   if (options.address) url += '&address=' + options.address;
-  window.console && console.log('test: %s', options.test);
+  // window.console && console.log('test: %s', options.test);
   if (options.test) url += '&electionId=2000';
   if (options.officialOnly) url += '&officialOnly=' + options.officialOnly;
   if (typeof options.productionDataOnly !== 'undefined') {

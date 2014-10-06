@@ -52,6 +52,13 @@
   </span>
 </div>
 
+<div id="location-legend" class="box right">
+  <div id="red-block"></div>
+  <span id="red-label">Early Voting Site</span>
+  <div id="blue-block"></div>
+  <span id="blue-label">Polling Location</span>
+</div>
+
 <div id="location" class="box right">
   {{> address data.pollingLocations.0.address }}
   <span>
@@ -78,16 +85,20 @@
   <span>{{assets.text.resources.summary}}</span>
 </div>
 <div id="more-resources" class="right">
-  <div class="subsection box">
-  {{assets.text.resources.electionAdministration.title}}
+  <div class="subsection box more-resources-header">
+    <span>
+    {{assets.text.resources.electionAdministration.title}}
+    </span>
   </div>
   <div class="correspondence-address box">
   {{#if data.state.0.local_jurisdiction}}
   <h1>{{assets.text.resources.electionAdministration.local_jurisdiction}}</h1>
   {{/if}}
-  <b>{{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}</b>
   {{#if data.state.0.local_jurisdiction.name}}
   <b>{{ data.state.0.local_jurisdiction.name }}</b><br>
+  {{/if}}
+  {{#if data.state.0.local_jurisdiction.electionAdministrationBody.name }}
+  <b>{{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}</b><br>
   {{/if}}
   {{ data.state.0.local_jurisdiction.electionAdministrationBody.hoursOfOperation }}
   {{#if data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
@@ -121,14 +132,18 @@
   </div>
   {{/if}}
   </div>
-  <div class="subsection box">
-  {{assets.text.resources.moreResources.title}}
+  <div class="subsection box more-resources-header">
+    <span>
+    {{assets.text.resources.moreResources.title}}
+    </span>
   </div>
   <div class="box information-links">
   {{> election-administration-body }}
   </div>
-  <div class="subsection box">
-  {{assets.text.resources.voterIdRequirements.title}}
+  <div class="subsection box more-resources-header">
+    <span>
+    {{assets.text.resources.voterIdRequirements.title}}
+    </span>
   </div>
   <div class="box information-items">
     <div class="voter-id-info">

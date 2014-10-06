@@ -4,7 +4,44 @@ module.exports = (function() {
     , mapView     = require('./views/mapView.js')
     , apiRequest  = require('./api.js')
     , text        = require('./config.js')
-    , $           = require('jquery');
+    , $           = require('jquery')
+    , csv         = require('csv-string');
+
+  function fetchVoterIdData (state, callback) {
+    $.ajax({
+      url: 'https://s3.amazonaws.com/vip-voter-information-tool/voter-id/voterIdInfo.csv',
+      cache: false,
+      success: function(resp) {
+        var csvArray = csv.parse(resp);
+        var questions = csvArray[0];
+        var states = csvArray.slice(1);
+        var stateData = Array.prototype.filter.call(states, function(entry) {
+          return entry[0] === state;
+        });
+        var voterIdInfo = {};
+        var voterIdLink;
+        stateData.forEach(function(state) {
+          questions.forEach(function(question, index) {
+            if (question !== 'Complete Voter ID Information') {
+              var answer = state[index];
+              for (var i = 0, len = answer.length; i < len; i++) {
+                if (answer.charCodeAt(i) === 65533) {
+                  var newStr = answer.slice(0, i) + answer.slice(i + 1, answer.length);
+                  answer = newStr;
+                }
+              }
+              voterIdInfo[index] = {
+                'question' : question,
+                'answer': answer
+              }
+            } else voterIdLink = state[index];
+          });
+        });
+
+        callback({ data: voterIdInfo, link: voterIdLink });
+      }
+    });
+  }
 
   return {
     start: function(config) {
@@ -32,14 +69,19 @@ module.exports = (function() {
       addressView
         .onRouteEvent('addressViewSubmit', function(response) {
           data = response;
-          window.console && console.log(data);
-          window.history && history.pushState && history.pushState(null, null, '?polling-location');
-          $(window).on('popstate', function() {
-            router.navigate(addressView, mapView, options);
-            $('#_vitModal').hide();
-          }.bind(this));
-          $.extend(options, { data: data })
-          router.navigate(mapView, addressView, options);
+
+          fetchVoterIdData(data.normalizedInput.state, function(voterId) {
+            data.voterId = voterId.data;
+            data.voterIdLink = voterId.link;
+            // window.console && console.log(data);
+            window.history && history.pushState && history.pushState(null, null, '?polling-location');
+            $(window).on('popstate', function() {
+              router.navigate(addressView, mapView, options);
+              $('#_vitModal').hide();
+            }.bind(this));
+            $.extend(options, { data: data })
+            router.navigate(mapView, addressView, options);
+          });
         });
 
       mapView
@@ -54,10 +96,14 @@ module.exports = (function() {
         })
         .onRouteEvent('mapViewSubmit', function(response) {
           data = response;
-          $.extend(options, { data: data })
-          // render the elections view if there's more than one election
-          // returned for the entered address, otherwise render the map view
-          router.navigate(mapView, mapView, options);
+
+          fetchVoterIdData(data.normalizedInput.state, function(voterId) {
+            data.voterId = voterId.data;
+            data.voterIdLink = voterId.link;
+
+            $.extend(options, { data: data })
+            router.navigate(mapView, mapView, options);
+          });
         });
 
       if ((options.language && options.language !== 'en') || !navigator.language.match(/en/)) {

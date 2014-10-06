@@ -66,6 +66,10 @@ module.exports = (function() {
       });
     },
 
+    addVoterIdDate: function() {
+
+    },
+
     render: function(options) {
       // last change
       var that = this;
@@ -171,8 +175,12 @@ module.exports = (function() {
 
     toggleLoadingDisplay: function() {
       if (this.find('.loading').is(':hidden')) {
+        this.$el.on('click', function(event) {
+          event.stopPropagation();
+        })
         this.find('#fade').fadeTo('slow', .1);
         this.find('.loading').fadeIn('slow');
+        google.maps.event.clearInstanceListeners(this.autocomplete);
       } else {
         this.find('#fade').hide();
         this.find('.loading').hide();
@@ -213,7 +221,7 @@ module.exports = (function() {
       if (typeof address === 'object') {
         var parsedAddress = '';
         for (var key in address) {
-          if (key === 'locationName') continue;
+          if (key === 'locationName' || key === 'name') continue;
           parsedAddress += address[key] + ' ';
         }
       return parsedAddress;

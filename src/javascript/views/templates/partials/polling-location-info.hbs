@@ -6,28 +6,31 @@
   {{/if}}
   {{#if pollingHours}}
   <div class="address-line">
-  Polling Hours:
-  {{ pollingHours }}
+  {{{ pollingHours }}}
   </div>
   {{/if}}
   {{#if startDate}}
   <div class="address-line">
-  {{ startDate }} - {{ endDate }}
+  {{{ startDate }}} -<br>
+  {{{ endDate }}}
   </div>
   {{/if}}
-  <div class="address-line">
+  <div class="address-line" id="get-directions">
     <a href="#" target="_blank">Get Directions</a>
   </div>
   {{#if voterServices}}
   <div class="address-line">
   Voter Services:
-  {{ voterServices }}
+  {{{ voterServices }}}
   </div>
   {{/if}}
   {{#if notes}}
   <div class="address-line">
   Notes:
-  {{ notes }}
+  {{{ notes }}}
   </div>
   {{/if}}
+  <div id="polling-location-info-close">
+  {{!-- x --}}
+  </div>
 </div>
