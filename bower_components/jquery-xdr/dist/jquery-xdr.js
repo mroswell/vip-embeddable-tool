@@ -6,10 +6,11 @@
  * copyright Jon Sharratt 2013
  * MIT License
 */
-(function() {
-  var _this = this;
+module.exports = (function() {
+  var _this = window;
 
-  (function(jQuery) {
+  return {
+    load: function(jQuery) {
     if (_this.XDomainRequest) {
       return jQuery.ajaxTransport(function(s) {
         var xdr;
@@ -55,6 +56,7 @@
         }
       });
     }
-  })(jQuery);
+  }
+  }
 
 }).call(this);
