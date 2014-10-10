@@ -13,6 +13,9 @@
       "cssify"
     ]
   },
+  "browser": {
+    "jquery-xdr": "./bower_components/jquery-xdr/dist/jquery-xdr.js"
+  },
   "browserify-shim" : {},
   "devDependencies": {
     "browser-sync": "~0.8.2",
