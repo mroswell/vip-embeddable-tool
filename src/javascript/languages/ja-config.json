@@ -1,0 +1,72 @@
+{
+  "text" : {
+    "summary" : "投票用紙情報、投票所、期日前投票、身分証明証の必要条件などについて調べてください...",
+    "placeholderText" : {
+      "enterAddress" : "登録済みの投票住所を入力してください",
+      "changeAddress" : "異なる住所を入力してください"
+    },
+    "about" : {
+      "title" : "投票情報ツールについて",
+      "content" : "投票情報プロジェクト（VIP）は、どこで投票するか、投票用紙に何が載っているかなどの有権者の皆さんが票を投じるために不可欠な情報を提供するものです。これは、The Pew Charitable Trusts社、Google社、州によるプロジェクトです。2008年に創設され、VIPは、州ならびに地方の選挙当局と協力し、Google Civic Information APIを含む様々な方法で公式な選挙情報を市民に提供しています。投票情報ツールは、VIPにより可能となった多くのものの一つであり、投票日またはそれ以前に、有権者の皆さんが公式な選挙情報を入手できることを確実にしていますy."
+    },
+    "footer" : {
+      "text" : "最も完成した最新の情報については、お近くの選挙当局にてご相談ください."
+    },
+    "addressNotFound" : {
+      "title" : "情報が見つかりません",
+      "text" : "入力された [ ]は、お客様の入力された住所に関する選挙情報に該当する選挙情報はありません.",
+      "button" : "Tもう一度入力してください"
+    },
+    "multipleElections" : {
+      "text" : "該当する選挙が二つ以上あります。一つを選択してください"
+    },
+    "mailInVoting" : {
+      "title" : "郵便投票州",
+      "text" : "入力された登録住所は郵便投票州にあります。これは、お客様は投票用紙をどの当局の投函箱にも投函できることを意味します。続けて、登録住所によりお近くの投函箱を検索しますか？もしくは、現在の所在地を使用して送信しなおしますか?",
+      "currentLocation" : "現在の所在地を使用する",
+      "registeredAddress" : "続ける"
+    },
+    "headers" : {
+      "registeredVoterAddress" : "登録した選挙住所",
+      "edit" : "変更",
+      "elections" : "変更",
+      "pollingLocation" : "変更",
+      "voterResources" : "有権者の資料",
+      "ballotInformation" : "投票用紙情報"
+    },
+    "resources" : {
+      "summary" : "期日、身分証明証情報、登録用リンクを含む選挙過程の進め方についての情報.",
+      "electionAdministration" : {
+        "title" : "選挙事務所",
+        "local_jurisdiction" : "お近くの選挙事務所",
+        "stateElectionsOffice" : "州選挙当局",
+        "physicalAddress" : "実在の住所",
+        "correspondenceAddress" : "返信用住所"
+      },
+      "moreResources" : {
+        "title" : "追加資料",
+        "electionInformationUrl" : "選挙情報",
+        "registrationConfirmationUrl" : "登録確認",
+        "absenteeVotingInformationUrl" : "不在者投票情報",
+        "votingLocationFinderUrl" : "投票場所検索",
+        "ballotInformationUrl" : "投票用紙情報"
+      },
+      "voterIdRequirements" : {
+        "title" : "有権者の身分証明証の必要条件",
+        "certified" : "認証済み?",
+        "state" : "州",
+        "needsId" : "有権するために身分証明証を提示しなければならないのは誰ですか?",
+        "acceptableId" : "どの種類の身分証明証が受け付け可能ですか?",
+        "canVote" : "有権者が十分な身分証明証を提示しない場合、その人は一般的な票を投じることはできますか?",
+        "linkTitle" : "リンク"
+      }
+    },
+    "pollingLocations" : {
+      "getDirections" : "道順の入手"
+    },
+    "inputs" : {
+      "registeredAddress" : "登録投票住所を入力してください",
+      "differentAddress" : "異なる住所を入力してください"
+    }
+  }
+}

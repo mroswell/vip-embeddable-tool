@@ -1,6 +1,7 @@
 var View = require('./view.js');
 var api = require('../api.js');
 var $ = require('jquery');
+var colors = require('../colors.js');
 
 module.exports = View.extend({
 
@@ -22,6 +23,9 @@ module.exports = View.extend({
 
   resizer: function () {
     $("#_vit").find("#about.modal").css({"max-height": $("#_vit").height() - 120 + "px"});
+
+    if (this.$container.parent().width() < this.$container.width())
+      this.$container.width(this.$container.parent().width());
   },
 
   onAfterRender : function(options) {
@@ -39,6 +43,13 @@ module.exports = View.extend({
     if (this.$container.width() > 600) {
       $('#user-image').css('max-width', '85%');
     }
+
+    if (options.colors) {
+      colors.replace(options.colors);
+    }
+
+    // if (this.$container.width() < 600)
+      // this.find('.modal').css('overflow-y', 'auto'
 
     this.$container.on('click', function(e) {
       if (e.target !== $aboutModal) $aboutModal.hide();
@@ -78,6 +89,10 @@ module.exports = View.extend({
           autocompleteContainer.next().text();
       }
     } else enteredAddress = enteredAddress.formatted_address;
+    var enteredInput = this.find('#address-input').val();
+
+    if (enteredInput.length > enteredAddress.length) enteredAddress = enteredInput;
+
     this.address = enteredAddress;
     this.hasSubmitted = true;
     this._makeRequest({

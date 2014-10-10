@@ -8,6 +8,18 @@
     .footer
       bottom: 0
 
+      span
+        @include translateY(-50%)
+        top: 50%
+
+      #error-feedback-link
+        left: 92%
+        @include translateY(50%)
+        margin-top: -5px
+
+      #info-icon
+        margin: 0
+
     .info
       font-size: 16px
 
@@ -25,6 +37,7 @@
       left: 79%
       top: 2%
       width: 20%
+      min-width: 145px
       background-color: rgba(255, 255, 255, .85)
       z-index: 2
       @include box-shadow(2px 2px 8px rgba(0,0,0,.25))

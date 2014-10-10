@@ -4,6 +4,7 @@ var util       = require('./util.js')
   , $          = require('jquery')
   , css        = require('../../build/app.css')
 
+// console.log(xdr)
 function loadScript(language) {
   var script = document.createElement('script');
   script.type = 'text/javascript';
@@ -42,9 +43,11 @@ window.vit = (function () {
 
     $.getScript(googleWebFontsUrl);
 
+    var language = navigator.language || navigator.browserLanguage;
+
     if ((window._vitOptions.language && window._vitOptions.language !== 'en') ||
-      !navigator.language.match(/en/)) {
-      language = window._vitOptions.language || navigator.language;
+      !language.match(/en/)) {
+      language = window._vitOptions.language || language;
       var supportedLanguages = ['en', 'es'];
       if (supportedLanguages.indexOf(language) !== -1) loadScript(language);
       else loadScript('en-US');

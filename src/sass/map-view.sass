@@ -37,7 +37,12 @@
       span
         float: right
         cursor: pointer
-        // font-weight: bold
+
+      &.expanded-pane
+        background-color: #57c4f7
+        width: 103% !important
+        border-bottom: 0 !important
+        @include box-shadow(3px 3px 7px rgba(0,0,0,.35))
 
     .box
       line-height: 1.15
@@ -49,7 +54,6 @@
     .address-line
       text-transform: lowercase
       font-size: 22px
-      color: #333
 
     .address-name,
     .address-line
@@ -63,8 +67,6 @@
       background-color: #eee
       padding: 15px
       font-size: 17px
-
-      // vertical align:
       height: 75px
 
       p,
@@ -142,12 +144,6 @@
       &.left-arrow
         @include translateY(27%)
 
-    .expanded-pane
-      background-color: #57c4f7 !important
-      width: 103% !important
-      border-bottom: 0 !important
-      @include box-shadow(3px 3px 7px rgba(0,0,0,.35))
-
     #map-canvas
       @include transition(height, 2s, ease-in-out)
 
@@ -189,7 +185,6 @@
 
     #chosen-election
       font-size: 22px
-      color: #333
 
       img
         width: 20px
@@ -261,13 +256,13 @@
     #info-icon
       background-color: white
       border: 6px solid white
-      border-top: 1px solid white
-      border-bottom: 1px solid white
+      border-top: 2px solid white
+      border-bottom: 2px solid white
       border-right: 7px solid white
       border-radius: 8px
       font-style: italic
       float: right
-      margin-right: -25px
+      margin: 8px 0 0
 
     #alert
       display: none
@@ -287,8 +282,27 @@
         img
           width: 100%
 
+      a
+        color: white
+
     .footer
       z-index: 2
+      font-size: 9px
+      padding: 10px 5px
+
+      span
+        width: 100%
+        @include translateY(0)
+        top: 5px
+
+      #error-feedback-link
+        color: white
+        position: absolute
+        left: 72%
+        width: 100%
+        font-size: 9px
+        @include translateY(-50%)
+        top: 63%
 
   @media only screen and (min-device-width : 768px)
   #map-view

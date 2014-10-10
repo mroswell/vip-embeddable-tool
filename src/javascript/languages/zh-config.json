@@ -1,0 +1,72 @@
+{
+  "text" : {
+    "summary" : "了解有關投票資訊，投票地點，提前投票，要求身份證明和更多...",
+    "placeholderText" : {
+      "enterAddress" : "輸入註冊投票地址",
+      "changeAddress" : "輸入不同的地址"
+    },
+    "about" : {
+      "title" : "了解有關投票的資訊工具",
+      "content" : "D投票項目資訊(The Voting Information Project VIP）連接選民提供基本所需的投票資訊。例如，往哪裡投票和什麼是選票. 這個項目是The Pew慈善信託 (The Pew Charitable Trusts), Google和各州。 於2008年推出, (VIP)可通過州與地方選舉辦事處提供各種正式選舉資訊給公民, 包括Google公民資訊的編程應用程序(API), 通過(VIP)工具提供更多投票資訊, 以確保準備好在選舉前,和選舉日為您提供正式選舉的資訊"
+    },
+    "footer" : {
+      "text" : "有關完整的最新資訊，請諮詢您當地的選舉辦事處."
+    },
+    "addressNotFound" : {
+      "title" : "找不到有關資料",
+      "text" : "您輸入[]  無法找到您輸入的地址任何選舉資訊。請檢查以確保輸入無誤",
+      "button" : "再試一次"
+    },
+    "multipleElections" : {
+      "text" : "發現多個相同。選一個:"
+    },
+    "mailInVoting" : {
+      "title" : " 郵寄投票狀況",
+      "text" : "您輸入的註冊地址駐於郵寄投票狀況。這意味著你可以提交您的選票在任何官方信箱,您想繼續根據您的註冊地址尋找投遞, 或者你想使用您現在地址重新查詢您的要求?",
+      "currentLocation" : " 使用您居住的地址",
+      "registeredAddress" : "繼續"
+    },
+    "headers" : {
+      "registeredVoterAddress" : "登記選民地址",
+      "edit" : "修正",
+      "elections" : "選舉",
+      "pollingLocation" : " 投票地點",
+      "voterResources" : "選民資訊來源",
+      "ballotInformation" : "投票資訊"
+    },
+    "resources" : {
+      "summary" : "關於如何瀏覽選舉過程，包括最後期限，選民身份證明和鏈接註冊資訊",
+      "electionAdministration" : {
+        "title" : "選舉行政部門",
+        "local_jurisdiction" : "地方選舉行政部門",
+        "stateElectionsOffice" : "州選舉辦事處",
+        "physicalAddress" : " 居住地址",
+        "correspondenceAddress" : "通訊地址"
+      },
+      "moreResources" : {
+        "title" : "添加多源資訊",
+        "electionInformationUrl" : "選舉資訊",
+        "registrationConfirmationUrl" : "註冊確認",
+        "absenteeVotingInformationUrl" : " 缺席投票資訊",
+        "votingLocationFinderUrl" : "搜索投票地點",
+        "ballotInformationUrl" : "投票資訊"
+      },
+      "voterIdRequirements" : {
+        "title" : "要求選民身份證明",
+        "certified" : "認證?",
+        "state" : "州",
+        "needsId" : "誰必須出示身份證投票?",
+        "acceptableId" : "什麼證明選民身份會被接受?",
+        "canVote" : "如果選民不出示證件，他/她仍可投票嗎",
+        "linkTitle" : "聯繫"
+      }
+    },
+    "pollingLocations" : {
+      "getDirections" : "找方向"
+    },
+    "inputs" : {
+      "registeredAddress" : "輸入註冊投票地址",
+      "differentAddress" : "輸入不同的地址"
+    }
+  }
+}

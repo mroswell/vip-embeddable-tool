@@ -12,19 +12,37 @@ module.exports = function(options) {
     url += '&productionDataOnly=' + options.productionDataOnly;
   }
 
-  $.support.cors = true;
-  $.ajax({
-      url: url,
-      dataType: 'jsonp',
-      cache: false,
-      error: function(e){ 
-        options.error && options.error();
-      },
-      success: function(response) {
-        if (typeof response.error === 'undefined') {
-          options.success(response);
+  // if (window.XDomainRequest) {
+  //   window.console && console.log('xdr')
+  //   xdr = new XDomainRequest(); 
+
+  //   xdr.onload=function() {
+  //     var response = xdr.responseText;
+  //     if (typeof response.error === 'undefined') {
+  //       options.success(response);
+  //     }
+  //     else options.error && options.error();
+  //   }
+  //   xdr.ontimeout=function(){};
+  //   xdr.onprogress=function(){};
+  //   xdr.ontimeout
+  //   xdr.open('get', url);
+  //   xdr.send(); 
+  // } else {
+    $.support.cors = true;
+    $.ajax({
+        url: url,
+        dataType: 'jsonp',
+        cache: false,
+        error: function(e){ 
+          options.error && options.error();
+        },
+        success: function(response) {
+          if (typeof response.error === 'undefined') {
+            options.success(response);
+          }
+          else options.error && options.error();
         }
-        else options.error && options.error();
-      }
-  });
+    });
+  // }
 }

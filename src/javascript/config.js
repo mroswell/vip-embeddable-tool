@@ -11,7 +11,10 @@ module.exports = {
   },
   "text" : {
     "summary" : "Find out about ballot information, polling location, early voting, ID requirements and more...",
-
+    "placeholderText" : {
+      "enterAddress" : "Enter Registered Voting Address",
+      "changeAddress" : "Enter a different address"
+    },
     "about" : {
       "title" : "About the Voting Information Tool",
       "content" : "The Voting Information Project (VIP) works to connect voters with the essential information needed to cast their ballot, such as where to vote and what is on the ballot. It is a project between The Pew Charitable Trusts, Google, and the states. Launched in 2008, VIP works with state and local election officials to provide official election information to citizens through a variety of means, including the Google Civic Information API. The Voting Information Tool is one of the many made available through VIP, ensuring official election information is accessible to voters before and on Election Day."
@@ -20,8 +23,8 @@ module.exports = {
       "text" : "For the most complete and up to date information, consult your local election official."
     },
     "addressNotFound" : {
-      "title" : "No Upcoming Elections Found",
-      "text" : "You entered:<h1>1234 Main St<br>New York, NY 10000</h1>We couldn't find any upcoming elections for the address you entered. Please check to make sure you entered it correctly, or try again closer to Election Day. Information will be available 2 - 4 weeks prior to the election.",
+      "title" : "No Election Information Found",
+      "text" : "You entered:<h1>1234 Main St<br>New York, NY 10000</h1>We couldn't find any election information for the address you entered. Please check to make sure you entered it correctly, contact your election official, or try again closer to Election Day. Information will be available 2 - 4 weeks prior to the election. For the most complete and up to date information, consult your local election official.",
       "button" : "Try Again"
     },
     "mailInVoting" : {
@@ -43,7 +46,9 @@ module.exports = {
       "electionAdministration" : {
         "title" : "Election Administration",
         "local_jurisdiction" : "Local Jurisdiction",
-        "stateElectionsOffice" : "State Elections Office"
+        "stateElectionsOffice" : "State Elections Office",
+        "physicalAddress" : "Physical Address",
+        "correspondenceAddress" : "Correspondence Address"
       },
       "moreResources" : {
         "title" : "Additional Resources",
