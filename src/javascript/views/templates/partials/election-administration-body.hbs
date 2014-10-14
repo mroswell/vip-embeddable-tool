@@ -1,0 +1,68 @@
+<div class="election-administration-body">
+  <div id="state-elections-office">
+  <h1>{{assets.text.resources.electionAdministration.stateElectionsOffice}}</h1>
+  {{#if data.state.0.electionAdministrationBody.electionInfoUrl }}
+  <a class="election-info-url" href="{{ data.state.0.electionAdministrationBody.electionInfoUrl }}" target="_blank">
+    {{assets.text.resources.moreResources.electionInformationUrl}}
+  </a>
+  <br><br>
+  {{/if}}
+  {{#if data.state.0.electionAdministrationBody.electionRegistrationConfirmationUrl }}
+  <a class="election-registration-confirmation-url" href="{{ data.state.0.electionAdministrationBody.electionRegistrationConfirmationUrl }}" target="_blank">
+    {{assets.text.resources.moreResources.registrationConfirmationUrl}}
+  </a>
+  <br><br>
+  {{/if}}
+  {{#if data.state.0.electionAdministrationBody.absenteeVotingInfoUrl}}
+  <a class="absentee-voting-info-url" href="{{ data.state.0.electionAdministrationBody.absenteeVotingInfoUrl }}" target="_blank">
+    {{assets.text.resources.moreResources.absenteeVotingInformationUrl}}
+  </a>
+  <br><br>
+  {{/if}}
+  {{#if data.state.0.electionAdministrationBody.votingLocationFinderUrl}}
+  <a class="voting-location-finder-url" href="{{ data.state.0.electionAdministrationBody.votingLocationFinderUrl }}" target="_blank">
+    {{assets.text.resources.moreResources.votingLocationFinderUrl}}
+  </a>
+  <br><br>
+  {{/if}}
+  {{#if data.state.0.electionAdministrationBody.ballotInfoUrl }}
+  <a class="ballot-info-url" href="{{ data.state.0.electionAdministrationBody.ballotInfoUrl }}" target="_blank">
+    {{assets.text.resources.moreResources.ballotInformationUrl}}
+  </a>
+  <br>
+  {{/if}}
+  </div>
+  <div id="local-jurisdiction-title">
+  <h1>{{assets.text.resources.electionAdministration.local_jurisdiction}}</h1>
+  {{#if data.state.0.local_jurisdiction.electionAdministrationBody.electionInfoUrl }}
+  <a class="election-info-url" href="{{ data.state.0.local_jurisdiction.electionAdministrationBody.electionInfoUrl }}" target="_blank">
+    {{assets.text.resources.moreResources.electionInformationUrl}}
+  </a>
+  <br><br>
+  {{/if}}
+  {{#if data.state.0.local_jurisdiction.electionAdministrationBody.electionRegistrationConfirmationUrl }}
+  <a class="election-registration-confirmation-url" href="{{ data.state.0.local_jurisdiction.electionAdministrationBody.electionRegistrationConfirmationUrl }}" target="_blank">
+    {{assets.text.resources.moreResources.registrationConfirmationUrl}}
+  </a>
+  <br><br>
+  {{/if}}
+  {{#if data.state.0.local_jurisdiction.electionAdministrationBody.absenteeVotingInfoUrl}}
+  <a class="absentee-voting-info-url" href="{{ data.state.0.local_jurisdiction.electionAdministrationBody.absenteeVotingInfoUrl }}" target="_blank">
+    {{assets.text.resources.moreResources.absenteeVotingInformationUrl}}
+  </a>
+  <br><br>
+  {{/if}}
+  {{#if data.state.0.local_jurisdiction.electionAdministrationBody.votingLocationFinderUrl}}
+  <a class="voting-location-finder-url" href="{{ data.state.0.local_jurisdiction.electionAdministrationBody.votingLocationFinderUrl }}" target="_blank">
+    {{assets.text.resources.moreResources.votingLocationFinderUrl}}
+  </a>
+  <br><br>
+  {{/if}}
+  {{#if data.state.0.local_jurisdiction.electionAdministrationBody.ballotInfoUrl }}
+  <a class="ballot-info-url" href="{{ data.state.0.local_jurisdiction.electionAdministrationBody.ballotInfoUrl }}" target="_blank">
+    {{assets.text.resources.moreResources.ballotInformationUrl}}
+  </a>
+  <br>
+  {{/if}}
+  </div>
+</div>

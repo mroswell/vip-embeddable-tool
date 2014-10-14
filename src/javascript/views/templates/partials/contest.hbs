@@ -1,0 +1,39 @@
+<div class="contest contest-toggle">
+	<div class="subsection box">
+		<p>{{ office }}</p>
+		<div class="contest-type"> 
+			{{ primaryParty }}
+		</div>
+		<span class="subsection-plus">&#8212</span>
+	</div>
+	<div class="candidate-list">
+		{{#if referendumSubtitle }}
+		<a href="{{ referendumUrl }}">
+			<div class="referendum-subtitle box">
+				{{ referendumTitle }}
+				<img src="https://s3.amazonaws.com/vip-voter-information-tool/images/arrow.png" class="arrow">
+				{{ referendumSubtitle }}
+			</div>
+		</a>
+		{{/if }}
+		{{#each candidates}}
+		{{#if candidateUrl}}
+		<a href="{{ candidateUrl }}" target="_blank">
+		{{/if}}
+			<div class="candidate-item box">
+				<div class="name">
+				{{ name }}
+				</div>
+				{{#if candidateUrl}}
+				<img src="https://s3.amazonaws.com/vip-voter-information-tool/images/arrow.png" class="arrow">
+				{{/if}}
+				<div class="party">
+				{{ party }}
+				</div>
+			</div>
+		{{#if candidateUrl}}
+		</a>
+		{{/if}}
+		{{/each}}
+	</div>
+</div>

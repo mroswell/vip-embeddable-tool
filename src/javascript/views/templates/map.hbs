@@ -1,0 +1,192 @@
+<div class="box" id="alert">
+  <span id="text"></span>
+  <span id="alert-close"><img src="https://s3.amazonaws.com/vip-voter-information-tool/images/plus.png"></span>
+</div>
+
+<div class="info box left" id="registered-address">
+  {{assets.text.headers.registeredVoterAddress}}
+</div>
+
+<div class="box left">
+  {{> address data.normalizedInput }}
+  <input type="text" class="change-address" placeholder="{{assets.text.placeholderText.changeAddress}}">
+  <span id="vote-address-edit">{{assets.text.headers.edit}}</span>
+</div>
+
+<div class="info box left" id="more-elections">
+  {{assets.text.headers.elections}}
+  <span>
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/plus.png" class="toggle-image plus">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/minus.png" class="toggle-image minus hidden">
+  </span>
+</div>
+
+<div class="info box left" id="election-list">
+  <div class="election-selection">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/radio-checked.png" class="radio checked">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/radio-unchecked.png" class="radio unchecked hidden">
+    <span class="hidden">{{ data.election.id }}</span>
+    {{ data.election.name }}
+  </div>
+  {{#each data.otherElections }}
+  <div class="election-selection">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/radio-checked.png" class="radio checked hidden">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/radio-unchecked.png" class="radio unchecked">
+    <span class="hidden">{{ id }}</span>
+    {{ name }}
+  </div>
+  {{/each}}
+</div>
+
+<div class="box left" id="chosen-election">
+  {{>election data.election}}
+  <div id="calendar-icon" title="{{ data.election.name }}" class="addthisevent" style="background-image: url('https://s3.amazonaws.com/vip-voter-information-tool/images/calendar.png'); float: right; margin-top: -30px; margin-right: 2px; background-color: transparent; border: 0; height: 20px; width: 20px; background-size: contain; padding: 0; background-position: center;">
+  </div> 
+</div>
+
+<div class="info box left" id="polling-location">
+  {{assets.text.headers.pollingLocation}}
+  <span id="map-toggle">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/plus.png" class="toggle-image plus">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/minus.png" class="toggle-image minus hidden">
+  </span>
+</div>
+
+<div id="location-legend" class="box right">
+  <div id="red-block"></div>
+  <span id="red-label">Early Voting Site</span>
+  <div id="blue-block"></div>
+  <span id="blue-label">Polling Location</span>
+</div>
+
+<div id="location" class="box right">
+  {{> address data.pollingLocations.0.address }}
+  <span>
+    <a href="#" target="_blank">
+      <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/directions.png">
+    </a>
+  </span>
+  {{#if data.pollingLocations.0.isEarlyVoteSite}}
+  <div class="early-vote-site">
+  Early Vote Site
+  </div>
+  {{/if}}
+</div>
+<div id="map-canvas" class="right"></div>
+
+<div class="info box left" id="resources-toggle">
+  {{assets.text.headers.voterResources}}
+  <span>
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/plus.png" class="toggle-image plus hidden">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/minus.png" class="toggle-image minus">
+  </span>
+</div>
+<div class="box information-items right" id="about-resources">
+  <span>{{assets.text.resources.summary}}</span>
+</div>
+<div id="more-resources" class="right">
+  <div class="subsection box more-resources-header">
+    <span>
+    {{assets.text.resources.electionAdministration.title}}
+    </span>
+  </div>
+  <div class="correspondence-address box">
+  {{#if data.state.0.local_jurisdiction}}
+  <h1>{{assets.text.resources.electionAdministration.local_jurisdiction}}</h1>
+  {{/if}}
+  <span id="local-jurisdiction-name">
+  {{#if data.state.0.local_jurisdiction.name}}
+  <b>{{ data.state.0.local_jurisdiction.name }}</b><br>
+  {{/if}}
+  </span>
+  <span id="local-jurisdiction-eab-name">
+  {{#if data.state.0.local_jurisdiction.electionAdministrationBody.name }}
+  <b>{{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}</b><br>
+  {{/if}}
+  </span>
+  {{ data.state.0.local_jurisdiction.electionAdministrationBody.hoursOfOperation }}
+  {{#if data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
+  <div id="local-jurisdiction-correspondence-address" class="election-administration-address">
+  <span>{{assets.text.resources.electionAdministration.correspondenceAddress}}:</span>
+  {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.correspondenceAddress }}
+  </div>
+  {{/if}}
+  {{#if data.state.0.local_jurisdiction.electionAdministrationBody.physicalAddress }}
+  <div id="local-jurisdiction-physical-address" class="election-administration-address">
+  <span>{{assets.text.resources.electionAdministration.physicalAddress}}</span>
+  {{> normalized-address data.state.0.local_jurisdiction.electionAdministrationBody.physicalAddress }}
+  </div>
+  {{/if}}
+  <br>
+  {{#if data.state.0.electionAdministrationBody}}
+  <h1>{{assets.text.resources.electionAdministration.stateElectionsOffice}}</h1>
+  {{/if}}
+  <b>{{ data.state.0.electionAdministrationBody.name }}</b>
+  {{ data.state.0.electionAdministrationBody.hoursOfOperation }}
+  {{#if data.state.0.electionAdministrationBody.correspondenceAddress }}
+  <div id="state-election-correspondence-address" class="election-administration-address">
+  <span>{{assets.text.resources.electionAdministration.correspondenceAddress}}</span>
+  {{> normalized-address data.state.0.electionAdministrationBody.correspondenceAddress }}
+  </div>
+  {{/if}}
+  {{#if data.state.0.electionAdministrationBody.physicalAddress }}
+  <div id="state-election-physical-address" class="election-administration-address">
+  <span>{{assets.text.resources.electionAdministration.physicalAddress}}</span>
+  {{> normalized-address data.state.0.electionAdministrationBody.physicalAddress }}
+  </div>
+  {{/if}}
+  </div>
+  <div class="subsection box more-resources-header">
+    <span>
+    {{assets.text.resources.moreResources.title}}
+    </span>
+  </div>
+  <div class="box information-links">
+  {{> election-administration-body }}
+  </div>
+  <div class="subsection box more-resources-header">
+    <span>
+    {{assets.text.resources.voterIdRequirements.title}}
+    </span>
+  </div>
+  <div class="box information-items">
+    <div class="voter-id-info">
+    {{#each data.voterId }}
+      <div class="question">{{ question }}</div>
+      <div class="answer">{{ answer }}</div>
+    {{/each}}
+      <div class="answer">
+        <a href="{{ data.voterIdLink }}" target="_blank">{{assets.text.resources.voterIdRequirements.linkTitle }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="info box left" id="ballot-information">
+  {{assets.text.headers.ballotInformation}}
+  <span>
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/plus.png" class="toggle-image plus hidden">
+    <img src="https://s3.amazonaws.com/vip-voter-information-tool/images/minus.png" class="toggle-image minus">
+  </span>
+</div>
+<div class="contests right" id="all-contests">
+{{#each data.contests}}
+{{> contest}}
+{{/each}}
+</div>
+
+<div class="footer">
+  <span>
+  {{assets.text.footer.text}}
+  </span>
+  <a href="#" target="_blank" id="error-feedback-link">Report an error</a>
+  <a href="#" target="_blank"><i id="info-icon">i</i></a>
+</div>
+
+{{> modals }}
+<div id="fade"></div>
+<!--[if gte IE 8]>
+<script type="text/javascript">
+document.getElementById('alert').className += 'alert_ie';
+</script>
+<![endif]-->

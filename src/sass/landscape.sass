@@ -1,0 +1,151 @@
+@import 'variables'
+@import 'compass/css3'
+
+#_vit
+  .landscape#map-view
+    height: 100%
+
+    .footer
+      bottom: 0
+
+      span
+        @include translateY(-50%)
+        top: 50%
+
+      #error-feedback-link
+        left: 92%
+        @include translateY(50%)
+        margin-top: -5px
+
+      #info-icon
+        margin: 0
+
+    .info
+      font-size: 16px
+
+    .subsection
+      @include box-shadow(0 2px 5px 0 rgba(0,0,0,.15))
+      span
+        font-weight: normal
+
+    .polling-location-info
+      .address-line:not(#get-directions)
+        font-weight: lighter
+
+    #location-legend
+      position: absolute
+      left: 79%
+      top: 2%
+      width: 20%
+      min-width: 145px
+      background-color: rgba(255, 255, 255, .85)
+      z-index: 2
+      @include box-shadow(2px 2px 8px rgba(0,0,0,.25))
+      font-size: 13px
+      padding: 10px
+
+      span
+        position: relative
+        margin-left: 10px
+
+      #red-block,
+      #blue-block
+        display: inline-block
+        width: 15px
+        height: 24px
+        background-size: contain
+        background-repeat: no-repeat
+
+      #red-block
+        background-image: url(https://s3.amazonaws.com/vip-voter-information-tool/images/red-marker.png)
+        margin-bottom: 4px
+
+      #blue-block
+        background-image: url(https://s3.amazonaws.com/vip-voter-information-tool/images/blue-marker.png)
+
+      #red-label
+        top: -13px
+
+      #blue-label
+        top: -8px
+
+
+    #location
+      position: absolute
+      left: 45%
+      top: 50%
+      width: 50%
+      max-height: 45%
+      overflow-y: auto
+      margin-top: 10px
+      background-color: rgba(255, 255, 255, .85),
+      // background-color: #fff
+      z-index: 2
+      @include box-shadow(2px 2px 8px rgba(0,0,0,.25))
+
+      img
+        margin-right: -10px
+        margin-top: -15px
+
+      #polling-location-info-close
+        display: block
+        position: absolute
+        cursor: pointer
+        right: 10px
+        top: 6px
+
+    .left-wrapper
+      float: left
+      position: absolute
+      z-index: 3
+      width: 40%
+      height: calc(100% - 40px)
+      background-color: $darkblue
+      @include box-shadow(2px 0px 5px 0px rgba(50, 50, 50, 0.35))
+
+      .box:not(.info)
+        padding: 10px
+        background-color: white
+
+      #vip-logo
+        height: 110px
+        background-size: 105px
+        background-repeat: no-repeat
+        background-position: center
+        background-color: white
+
+    .dark-blue-box
+      background-color: $darkblue
+      overflow: hidden
+
+    .right-wrapper
+      height: calc(100% - 40px)
+      width: 100%
+      overflow-y: auto
+      -webkit-overflow-scrolling: touch
+      position: absolute
+
+      #all-contests
+        position: relative
+
+    .right
+      float: right
+      width: 60%
+
+      .box
+        padding-left: 30px
+        border-bottom: 1px solid #dfdfdf
+
+    #map-canvas
+      position: absolute !important
+      left: 40%
+      height: 100%
+      background-color: white
+      z-index: 1
+
+    #current-location
+      button
+        margin: 10px 25px 0 90px
+
+    #about-resources
+      padding-left: 30px

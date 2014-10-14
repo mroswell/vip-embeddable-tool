@@ -1,0 +1,186 @@
+@import 'variables'
+@import 'compass/css3'
+
+
+// global styles added to html, body, vit elements
+
+.no-scroll
+  overflow: hidden
+  position: fixed
+
+.max-height
+  height: 100%
+  transform: none
+  -webkit-transform: none
+
+.floating-container
+  position: fixed !important
+  z-index: 99 !important
+  left: 0 !important
+  top: 0 !important
+  overflow: scroll !important
+  margin: 0 !important
+  border: 0 !important
+
+.floating-modal-container
+  position: fixed !important
+  z-index: 999 !important
+  margin: 0 !important
+  overflow: hidden !important
+  min-height: 520px !important
+
+#_vit
+  font-family: 'Roboto', sans-serif
+  color: $text
+
+  *, *:before, *:after
+    outline: none
+    @include box-sizing(border-box)
+    -webkit-tap-highlight-color: transparent
+
+  input[type=text]
+    margin: 0
+    padding: 12px
+    border: 1px solid $border
+    border-radius: 4px
+    font-size: 15px
+    font-family: sans-serif
+    color: $input-text
+    color: $text
+    width: 100%
+    background-color: $input-background
+    @include box-shadow(1px 1px 6px 0px #ccc)
+
+    &:focus
+      outline: none
+
+  a
+    color: #333
+    text-decoration: none
+
+    &:focus
+      color: #333
+
+  button
+    padding: 10px 20px
+    border: 0
+    background: $blue
+    color: white
+    text-transform: uppercase
+    font-size: 12px
+
+  li
+    margin: 15px
+
+  .box
+    padding: 15px
+
+  .container
+    margin: 0 auto
+    width: 85%
+    @include box-shadow(0px, 2px, 2px, 0px, rgba(50, 50, 50, 0.25))
+
+  .container:first-child
+    margin-top: 30px
+
+  .footer
+    font-weight: bold
+    position: absolute
+    width: 100%
+    height: 40px
+    padding: 10px 40px 10px 20px
+    color: white
+    font-size: 11px
+    background-color: $text
+
+    span
+      letter-spacing: -0.3px
+      position: absolute
+      width: 75%
+      @include translate(0%, -50%)
+      top: 50%
+
+  .bottom
+    padding: 5px 0
+    bottom: 0
+    color: white
+    background-color: $darkgray
+    font-size: 8px
+    font-weight: bold
+    text-align: center
+
+  .modal
+    display: none
+    position: absolute
+    overflow-y: auto
+    background-color: white
+    border: 1px solid $border
+    padding: 15px
+    width: 95%
+    left: 50%
+    top: 50%
+    @include translate(-50%, -50%)
+    z-index: 3
+    @include box-shadow(0 3px 2px 0 rgba(50,50,50,0.45))
+
+    h2
+      color: $blue
+      margin: 20px 0
+
+  .radio
+    @include inline-block
+    width: 18px
+    height: 18px
+    @include border-radius(18px)
+    border: 2px solid white
+    background-color: transparent
+
+    .radio-selected
+      display: none
+      margin: 1px
+      background-color: white
+      width: 12px
+      height: 12px
+      border-radius: 12px
+
+    &.checked
+      .radio-selected
+        display: block
+
+  .magnifying-glass
+    background-color: $text
+    float: right
+    padding: 10px
+    position: relative
+    display: inline-block
+    width: 41px
+    @include border-radius(2px 5px 5px 2px)
+    @include box-shadow(2px 1px 5px 0px rgba(0,0,0,0.25))
+    top: -44px
+
+  .hidden
+    display: none
+
+  .loading
+    display: none
+    position: absolute
+    left: 50%
+    top: 40%
+    @include translate(-50%, -50%)
+    z-index: 3
+    width: 50px
+    height: 50px
+
+  #fade
+    display: none
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    background-color: black
+    z-index: 2
+
+@media screen and (max-device-width: 480px)
+  #_vit
+    -webkit-text-size-adjust: none

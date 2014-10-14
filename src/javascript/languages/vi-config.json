@@ -1,0 +1,72 @@
+{
+  "text" : {
+    "summary" : "Để biết tin tức về lá phiếu, địa điểm phòng phiếu, đi bầu sớm, giấy chứng minh cá nhân, và nhiều nữa…",
+    "placeholderText" : {
+      "enterAddress" : "Điền vào Địa chỉ đã Ghi danh Bỏ phiếu",
+      "changeAddress" : "Điền vào một địa chỉ khác"
+    },
+    "about" : {
+      "title" : "Tìm hiểu Về Công cụ Thông tin Bỏ phiếu",
+      "content" : "Dự án Thông tin Bỏ phiếu (Voting Information Project - VIP) kết nối cử tri với thông tin căn bản mà cử tri cần để quyết định cho lá phiếu của mình, ví dụ như đi bầu ở đâu và chọn lựa gì trên lá phiếu. Đây là một dự án của hội từ thiện The Pew Charitable Trusts, hãng Google, và nhiều tiểu bang Hoa kỳ. Được đưa ra năm 2008, Dự án Thông tin Bỏ phiếu (VIP) dùng bởi nhân viên bầu cử của tiểu bang và địa phương để cung cấp thông tin bầu cử hơp lệ cho công dân bằng nhiều cách khác nhau bao gồm Giao diện Lập trình Ứng dụng (API) Google Civic Information. Công cụ Thông tin Bỏ phiếu là một trong nhiều công cụ cung câp bởi Dự án Thông tin Bỏ phiếu (VIP), để bảo đảm thông tin bầu cử hợp lệ sẳn sàng cho cử tri trước và trong Ngày Bầu cử."
+    },
+    "footer" : {
+      "text" : "Để có thông tin cập nhật đầy đủ, tham vấn với nhân viên bầu cử ở địa phương của quí vị."
+    },
+    "addressNotFound" : {
+      "title" : "Không tìm thấy thông tin",
+      "text" : "Quí vị đã điền vào: [] không tìm thấy thông tin bầu cử cho địa chỉ mà quí vị đã cung cấp. Xin kiểm lại đúng với địa chỉ quí vị cung cấp",
+      "button" : "Thử lại Lần nữa"
+    },
+    "multipleElections" : {
+      "text" : "Nhiều cuộc bầu cử được tìm thấy. Chọn một:"
+    },
+    "mailInVoting" : {
+      "title" : "Tiểu bang Bỏ phiếu bằng Thư",
+      "text" : "Địa chỉ đã ghi danh do quí vị cung cấp được tìm thấy ở tiểu bang bỏ phiếu bằng thư. Có nghĩa là quí vị có thể bỏ lá phiếu vào bất cứ thùng thư nào. Quí vị có muốn tiếp tục kiếm thùng thư để bỏ lá phiếu căn cứ vào địa chỉ quí vị cung cấp không, hay là quí vị muốn nộp lại yêu cầu dùng địa điểm hiện tại của quí vị?",
+      "currentLocation" : "Địa điểm Hiện tại",
+      "registeredAddress" : "Tiếp tục"
+    },
+    "headers" : {
+      "registeredVoterAddress" : "Địa chỉ Cử tri Ghi danh",
+      "edit" : "Chỉnh sửa",
+      "elections" : "Bầu cử",
+      "pollingLocation" : "Địa điểm Phòng phiếu",
+      "voterResources" : "Nguồn Thông tin cho Cử tri",
+      "ballotInformation" : "Thông tin về Lá phiếu"
+    },
+    "resources" : {
+      "summary" : "Thông tin về cách sử dụng tiến trình bầu cử, bao gồm ngày hết hạn, Tin tức Chứng minh Cá nhân của Cử tri, và những trang liên kết về ghi danh.",
+      "electionAdministration" : {
+        "title" : "Điều hành Bầu cử",
+        "local_jurisdiction" : "Điều hành Bầu cử Địa phương",
+        "stateElectionsOffice" : "Văn phòng Bầu cử Tiểu bang",
+        "physicalAddress" : "Địa chỉ nơi cư ngụ",
+        "correspondenceAddress" : "Địa chỉ Tương tự"
+      },
+      "moreResources" : {
+        "title" : "Thêm Nhiều Nguồn thông tin",
+        "electionInformationUrl" : "Thông tin Bầu cử",
+        "registrationConfirmationUrl" : "Xác định Ghi danh đi bầu",
+        "absenteeVotingInformationUrl" : "Thông tin về Bỏ phiếu Khiếm diện",
+        "votingLocationFinderUrl" : "Tìm Địa điểm Bỏ phiếu",
+        "ballotInformationUrl" : "Thông tin về Lá phiếu"
+      },
+      "voterIdRequirements" : {
+        "title" : "Cần Chứng minh Cá nhân của Cử tri",
+        "certified" : "Chứng nhận?",
+        "state" : "Tiểu bang",
+        "needsId" : "Ai phải có chứng minh cá nhân để được đi bầu?",
+        "acceptableId" : "Chứng minh cá nhân nào của cử tri mới được chấp nhận?",
+        "canVote" : "Nếu một cử tri không trình giấy chứng minh cá nhân hởp lệ, thì cử tri đó có thể bỏ phiếu không?",
+        "linkTitle" : "Liên mạng"
+      }
+    },
+    "pollingLocations" : {
+      "getDirections" : "Tìm Phương hướng"
+    },
+    "inputs" : {
+      "registeredAddress" : "Điền vào Địa chỉ Ghi danh Đi bầu",
+      "differentAddress" : "Điền vào một địa chỉ khác"
+    }
+  }
+}

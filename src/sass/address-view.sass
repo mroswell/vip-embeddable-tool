@@ -1,0 +1,201 @@
+@import 'variables'
+@import 'fonts'
+@import 'compass/css3'
+
+#_vit
+  #address-view
+    background-color: white
+    height: 100%
+    overflow-x: hidden
+    overflow-y: auto
+
+    #address-input 
+      height: 46px
+
+    .address-info
+      height: 100%
+      border-bottom: 0
+
+    .title
+      margin: 10px 0 5px 0
+      padding: 0
+      text-align: center
+
+    .subtitle
+      margin: 0 0 25px 0
+      text-align: center
+
+    #app-info
+      margin: 15px auto 10%
+      text-align: center
+      max-width: 235px
+      span
+        display: inline-block
+        text-align: center
+
+    #user-image
+      width: 90%
+      max-height: 150px
+      max-width: 300px
+      display: block
+      margin: 10% auto 0
+
+    #get-information-on
+      padding: 45px
+      border-bottom: 0
+      font-size: 12px
+      font-weight: bold
+      color: $darkgray
+      text-transform: uppercase
+
+    #info-icon
+      position: relative
+      top: 50%
+      margin-top: -9px
+      margin-right: -30px
+      color: $text
+      font-family: times
+      font-weight: bold
+      font-style: italic
+      text-align: center
+      background-color: white
+      border: 6px solid white
+      border-top: 2px solid white
+      border-bottom: 2px solid white
+      border-radius: 18px
+      width: 18px
+      font-size: 14px
+      float: right
+      display: block
+
+    #plus-icon
+      position: relative
+      top: 50%
+      margin-top: -50px
+      margin-right: -30px
+      @include translate(-50%, -50%)
+      color: white
+      background-color: $blue
+      font-family: times
+      font-weight: bold
+      text-align: center
+      border: 6px solid $blue
+      border-top: 2px solid $blue
+      border-bottom: 2px solid $blue
+      border-radius: 18px
+      width: 19px
+      font-size: 14px
+      float: right
+      display: block
+      cursor: pointer
+
+    #close-button
+      transform: rotate(45deg)
+      -webkit-transform: rotate(45deg)
+      position: absolute
+      top: 10px
+      right: 10px
+      color: white
+      background-color: $blue
+      font-family: times
+      font-weight: bold
+      text-align: center
+      border: 6px solid $blue
+      border-radius: 18px
+      width: 19px
+      font-size: 14px
+      display: block
+      cursor: pointer
+      img 
+        display: block
+        width: 100%
+
+    #submit-address-button
+      cursor: pointer
+
+    #address-not-found,
+    #current-location
+      display: none
+      position: absolute
+      width: 95%
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      z-index: 3
+      @include box-shadow(0 3px 2px 0 rgba(50,50,50,0.45))
+      h1
+        margin: 10px 0
+        text-align: left
+      h2
+        color: $red
+      button
+        display: block
+        margin: 0 auto
+        margin-top: 20px
+
+    #current-location
+      span
+        margin: 0 auto
+
+      button
+        display: inline-block
+
+    #multiple-elections
+      h2
+        color: $red
+
+      .election
+        margin: 20px 0
+        h1,
+        h2
+          display: inline-block
+
+        h1
+          font-size: 18px
+
+        h2
+          margin: 5px 10px 20px 45px
+          color: $text
+
+    #about
+      overflow-y: auto
+      width: 90%
+
+      h2
+        margin: 10px 0 20px 0
+      p
+        margin-bottom: 30px
+
+      .close-modal-text-button
+        color: $blue
+        text-decoration: underline
+        cursor: pointer
+        display: none
+
+    .footer
+      bottom: 0
+      max-width: 800px
+
+      span
+        width: 90%
+      #plus-icon
+        position: relative
+        top: 50%
+        margin-top: -50px
+        margin-right: -30px
+        @include translate(-50%, -50%)
+        color: white
+        background-color: $blue
+        font-family: times
+        font-weight: bold
+        text-align: center
+        border: 6px solid $blue
+        border-radius: 18px
+        width: 18px
+        font-size: 14px
+        float: right
+        display: block
+        cursor: pointer
+        img
+          display: block 
+          width: 100%

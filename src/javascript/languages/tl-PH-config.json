@@ -1,0 +1,72 @@
+{
+ "text" : {
+  "summary" : "Alamin ang impormasyon sa balota,lugar ng botohan, maagang pagboto, mga kinakailangan sa pagkakakilanlan at marami pang iba pa…..",
+  "placeholderText" : {
+   "enterAddress" : "Ilagay ang nakarehistrong tirahan sa pagboto",
+   "changeAddress" : "Ilagay ang ibang tirahan"
+  },
+  "about" : {
+   "title" : "Tungkul sa Kagamitan sa Impormasyon sa Pagboto",
+   "content" : "Ang Proyektong Kagamitan  sa Impormasyon sa Pagboto (VIP) ay nag-uugnay sa mga esensyal na impormasyon na kailangan ng mga botante para  tuparin ang kanilang mga balota,  gaya ng kung saan boboto at kung ano-ano  ang nasa balota. Ito ay isang proyekto sa pagitan ng Bangkong Mapagkakatiwalaan ng Mapagbigay (The Pew Charitable Trusts), Google, at mga estado. Inilunsad nuong taong 1998, ang (VIP) ay kumikilos kasama ang estado at mga lokal na opisyal ng halalan upang bigyan ng opisyal na impormasyon ang mga  mamamayan sa maraming paraan, kasama na ang Pambayang Impormasyon ng Google API. Ang Kagamitan  sa Impormasyon sa Pagboto ay isa sa mga maaaring gamitin sa pamamagitan ng VIP, na makatitiyak na ang impormasyon sa eleksyon ay magagamit ng botante bago at matapos ang halalan."
+  },
+  "footer" : {
+   "text" : "Para sa mga pinaka-kumpleto at nasasa-panahong impormasyon, kumunsulta sa inyong opisyal ng halalan."
+  },
+  "addressNotFound" : {
+   "title" : "Walang  Impormasyong Nakita",
+   "text" : "Inilagay ninyo ang: ( )walang mahanap na impormasyon sa halalan sa inilagay ninyong tirahan, Paki-suri at siguraduhin na tama ang inyong pagkalagay",
+   "button" : "Ulitin Muli"
+  },
+  "multipleElections" : {
+   "text" : "Maraming halalan ang nakita. Pumili ng isa"
+  },
+  "mailInVoting" : {
+   "title" : "Katayuang botante sa pamamagitan ng koreo",
+   "text" : "Ang nakarehistrong tirahang  inilagay  ninyo ay nasa katayuang botante sa pamamagitan ng koreo. Ang ibig sabihin nito ay maaring isumite ang inyong balota sa alinmang opisyal na hulugan ng balota. Gusto mo bang magpatuloy sa paghahanap ng mga hulugan ng balota sa iyong nakarehistrong tirahan, o gusto mo bang isumite uli ang iyong kahilingan batay sa iyong  kasalukuyan lokasyon?",
+   "currentLocation" : "Gamitin ang Kasalukuyang Lokasyon",
+   "registeredAddress" : "Magpatuloy"
+  },
+  "headers" : {
+   "registeredVoterAddress" : "Nakarehistrong Tirahan ng Botante",
+   "edit" : "I-edit",
+   "elections" : "Halalan",
+   "pollingLocation" : "Lugar ng Botohan",
+   "voterResources" : "Mga Tagapagdulot ng Botante",
+   "ballotInformation" : "Impormasyon sa Balota"
+  },
+  "resources" : {
+   "summary" : "Impormasyon kung paano layagin ang proseso ng halalan, kasama ang mga huling araw,  ang mga impormasyon ng pagkakilanlan, at mga naguugnay para sa rehistrasyon.",
+   "electionAdministration" : {
+    "title" : "Pangangasiwa ng Halalan",
+    "local_jurisdiction" : "Lokal na Pangangasiwa ng Halalan",
+    "stateElectionsOffice" : "Opisina ng Halalan ng Estado",
+    "physicalAddress" : "Pisikal na Tirahan",
+    "correspondenceAddress" : "Tirahan na masusulatan"
+   },
+   "moreResources" : {
+    "title" : "Mga dagdag na tagapagdulot",
+    "electionInformationUrl" : "Impormasyon sa Halalan",
+    "registrationConfirmationUrl" : "Kompirmasyon ng Rehistrasyon",
+    "absenteeVotingInformationUrl" : "Impormasyon ng Botante sa Pamamagitan ng Koreo",
+    "votingLocationFinderUrl" : "Paghanap sa Lugar ng Botohan",
+    "ballotInformationUrl" : "Impormasyon sa Balota"
+   },
+   "voterIdRequirements" : {
+    "title" : "Mga kailangan sa pagkakakilanlan",
+    "certified" : "Sertipikado?",
+    "state" : "Katayuan",
+    "needsId" : "Sino ang dapat magpakita ng pagkakakilanlan  para bomoto?",
+    "acceptableId" : "Ano ano ang mga tinatanggap na pagkakakilanlan ng botante ?",
+    "canVote" : "If a voter does not present proper identification, can s/he still vote a regular ballot",
+    "linkTitle" : "Tagaugnay"
+   }
+  },
+  "pollingLocations" : {
+   "getDirections" : "Humanap ng Direksyon"
+  },
+  "inputs" : {
+   "registeredAddress" : "Ilagay ang Nakarehistrong Tirahan sa Pagboto",
+   "differentAddress" : "Ilagay ang ibang tirahan"
+  }
+ }
+}

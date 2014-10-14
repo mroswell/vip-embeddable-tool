@@ -1,0 +1,24 @@
+{{#with address}}
+	{{> normalized-address }}
+{{/with}}
+<div class="notes">
+{{ notes }}
+</div>
+<div class="polling-hours">
+{{ pollingHours }}
+</div>
+<div class="name">
+{{ name }}
+</div>
+<div class="voter-services">
+{{ voterServices }}
+</div>
+<div class="start-date">
+{{ startDate }}
+</div>
+<div class="end-date">
+{{ endDate }}
+</div>
+{{#each sources}}
+{{> source}}
+{{/each}}

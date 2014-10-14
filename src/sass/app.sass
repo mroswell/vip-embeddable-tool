@@ -1,0 +1,60 @@
+@import compass
+@import scss-mixins
+
+#_vit
+  @import 'compass/reset'
+
+  -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+
+  font-weight: normal
+  font-size: 16px
+
+@import 'variables'
+
+@import 'global'
+@import 'landscape'
+
+@import 'address-view'
+@import 'map-view'
+
+.pac-nudge
+  margin-top: 0 !important
+
+.alert_ie
+  position: absolute !important
+  padding: 10px
+
+.radio
+  margin: -5px 10px 0
+
+#_vitModal
+  display: none
+  position: fixed
+  width: 100%
+  height: 100%
+  z-index: 998
+  background-color: rgba(0,0,0,.75)
+
+#add-to-calendar-dropdown
+  cursor: pointer
+  display: block
+  width: 20px
+  height: 20px
+  label
+    cursor: pointer
+    display: block
+    width: 20px
+    height: 20px
+  a
+    padding: 5px
+    font-weight: bold
+    background-color: white
+    color: $blue
+    font-size: 14px
+  .icon-outlook
+    border-bottom: 1px solid $darkgray
+
+#map-canvas:not(.landscape)
+  height: 150px
+  @include transition(height, 200ms, ease-in-out)

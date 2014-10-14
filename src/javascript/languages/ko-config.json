@@ -1,0 +1,72 @@
+{
+  "text" : {
+    "summary" : "투표지 정보, 투표소 위치, 조기 투표, ID요구 등에 대해 알아보기.",
+    "placeholderText" : {
+      "enterAddress" : "등록된 투표 주소 입력",
+      "changeAddress" : "다른 주소 입력"
+    },
+    "about" : {
+      "title" : "투표 정보 도구에 대해서",
+      "content" : "투표 정보 프로젝트(VIP)는 어디서 투표하고  투표지 안에 어떤 내용이 있는지와 같은 투표를 하기위해 필수 정보를 가지고 유권자들과 연결하기위해 사용된다.이것은 퓨 자선 신탁(Pew Charitable Trusts), 구글 그리고 주 사이의 프로젝트입니다.2008년에 출시된, VIP는 구글 시민 정보 API를 포함한 다양한 수단들을 통해 시민들에게 공식적인 선거 정보를 제공하기위해 주와 지방 선거 사무실들이 함께 협력합니다. 투표 정보 도구는 공식 선거 정보가 선거전과 선거  당일 유권자에게 접근하기 쉽게 하기위해 VIP가 가능하게 만든 기능중  하나이다."
+    },
+    "footer" : {
+      "text" : "가장 정확하고 최신 정보 안내를 위해선, 당신의 지방 선거 사무실과 상의 하셔요."
+    },
+    "addressNotFound" : {
+      "title" : "정보가 발견되지 않았읍니다",
+      "text" : "당신이 입력한것:입력하신 주소에는 어떠한 선거 정보도 발견되지 않았습니다. 입력한 것이 맞는지 확인해 주셔요.",
+      "button" : "다시 시도해 주셔요"
+    },
+    "multipleElections" : {
+      "text" : "여러가지 선거가 발견됬습니다. 선택해 주셔요"
+    },
+    "mailInVoting" : {
+      "title" : "우편 투표 상태",
+      "text" : "입력하신 등록된 주소는 우편 투표상태에 있습니다.이것은 당신의 투표지를 공식 우편물 투입함에 넣을 수 있음을 의미합니다.당신의 등록된 주소를 기준으로 우편물 투임함 위치를 찾기를 계속할것입니까? 아님 당신의 현재 위치를 사용하여 다시 찾기를 할 것입니까",
+      "currentLocation" : "현재 위치 사용",
+      "registeredAddress" : "계속"
+    },
+    "headers" : {
+      "registeredVoterAddress" : "등록된 유권자 주소",
+      "edit" : "편집",
+      "elections" : "선거",
+      "pollingLocation" : "투표소 위치",
+      "voterResources" : "유권자 자원",
+      "ballotInformation" : "투표지 정보"
+    },
+    "resources" : {
+      "summary" : "마감, 유권자 ID정보, 등록 링크를 포함해서 선거 과정을 탐색하는 방법에 대한 정보",
+      "electionAdministration": {
+        "title" : "선거 행정n",
+        "local_jurisdiction" : "지역 선거 행정",
+        "stateElectionsOffice" : "주 선거 사무실",
+        "physicalAddress" : "집주소",
+        "correspondenceAddress" : "서신 주소"
+      },
+      "moreResources" : {
+        "title" : "추가적인 자원s",
+        "electionInformationUrl" : "선거 정보",
+        "registrationConfirmationUrl" : "등록 확인 ",
+        "absenteeVotingInformationUrl" : "부재자 투표 정보",
+        "votingLocationFinderUrl" : "투표 장소 찾기",
+        "ballotInformationUrl" : "투표지 정보"
+      },
+      "voterIdRequirements" : {
+        "title" : "유권자 ID 요구 사항",
+        "certified" : "증명된",
+        "state" : "주",
+        "needsId" : "투표를 위해서 누구에게 ID를 보여줘야 합니까",
+        "acceptableId" : "어떤 종류에 유권자 ID가 사용됩니까",
+        "canVote" : "만약 유권자가 적당한 ID를 보여주지 못해도, 여전히 일반 투표를 할 수 있읍니까",
+        "linkTitle" : "링크"
+      }
+    },
+    "pollingLocations" : {
+      "getDirections" : "길 찾기"
+    },
+    "inputs" : {
+      "registeredAddress" : "등록된 투표 주소 입력",
+      "differentAddress" : "틀린 주소 입력"
+    }
+  }
+}

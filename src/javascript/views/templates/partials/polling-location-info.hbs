@@ -1,0 +1,39 @@
+<div class="polling-location-info">
+  {{#if isEarlyVoteSite}}
+  <div class="early-vote-site">
+  {{#if isBoth}}
+  Polling Location & 
+  {{/if}}
+  Early Vote Site
+  </div>
+  {{/if}}
+  {{#if pollingHours}}
+  <div class="address-line">
+  {{{ pollingHours }}}
+  </div>
+  {{/if}}
+  {{#if startDate}}
+  <div class="address-line">
+  {{{ startDate }}} -<br>
+  {{{ endDate }}}
+  </div>
+  {{/if}}
+  <div class="address-line" id="get-directions">
+    <a href="#" target="_blank">Get Directions</a>
+  </div>
+  {{#if voterServices}}
+  <div class="address-line">
+  Voter Services:
+  {{{ voterServices }}}
+  </div>
+  {{/if}}
+  {{#if notes}}
+  <div class="address-line">
+  Notes:
+  {{{ notes }}}
+  </div>
+  {{/if}}
+  <div id="polling-location-info-close">
+  {{!-- x --}}
+  </div>
+</div>

@@ -1,0 +1,22 @@
+@import 'compass/css3'
+
+#magnifying-glass
+  font-size: 10em /* This controls the size. */
+  display: inline-block
+  width: 0.4em
+  height: 0.4em
+  border: 0.1em solid red
+  position: relative
+  border-radius: 0.35em
+
+#magnifying-glass::before
+  content: ""
+  display: inline-block
+  position: absolute
+  right: -0.25em
+  bottom: -0.1em
+  border-width: 0
+  background: red
+  width: 0.35em
+  height: 0.08em
+  @include rotate(45deg)   

@@ -1,0 +1,310 @@
+@import 'variables'
+@import 'compass/css3'
+
+#_vit
+  #map-view
+    display: table
+    z-index: 999
+    margin: 0 auto
+    width: 100%
+    background-color: white
+    position: absolute
+
+    &:after
+      content: ""
+      display: table
+      clear: both
+
+    button
+      position: absolute
+      left: 2px
+      margin-top: 100px
+      padding: 4px 3px
+      font-size: 10px
+      background-color: white
+      width: 34%
+
+    .info
+      background-color: $blue
+      color: white
+      padding: 10px 20px
+      @include box-shadow(0px, 2px, 2px, rgba(50, 50, 50, 0.25))
+      font-size: 17px
+
+      &:not(#more-elections)
+        border-bottom: 1px solid $darkblue
+
+      span
+        float: right
+        cursor: pointer
+
+      &.expanded-pane
+        background-color: #57c4f7
+        width: 103% !important
+        border-bottom: 0 !important
+        @include box-shadow(3px 3px 7px rgba(0,0,0,.35))
+
+    .box
+      line-height: 1.15
+      @include transition(height, 200ms, ease-in-out)
+      @include border-radius(1px)
+
+    .address
+    .address-name,
+    .address-line
+      text-transform: lowercase
+      font-size: 22px
+
+    .address-name,
+    .address-line
+      text-transform: capitalize
+
+    .early-vote-site
+      color: $red
+
+    .subsection
+      cursor: default
+      background-color: #eee
+      padding: 15px
+      font-size: 17px
+      height: 75px
+
+      p,
+      span
+        cursor: pointer
+        position: relative
+        top: 50%
+        @include translateY(-50%)
+      p
+        display: inline-block
+        width: 90%
+      span
+        float: right
+        font-weight: bolder
+
+      .contest-type
+        @include inline-block
+        font-style: italic
+
+    .candidate-list
+      overflow: hidden
+
+    .candidate-item
+      .right-arrow
+        @include translateY(-50%)
+
+    .change-address
+      display: none
+      position: relative
+      z-index: 3
+      margin: 0
+      padding-left: 12px
+
+    .more-resources-header
+      span
+        top: 50%
+        @include translateY(-50%)
+        float: left
+
+    .contests
+      margin-bottom: 40px
+
+    .party
+      font-style: italic
+
+    .election 
+      cursor: default
+
+    .election-selection
+      margin: 5px 0
+
+      &:last-child
+        margin-bottom: 10px
+
+    .question
+      font-weight: bold
+      margin: 15px 0
+
+    .answer
+      @include inline-block
+
+    .toggle-image
+      width: 15px
+
+    .minus
+      position: relative
+      top: -5px
+
+    .arrow
+      width: 10px
+      float: right
+      @include translateY(-50%)
+      &.toggle-image
+        @include translateY(0)
+      &.left-arrow
+        @include translateY(27%)
+
+    #map-canvas
+      @include transition(height, 2s, ease-in-out)
+
+    #local-jurisdiction-correspondence-address
+      span    
+        font-weight: bold
+
+    #local-jurisdiction-physical-address
+      span    
+        font-weight: bold
+
+    #state-election-correspondence-address
+      span
+        font-weight: bold
+
+    #state-election-physical-address
+      span    
+        font-weight: bold
+
+    .polling-location-info
+      margin: 5px 0
+
+    #registered-address
+      cursor: pointer
+      span
+        color: $lightblue
+        float: none
+        position: absolute
+        right: 5px
+    
+    #vote-address-edit
+      color: $lightblue
+      float: none
+      position: absolute
+      right: 8px
+      cursor: pointer
+      color: rgb(214, 213, 213)
+      margin-top: -17px
+
+    #chosen-election
+      font-size: 22px
+
+      img
+        width: 20px
+        float: right
+        margin-top: -30px
+        margin-right: 2px
+
+      div 
+        width: 85%
+
+      .date
+        font-size: 16px
+
+
+    .address-line
+      font-size: 16px
+      width: 85%
+
+    #location-legend
+      display: none
+
+    #location
+      .address-line
+        font-size: 16px
+
+      span
+        float: right
+        margin-top: -23px
+
+      img
+        float: right
+        width: 60px
+        margin-right: -20px
+        margin-top: -20px
+
+    #voter-resources
+      margin-top: 125px
+
+    #other-elections
+      overflow: hidden
+
+    #election-list
+      display: none
+      padding: 0 20px
+      overflow: hidden
+
+    #more-elections,
+    #polling-location,
+    #resources-toggle,
+    #ballot-information 
+      cursor: pointer
+
+    #more-resources
+      overflow: hidden
+
+      h1
+        font-size: 20px
+        margin: 10px 0
+
+      a
+        font-size: 17px
+        text-decoration: underline
+        color: $blue
+        margin: 30px 0
+
+    #plus-icon
+      margin-top: -45px
+
+    #info-icon
+      background-color: white
+      border: 6px solid white
+      border-top: 2px solid white
+      border-bottom: 2px solid white
+      border-right: 7px solid white
+      border-radius: 8px
+      font-style: italic
+      float: right
+      margin: 8px 0 0
+
+    #alert
+      display: none
+      position: fixed
+      z-index: 10000
+      background-color: rgba(200,0,0,.85)
+      width: 100%
+      color: white
+      font-weight: bold
+      font-size: 20px
+
+      #alert-close
+        float: right
+        width: 18px
+        @include rotate(45deg)
+        cursor: pointer
+        img
+          width: 100%
+
+      a
+        color: white
+
+    .footer
+      z-index: 2
+      font-size: 9px
+      padding: 10px 5px
+
+      span
+        width: 100%
+        @include translateY(0)
+        top: 5px
+
+      #error-feedback-link
+        color: white
+        position: absolute
+        left: 72%
+        width: 100%
+        font-size: 9px
+        @include translateY(-50%)
+        top: 63%
+
+  @media only screen and (min-device-width : 768px)
+  #map-view
+    #alert
+      position: absolute
