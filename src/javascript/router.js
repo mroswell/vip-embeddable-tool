@@ -16,6 +16,7 @@ module.exports = (function() {
     var stateData = Array.prototype.filter.call(states, function(entry) {
       return entry[0] === state;
     });
+    console.log(stateData)
     var voterIdInfo = {};
     var voterIdLink;
     stateData.forEach(function(state) {
