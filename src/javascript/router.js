@@ -71,7 +71,7 @@ module.exports = (function() {
         .onRouteEvent('addressViewSubmit', function(response) {
           data = response;
 
-          if (translatedVoterIdData) {
+          if (translatedVoterIdData && !options.json) {
             var parsedVoterIdData = parseVoterIdData(data.normalizedInput.state, translatedVoterIdData)
             if ( parsedVoterIdData.voterId["0"] ) {
               $.extend(data, parseVoterIdData(data.normalizedInput.state, translatedVoterIdData));
@@ -104,7 +104,7 @@ module.exports = (function() {
         .onRouteEvent('mapViewSubmit', function(response) {
           data = response;
 
-          if (translatedVoterIdData) {
+          if (translatedVoterIdData && !options.json) {
             var parsedVoterIdData = parseVoterIdData(data.normalizedInput.state, translatedVoterIdData)
             if ( parsedVoterIdData.voterId["0"] ) {
               $.extend(data, parseVoterIdData(data.normalizedInput.state, translatedVoterIdData));
@@ -113,8 +113,6 @@ module.exports = (function() {
             }
           } else {
             $.extend(data, parseVoterIdData(data.normalizedInput.state, voterIdData));
-
-            console.log(data)
           }
 
           $.extend(options, { data: data })
@@ -168,7 +166,7 @@ module.exports = (function() {
         cache: false,
         success: function(resp) { 
           voterIdData = resp; 
-          if (voterIdTranslatedInfoUrl) {
+          if (voterIdTranslatedInfoUrl && !options.json) {
             $.ajax({
               url: voterIdTranslatedInfoUrl,
               cache: false,

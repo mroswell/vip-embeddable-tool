@@ -19,6 +19,10 @@ module.exports = View.extend({
 
   hasSubmitted: false,
 
+  initialParent: undefined,
+
+  modal: false,
+
   events: {
     '#map-view click' : "closePopUps",
     '.nav click' : 'back',
@@ -187,6 +191,11 @@ module.exports = View.extend({
     $('<div id="_vitModal">')
       .prependTo($('html'));
 
+    if (options.modal) {
+      this.modal = true;
+      this.initialParent = $("#_vit").parent();
+      $("#_vit").prependTo($('html'));
+    }
   },
 
   _resizeHandler: function () {
@@ -505,6 +514,10 @@ module.exports = View.extend({
     });
 
     $('#_vitModal').remove();
+
+    if (this.modal) {
+      $("#_vit").prependTo($(this.initialParent));
+    }
 
     $('#viewport-mobile-web-tag').remove();
 
