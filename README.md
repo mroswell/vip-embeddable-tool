@@ -32,7 +32,7 @@ vit.load({
 |`smallLogo`| string (URL) | link to an alternative logo to display in the modal election information view|
 |`title`| string | text appearing beneath the logo of the tool (defaults to `Voting Information Tool`)|
 |`subtitle`| string | text appearing beneath the title (defaults to nothing)|
-|`language`| string | set to `en` by default|
+|`language`| string | set to `en` by default.|
 |`colors`| object | custom colors (detailed in the next section) |
 |`json`| string (URL) | Language and other customization via a link to a JSON object (detailed in the following section)|
 

@@ -1,13 +1,14 @@
 module.exports = (function() {
   var data
     , voterIdData
-    , addressView = require('./views/addressView.js')
-    , mapView     = require('./views/mapView.js')
-    , apiRequest  = require('./api.js')
-    , text        = require('./config.js')
-    , $           = require('jquery')
-    , csv         = require('csv-string')
-    , xdr         = require('jquery-xdr').load($)
+    , translatedVoterIdData = false
+    , addressView           = require('./views/addressView.js')
+    , mapView               = require('./views/mapView.js')
+    , apiRequest            = require('./api.js')
+    , text                  = require('./config.js')
+    , $                     = require('jquery')
+    , csv                   = require('csv-string')
+    , xdr                   = require('jquery-xdr').load($)
 
   var parseVoterIdData = function (state, data) {
     var csvArray = csv.parse(data);
@@ -69,8 +70,18 @@ module.exports = (function() {
       addressView
         .onRouteEvent('addressViewSubmit', function(response) {
           data = response;
-          $.extend(data, parseVoterIdData(data.normalizedInput.state, voterIdData));
 
+          if (translatedVoterIdData) {
+            var parsedVoterIdData = parseVoterIdData(data.normalizedInput.state, translatedVoterIdData)
+            if ( parsedVoterIdData.voterId["0"] ) {
+              $.extend(data, parseVoterIdData(data.normalizedInput.state, translatedVoterIdData));
+            } else {
+               $.extend(data, parseVoterIdData(data.normalizedInput.state, voterIdData));
+            }
+          } else {
+            $.extend(data, parseVoterIdData(data.normalizedInput.state, voterIdData));
+          }
+          
           window.history && history.pushState && history.pushState(null, null, '?polling-location');
           $(window).on('popstate', function() {
             router.navigate(addressView, mapView, options);
@@ -93,13 +104,23 @@ module.exports = (function() {
         .onRouteEvent('mapViewSubmit', function(response) {
           data = response;
 
-          $.extend(data, parseVoterIdData(data.normalizedInput.state, voterIdData));
+          if (translatedVoterIdData) {
+            var parsedVoterIdData = parseVoterIdData(data.normalizedInput.state, translatedVoterIdData)
+            if ( parsedVoterIdData.voterId["0"] ) {
+              $.extend(data, parseVoterIdData(data.normalizedInput.state, translatedVoterIdData));
+            } else {
+               $.extend(data, parseVoterIdData(data.normalizedInput.state, voterIdData));
+            }
+          } else {
+            $.extend(data, parseVoterIdData(data.normalizedInput.state, voterIdData));
+          }
 
           $.extend(options, { data: data })
           router.navigate(mapView, mapView, options);
         });
 
       var voterIdInfoUrl = location.protocol.toString() + '//s3.amazonaws.com/vip-voter-information-tool/voter-id/voterIdInfo.csv';
+      var voterIdTranslatedInfoUrl = false;
 
       var language = navigator.language || navigator.browserLanguage;
 
@@ -114,13 +135,14 @@ module.exports = (function() {
           'th',
           'tl-PH',
           'vi',
-          'zh'
+          'zh',
+          'km'
         ];
         if (supportedLanguages.indexOf(language) === -1) addressView.render(options);
         var url = location.protocol.toString() + '//s3.amazonaws.com/vip-voter-information-tool/languages/' + language + '-config.json';
         
-        // voterIdInfoUrl = location.protocol.toString() + '//s3.amazonaws.com/vip-voter-information-tool/voter-id/voterIdInfo_'+options.language+'.csv';
-        
+        var voterIdTranslatedInfoUrl = location.protocol.toString() + '//s3.amazonaws.com/vip-voter-information-tool/voter-id/voterIdInfo_'+options.language+'.csv';
+
         if (options.json) url = options.json;
 
         $.ajax({
@@ -142,7 +164,18 @@ module.exports = (function() {
       $.ajax({
         url: voterIdInfoUrl,
         cache: false,
-        success: function(resp) { voterIdData = resp; }
+        success: function(resp) { 
+          voterIdData = resp; 
+          if (voterIdTranslatedInfoUrl) {
+            $.ajax({
+              url: voterIdTranslatedInfoUrl,
+              cache: false,
+              success: function(resp) { 
+                translatedVoterIdData = resp;
+              }
+            })
+          }
+        }
       });
     },
 
