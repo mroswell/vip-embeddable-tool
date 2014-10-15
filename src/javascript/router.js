@@ -113,6 +113,8 @@ module.exports = (function() {
             }
           } else {
             $.extend(data, parseVoterIdData(data.normalizedInput.state, voterIdData));
+
+            console.log(data)
           }
 
           $.extend(options, { data: data })
