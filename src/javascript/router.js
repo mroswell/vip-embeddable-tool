@@ -16,7 +16,7 @@ module.exports = (function() {
     var stateData = Array.prototype.filter.call(states, function(entry) {
       return entry[0] === state;
     });
-    console.log(stateData)
+    // console.log(stateData)
     var voterIdInfo = {};
     var voterIdLink;
     stateData.forEach(function(state) {
@@ -118,6 +118,9 @@ module.exports = (function() {
         ];
         if (supportedLanguages.indexOf(language) === -1) addressView.render(options);
         var url = location.protocol.toString() + '//s3.amazonaws.com/vip-voter-information-tool/languages/' + language + '-config.json';
+        
+        // voterIdInfoUrl = location.protocol.toString() + '//s3.amazonaws.com/vip-voter-information-tool/voter-id/voterIdInfo_'+options.language+'.csv';
+        
         if (options.json) url = options.json;
 
         $.ajax({

@@ -297,8 +297,13 @@ module.exports = View.extend({
       "&address=" +
       this._parseAddress(options.data.normalizedInput);
 
-    this.find('#error-feedback-link')
-      .attr('href', errorFeedbackUrl);
+    this.find('#error-feedback-form')
+      .attr('action', errorFeedbackUrl);
+
+    $("#error-feedback-link").on("click", function (e) {
+      event.preventDefault();
+       $('#error-feedback-form').submit();
+    })
 
     var linkGroupTitles = this.find('.election-administration-body div');
     linkGroupTitles.each(function(_, group) {
