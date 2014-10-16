@@ -58,6 +58,7 @@
   <br>
   <div id="blue-block"></div>
   <span id="blue-label">Polling Location</span>
+
 </div>
 
 <div id="location" class="box right">
@@ -102,6 +103,7 @@
   </span>
   <span id="local-jurisdiction-eab-name">
   {{#if data.state.0.local_jurisdiction.electionAdministrationBody.name }}
+      {{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}
   <b>{{ data.state.0.local_jurisdiction.electionAdministrationBody.name }}</b><br>
   {{/if}}
   </span>

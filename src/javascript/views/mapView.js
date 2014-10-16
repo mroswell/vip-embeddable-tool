@@ -255,7 +255,10 @@ module.exports = View.extend({
       this.$container.height(window.innerHeight);
       this.landscape = false;
 
-      this.find('.box,#map-canvas').width(window.innerWidth);
+      // this.find('.box,#map-canvas').width(window.innerWidth);
+      this.find('#map-canvas').width(window.innerWidth);
+      // this.find('.box').width(window.innerWidth)
+      // console.log("width", window.innerWidth)
     } else {
       // tablet sizing
       this.$container
@@ -715,8 +718,8 @@ module.exports = View.extend({
     var that = this;
     var daddr = this._parseAddressWithoutName(address);
     var saddr = this._parseAddressWithoutName(saddr);
-    var url = 'https://s3.amazonaws.com/vip-voter-information-tool/images/' +
-      (isEarlyVote ? 'red-marker.png' : 'blue-marker.png');
+    var url = 'https://s3.amazonaws.com/vip-voter-information-tool/images/' + (isEarlyVote ? 'red-marker.png' : 'blue-marker.png');
+    if (isBoth) url = 'https://s3.amazonaws.com/vip-voter-information-tool/images/green-marker.png'
 
     var marker = new google.maps.Marker({
       map: this.map,
