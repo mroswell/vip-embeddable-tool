@@ -328,7 +328,7 @@ module.exports = View.extend({
     var localJurisdictionEABName = this.find('#local-jurisdiction-eab-name');
 
     var contains = function(first, second) {
-      return String.prototype.indexOf.call(first, second) !== -1;
+      return String.prototype.indexOf.call(first.text().trim(), second.text().trim()) !== -1;
     }
 
     var equals = function(first, second) {
