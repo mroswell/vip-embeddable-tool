@@ -50,7 +50,7 @@ module.exports = (function() {
 
       var options = {
         modal: true,
-        officialOnly: false,
+        officialOnly: true,
         alert: null,
         test: false,
         key: 'AIzaSyCLNlhlWcKcozqYRq9M1_j25GLUzqrJxH8',

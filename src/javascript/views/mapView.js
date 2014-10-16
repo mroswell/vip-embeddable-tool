@@ -50,6 +50,9 @@ module.exports = View.extend({
   onBeforeRender: function(options) {
     var that = this;
 
+    $("#_vit").css("max-width", "800px")
+    $("#_vit .footer").css("max-width", "800px")
+
     if(navigator.userAgent.match('CriOS')) {
       $('<meta>')
         .attr('name', 'viewport')

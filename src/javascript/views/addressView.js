@@ -35,10 +35,12 @@ module.exports = View.extend({
     var $currentLocationModal = this.find('#current-location');
 
     this.$container.css({
-      'max-width': 800,
+      'max-width': "none",
       'width' : options.width,
       'height' : options.height
     });
+
+    $("#_vit .footer").css("max-width", "none")
 
     if (this.$container.width() > 600) {
       $('#user-image').css('max-width', '85%');
