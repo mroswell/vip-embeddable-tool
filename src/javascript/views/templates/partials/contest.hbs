@@ -8,13 +8,19 @@
 	</div>
 	<div class="candidate-list">
 		{{#if referendumSubtitle }}
+		{{#if referendumUrl }}
 		<a href="{{ referendumUrl }}">
+		{{/if}}
 			<div class="referendum-subtitle box">
 				{{ referendumTitle }}
+				{{#if referendumUrl}}
 				<img src="https://s3.amazonaws.com/vip-voter-information-tool/images/arrow.png" class="arrow">
+				{{/if}}
 				{{ referendumSubtitle }}
 			</div>
+		{{#if referendumUrl}}
 		</a>
+		{{/if}}
 		{{/if }}
 		{{#each candidates}}
 		{{#if candidateUrl}}
