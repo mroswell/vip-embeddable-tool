@@ -32,122 +32,6 @@ module.exports = (function() {
 
     onRemove: function() {},
 
-    fetchVoterIdData: function(state, callback) {
-      window.console && console.log('fetching...')
-      var success = function (resp) {
-        // var csvArray = csv.parse(resp);
-        // var questions = csvArray[0];
-        // var states = csvArray.slice(1);
-        // var stateData = Array.prototype.filter.call(states, function(entry) {
-        //   return entry[0] === state;
-        // });
-        // var voterIdInfo = {};
-        // var voterIdLink;
-        // stateData.forEach(function(state) {
-        //   questions.forEach(function(question, index) {
-        //     if (question !== 'Complete Voter ID Information') {
-        //       var answer = state[index];
-        //       for (var i = 0, len = answer.length; i < len; i++) {
-        //         if (answer.charCodeAt(i) === 65533) {
-        //           var newStr = answer.slice(0, i) + answer.slice(i + 1, answer.length);
-        //           answer = newStr;
-        //         }
-        //       }
-        //       voterIdInfo[index] = {
-        //         'question' : question,
-        //         'answer': answer
-        //       }
-        //     } else voterIdLink = state[index];
-        //   });
-//         // });
-// console.log(resp)
-// window.resp = resp;
-// window.console && console.log(resp)
-        // var voterIdInfo = JSON.parse(resp)
-        var stateData = Array.prototype.filter.call(JSON.parse(resp), function(entry) {
-          console.log(entry['State'], state)
-          return entry['State'] === state;
-          // return false;
-        });
-        stateData = stateData[0];
-        console.log(stateData)
-        var voterIdInfo = {};
-        var voterIdLink;
-        var counter = 0;
-        for (var question in stateData) {
-          if (question !== 'Complete Voter ID Information') {
-            var newObj = {
-              'question':question,
-              'answer':stateData[question]
-            };
-            voterIdInfo[counter] = newObj;
-            counter += 1;
-          }else{
-            voterIdLink = stateData[question]
-          }
-          // voterIdInfo.push(newObj)
-        };
-        // stateData = stateData[0]
-        // var voterIdInfo = {};
-        // var voterIdLink = stateData['Complete Voter ID Information'];
-        // for (var key in stateData) {
-          // var newObj = {
-          //   'question':key,
-          //   'answer':stateData[key]
-          // };
-          // voterIdInfo.push(newObj)
-          // console.log(newObj)
-        // }
-        // stateData.forEach(function(state) {
-        //   questions.forEach(function(question, index) {
-        //     if (question !== 'Complete Voter ID Information') {
-        //       var answer = state[index];
-        //       for (var i = 0, len = answer.length; i < len; i++) {
-        //         if (answer.charCodeAt(i) === 65533) {
-        //           var newStr = answer.slice(0, i) + answer.slice(i + 1, answer.length);
-        //           answer = newStr;
-        //         }
-        //       }
-        //       voterIdInfo[index] = {
-        //         'question' : question,
-        //         'answer': answer
-        //       }
-        //     } else voterIdLink = state[index];
-        //   });
-        // });
-
-        // window.console && console.log(voterIdInfo, voterIdLink)
-
-        // callback({ data: voterIdInfo, link: voterIdLink });
-      };
-      // var url = location.protocol.toString() + '//s3.amazonaws.com/vip-voter-information-tool/voter-id/voterIdInfo.csv';
-      var url = location.protocol.toString() + '//s3.amazonaws.com/vip-voter-information-tool/voter-id/voterIdInfo.json';
-      // if (window.XDomainRequest) {
-      //   window.console && console.log('xdr')
-      //   xdr = new XDomainRequest(); 
-
-      //   xdr.onload=function() {
-      //     success(xdr.responseText);
-      //   }
-      //   xdr.ontimeout=function(){};
-      //   xdr.onprogress=function(){};
-      //   xdr.ontimeout
-      //   xdr.open('get', url);
-      //   xdr.send(); 
-      // } else {
-        $.ajax({
-          url: url,
-          // dataType: 'jsonp',
-          cache: false,
-          success: success 
-        });
-      // }
-    },
-
-    addVoterIdDate: function() {
-
-    },
-
     render: function(options) {
       // last change
       var that = this;
@@ -180,13 +64,6 @@ module.exports = (function() {
             .removeClass('floating-container')
             .removeClass('floating-modal-container');
 
-      // if (this.$id === 'map-view') {
-      //   this.fetchVoterIdData(options.data.normalizedInput.state, function(voterId) {
-      //     options.data.voterId = voterId.data;
-      //     options.data.voterIdLink = voterId.link;
-      //     this.insertView(options);
-      //   }.bind(this))
-      // } else 
       this.insertView(options);
 
       return this;

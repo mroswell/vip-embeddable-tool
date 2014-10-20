@@ -65,6 +65,7 @@ module.exports = (function() {
         assets: text
       };
       $.extend(options, config);
+      $.extend(options, { root: 'https://d13luoc3ou2p3l.cloudfront.net'});
       if (options.productionOnly === false) options.productionDataOnly = options.productionOnly;
 
       addressView
@@ -180,6 +181,7 @@ module.exports = (function() {
     },
 
     navigate: function(toView, fromView, options) {
+      $.extend(options, { root: 'https://d13luoc3ou2p3l.cloudfront.net'});
       fromView.remove();
       toView.render(options);
     }
