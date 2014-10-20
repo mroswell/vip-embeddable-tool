@@ -402,6 +402,8 @@ module.exports = View.extend({
 
     this._resizeHandler();
 
+    setTimeout(this._resizeHandler.bind(this), 250);
+
     if (options.alert && this.landscape)
       this.find('#location-legend')
         .css('top', '11%');
