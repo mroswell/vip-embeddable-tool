@@ -269,10 +269,12 @@ module.exports = View.extend({
         .height(containerWidth * (7/10));
 
       var containerHeight = this.$container.height();
+      var top = (height/2) - (containerHeight/2);
+      top = (top > 0 ? top : 0);
 
       this.$container
         .css({
-          'top':((height/2) - (containerHeight/2)) + 'px',
+          'top': top + 'px',
           'left':((width/2) - (containerWidth/2)) + 'px'
         });
 
