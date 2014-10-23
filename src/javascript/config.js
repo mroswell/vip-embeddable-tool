@@ -7,7 +7,7 @@ module.exports = {
     "selectedHeaderColor" : "#26a8df",
     "landscapeHeaderBackground" : " #0f6387",
     "alertTextColor" : "#a30000",
-    "footerColor" : "#898989",
+    "footerColor" : "#898989"
   },
   "text" : {
     "summary" : "Find out about ballot information, polling location, early voting, ID requirements and more...",

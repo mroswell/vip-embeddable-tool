@@ -148,8 +148,8 @@
   };
 
   var getClass = function(params) {
-    if (params.options && params.options.class) {
-      return params.options.class;
+    if (params.options && params.options.notClass) {
+      return params.options.notClass;
     }
   };
 

@@ -317,10 +317,10 @@ module.exports = View.extend({
     this.find('#error-feedback-form')
       .attr('action', errorFeedbackUrl);
 
-    $("#error-feedback-link").on("click", function (e) {
-      event.preventDefault();
-       $('#error-feedback-form').submit();
-    })
+    this.find("#error-feedback-link").on("click", function (e) {
+      e.preventDefault();
+      this.find('#error-feedback-form').submit();
+    }.bind(this))
 
     var linkGroupTitles = this.find('.election-administration-body div');
     linkGroupTitles.each(function(_, group) {
@@ -453,7 +453,7 @@ module.exports = View.extend({
 
     var myCalendar = createOUICalendar({
       options: {
-        class: 'add-to-calendar-drop-class',
+        notClass: 'add-to-calendar-drop-class',
         id: 'add-to-calendar-dropdown'
       },
       data: {
