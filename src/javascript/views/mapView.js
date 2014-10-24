@@ -504,6 +504,10 @@ module.exports = View.extend({
       electionAdministrationBody.prev().remove(), electionAdministrationBody.remove()
 
     window.setTimeout(this.closeAlert.bind(this), 8000);
+
+    this.find('.change-address').on('keypress', function() {
+      $('.pac-container').last().css('z-index', 100000);
+    })
   },
 
   closePopUps: function (e) {
