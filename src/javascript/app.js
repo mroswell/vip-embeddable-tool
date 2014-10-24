@@ -39,7 +39,7 @@ window.vit = (function () {
     window._vitOptions = typeof options !== 'undefined' ? options : {}
 
     // Roboto font
-    WebFontConfig = { google: { families: [ 'Roboto:400,500,700:latin' ] } };
+    var WebFontConfig = { google: { families: [ 'Roboto:400,500,700:latin' ] } };
 
     $.getScript(googleWebFontsUrl);
 

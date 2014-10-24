@@ -714,7 +714,7 @@ module.exports = View.extend({
     if (this.markers.length === 1) this.map.setZoom(15);
     else {
       var bounds = new google.maps.LatLngBounds();
-      for(i=0;i<this.markers.length;i++) {
+      for(var i=0;i<this.markers.length;i++) {
         bounds.extend(this.markers[i].getPosition());
       }
 
