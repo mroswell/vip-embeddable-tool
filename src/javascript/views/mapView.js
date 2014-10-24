@@ -103,7 +103,8 @@ module.exports = View.extend({
         earlyVoteSites.splice(idx, 1);
       })
 
-      options.data.pollingLocations = pollingLocations.concat(earlyVoteSites);
+      if (pollingLocations)
+        options.data.pollingLocations = pollingLocations.concat(earlyVoteSites);
     }
 
     if (options.data.pollingLocations) {
