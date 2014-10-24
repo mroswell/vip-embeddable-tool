@@ -88,14 +88,15 @@ module.exports = View.extend({
         if (endDate < now)
           toRemove.push(idx);
 
-        pollingLocations.forEach(function(pollingLocation, j) {
-          if (pollingLocation.address.line1 === earlyVoteSite.address.line1 ||
-              pollingLocation.address.locationName === earlyVoteSite.address.LocationName) {
-            $.extend(pollingLocation, earlyVoteSite);
-            toRemove.push(idx);
-            pollingLocation.isBoth = true;
-          }
-        });
+        if (pollingLocations)
+          pollingLocations.forEach(function(pollingLocation, j) {
+            if (pollingLocation.address.line1 === earlyVoteSite.address.line1 ||
+                pollingLocation.address.locationName === earlyVoteSite.address.LocationName) {
+              $.extend(pollingLocation, earlyVoteSite);
+              toRemove.push(idx);
+              pollingLocation.isBoth = true;
+            }
+          });
       });
 
       toRemove.forEach(function(idx) {
