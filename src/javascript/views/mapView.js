@@ -66,12 +66,14 @@ module.exports = View.extend({
     // add the early vote sites to the regular polling places
     var pollingLocations = options.data.pollingLocations;
     var earlyVoteSites = options.data.earlyVoteSites;
+    var dropOffLocations = options.data.dropOffLocations;
 
     if (pollingLocations)
       pollingLocations.forEach(function(pollingLocation) {
         if (pollingLocation.name) pollingLocation.address.name = pollingLocation.name;
         pollingLocation.isEarlyVoteSite = false
         pollingLocation.isBoth = false;
+        pollingLocation.isDropOffLocation = false;
       });
 
     if (earlyVoteSites) {
@@ -99,40 +101,19 @@ module.exports = View.extend({
           });
       });
 
-      toRemove.forEach(function(idx) {
-        earlyVoteSites.splice(idx, 1);
-      })
+      toRemove.forEach(function(idx) { earlyVoteSites.splice(idx, 1) });
 
       if (pollingLocations)
         options.data.pollingLocations = pollingLocations.concat(earlyVoteSites);
-      if (earlyVoteSites && !pollingLocations)
+      else
         options.data.pollingLocations = earlyVoteSites;
     }
 
-    if (options.data.pollingLocations) {
-      options.data.pollingLocations.forEach(function(location) {
-        if (location.startDate) {
-          var date = new Date(location.startDate);
-          var newDate = date.toLocaleDateString('en-us', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          });
-          // location.startDate = newDate;
-        }
-        if (location.endDate) {
-          var date = new Date(location.endDate);
-          var newDate = date.toLocaleDateString('en-us', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          });
-          // location.endDate = newDate;
-        }
-      })
-    }
+    if (dropOffLocations)
+      dropOffLocations.forEach(function(dropOffLocation) {
+        dropOffLocation.isDropOffLocation = true;
+        options.data.pollingLocations = options.data.pollingLocations.concat(dropOffLocation);
+      });
 
     // comb the address data
     var state = (options.data.state && options.data.state.length ? options.data.state[0] : {});
