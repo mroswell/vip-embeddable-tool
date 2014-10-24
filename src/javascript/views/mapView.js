@@ -105,6 +105,8 @@ module.exports = View.extend({
 
       if (pollingLocations)
         options.data.pollingLocations = pollingLocations.concat(earlyVoteSites);
+      if (earlyVoteSites && !pollingLocations)
+        options.data.pollingLocations = earlyVoteSites;
     }
 
     if (options.data.pollingLocations) {
@@ -801,7 +803,8 @@ module.exports = View.extend({
               location.isEarlyVoteSite,
               location.isBoth
             );
-          }, function(status) {},
+          }, function(status) {
+          },
           0
         );
       }, timeout * idx);
