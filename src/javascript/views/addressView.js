@@ -121,6 +121,7 @@ module.exports = View.extend({
     if (stateName === 'Washington' || stateName === 'Oregon') {
       this.find('#current-location').fadeIn('fast');
       this.find('#fade').fadeTo('fast', .2);
+      this.find('.loading').hide();
 
       $('#use-current-location').one('click', function() {
         if ('geolocation' in navigator) {
