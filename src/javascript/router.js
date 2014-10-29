@@ -90,6 +90,9 @@ module.exports = (function() {
           }.bind(this));
           $.extend(options, { data: data });
           router.navigate(mapView, addressView, options);
+        })
+        .onRouteEvent('addressViewRerender', function() {
+          router.navigate(addressView, addressView, options)
         });
 
       mapView

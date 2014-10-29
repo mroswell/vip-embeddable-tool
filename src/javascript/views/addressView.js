@@ -132,27 +132,30 @@ module.exports = View.extend({
               position.coords.latitude,
               position.coords.longitude,
               function(address) {
-                that._makeRequest({
-                  address: address,
-                  success: function(newResponse) {
-                    that.triggerRouteEvent('addressViewSubmit', newResponse);
-                  },
-                  error: function() {
-                    that.triggerRouteEvent('addressViewSubmit', response);
-                  }
-              });
+                var stateAbbr = (stateName === 'Washington' ? 'WA' : 'OR');
+                if (address.indexOf(stateAbbr) !== -1)
+                  that._makeRequest({
+                    address: address,
+                    success: function(newResponse) {
+                      that.triggerRouteEvent('addressViewSubmit', newResponse);
+                    },
+                    error: function() {
+                      that.triggerRouteEvent('addressViewSubmit', response);
+                    }
+                  });
+                else that.triggerRouteEvent('addressViewRerender')
             });
           });
-        } else {
-          $('#current-location, #fade').fadeOut('fast');
-          $('#address-input')
-            .val('')
-            .attr('placeholder', 'Enter Your Current Location');
-        }
+        } else
+          that.triggerRouteEvent('addressViewRerender')
       });
 
       $('#use-registered-address').one('click', function() {
         that.triggerRouteEvent('addressViewSubmit', response);
+      });
+
+      that.find('#use-different-address').one('click', function() {
+        that.triggerRouteEvent('addressViewRerender')
       })
       return;
     }

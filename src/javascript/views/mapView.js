@@ -127,8 +127,10 @@ module.exports = View.extend({
           })
       });
 
-      removeIndices(earlyVoteSites, earlyVoteSitesToRemove);
-      removeIndices(dropOffLocations, dropOffLocationsToRemove);
+      if (earlyVoteSites)
+        removeIndices(earlyVoteSites, earlyVoteSitesToRemove);
+      if (dropOffLocations)
+        removeIndices(dropOffLocations, dropOffLocationsToRemove);
     } else {
       if (earlyVoteSites) {
         earlyVoteSites.forEach(function(earlyVoteSite) {
@@ -149,7 +151,8 @@ module.exports = View.extend({
         });
 
         removeIndices(earlyVoteSites, earlyVoteSitesToRemove);
-        removeIndices(dropOffLocations, dropOffLocationsToRemove);
+        if (dropOffLocations)
+          removeIndices(dropOffLocations, dropOffLocationsToRemove);
       }
     }
 
@@ -418,6 +421,14 @@ module.exports = View.extend({
     if (!informationLinks.children().children().is(':visible'))
         informationLinks.prev().remove().end().remove()
 
+    var informationItems = this.find('.voter-id-info').parent();
+    if (this.find('.answer').text().trim().length < 10)
+      informationItems
+        .prev()
+          .remove()
+        .end()
+        .remove();
+
     if (options.alert)
       this.find('#alert')
         .find('#text')
@@ -460,9 +471,6 @@ module.exports = View.extend({
       this.find('#location').append($locationInfo);
       $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
       var earlyVoteTag = this.find('.early-vote-site');
-      window.console && console.log(earlyVoteTag.length)
-      // if (earlyVoteTag.length > 1)
-      //   earlyVoteTag.first().remove()
       if (earlyVoteTag.length > 1)
         earlyVoteTag.last().remove()
       if (!this.landscape) $locationInfo.hide();
