@@ -118,9 +118,7 @@ module.exports = View.extend({
               dropOffLocation.isDropOffLocation = true;
               mergeAndRemoveDups(pollingLocation, dropOffLocation, dropOffLocations, dropOffLocationsToRemove, false);
             })
-        }
-
-        if (dropOffLocations)
+        } else if (dropOffLocations)
           dropOffLocations.forEach(function(dropOffLocation) {
             dropOffLocation.isDropOffLocation = true;
             mergeAndRemoveDups(pollingLocation, dropOffLocation, dropOffLocations, dropOffLocationsToRemove, false);
