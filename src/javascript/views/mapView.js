@@ -53,7 +53,7 @@ module.exports = View.extend({
     $("#_vit").css("max-width", "800px")
     $("#_vit .footer").css("max-width", "800px")
 
-    if(navigator.userAgent.match('CriOS')) {
+    if (navigator.userAgent.match('CriOS')) {
       $('<meta>')
         .attr('name', 'viewport')
         .attr('content', 'width=device-width,initial-scale=0.75')
@@ -69,15 +69,23 @@ module.exports = View.extend({
     var dropOffLocations = options.data.dropOffLocations;
     var earlyVoteSitesToRemove = [];
     var dropOffLocationsToRemove = [];
-    var mergeAndRemoveDups = function(pollingLocation, otherLocation, otherLocationCollection, toRemoveCollection) {
+
+    var removeIndices = function(arr, indices) {
+      for (var i = arr.length-1; i > -1; i--)
+        if (indices.indexOf(i) !== -1)
+          arr.splice(i, 1);
+    };
+
+    var mergeAndRemoveDups = function(pollingLocation, otherLocation, otherLocationCollection, toRemoveCollection, isBoth) {
       if (pollingLocation.address.line1 === otherLocation.address.line1 ||
-        pollingLocation.address.locationName === otherLocation.address.LocationName) {
+          pollingLocation.address.locationName === otherLocation.address.LocationName) {
         $.extend(pollingLocation, otherLocation);
 
         var idx = otherLocationCollection.indexOf(otherLocation);
         toRemoveCollection.push(idx);
 
-        pollingLocation.isBoth = true;
+        if (isBoth) pollingLocation.isBoth = true;
+        else pollingLocation.isBothEarlyVoteAndDropOff = true;
       }
     }
 
@@ -90,8 +98,9 @@ module.exports = View.extend({
         pollingLocation.isEarlyVoteSite = false
         pollingLocation.isBoth = false;
         pollingLocation.isDropOffLocation = false;
+        pollingLocation.isBothEarlyVoteAndDropOff = false;
 
-        if (earlyVoteSites)
+        if (earlyVoteSites) {
           earlyVoteSites.forEach(function(earlyVoteSite) {
             var endDate = new Date(earlyVoteSite.endDate);
             earlyVoteSite.isEarlyVoteSite = true;
@@ -102,20 +111,26 @@ module.exports = View.extend({
             if (endDate < now)
               earlyVoteSitesToRemove.push(idx);
             else
-              mergeAndRemoveDups(pollingLocation, earlyVoteSite, earlyVoteSites, earlyVoteSitesToRemove);
+              mergeAndRemoveDups(pollingLocation, earlyVoteSite, earlyVoteSites, earlyVoteSitesToRemove, true);
           });
+          if (dropOffLocations)
+            dropOffLocations.forEach(function(dropOffLocation) {
+              dropOffLocation.isDropOffLocation = true;
+              mergeAndRemoveDups(pollingLocation, dropOffLocation, dropOffLocations, dropOffLocationsToRemove, false);
+            })
+        }
 
         if (dropOffLocations)
           dropOffLocations.forEach(function(dropOffLocation) {
             dropOffLocation.isDropOffLocation = true;
-            mergeAndRemoveDups(pollingLocation, dropOffLocation, dropOffLocations, dropOffLocationsToRemove);
+            mergeAndRemoveDups(pollingLocation, dropOffLocation, dropOffLocations, dropOffLocationsToRemove, false);
           })
       });
 
-      earlyVoteSitesToRemove.forEach(function(i) { earlyVoteSites.splice(i, 1) });
-      dropOffLocationsToRemove.forEach(function(i) { dropOffLocations.splice(i, 1) });
+      removeIndices(earlyVoteSites, earlyVoteSitesToRemove);
+      removeIndices(dropOffLocations, dropOffLocationsToRemove);
     } else {
-      if (earlyVoteSites)
+      if (earlyVoteSites) {
         earlyVoteSites.forEach(function(earlyVoteSite) {
           var endDate = new Date(earlyVoteSite.endDate);
           earlyVoteSite.isEarlyVoteSite = true;
@@ -129,9 +144,13 @@ module.exports = View.extend({
           if (dropOffLocations)
             dropOffLocations.forEach(function(dropOffLocation) {
               dropOffLocation.isDropOffLocation = true;
-              mergeAndRemoveDups(earlyVoteSite, dropOffLocation, dropOffLocations, dropOffLocationsToRemove)
+              mergeAndRemoveDups(earlyVoteSite, dropOffLocation, dropOffLocations, dropOffLocationsToRemove, false)
             })
         });
+
+        removeIndices(earlyVoteSites, earlyVoteSitesToRemove);
+        removeIndices(dropOffLocations, dropOffLocationsToRemove);
+      }
     }
 
     if (pollingLocations && earlyVoteSites)
@@ -272,7 +291,7 @@ module.exports = View.extend({
       // this.find('.box,#map-canvas').width(window.innerWidth);
       this.find('#map-canvas').width(window.innerWidth);
       // this.find('.box').width(window.innerWidth)
-      // console.log("width", window.innerWidth)
+
     } else {
       // tablet sizing
       this.$container
@@ -436,9 +455,17 @@ module.exports = View.extend({
       this.find('#location a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
 
       var $locationInfo = $(this.pollingLocationPartial(primaryLocation));
+      var earlyVoteTag = this.find('.early-vote-site');
+      if (earlyVoteTag) earlyVoteTag.remove()
       this.find('#location').append($locationInfo);
       $locationInfo.find('a').attr('href', 'https://maps.google.com?daddr=' + daddr + '&saddr=' + saddr);
-      $locationInfo.hide();
+      var earlyVoteTag = this.find('.early-vote-site');
+      window.console && console.log(earlyVoteTag.length)
+      // if (earlyVoteTag.length > 1)
+      //   earlyVoteTag.first().remove()
+      if (earlyVoteTag.length > 1)
+        earlyVoteTag.last().remove()
+      if (!this.landscape) $locationInfo.hide();
 
       if (options.data.pollingLocations.length) {
         var locations = options.data.pollingLocations;
@@ -712,6 +739,7 @@ module.exports = View.extend({
         that.find('#map-canvas').on(that._transitionEnd(), function() {
           google.maps.event.trigger(that.map, 'resize');
         });
+
       } else {
         that.find('#location')
           .find('a')
@@ -941,6 +969,7 @@ module.exports = View.extend({
 
     // slide up the current polling location information partial
     // and then replace its information with new
+    this.find('.early-vote-site').remove();
     this.find('.polling-location-info').replaceWith($locationInfo);
 
     // replace the directions link with the correct address
@@ -954,7 +983,7 @@ module.exports = View.extend({
 
     var earlyVoteTag = this.find('.early-vote-site');
     if (earlyVoteTag.length > 1)
-      earlyVoteTag.first().remove()
+      earlyVoteTag.last().remove()
   },
 
   toggleMap: function(e, marker, address) {
@@ -1005,7 +1034,7 @@ module.exports = View.extend({
     } else {
       this.find('.right-wrapper').css('overflow', 'hidden');
       if (this.find('#location').is(':visible')) {
-        this._fitMap();
+        // this._fitMap();
         this.map.panTo(marker.getPosition());
         if (address) {
           var isSameLocation = (this.find('#location .address').text() === $(this.addressPartial(address)).text());
