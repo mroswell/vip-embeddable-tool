@@ -77,8 +77,10 @@ module.exports = View.extend({
     };
 
     var mergeAndRemoveDups = function(pollingLocation, otherLocation, otherLocationCollection, toRemoveCollection, isBoth) {
-      if (pollingLocation.address.line1 === otherLocation.address.line1 ||
-          pollingLocation.address.locationName === otherLocation.address.LocationName) {
+      if ((pollingLocation.address.line1 === otherLocation.address.line1 &&
+           pollingLocation.address.line1) ||
+          (pollingLocation.address.locationName === otherLocation.address.LocationName &&
+           pollingLocation.address.locationName)) {
         $.extend(pollingLocation, otherLocation);
 
         var idx = otherLocationCollection.indexOf(otherLocation);
