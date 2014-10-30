@@ -163,6 +163,11 @@ module.exports = View.extend({
 
     if (pollingLocations && dropOffLocations)
       pollingLocations = pollingLocations.concat(dropOffLocations);
+    else if (!pollingLocations && dropOffLocations)
+      pollingLocations = dropOffLocations.map(function(location) {
+        location.isDropOffLocation = true;
+        return location;
+      });
 
     options.data.pollingLocations = pollingLocations
 
@@ -540,9 +545,18 @@ module.exports = View.extend({
     });
 
     this.earlyVoteSites = options.data.earlyVoteSites;
-    if (this.earlyVoteSites)
+    this.dropOffLocations = options.data.dropOffLocations;
+    if (this.earlyVoteSites || this.dropOffLocations)
       this.find('#location-legend')
         .show()
+
+    if (!this.earlyVoteSites)
+      this.find('#red-label,#red-block')
+        .hide();
+
+    if (!this.dropOffLocations)
+      this.find('#grey-block,#grey-label')
+        .hide();
 
     if (!options.data.contests)
       this.find('#ballot-information')
